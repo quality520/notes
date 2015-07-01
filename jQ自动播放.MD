@@ -1,5 +1,5 @@
 #jQuery中自动播放代码
-..
+...
 <script type="text/javascript">
 		$(function(){
 			var index=0;
@@ -14,4 +14,4 @@
 			},3000);
 		});
 	</script>
-..	
+...	
