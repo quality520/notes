@@ -8,3 +8,8 @@ color:#dcdcdc;
 }
 li:first-child{}
 li:last-child{}
+
+使用js/jQ动态的更改placeholder的内容
+jQ:$(".className").click(function(){
+    $("input").attr("placeholder","hello world!");
+})
