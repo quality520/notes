@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+		<title>CSS-Loading</title>
+		<style type="text/css">
+			.loading{width:400px;height:400px;margin:100px auto;text-align:center;}
+			.loading span{display:inline-block;width:40px;height:40px;border:5px solid gray;border-left-color:blue;border-radius:50%;
+						  animation:load 1s infinite linear;-webkit-animation:load 1s infinite linear;}
+			@keyframes load{
+				from{
+					transform:rotate(0deg);
+				}
+				to{
+					transform:rotate(360deg);
+				}
+			}
+			@-webkit-keyframes load{
+				from{
+					transform:rotate(0deg);
+				}
+				to{
+					transform:rotate(360deg);
+				}
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="loading">
+			<span></span>
+		</div>
+	</body>
+</html>
