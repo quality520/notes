@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+</head>
+<body ng-app="myApp">
+	<div ng-controller="firstController">
+		first-data:<input type="text" ng-model="data.name"/>
+		second-message:<input type="text" ng-model="Data.message"/>
+		<p>first-data:{{data.name}}</p>
+		<p>first-message:{{Data.message}}</p>
+	</div>
+	<div ng-controller="secondController">
+		<p>second-data:{{data.name}}</p>
+		<p>second-message:{{Data.message}}</p>
+	</div>
+
+
+
+
+	<script type="text/javascript" src="../../vendor/angular/angular-0719.js"></script>
+	<script type="text/javascript" src="app/main.js"></script>
+</body>
+</html>
