@@ -201,5 +201,25 @@ finally{
     //3）抛出一个异常，异常被catch从句捕获
     //4）抛出一个异常，异常未被捕获，继续向上传播
 }
-//with
+//with语句
+/*    with (object)
+        statement*/
+//在对象嵌套层次很深的时候通常会使用with语句来简化代码的编写，例如，在客户端javascript中，可能会使用类似下面这种表达式来访问一个HTML表单中的元素：
+    document.form[0].address.value;
+//如果这种表达式在代码中多次出现，则可以使用with语句将form对象添加至作用域链接的顶层：
+    with(document.form[0]){
+    //直接访问表单元素，
+    name.value = "";
+    address.value = "";
+    email.value = "";
+}
+//这种方法减少了大量的输入，不用再为每个属性名添加document.form[0]的前缀。这个对象临时挂载在作用域链上，当javascript需要解析诸如address标识符事，
+//就会自动在这个对象中查找。当然，不适用with语句的等价代码可以写成这样：
+    var f = document.forms[0];
+    f.name.value = "";
+    f.address.value = "";
+    f.email.value = "";
+
+//debugger语句 这条语句用来产生一个断点(breakpoint)
+
 
