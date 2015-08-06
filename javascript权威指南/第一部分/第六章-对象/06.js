@@ -101,15 +101,106 @@ var o1 = Object.create({x:1,y:2});      //o1继承了属性x和y；
         }
     //==>" 1,2,3,4 "
 
+//继承：javascript对象具有“自有属性”(own property)，也有一些属性是从原型对象继承而来的。
+//inherit（）函数为上面的函数
+    var a = {};     //a从Object.prototype继承对象方法
+    a.x = 1;        //给a定义一个属性x=1；
+    var b = inherit(a); //b继承a和Object.prototype
+    b.y = 2;        //给b定义一个属性y=2
+    var c = inherit(b); //c继承b、a和Object.prototype
+    c.z = 3;        //给c定义一个属性z=3；
+    var d = z.toString();   //toString继承自Object.prototype
+    c.x + c.y;      //==>3:x和y分别继承自a和b
+
+//继承之后，如果定义同名的属性，会将现有的属性重新定义
+
+        function inherit(p){
+            if(p ==null) throw TypeError();
+            if(Object.create)
+                return Object.create(p);
+            var t = typeof p;
+            if(t !=='object' && t != 'function') throw TypeError();
+            function f() {};
+            f.prototype = p;
+            return new f();
+
+        }
+
+        var r = {x:1};
+        var x = inherit(r);
+        console.log(x.x);           //==> 1
+
+        var unitcircle = { r:1};    //一个用来继承的对象
+        var c = inherit(unitcircle);    //c继承属性r
+        c.x = 1;c.y = 1;                //定义两个属性
+        c.r = 2;                        //c覆盖继承来的属性
+        unitcircle.r;                   //==>
+
+//当属性值不存在的时候，返回undefined
+        function inherit(p){
+            if(p ==null) throw TypeError();
+            if(Object.create)
+                return Object.create(p);
+            var t = typeof p;
+            if(t !=='object' && t != 'function') throw TypeError();
+            function f() {};
+            f.prototype = p;
+            return new f();
+
+        }
+        var r = {x:1};
+        var x = inherit(r);
+        x.z;        //undefined,属性不存在
 
 
+//如果对象不存在，那么试图查询这个不存在的对象的属性就会报错，null和undefined值都没有属性，因此查询这些值的属性会报错。
+        var a = {
+            x:[1,2,3],y:[4,5,6,7,8,9],z:[10]
+        }
+        a.x.length;     //==>3
 
+        var a = {
+            x:[1,2,3],y:[4,5,6,7,8,9],z:[10]
+        }
+        a.y.length;     //==>6
 
+        var a = {
+            x:[1,2,3],y:[4,5,6,7,8,9],z:[10]
+        }
+        a.xx.length;    //==>Uncaught TypeError: Cannot read property 'length' of undefined(anonymous function)
+//两种避免属性不存在而调用出错的方法
+//一种冗余但很易懂的方法
+        var len = undefined;
+        if(book){
+            if(book.subtitle) len = book.subtitle.length;
+        }
+//
+        var a = {
+            x:[1,2,3],y:[4,5,6,7,8,9],z:[10]
+        }
+        var len = undefined;
+        if(a)
+            if(a.x) len = a.x.length;
+    //==>3
 
+//一种更简练的常用方法，获取subtitle的length属性或undefined
+        var len = book && book.subtitle && book.subtitle.length;
+        len;    //==> 3
 
+//对象的只读属性
+//内置构造函数的原型是只读的。
+Object.prototype = o;//赋值失败，但没有报错，Object.prototype没有修改。【貌似有点问题，可以修改】
 
+//js中在只能在闭包里面能够将属性更改为只读
 
-
+//删除属性,
+        var s = {x:[1,2,3],y:[4,5,6,7,8]}
+        console.log(s.x);       //==> [1,2,3]
+        delete s.x;
+        delete s['y'];
+        console.log(s.x);        //==>undefined
+        console.log(s.y);       //==>undefined
+//delete运算符只能删除自有属性，不能删除继承属性(要删除继承属性必须从定义这个属性的原型对象上删除它，而且这会影响到所有继承自这个原型的对象)
 
 
 
