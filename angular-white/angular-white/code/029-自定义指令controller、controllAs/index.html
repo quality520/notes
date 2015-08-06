@@ -8,15 +8,8 @@
 
 </head>
 <body ng-app="myApp">
-	<div ng-controller="firstController">
 		<custom-tags>default-data</custom-tags>
-		<!--
-			1,将div转换为dom
-			2,当priority都为0时，哪个指令先定义，哪个就优先执行
-		-->
-
-		<div ng-repeat="user in users" custom-tags2="" custom-tags3></div>
-	</div>
+		<div custom-tags2 custom-tags3></div>
 
 
 
