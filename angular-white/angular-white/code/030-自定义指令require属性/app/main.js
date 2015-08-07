@@ -27,20 +27,33 @@ angular.module('myApp',[])
 
 				];
 			this.addBook = function(){
-				alert('test');
+				$scope.$apply(
+					$scope.books.push({
+						name:'AngularJs'
+					})
+				)
 			}
 		},
 		controllerAs : 'bookListController',
-		template : '<div ng-repeat="book in books"><li>{{book.name}}</li></div>',
-		replace :true,
+		template : '<div><ul ng-repeat="book in books"><li>{{book.name}}</li></ul><book-add></book-add></div>',
+		replace :true
+	}
+})
+.directive('bookAdd',function(){
+	return {
+		restrict : 'ECMA',
+		require : '^bookList',
+		template : '<button type="button">添加</button>',
+		replace : true,
 		link:function(scope,iElements,iAttrs,bookListController){
 			iElements.on('click',bookListController.addBook)
 		}
 	}
+
 })
 
 .controller('firstController',['$scope',function($scope){
-	console.log($scope);
+	//console.log($scope);
 	/*$scope.books = [
 		{
 			id : 1,
