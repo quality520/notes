@@ -24,7 +24,6 @@ angular.module('myApp',[])
 						id : 4,
 						name : 'IOS'
 					}
-
 				];
 			this.addBook = function(){
 				$scope.$apply(
@@ -46,7 +45,7 @@ angular.module('myApp',[])
 		template : '<button type="button">添加</button>',
 		replace : true,
 		link:function(scope,iElements,iAttrs,bookListController){
-			iElements.on('click',bookListController.addBook)
+			iElements.on('click',bookListController.addBook);
 		}
 	}
 
