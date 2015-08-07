@@ -203,6 +203,154 @@ Object.prototype = o;//赋值失败，但没有报错，Object.prototype没有�
 //delete运算符只能删除自有属性，不能删除继承属性(要删除继承属性必须从定义这个属性的原型对象上删除它，而且这会影响到所有继承自这个原型的对象)
 
 
+//检测属性
+//我们经常会检测集合中成员的所属关系---判断某个属性是否存在于某个对象中。可以通过in运算符、hasOwnProperty()和propertyIsEnumerable()方法来完成工作，
+//甚至仅通过属性查询也可以做到这一点
 
+//in运算符的左侧是属性名(字符串)，右侧是对象。如果对象的自有属性或继承属性中包含这个属性则反水true；
+    var a = {x:1,y:2,z:3}   //定义一个包含3个属性的对象
+    'x' in a;               //==>true,‘x'是a的属性
+    'y' in a;               //==>true,‘y'是a的属性
+    'w' in a;               //==>false,‘w'不是a的属性
+    'toString' in a;        //==>true,o继承toString属性
 
+//对象的hasOwnProperty()方法用来检测给定的名字是否是对象的自有属性，对于继承属性它将返回false：
+    var a = {x:1,y:2,z:3}   //定义一个包含3个属性的对象
+    a.hasOwnProperty('x');  //true:a有一个自有属性x
+    a.hasOwnProperty('z');  //true:a有一个自有属性z
+    a.hasOwnProperty('toString');  //false:toString是继承属性，不是a的自有属性
+
+//propertyIsEnumerable()是hasOwnProperty()的增强版，只有检测到是自有属性且这个属性的可枚举性(enumerable attribute)为true时它才返回true。
+//某些内置属性是不可枚举的。通常由javascript代码创建的属性都是可枚举的，除非在ECMAScript5中使用一个特殊的方法来改变属性的可枚举性，
+//可枚举的意思：可以使用for/in列举出来的函数
+    function inherit(p){
+        if(p ==null) throw TypeError();
+        if(Object.create)
+            return Object.create(p);
+        var t = typeof p;
+        if(t !=='object' && t != 'function') throw TypeError();
+        function f() {};
+        f.prototype = p;
+        return new f();
+
+    }
+
+    var o = inherit({y:2});
+    o.x = 1;
+    o.propertyIsEnumerable('x');    //==>true,o有一个可枚举的自有属性x
+    o.propertyIsEnumerable('y');    //==>false,y是继承来的
+    Object.prototype.propertyIsEnumerable('toString');  //==>false，不可枚举
+//除了使用in运算符，另外一种简便的方法是使用“!==”判断一个属性是否是undefined
+    var o = {x:1}       //属性被显式赋值为1
+    o.x !== undefined;          //==>true;o中有属性x
+    o.y !== undefined;          //==>false:o中没有属性y
+    o.toSting !== undefined;    //==>true:o继承了toString属性
+
+//有一种场景只能使用in运算符而不能使用上述属性访问的方式。in可以区分不存在的属性和存在但值为undefined的属性。
+    var o = {x:undefined}   //属性被显式赋值为undefined
+    o.x !== undefined;      //==>false,属性存在，但是值为undefined
+    o.y !== undefined;      //==>false：属性不存在
+    'x' in o;               //==>true:属性存在
+    'y' in o;               //==>false：属性不存在
+    delete o.x;             //删除了属性x
+    'x' in o;               //==>false，属性x不存在了
+
+//运算符"!=="可以区分undefined和null
+
+//6.5枚举属性
+//for/in循环可以在循环体中遍历对象中所有可枚举的属性(包括自有属性和继承的属性)，把属性名称赋值给循环变量。
+//对象继承的内置方法不可枚举，但在代码中给对象添加的属性都是可枚举的（除非用方法将它们转换为不可枚举）
+var o = {x:1,y:2,z:3}                   //三个不可枚举的自有属性
+o.propertyIsEnumerable('toString');     //==>false ,不可枚举
+for (p in o)                            //遍历属性
+    console.log(p);                     //输出x,y,z，不会输出toString
+//有许多使用工具给Object.prototype添加了新的方法或属性，这些方法和属性可以被所有对象继承并使用。然而在ECMAScript5
+//标准之前，这些新添加的方法是不能定义为不可枚举的，因此他们都可以在for/in循环中枚举出来。
+//为了避免这种情况，需要过滤for/in循环返回的属性，下面两种方式是最常见的
+//1，
+for(p in o){
+    if(!o.hasOwnProperty(p)) continue;  //跳过继承的属性
+}
+//2，
+for(p in o){
+    if(typeof o[p] === 'function') continue;    //跳过方法
+}
+//extend()
+//例6-2：用来枚举属性的对象工具函数
+/*
+* 把p中的可枚举属性复制到o中，并返回o
+* 如果o和p中含有同名属性，则覆盖o中的属性
+* 把这个函数并不处理getter和setter以及复制属性
+* */
+function extend(o,p){
+    for(prop in p){
+        o[prop] = p[prop];
+    }
+    return o;
+}
+/*
+* 将p中的可枚举属性复制至o中，并返回o
+* 如果o和p中有同名属性，o中的属性将受影响
+* 这个函数并不处理getter和setter以及复制属性
+* */
+function  merga(o,p){
+    for(prop in p){                             //遍历p中的所有属性
+        if(o.hasOwnProperty[prop]) continue;    //过滤掉已经在o中存在的属性
+        o[prop] = p[prop];                      //将属性添加至o中
+    }
+    return o;
+}
+/*
+* 如果o中的属性在p中没有同名属性，则从o中删除这个属性
+* 返回o
+* */
+function subtract(o,p){
+    for(prop in p){                     //遍历o中的所有属性
+        if(!(prop in p)) delete o[prop];//如果在p中不存在，则删除
+    }
+    return o;
+}
+/*
+ * 如果o中的属性在p中存在同名属性，则从o中删除这个属性
+ * 返回o
+ * */
+function subtract(o,p){
+    for(prop in p){                     //遍历o中的所有属性
+        delete o[prop];                 //从o中删除（删除一个不存在的属性不会报错）
+    }
+    return o;
+}
+/*
+* 返回一个新对象，这个对象同时拥有o的属性和p的属性
+* 如果o和p中有重名属性，使用p中的属性值
+* */
+function union(o,p) {return extend(extend({},o),p);}
+/*
+* 返回一个新对象，这个对象有用同时在o和p中出现的属性
+* 很像求o和p的交集，但p中属性的值被忽略
+* */
+function intersection(o,p) {return restrict(extend({},o),p);}
+/*
+* 返回一个数组，这个数组包含的是o中可枚举的自有属性的名字
+* */
+
+function keys(o){
+    if(typeof o !== 'object') throw TypeError();    //参数必须是对象
+    var result = [];        //将要返回的数组
+    for(var prop in o){         //遍历所有可枚举的属性
+        if(o.hasOwnProperty(prop))  //判断是否是自有属性
+            result.push(prop);  //将属性名添加至数组中
+    }
+    return result;  //返回这个数组
+}
+//1，Object.keys();返回一个数组
+//2,Object.getOwnPropertyNames()
+//属性getter和setter
+var o = {
+    //普通的数据属性
+    data_prop:value,
+// 存储器属性都是成对定义的额函数
+    get accessor_prop(){/*这里是函数体*/},
+    set accessor_prop(value){/*这里是函数体*/}
+}
 
