@@ -354,3 +354,112 @@ var o = {
     set accessor_prop(value){/*这里是函数体*/}
 }
 
+//调用Object.getOwnPropertyDescriptor()可以获得某个对象特定属性的属性描述符：
+Object.getOwnPropertyDescriptor({x:1},"x");
+//==> Object {value: 1, writable: true, enumerable: true, configurable: true}
+
+//对于继承舒心和不存在的属性，返回undefined
+Object.getOwnPropertyDescriptor({},"x");        //undefined,没有x属性
+Object.getOwnPropertyDescriptor({},"toString"); //undefined,继承属性
+//getOwnPropertyDescriptor()只能得到自有属性的描述符
+//要想获得继承属性的特性，需要遍历原型链getPrototypeOf()；
+//想要设置属性的特性，或者想让新建属性具有某种特性，则需要调用Object.definePeoperty()，传入需要修改的对象、要创建或
+//修改的名称以及属性描述符对象：
+var  o = {};    //create empty Object
+//add property 一个不可枚举的属性属性x，并赋值为1
+Object.defineProperty(o,"x",{
+    value:1,                //赋值为1，
+    writable:true,          //可写属性
+    enumerable:false,       //不可枚举
+    configurable:true       //可配置
+});
+o.x;    //==>1
+Object.keys(o); //==>[]
+//现在对属性x做修改，让它变为只读
+Object.defineProperty(o,"x",{writable:false});
+o.x = 2;    //操作失败但不报错
+o.x;       //==> 1,x的值怡然为1
+//属性依然是可配置的，可以使用Object.defineProperty()中value中进行修改
+Object.defineProperty(o,"x",{value:3});
+o.x;        //==>3
+//将x数据属性修改为存取器属性
+Object.defineProperty(o,"x",{get:function(){return 10;}});
+o.x;        //==>10;
+//Object.defineProperty()这个方法要么修改已有属性要么新建自有属性，但不能修改继承的属性
+
+//修改或者创建多个属性，Object.defineProperties(),第一个参数是要修改的对象，第二个参数是一个映射表，它包含
+//要新建或修改的属性的名称，已经他们的属性描述符
+
+var p = Object.defineProperties({},{
+    x:{value:1,writable:true,enumerable:false,configurable:true},
+    y:{value:2,writable:true,enumerable:false,configurable:true},
+    r:{
+        get:function(){return Math.sqrt(this.x*this.x + this.y *this.y)},
+        enumerable:true,
+        configurable:true
+    }
+});
+p.x;    //==>1,
+p.y;    //==>2
+
+//任何对Object.defineProperty()或Object.defineProperties()违反规则的使用都会抛出类型错误异常
+//1，如果对象是不可扩展的，则可以编辑已有的自有属性，但不能给它添加新属性
+//2，如果属性是不可配置的，则不能修改它的可配置性和可没枚举性
+//3，如果存取器属性是不可配置的，则不能改其getter和setter方法，也不能将它转换为数据属性
+//4，如果数据属性是不可配置的，则不能将它转换为存取器属性
+//5，如果数据属性是不可配置的，则不能将它的可写性从false修改为true，但可以从true修改为false
+//6，如果数据属性是不可配置且不可写的，则不能修改它的值。然而可配置但不可写属性的值是可以修改的（
+// 实际上是先将它标记为可写的，然后修改它的值，最后转换为不可写的）
+
+
+//例6-3：复制属性的特性
+/*
+* 给Object.prototype添加一个不可枚举的extend()方法
+* 这个方法继承自调用它的对象，将作为参数传入的对象的属性一一复制
+* 除了值之外，也复制属性的所有特性，除非在目标对象中存在同名的属性
+* 参数对象的所有自有属性(包括不可枚举的属性)也会一一复制
+*
+*/
+Object.defineProperty(Object.prototype,
+    "extend",               //定义Object.prototype.extend
+    {
+        writable : true,
+        enumerable : false,
+        configurable : true,
+        value : function(o){    //值就是这个函数
+             //得到所有的自有属性，包括不可枚举的属性
+             var names = Object.getOwnPropertyNames(o);
+            //遍历它们
+            for(var i = 0;i<names.length;i++){
+                //如果属性已经存在，则跳过
+                if(names[i] in this) continue;
+                //获取o中的属性的描述符
+                var desc = Object.getOwnPropertyDescriptor(o,names[i]);
+                //用它给this创建一个属性
+                Object.defineProperty(this,names[i],desc);
+            }
+        }
+    });
+
+//序列化对象（serialization）是指将对象的状态转换为字符串，也可以将字符串还原为对象。
+//内置函数JSON.stringify()和JSON.parse()用来序列化和还原javascript对象
+
+var o = {x:1,y:2,z:{zz:[false,null,""]}};
+s = JSON.stringify(o);  //==>"{"x":1,"y":2,"z":{"zz":[false,null,""]}}"
+p = JSON.parse(s);  //==>Object {x: 1, y: 2, z: Object}
+
+//6.10对象方法
+//1，toString()方法，需要将对象转换为字符串的时候，javascript都会调用这个方法。
+var s = {x:1,y:2};
+s.toString();   //==>"[object Object]"
+//2,toLocaleString()
+var date = new Date();
+date.toString();    //==>"Mon Aug 10 2015 15:27:47 GMT+0800 (中国标准时间)"
+date.toLocaleString();  //==>"2015/8/10 下午3:26:58"
+//3,toJSON()
+date.toJSON();      //==>"2015-08-10T07:28:48.078Z"
+//valueOf()返回原始值
+date.valueOf();     //==>1439191790978
+
+
+
