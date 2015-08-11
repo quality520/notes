@@ -17,4 +17,15 @@ var b = [,,];  a.length; //==>2;
 //数组直接量的语法允许有可选的结尾的逗号，故[,,]只有两个元素而非三个
 
 //调用构造函数array()创建数组
+var myArray = new Array();  //一个空的数组
+var myA = new Array(10);    //一个长度为10的数组
+var myArr = new Array(1,2,3,4,5,6,7,8,9);
+
+var a = ["world"];
+var value = a[0];
+a[1] = 3.14;
+i = 2;
+a[i] = 3;
+a[i+1]="hello";
+a[a[i]];    //==>a[3] "hello"
 
