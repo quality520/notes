@@ -160,6 +160,37 @@ a.forEach(function(x){
 });
 sum;    //==>55;1+4+9+16+25
 
+//数组方法join(),concat(),sort(),reverse(),slice(),splice(),pop(),push(),shift(),unshift(),toString(),toLocaleString(),
 
 
+
+//ECAMScript数组方法forEach(),every(),some(),map(),filter(),reduce(),reduceRight(),indexOf(),lastIndexOf()
+
+var a = [1,2,3,4,5,6,7,8,9];
+a.filter(function(x){return x>5;});     //==>[6, 7, 8, 9]
+
+var a = [1,2,3,4,5,6,7,8,9];
+a.every(function(x){return x>5;});      //==>false
+
+var a = [1,2,3,4,5,6,7,8,9];
+a.every(function(x){return x>0;});      //==>true
+
+var a = [1,2,3,4,5,6,7,8,9];
+a.some(function(x){return x>6;});       //==>true
+
+//在数组中查找所有出现的x，并返回一个包含匹配索引的数组
+var a = [1,2,3,4,5,7,8,9,1,1,1,1,1,1];
+function result(b,x){
+    var result = [];        //将会返回的数组
+    var index = 0;          //开始搜索的位置
+    var len = b.length;     //待搜索数组的长度
+    while(index < len){     //循环搜索过个元素
+        index = a.indexOf(x,index);     //搜索
+        if(index == -1) break;          //未找到，就完成搜索
+        result.push(index);             //否则，在数组中存储索引
+        index = index +1;               //并从下一个位置开始搜索
+    }
+    return result;                      //返回包含索引的数组
+}
+result (a,1);       //==>[0, 8, 9, 10, 11, 12, 13]
 

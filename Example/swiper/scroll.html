@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <title></title>
+    <style>
+        html,body,ul,li{margin:0;padding:0;}
+        html,body{width:100%;height:100%;}
+        .container{width:100%;height:100%;overflow:hidden;}
+        ul{width:100%;height:100%;}
+        li{width:100%;height:100%;}
+        li:nth-child(1){background:#000066;}
+        li:nth-child(2){background:#008800;}
+        li:nth-child(3){background:#004444;}
+        li:nth-child(4){background:#101010;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ul>
+            <li>the first page</li>
+            <li>the second page</li>
+            <li>the third page</li>
+            <li>the fourth page</li>
+        </ul>
+    </div>
+
+<script type="text/javascript" src="scripts/zepto.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var index = 0;
+        $('ul li').click(function () {
+            index = $(this).index();
+            return(index);
+        })
+        $('ul').swipeUp(function(){
+            var a =(index+1)*100;
+            console.log(a);
+            $(this).css('-webkit-transform','translateY(-'+a+'%)');
+        })
+    })
+
+</script>
+</body>
+</html>

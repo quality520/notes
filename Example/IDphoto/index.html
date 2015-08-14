@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <title>爱代驾</title>
+    <link type="text/css" rel="stylesheet" href="styles/main.css"/>
+</head>
+<body ng-app="IDphoto">
+    <div class="form" ng-controller="IDphotoController">
+        <input type="tel" class="telNumber" placeholder="请输入手机号"/>
+        <input type="tel" class="vCode" placeholder="验证码"/>
+        <input type="button" class="gCode" value="{{getTextCode}}" ng-click="getCode()"/>
+        <input type="button" class="bindBtn" value="绑定" ng-click=""/>
+    </div>
+
+
+
+    <script type="text/javascript" src="scripts/angular.min.js"></script>
+    <script type="text/javascript" src="scripts/angular-route.min.js"></script>
+    <script type="text/javascript" src="scripts/main.js"></script>
+</body>
+</html>

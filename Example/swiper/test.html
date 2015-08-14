@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="checkbox" checked=""/>
+<button>click</button>
+<script type="text/javascript" src="scripts/zepto.min.js"></script>
+<script type="text/javascript" >
+    $(function(){
+        $('button').click(function(){
+            //alert($('input:checked').length);
+
+            if($('input:checked').length){
+                alert('1');
+            }else{
+                alert('2');
+            }
+        })
+    })
+</script>
+</body>
+</html>
