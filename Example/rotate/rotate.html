@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+		<title>旋转</title>
+		<style>
+			html,body,div{
+				margin:0;
+				padding:0;
+			}
+			.container{
+				background:url('images/radar_background.png') no-repeat center center;
+				width:530px;
+				height:530px;
+				margin:0 auto;
+			}
+			.container img{
+				animation:rotateImg 2.0s linear infinite;
+				-webkit-animation:rotateImg 2.0s linear infinite;
+				-moz-animation:rotateImg 2.0s linear infinite;
+			}
+			@-moz-keyframes rotateImg{
+				from{
+					transform:rotate(0deg);
+					-moz-transform:rotate(0deg);
+				}
+				to{
+					transform:rotate(360deg);
+					-moz-transform:rotate(360deg);}
+				}
+			@-webkit-keyframes rotateImg{
+				from{
+					transform:rotate(0deg);
+					-webkit-transform:rotate(0deg);
+				}
+				to{
+					transform:rotate(360deg);
+					-webkit-transform:rotate(360deg);}
+				}
+			}
+			@keyframes rotateImg{
+				from{
+					transform:rotate(0deg);
+				}
+				to{
+					transform:rotate(360deg);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<img src="images/radar_point.png" alt=""/>
+		</div>
+	</body>
+</html>
