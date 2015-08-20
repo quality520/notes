@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<select>
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+			<option>5</option>
+			<option>6</option>
+		</select>
+		<button>click me</button>
+		
+		
+		<script src="scripts/zepto.min.js"></script>
+		<script>
+			$('button').click(function(){
+				var selected = $('select option').not(function(){return !this.selected}).text();
+				console.log(selected);
+				//$('option').not(function(){ return !this.selected })
+			})
+		</script>
+	</body>
+</html>

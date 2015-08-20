@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="checkbox" value="123"/>
+		<script src="scripts/zepto.min.js"></script>
+		<script>
+			$('input').click(function(){
+				console.log($('input:checked').length);				
+			})
+		</script>
+	</body>
+</html>
