@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			body{font-size:25px;}
+		</style>
+	</head>
+	<body>
+		<span id="parent"></span>
+		<span id="templ"></span>
+		
+		
+		
+		
+		<script>
+			
+			var parNode = document.getElementById('parent');
+			var templ = document.getElementById('templ');
+			var str = 'Hello World!';
+			var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@$%&'
+			var out = 0;
+			var t;
+			function dynamic(){
+				if(out < str.length){
+					parNode.appendChild(document.createTextNode(str[out]));
+					out++;
+				}else{
+					templ.innerHTML = '';
+					//clearInterval(t);
+					removeInterval(t);
+				}
+				templ.innerHTML = chars[Math.floor(Math.random()*chars.length)];
+			}
+			t = setInterval(dynamic,100);
+			parNode.innerHTML = '';
+			
+			window.onload = function(){
+				dynamic();
+			}
+		</script>
+	</body>
+</html>

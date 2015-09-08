@@ -1,0 +1,158 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:900);
+html, body {
+  height: 100%;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  background: #73C477;
+  overflow: hidden;
+}
+
+.flog {
+  position: relative;
+}
+.flog:after {
+  content: 'FLOG';
+  font-family: 'Raleway', sans-serif;
+  position: absolute;
+  font-size: 4em;
+  bottom: 30%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #231F20;
+  z-index: 70;
+}
+.flog .head {
+  border: 6px solid #231F20;
+  border-radius: 50%;
+  width: 38.15em;
+  height: 38.15em;
+  position: relative;
+  margin-top: 19.4em;
+}
+.flog .head:before, .flog .head:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #73C477;
+}
+.flog .head:before {
+  z-index: 20;
+  border-radius: 50%;
+}
+.flog .head:after {
+  top: 7.4em;
+  width: 130%;
+  left: -15%;
+  z-index: 21;
+}
+.flog .head .eye {
+  top: -1.7em;
+  position: absolute;
+  width: 8.5em;
+  height: 8.5em;
+  border: 6px solid #231F20;
+  border-radius: 50%;
+  background: #73C477;
+}
+.flog .head .eye.leftEye {
+  left: 6.55em;
+}
+.flog .head .eye.leftEye:before {
+  left: 1.6em;
+}
+.flog .head .eye.leftEye:after {
+  right: 2.6em;
+}
+.flog .head .eye.rightEye {
+  right: 6.55em;
+}
+.flog .head .eye.rightEye:before {
+  right: 1.6em;
+}
+.flog .head .eye.rightEye:after {
+  right: 2.5em;
+}
+.flog .head .eye:before, .flog .head .eye:after {
+  content: '';
+  position: absolute;
+  z-index: 30;
+}
+.flog .head .eye:before {
+  top: 1.6em;
+  width: 4.5em;
+  height: 4.5em;
+  border: 6px solid #231F20;
+  border-radius: 50%;
+  background: #231F20;
+}
+.flog .head .eye:after {
+  top: 2.5em;
+  width: 1.25em;
+  height: 1.25em;
+  border-radius: 50%;
+  background: #73C477;
+}
+.flog .head .nose:before, .flog .head .nose:after {
+  content: '';
+  top: 6.4em;
+  position: absolute;
+  width: 0.7em;
+  height: 0.7em;
+  background: #231F20;
+  border-radius: 50%;
+  z-index: 40;
+}
+.flog .head .nose:before {
+  left: 15.9em;
+}
+.flog .head .nose:after {
+  right: 15.5em;
+}
+.flog .head .mouth {
+  width: 100%;
+  height: 43.6em;
+  border: 6px solid #231F20;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 50;
+  top: -31em;
+  clip: rect(625px, 600px, 800px, 0);
+}
+.flog .head .mouth:before, .flog .head .mouth:after {
+  content: '';
+  position: absolute;
+  width: 5em;
+  height: 5em;
+  background: #73C477;
+  z-index: 60;
+  bottom: 0;
+}
+.flog .head .mouth:before {
+  left: 6.1em;
+  -moz-transform: rotate(35deg);
+  -ms-transform: rotate(35deg);
+  -webkit-transform: rotate(35deg);
+  transform: rotate(35deg);
+}
+.flog .head .mouth:after {
+  right: 6.1em;
+  -moz-transform: rotate(-35deg);
+  -ms-transform: rotate(-35deg);
+  -webkit-transform: rotate(-35deg);
+  transform: rotate(-35deg);
+}
