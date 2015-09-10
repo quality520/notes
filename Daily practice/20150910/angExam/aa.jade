@@ -1,0 +1,10 @@
+form.view-login(novalidate name='loginForm' ng-model-options='{updateOn:"blur"}')
+  .control
+    .error(ng-show='(loginForm.$submitted || loginForm.Cellphone.$touched) && loginForm.Cellphone.$error.required') 请输入手机号
+    .error(ng-show='(loginForm.$submitted || loginForm.Cellphone.$touched) && loginForm.Cellphone.$error.pattern') 请输入正确的手机号
+    input(ai-input='full' placeholder='请输入手机号' ng-model='data.Cellphone' name='Cellphone' required pattern='^1\\d{10}')
+  .control
+    .error(ng-show='(loginForm.$submitted || loginForm.Pwd.$touched) && loginForm.Pwd.$error.required') 请输入密码
+    .error(ng-show='(loginForm.$submitted || loginForm.Pwd.$touched) && loginForm.Pwd.$error.minlength') 至少输入6位密码
+    input(ai-input='full' placeholder='请输入密码' type='password' ng-model='data.Pwd' name='Pwd' required minlength='6')
+  button(ai-btn='success full' type='submit' ng-click='loginForm.$valid && submit()') 登录

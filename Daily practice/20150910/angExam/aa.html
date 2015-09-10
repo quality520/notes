@@ -1,0 +1,14 @@
+
+<form novalidate="novalidate" name="loginForm" ng-model-options="{updateOn:&quot;blur&quot;}" class="view-login">
+  <div class="control">
+    <div ng-show="(loginForm.$submitted || loginForm.Cellphone.$touched) &amp;&amp; loginForm.Cellphone.$error.required" class="error">请输入手机号</div>
+    <div ng-show="(loginForm.$submitted || loginForm.Cellphone.$touched) &amp;&amp; loginForm.Cellphone.$error.pattern" class="error">请输入正确的手机号</div>
+    <input ai-input="full" placeholder="请输入手机号" ng-model="data.Cellphone" name="Cellphone" required="required" pattern="^1\d{10}"/>
+  </div>
+  <div class="control">
+    <div ng-show="(loginForm.$submitted || loginForm.Pwd.$touched) &amp;&amp; loginForm.Pwd.$error.required" class="error">请输入密码</div>
+    <div ng-show="(loginForm.$submitted || loginForm.Pwd.$touched) &amp;&amp; loginForm.Pwd.$error.minlength" class="error">至少输入6位密码</div>
+    <input ai-input="full" placeholder="请输入密码" type="password" ng-model="data.Pwd" name="Pwd" required="required" minlength="6"/>
+  </div>
+  <button ai-btn="success full" type="submit" ng-click="loginForm.$valid &amp;&amp; submit()">登录</button>
+</form>
