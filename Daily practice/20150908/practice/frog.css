@@ -1,1 +1,10 @@
-frog.css
+html,body{
+    height:100%;
+}
+body{
+    margin:0;
+    padding:0;
+    display: flex;
+
+    background:#73C477;
+}

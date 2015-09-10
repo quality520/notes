@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>几种CSS3下的纸张效果展示demo2</title>
+	<style>
+		body{background:#666;color:#333;font-family:"微软雅黑", "Yahei Mono";font-size:84.5%;}
+		.page{
+			width:500px;
+			background-color:#f4f39e;
+			background:gradient(linear,0% 0%,0 100%,from(#f4f39e),to(#fe6),color-stop(0.6,#f5da41));
+			background:-webkit-gradient(linear,0% 0%,0 100%,from(#f4f39e),to(#fe6),color-stop(0.6,#f5da41));
+			margin:50px auto 0 ;
+			padding:20px 0;
+			box-shadow:0 2px 10px 1px rgba(0, 0, 0, 0.2);
+			text-shadow:0 1px 0 #F6EF97;
+			position:relative;
+			
+		}
+		.page:before,.page:after{
+			content:"";
+			position:absolute;
+			width:95%;
+			height:20%;
+			bottom:22px;
+			box-shadow:0 8px 16px rgba(0, 0, 0, 0.3);
+			-webkit-box-shadow:0 8px 16px rgba(0, 0, 0, 0.3);
+			z-index:-1;
+		}
+		.page:before{
+			left:15px;
+			transform:skew(-15deg) rotate(-5deg);
+			-webkit-transform:skew(-15deg) rotate(-5deg);
+		}
+		.page:after{
+			right:15px;
+			transform:skew(15deg) rotate(5deg);
+			-webkit-transform:skew(15deg) rotate(5deg);
+		}
+		.title{text-align:center;}
+		.page p{padding:0 10px;}
+	</style>
+</head>
+<body>
+	<div class="page">
+		<h2 class="title">一些示例文字</h2>
+		<p>有个老头儿的狗死了，老头就把死狗打包托运准备带回家乡厚葬。但是托运的时候机场的人不知道是死的，下飞机的时候发现是死的，吓坏了。以为把狗托运死了。于是就派人去附近狗市买了一个一模一样的。后来这老头打开行李发现狗活了。于是老头给吓死了！</p>
+		<p>本来抱着大哭一场的念头去观摩将爱情进行到底，结果从头笑到尾。波尔多那一场戏，徐静蕾对李亚鹏说："带我走吧。"李亚鹏答："大象怎么办？"（大象是徐静蕾的儿子）。结果您猜怎么着？邻座一个观众很严肃的说：装冰箱呀！</p>
+		<p>今天全家看湖南卫视播放的古装片的时候，突然很脑残的问我爸：爸，你说我为什么要叫你做爸呢？——我爸弱弱的回答：你也可以叫我阿玛。。。</p>
+		<p>病童："打针前为什么要擦棉球？" 父亲："那是酒精，先把你的屁股擦醉了，再打针就不痛了。" 病童："可是我还是痛呀！" 父亲："那是因为你屁股的酒量好啊！"</p>
+	</div>
+</body>
+</html>

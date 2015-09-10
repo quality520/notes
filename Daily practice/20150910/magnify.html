@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>放大镜效果test</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #demo{
+            width: 400px;
+            height: 255px;
+            margin: 50px;
+            position: relative;
+            border: 1px solid #cccccc;
+        }
+        #small-box{
+            position: relative;
+        }
+        #float-box {
+            display: none;
+            width: 160px;
+            height: 120px;
+            position: absolute;
+            background: #ffffcc;
+            border: 1px solid #ccc;
+            filter: alpha(opacity=50);
+            opacity: 0.5;
+        }
+        #demo:hover   #float-box{
+            display: block;
+        }
+        #demo:hover #big-box{
+            display: block;
+        }
+        #mark {
+            position: absolute;
+            display: block;
+            width: 400px;
+            height: 255px;
+            background-color: #fff;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            z-index: 10;
+        }
+        #big-box {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 460px;
+            width: 400px;
+            height: 300px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            z-index: 1;;
+        }
+        #big-box img {
+            position: absolute;
+            z-index: 5;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload=function(){
+            var demo=document.getElementById("demo");
+            var small_box=document.getElementById("small-box");
+            var big_box=document.getElementById("big-box");
+            var float_box= document.getElementById("float-box");
+            var big_img=big_box.getElementsByTagName("img")[0];
+
+            var flag=false;
+
+            small_box.onmouseover=function(){
+                flag=true;
+            };
+            small_box.onmouseout=function(){
+                flag=false;
+            };
+            document.onmousemove=function(ev){
+                if(flag==true){
+                    var Event=ev||window.event;
+                    var clientX=Event.clientX;
+                    var clientY=Event.clientY;
+
+                    var left = clientX - demo.offsetLeft - small_box.offsetLeft - float_box.offsetWidth / 2;
+                    var top = clientY - demo.offsetTop - small_box.offsetTop - float_box.offsetHeight / 2;
+
+                    left=Math.max(0,Math.min(left,(demo.offsetWidth-float_box.offsetWidth)));
+                    top=Math.max(0,Math.min(top,(demo.offsetHeight-float_box.offsetHeight)));
+//                    if(left<0){
+//                        left=0;
+//                    }else if(left>(demo.offsetWidth-float_box.offsetWidth)){
+//                        left=demo.offsetWidth-float_box.offsetWidth;
+//                    }
+
+//                    if(top<0){
+//                        top=0;
+//                    }else if(top>(demo.offsetHeight-float_box.offsetHeight)){
+//                        top=demo.offsetHeight-float_box.offsetHeight;
+//                    }
+
+                    float_box.style.left=left+"px";
+                    float_box.style.top=top+"px";
+
+                    var percentX=-(big_img.offsetWidth-big_box.offsetWidth)/(small_box.offsetWidth-float_box.offsetWidth);
+                    var percentY=-(big_img.offsetHeight-big_box.offsetHeight)/(small_box.offsetHeight-float_box.offsetHeight);
+
+                    big_img.style.left=percentX*left+"px";
+                    big_img.style.top=percentY*top+"px";
+
+
+
+
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="demo">
+    <div id="small-box">
+        <div id="mark"></div>
+        <div id="float-box"></div>
+        <img src="img/macbook-small.jpg"/>
+    </div>
+    <div id="big-box">
+        <img src="img/macbook-big.jpg"/>
+    </div>
+</div>
+</body>
+</html>
