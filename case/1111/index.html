@@ -1,0 +1,1116 @@
+﻿<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="zh-CN">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="zh-CN">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8) ]><!-->
+<html lang="zh-CN">
+<!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>纯CSS3的3D旋转立方体 &#8211; WEB骇客</title>
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="wordpress/xmlrpc.php">
+	<!--[if lt IE 9]>
+	<script src="wordpress/wp-content/themes/webhek4/js/html5.js"></script>
+	<![endif]-->
+	
+<!-- All in One SEO Pack 2.2.6 by Michael Torbert of Semper Fi Web Design[-1,-1] -->
+<meta name="description"  content="提示：将鼠标放到立方体上，会发现更炫的动画效果。(用谷歌浏览器观看效果最佳) 前后上下左右" />
+
+<!-- /all in one seo pack -->
+<link rel="alternate" type="application/rss+xml" title="WEB骇客 &raquo; Feed" href="feed" />
+<link rel="alternate" type="application/rss+xml" title="WEB骇客 &raquo; 评论Feed" href="comments/feed" />
+<link rel="alternate" type="application/rss+xml" title="WEB骇客 &raquo; 纯CSS3的3D旋转立方体评论Feed" href="demo-css-cube-colorful/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.webhek.com\/wordpress\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.2.4"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='genericons-css'  href='wordpress/wp-content/themes/webhek4/genericons/genericons.css?ver=3.0.2' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-style-css'  href='wordpress/wp-content/themes/webhek4/style.css?ver=4.2.4' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentyfourteen-ie-css'  href='wordpress/wp-content/themes/webhek4/css/ie.css?ver=20131205' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='wordpress/wp-includes/js/jquery/jquery.js?ver=1.11.2'></script>
+<script type='text/javascript' src='wordpress/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="wordpress/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="wordpress/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='动画演示如何用CSS3画出三角形图案(动画由CSS3制作完成)' href='demo-animation-to-explain-css-triangles' />
+<link rel='next' title='用CSS3的animation轻松实现背景动画：漂浮的云' href='background-animation-css-cloud' />
+<meta name="generator" content="WordPress 4.2.4" />
+<link rel='canonical' href='demo-css-cube-colorful' />
+<link rel='shortlink' href='?p=318' />
+<style>#demo{
+background:url(http://www.webtwt.com/wordpress/wp-content/uploads/2013/10/2i2255j.jpg);
+width:100%;
+height:600px;
+padding-top: 100px;
+}
+/* keyframes for rotating animation */
+@-webkit-keyframes spin{
+from { transform:rotateY(0);
+}
+to{
+/*transform*/
+-webkit-transform:rotateY(360deg);
+   -moz-transform:rotateY(360deg);
+    -ms-transform:rotateY(360deg);
+     -o-transform:rotateY(360deg);
+        transform:rotateY(360deg);
+}
+}
+@-moz-keyframes spin{
+from { transform:rotateY(0);
+}
+to{
+/*transform*/
+-webkit-transform:rotateY(360deg);
+   -moz-transform:rotateY(360deg);
+    -ms-transform:rotateY(360deg);
+     -o-transform:rotateY(360deg);
+        transform:rotateY(360deg);
+}
+}
+@-o-keyframes spin{
+from { transform:rotateY(0);
+}
+to{
+/*transform*/
+-webkit-transform:rotateY(360deg);
+   -moz-transform:rotateY(360deg);
+    -ms-transform:rotateY(360deg);
+     -o-transform:rotateY(360deg);
+        transform:rotateY(360deg);
+}
+}
+@keyframes spin{
+from { transform:rotateY(0);
+}
+to{
+/*transform*/
+-webkit-transform:rotateY(360deg);
+   -moz-transform:rotateY(360deg);
+    -ms-transform:rotateY(360deg);
+     -o-transform:rotateY(360deg);
+        transform:rotateY(360deg);
+}
+}
+
+/* scene wrapper */
+#demo .wrapper2{
+height:300px;
+margin-top:50px;
+position:relative;
+/*perspective*/
+-webkit-perspective:800;
+   -moz-perspective:800;
+    -ms-perspective:800;
+     -o-perspective:800;
+        perspective:800;
+/*perspective-origin*/
+-webkit-perspective-origin:50% 100px;
+   -moz-perspective-origin:50% 100px;
+    -ms-perspective-origin:50% 100px;
+     -o-perspective-origin:50% 100px;
+        perspective-origin:50% 100px;
+}
+/* cube wrapper */
+.cube{
+position:relative;
+margin:0 auto;
+width:200px;
+/*transform-style*/
+-webkit-transform-style:preserve-3d;
+   -moz-transform-style:preserve-3d;
+    -ms-transform-style:preserve-3d;
+     -o-transform-style:preserve-3d;
+        transform-style:preserve-3d;
+/*animation*/
+-webkit-animation:spin 4s infinite linear;
+   -moz-animation:spin 4s infinite linear;
+    -ms-animation:spin 4s infinite linear;
+     -o-animation:spin 4s infinite linear;
+        animation:spin 4s infinite linear;
+/*transition*/
+-webkit-transition:all 1s linear;
+   -moz-transition:all 1s linear;
+     -o-transition:all 1s linear;
+        transition:all 1s linear;
+}
+/* outer cube */
+#demo b{
+position:absolute;
+width:200px;
+height:200px;
+display:block;
+background:rgba(255,255,255,0.1);
+/*box-shadow*/
+-webkit-box-shadow:inset 0 0 30px rgba(0,0,0,0.2);
+   -moz-box-shadow:inset 0 0 30px rgba(0,0,0,0.2);
+        box-shadow:inset 0 0 30px rgba(0,0,0,0.2);
+font-size:20px;
+text-align:center;
+line-height:200px;
+color:rgba(0,0,0,0.5);
+font-family:sans-serif;
+text-transform:uppercase;
+/*transition*/
+-webkit-transition:all 1s linear;
+   -moz-transition:all 1s linear;
+     -o-transition:all 1s linear;
+        transition:all 1s linear;
+}
+b.back{
+/*transform*/
+-webkit-transform:translateZ(-100px) rotateY(180deg);
+   -moz-transform:translateZ(-100px) rotateY(180deg);
+    -ms-transform:translateZ(-100px) rotateY(180deg);
+     -o-transform:translateZ(-100px) rotateY(180deg);
+        transform:translateZ(-100px) rotateY(180deg);
+}
+b.right{
+/*transform*/
+-webkit-transform:rotateY(-270deg) translateX(100px);
+   -moz-transform:rotateY(-270deg) translateX(100px);
+    -ms-transform:rotateY(-270deg) translateX(100px);
+     -o-transform:rotateY(-270deg) translateX(100px);
+        transform:rotateY(-270deg) translateX(100px);
+/*transform-origin*/
+-webkit-transform-origin:top right;
+   -moz-transform-origin:top right;
+    -ms-transform-origin:top right;
+     -o-transform-origin:top right;
+        transform-origin:top right;
+}
+b.left{
+/*transform*/
+-webkit-transform:rotateY(270deg) translateX(-100px);
+   -moz-transform:rotateY(270deg) translateX(-100px);
+    -ms-transform:rotateY(270deg) translateX(-100px);
+     -o-transform:rotateY(270deg) translateX(-100px);
+        transform:rotateY(270deg) translateX(-100px);
+/*transform-origin*/
+-webkit-transform-origin:center left;
+   -moz-transform-origin:center left;
+    -ms-transform-origin:center left;
+     -o-transform-origin:center left;
+        transform-origin:center left;
+}
+b.top{
+/*transform*/
+-webkit-transform:rotateX(-90deg) translateY(-100px);
+   -moz-transform:rotateX(-90deg) translateY(-100px);
+    -ms-transform:rotateX(-90deg) translateY(-100px);
+     -o-transform:rotateX(-90deg) translateY(-100px);
+        transform:rotateX(-90deg) translateY(-100px);
+/*transform-origin*/
+-webkit-transform-origin:top center;
+   -moz-transform-origin:top center;
+    -ms-transform-origin:top center;
+     -o-transform-origin:top center;
+        transform-origin:top center;
+}
+b.bottom{
+/*transform*/
+-webkit-transform:rotateX(90deg) translateY(100px);
+   -moz-transform:rotateX(90deg) translateY(100px);
+    -ms-transform:rotateX(90deg) translateY(100px);
+     -o-transform:rotateX(90deg) translateY(100px);
+        transform:rotateX(90deg) translateY(100px);
+/*transform-origin*/
+-webkit-transform-origin:bottom center;
+   -moz-transform-origin:bottom center;
+    -ms-transform-origin:bottom center;
+     -o-transform-origin:bottom center;
+        transform-origin:bottom center;
+}
+b.front{
+/*transform*/
+-webkit-transform:translateZ(100px);
+   -moz-transform:translateZ(100px);
+    -ms-transform:translateZ(100px);
+     -o-transform:translateZ(100px);
+        transform:translateZ(100px);
+}
+/* inner cube */
+#demo i{
+position:absolute;
+top:50px;
+left:50px;
+width:100px;
+height:100px;
+display:block;
+background:url(http://www.webtwt.com/wordpress/wp-content/uploads/2013/10/muxvt1.jpg);
+/*transition*/
+-webkit-transition:all 1s linear;
+   -moz-transition:all 1s linear;
+     -o-transition:all 1s linear;
+        transition:all 1s linear;
+}
+i.front{
+/*transform*/
+-webkit-transform:translateZ(50px);
+   -moz-transform:translateZ(50px);
+    -ms-transform:translateZ(50px);
+     -o-transform:translateZ(50px);
+        transform:translateZ(50px);
+}
+i.back{
+/*transform*/
+-webkit-transform:translateZ(-50px) rotateY(180deg);
+   -moz-transform:translateZ(-50px) rotateY(180deg);
+    -ms-transform:translateZ(-50px) rotateY(180deg);
+     -o-transform:translateZ(-50px) rotateY(180deg);
+        transform:translateZ(-50px) rotateY(180deg);
+}
+i.bottom{
+/*transform*/
+-webkit-transform:rotateX(-90deg) translateY(50px);
+   -moz-transform:rotateX(-90deg) translateY(50px);
+    -ms-transform:rotateX(-90deg) translateY(50px);
+     -o-transform:rotateX(-90deg) translateY(50px);
+        transform:rotateX(-90deg) translateY(50px);
+/*transform-origin*/
+-webkit-transform-origin:left bottom;
+   -moz-transform-origin:left bottom;
+    -ms-transform-origin:left bottom;
+     -o-transform-origin:left bottom;
+        transform-origin:left bottom;
+}
+i.left{
+/*transform*/
+-webkit-transform:rotateY(270deg) translateX(-50px);
+   -moz-transform:rotateY(270deg) translateX(-50px);
+    -ms-transform:rotateY(270deg) translateX(-50px);
+     -o-transform:rotateY(270deg) translateX(-50px);
+        transform:rotateY(270deg) translateX(-50px);
+/*transform-origin*/
+-webkit-transform-origin:center left;
+   -moz-transform-origin:center left;
+    -ms-transform-origin:center left;
+     -o-transform-origin:center left;
+        transform-origin:center left;
+}
+i.right{
+/*transform*/
+-webkit-transform:rotateY(-270deg) translateX(50px);
+   -moz-transform:rotateY(-270deg) translateX(50px);
+    -ms-transform:rotateY(-270deg) translateX(50px);
+     -o-transform:rotateY(-270deg) translateX(50px);
+        transform:rotateY(-270deg) translateX(50px);
+/*transform-origin*/
+-webkit-transform-origin:top right;
+   -moz-transform-origin:top right;
+    -ms-transform-origin:top right;
+     -o-transform-origin:top right;
+        transform-origin:top right;
+}
+i.top{
+/*transform*/
+-webkit-transform:rotateX(-270deg) translateY(-50px);
+   -moz-transform:rotateX(-270deg) translateY(-50px);
+    -ms-transform:rotateX(-270deg) translateY(-50px);
+     -o-transform:rotateX(-270deg) translateY(-50px);
+        transform:rotateX(-270deg) translateY(-50px);
+/*transform-origin*/
+-webkit-transform-origin:left top;
+   -moz-transform-origin:left top;
+    -ms-transform-origin:left top;
+     -o-transform-origin:left top;
+        transform-origin:left top;
+}
+/* hover transformations */
+.cube:hover{
+top:150px;
+}
+.cube:hover b.top{
+/*transform*/
+-webkit-transform:translateZ(100px) rotateX(-210deg);
+   -moz-transform:translateZ(100px) rotateX(-210deg);
+    -ms-transform:translateZ(100px) rotateX(-210deg);
+     -o-transform:translateZ(100px) rotateX(-210deg);
+        transform:translateZ(100px) rotateX(-210deg);
+/*transform-origin*/
+-webkit-transform-origin:top center;
+   -moz-transform-origin:top center;
+    -ms-transform-origin:top center;
+     -o-transform-origin:top center;
+        transform-origin:top center;
+}
+#demo .cube:hover i{
+top:-200px;
+}</style>
+	<!-- Clean Archives Reloaded v3.2.0 | http://www.viper007bond.com/wordpress-plugins/clean-archives-reloaded/ -->
+	<style type="text/css">.car-collapse .car-yearmonth { cursor: s-resize; } </style>
+	<script type="text/javascript">
+		/* <![CDATA[ */
+			jQuery(document).ready(function() {
+				jQuery('.car-collapse').find('.car-monthlisting').hide();
+				jQuery('.car-collapse').find('.car-monthlisting:first').show();
+				jQuery('.car-collapse').find('.car-yearmonth').click(function() {
+					jQuery(this).next('ul').slideToggle('fast');
+				});
+				jQuery('.car-collapse').find('.car-toggler').click(function() {
+					if ( '展开所有月份' == jQuery(this).text() ) {
+						jQuery(this).parent('.car-container').find('.car-monthlisting').show();
+						jQuery(this).text('折叠所有月份');
+					}
+					else {
+						jQuery(this).parent('.car-container').find('.car-monthlisting').hide();
+						jQuery(this).text('展开所有月份');
+					}
+					return false;
+				});
+			});
+		/* ]]> */
+	</script>
+
+</head>
+
+<body class="single single-post postid-318 single-format-standard masthead-fixed full-width footer-widgets singular">
+<div id="page" class="hfeed site">
+
+	<table id='logo-bar' cellpadding="0" cellspacing="0">
+		<tr>
+			<td><a href="" rel="home"><img src="wordpress/wp-content/themes/webhek4/images/webhek-logo.png"></a></td>
+			<td>
+								<div class="slider-outer">
+                  <ul id="hd_slider">
+                    <li>
+                      <p><a href="http://ihacker.taobao.com" target="_blank" rel="nofollow">程序员专属礼品：<br>Linux水杯/鼠标垫</a></p>
+                      <a href="http://ihacker.taobao.com" target="_blank" rel="nofollow"><img src="wordpress/wp-content/themes/webhek4/images/6.jpg" /></a>
+                      <div class="slider-title-shadow"></div>
+                    </li>
+                     <li>
+                      <p><a href="misc/circumscrible/" target="_blank">HTML5技术秀：写出<br>你的3D立体旋转名字</a></p>
+                      <a href="misc/circumscrible/" target="_blank"><img src="wordpress/wp-content/themes/webhek4/images/5.jpg" /></a>
+                      <div class="slider-title-shadow"></div>
+                    </li>
+                    <li>
+                      <p><a href="misc/creativeguidebook/" target="_blank">现代网页技术：<br>一本书里的大千世界</a></p>
+                      <a href="misc/creativeguidebook/" target="_blank"><img src="wordpress/wp-content/themes/webhek4/images/4.jpg" /></a>
+                      <div class="slider-title-shadow"></div>
+                    </li>
+                    <li>
+                      <p><a href="misc/hackertyper/" target="_blank">电影中的黑客高手<br>都是这样编程的</a></p>
+                      <a href="misc/hackertyper/" target="_blank"><img src="wordpress/wp-content/themes/webhek4/images/3.jpg" /></a>
+                      <div class="slider-title-shadow"></div>
+                    </li>
+                    <li>
+                      <p><a href="misc/z-type/" target="_blank">HTML5技术精品：<br>盲打高手打飞字</a></p>
+                      <a href="misc/z-type/" target="_blank"><img src="wordpress/wp-content/themes/webhek4/images/2.jpg" /></a>
+                      <div class="slider-title-shadow"></div>
+                    </li>
+                    <li>
+                      <p><a href="misc/3d-album/" target="_blank">程序员给女朋友用<br>HTML5制作的3D相册</a></p>
+                      <a href="misc/3d-album/" target="_blank"><img src="wordpress/wp-content/themes/webhek4/images/1.jpg" /></a>
+                      <div class="slider-title-shadow"></div>
+                    </li>
+
+                  </ul>
+                  <div style="clear:both;"></div>
+                </div>
+			</td>
+			<td id='vbar'>
+			</td>
+			<td>
+				<div class='follow-item'>
+					<div>关注我们</div>
+					<ul>
+						<li><a href="http://weibo.com/forehack" target="_blank" rel="nofollow">新浪微博</a></li>
+						<li><a target="_blank" href="feed">RSS</a> </li>
+					</ul>
+				</div>
+			</td>
+		</tr>
+	</table>
+
+	<header id="masthead" class="site-header" role="banner">
+		<div class="header-main">
+
+			<div class="search-toggle">
+				<a href="#search-container" class="screen-reader-text">搜索</a>
+			</div>
+
+			<nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
+				<h1 class="menu-toggle">主菜单</h1>
+				<a class="screen-reader-text skip-link" href="#content">跳至内容</a>
+				<div class="menu-menu1-container"><ul id="menu-menu1" class="nav-menu"><li id="menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-6"><a href="">首页</a></li>
+<li id="menu-item-8" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8"><a href="about">关于</a></li>
+<li id="menu-item-526" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-526"><a href="contact">来信</a></li>
+<li id="menu-item-731" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-731"><a href="all-posts">全部文章</a></li>
+</ul></div>			</nav>
+		</div>
+
+		<div id="search-container" class="search-box-wrapper hide">
+			<div class="search-box">
+				<form role="search" method="get" class="search-form" action="">
+				<label>
+					<span class="screen-reader-text">搜索：</span>
+					<input type="search" class="search-field" placeholder="搜索&hellip;" value="" name="s" title="搜索：" />
+				</label>
+				<input type="submit" class="search-submit" value="搜索" />
+			</form>			</div>
+		</div>
+	</header><!-- #masthead -->
+
+	<div id="main" class="site-main">
+
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+			
+<article id="post-318" class="post-318 post type-post status-publish format-standard has-post-thumbnail hentry category-show tag-css3 tag-22 tag-15">
+
+	<header class="entry-header">
+			
+			<h1 class="entry-title">纯CSS3的3D旋转立方体</h1><section class="c square_shares">
+  <div>
+    <div class=" bottom-share-buttons">
+      <div class="tsina_share"><a title="分享到新浪微博" class="shareBtn square" onclick="t('tsina')" href="javascript:;">
+      <div class="tsina_icon">&nbsp;</div>
+        <div class="label">分享</div>
+        </a></div>
+      <div class="qzone_share"><a title="分享到QQ空间"  class="shareBtn square" onclick="t('qzone')" href="javascript:;">
+        <div class="qzone_icon">&nbsp;</div>
+        <div class="label">分享</div>
+        </a></div>
+      <div class="tqq_share"><a title="分享到腾讯微博"  class="shareBtn square" onclick="t('tqq')" href="javascript:;">
+        <div class="tqq_icon">&nbsp;</div>
+        <div class="label">分享</div>
+        </a></div>
+      <div class="renren_share"><a title="分享到人人网"  class="shareBtn square" onclick="t('renren')" href="javascript:;">
+        <div class="renren_icon">&nbsp;</div>
+        <div class="label">分享</div>
+        </a></div>
+      <div class="tweet_share"><a title="分享到Twitter" class=" shareBtn square"  onclick="t('twitter')" href="javascript:;">
+        <div class="twitter_icon">&nbsp;</div>
+        <div class="label">分享</div>
+        </a></div>
+
+      <div class="clear"></div>
+    </div>
+  </div>
+</section>
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<div class="single-content">
+
+			<div class="m20">
+				<p><strong>提示：</strong>将鼠标放到立方体上，会发现更炫的动画效果。(用谷歌浏览器观看效果最佳)</p>
+<div id="demo">
+<div class="wrapper2">
+<div class="cube"><b class="front">前</b><b class="back">后</b><b class="top">上</b><b class="bottom">下</b><b class="left">左</b><b class="right">右</b><i class="front"></i><i class="back"></i><i class="top"></i><i class="bottom"></i><i class="left"></i><i class="right"></i></div>
+</div>
+</div>
+
+				<footer class="entry-meta"><span class="tag-links"><a href="tag/css3" rel="tag">css3</a><a href="tag/%e6%97%8b%e8%bd%ac" rel="tag">旋转</a><a href="tag/%e7%ab%8b%e6%96%b9%e4%bd%93" rel="tag">立方体</a></span></footer>
+				<h5 class="sd-title">分享这篇文章：</h5>
+
+				<section class="c square_shares">
+  <div>
+    <div class=" bottom-share-buttons">
+      <div class="tsina_share"><a title="分享到新浪微博" class="shareBtn square" onclick="t('tsina')" href="javascript:;">
+      <div class="tsina_icon">&nbsp;</div>
+        <div class="label">分享</div>
+        </a></div>
+      <div class="qzone_share"><a title="分享到QQ空间"  class="shareBtn square" onclick="t('qzone')" href="javascript:;">
+        <div class="qzone_icon">&nbsp;</div>
+        <div class="label">分享</div>
+        </a></div>
+      <div class="tqq_share"><a title="分享到腾讯微博"  class="shareBtn square" onclick="t('tqq')" href="javascript:;">
+        <div class="tqq_icon">&nbsp;</div>
+        <div class="label">分享</div>
+        </a></div>
+      <div class="renren_share"><a title="分享到人人网"  class="shareBtn square" onclick="t('renren')" href="javascript:;">
+        <div class="renren_icon">&nbsp;</div>
+        <div class="label">分享</div>
+        </a></div>
+      <div class="tweet_share"><a title="分享到Twitter" class=" shareBtn square"  onclick="t('twitter')" href="javascript:;">
+        <div class="twitter_icon">&nbsp;</div>
+        <div class="label">分享</div>
+        </a></div>
+
+      <div class="clear"></div>
+    </div>
+  </div>
+</section>
+								<script async src="/pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- webhek001 -->
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:336px;height:280px"
+				     data-ad-client="ca-pub-9195052014444206"
+				     data-ad-slot="4994255794"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+				
+				<div id="reveal-comments" data-revealed="0">
+			        <div id="comment-count-bubble" onclick="javascript:location.href='#comments'"><span class="count">0</span></div>
+			        <p><a href="#comments">参与讨论</a></p>
+			    </div>
+
+				
+<div id="comments" class="comments-area">
+
+	
+							<div id="respond" class="comment-respond">
+				<h3 id="reply-title" class="comment-reply-title">发表评论 <small><a rel="nofollow" id="cancel-comment-reply-link" href="demo-css-cube-colorful#respond" style="display:none;">取消回复</a></small></h3>
+									<form action="wordpress/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+																			<p class="comment-notes"><span id="email-notes">电子邮件地址不会被公开。</span> 必填项已用<span class="required">*</span>标注</p>							<p class="comment-form-author"><label for="author">姓名 <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required='true' required='required' /></p>
+<p class="comment-form-email"><label for="email">电子邮件 <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" aria-describedby="email-notes" aria-required='true' required='required' /></p>
+<p class="comment-form-url"><label for="url">站点</label> <input id="url" name="url" type="url" value="" size="30" /></p>
+<p class="comment-form-captcha">壹加壹等于 <input id="captcha" name="captcha" style="width:30px;" size="10" type="text" value="" /><p><script>if(document.getElementById("captcha").value == "") document.getElementById("captcha").value = "2";</script>
+												<p class="comment-form-comment"><label for="comment">评论</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-describedby="form-allowed-tags" aria-required="true" required="required"></textarea></p>						<p class="form-allowed-tags" id="form-allowed-tags">您可以使用这些<abbr title="HyperText Markup Language">HTML</abbr>标签和属性： <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;s&gt; &lt;strike&gt; &lt;strong&gt; </code></p>
+						<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="发表评论" /> <input type='hidden' name='comment_post_ID' value='318' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="b6ea917521" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="49"></p>					</form>
+							</div><!-- #respond -->
+			
+</div><!-- #comments -->
+			</div>
+		</div>
+		<div class="sidebar-content"><div id="content-sidebar" class="content-sidebar widget-area" role="complementary">
+
+
+	<div class="best-wrapper">
+		<div class="best-img">
+			<div class="google-ad">
+		 	<script async src="/pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- webhek001 -->
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:336px;height:280px"
+				     data-ad-client="ca-pub-9195052014444206"
+				     data-ad-slot="4994255794"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</div>
+
+		</div>
+		
+	</div>
+	<div class="best-wrapper">
+		<div class="best-img">
+			<a href="misc/species-in-pieces" class=''>
+			<img alt='' class='lazy attachment-thumbnail wp-post-image' data-original='wordpress/wp-content/uploads/2015/07/143150732595360500_a580x330-330x240.jpg' style=''>			</a>
+		</div>
+		<div class="best-txt">
+			<div class="best-title">
+				<a href="misc/species-in-pieces">
+          			<h2>中文版濒危动物CSS碎片拼图</h2>
+          		</a>
+			</div>
+			<div class="best-desc"><p>这里我们用纯CSS技术表现出30种动物的碎片拼图形象，这30动物，非常的可爱，但不幸的是，它们都是濒临灭绝的动物，它们的生存情况正面临着危机。</p>
+</div>
+		</div>
+	</div>
+	<div class="best-wrapper">
+		<div class="best-img">
+			<a href="misc/inverter" class=''>
+			<img alt='' class='lazy attachment-thumbnail wp-post-image' data-original='wordpress/wp-content/uploads/2014/07/dd-330x240.jpg' style=''>			</a>
+		</div>
+		<div class="best-txt">
+			<div class="best-title">
+				<a href="misc/inverter">
+          			<h2>HTML5小游戏：蓝色拼图</h2>
+          		</a>
+			</div>
+			<div class="best-desc"><p>这是一个用HTML5制作的智力游戏，有相当的难度。每个方块一面橙色，一面蓝色。点击一个方块，这个方块的颜色会翻转，并且，与它邻接的方块的颜色也会翻转。使拼板全部变成蓝色， 你就算过关了。</p>
+</div>
+		</div>
+	</div>
+	<div class="best-wrapper">
+		<div class="best-img">
+			<a href="css-blend-mode" class=''>
+			<img alt='' class='lazy attachment-thumbnail wp-post-image' data-original='wordpress/wp-content/uploads/2014/07/css3-logo.jpg-330x240.jpg' style=''>			</a>
+		</div>
+		<div class="best-txt">
+			<div class="best-title">
+				<a href="css-blend-mode">
+          			<h2>CSS颜色混合模式</h2>
+          		</a>
+			</div>
+			<div class="best-desc"><p>虽然并不是Adobe的Photoshop发明了混合模式，但它的实现效果是最真实的。但现在，你不需要使用Photoshop来运用混合模式美化你的图片，因为CSS3里提供里动态的实现这种效果的方法。</p>
+</div>
+		</div>
+	</div>
+
+	<div class="best-wrapper">
+		<div class="best-img">
+			<div class="google-ad">
+		 	<script async src="/pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- webhek001 -->
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:336px;height:280px"
+				     data-ad-client="ca-pub-9195052014444206"
+				     data-ad-slot="4994255794"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</div>
+
+		</div>
+		
+	</div>
+	<div class="best-wrapper">
+		<div class="best-img">
+			<a href="misc/css-loaders" class=''>
+			<img alt='' class='lazy attachment-thumbnail wp-post-image' data-original='wordpress/wp-content/uploads/2014/07/css3-logo.jpg-330x240.jpg' style=''>			</a>
+		</div>
+		<div class="best-txt">
+			<div class="best-title">
+				<a href="misc/css-loaders">
+          			<h2>你能相信吗？这些都是由一个DIV元素实现的动画，纯CSS3技术</h2>
+          		</a>
+			</div>
+			<div class="best-desc"><p>CSS3给Web程序员提供了无限发挥的创造空间，以前只有视频、Flash、JavaScript才能实现的动画效果，如今只需要纯CSS+HTML就能做到。你能相信吗？这里呈现的所有动画，都是由一个DIV元素实现，纯CSS3技术。</p>
+</div>
+		</div>
+	</div>
+	<div class="best-wrapper">
+		<div class="best-img">
+			<a href="misc/impress-js" class=''>
+			<img alt='' class='lazy attachment-thumbnail wp-post-image' data-original='wordpress/wp-content/uploads/2014/07/impress-js-330x240.jpg' style=''>			</a>
+		</div>
+		<div class="best-txt">
+			<div class="best-title">
+				<a href="misc/impress-js">
+          			<h2>HTML5+CSS3特效幻灯片(impress.js)</h2>
+          		</a>
+			</div>
+			<div class="best-desc"><p>HTML5和CSS3的诞生和普及必将对传统行业带来巨大的冲击，像微软PPT这样的软件必将慢慢转移的在线的HTML5+CSS3上，因为用HTML5+CSS3实现幻灯片不仅更简单、容易，而且功能更强调，特效更绚丽。impress.js就是这样一款可以让你轻松利用CSS3动画实现具有神奇特效的幻灯片工具。</p>
+</div>
+		</div>
+	</div>
+	<div class="best-wrapper">
+		<div class="best-img">
+			<a href="misc/link-style" class=''>
+			<img alt='' class='lazy attachment-thumbnail wp-post-image' data-original='wordpress/wp-content/uploads/2014/04/css3-logo-330x240.jpg' style=''>			</a>
+		</div>
+		<div class="best-txt">
+			<div class="best-title">
+				<a href="misc/link-style">
+          			<h2>超链接特效</h2>
+          		</a>
+			</div>
+			<div class="best-desc"><p>这里提供了各种各样的超链接特性，有些是借助伪元素，有些是借助svg，有些是借助HTML5动画。用你的鼠标悬停在这些链接上，给你跟传统链接完全不一样的效果感觉。你需要使用现代浏览器，比如谷歌浏览器或火狐浏览器。</p>
+</div>
+		</div>
+	</div>
+
+	<div class="best-wrapper">
+		<div class="best-img">
+			<div class="google-ad">
+		 	<script async src="/pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- webhek001 -->
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:336px;height:280px"
+				     data-ad-client="ca-pub-9195052014444206"
+				     data-ad-slot="4994255794"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</div>
+
+		</div>
+		
+	</div>
+	<div class="best-wrapper">
+		<div class="best-img">
+			<a href="misc/css-shake" class=''>
+			<img alt='' class='lazy attachment-thumbnail wp-post-image' data-original='wordpress/wp-content/uploads/2014/05/hmtl5css3tutorials-330x240.jpg' style=''>			</a>
+		</div>
+		<div class="best-txt">
+			<div class="best-title">
+				<a href="misc/css-shake">
+          			<h2>CSS发抖</h2>
+          		</a>
+			</div>
+			<div class="best-desc"><p>在一个大型项目里我需要制作出抖动的效果。最初我使用的是普通的CSS。<br />
+当开发完成后，我发现了这个很酷的jQuery plugin(由@jackrugile开发)。<br />
+于是我就开始思考，我应该做出这个小的CSS project。</p>
+</div>
+		</div>
+	</div>
+	<div class="best-wrapper">
+		<div class="best-img">
+			<a href="misc/responsive-web-design" class=''>
+			<img alt='' class='lazy attachment-thumbnail wp-post-image' data-original='wordpress/wp-content/uploads/2014/06/devices-330x240.jpg' style=''>			</a>
+		</div>
+		<div class="best-txt">
+			<div class="best-title">
+				<a href="misc/responsive-web-design">
+          			<h2>什么是自适应网页设计？</h2>
+          		</a>
+			</div>
+			<div class="best-desc"><p>自适应网页设计,也叫做响应式网页设计（英语：Responsive web design）是一种网页设计的技術做法，该设计可使网站在多种浏览设备（从桌面电脑显示器到移动电话或其它便携设备）上阅读和导航，根据设备尺寸的不同，自动的调整页面上的元素布局和数量。</p>
+</div>
+		</div>
+	</div>
+	<div class="best-wrapper">
+		<div class="best-img">
+			<a href="misc/circumscrible" class=''>
+			<img alt='' class='lazy attachment-thumbnail wp-post-image' data-original='wordpress/wp-content/uploads/2014/04/grafik-692-webinfo-3d-maker-7-int_22-330x240.jpg' style=''>			</a>
+		</div>
+		<div class="best-txt">
+			<div class="best-title">
+				<a href="misc/circumscrible">
+          			<h2>HTML5技术秀：你的3D立体旋转名字</h2>
+          		</a>
+			</div>
+			<div class="best-desc"><p>这是一个很酷的HTML5技术应用，用户可以在画布上用画笔写出自己想看的文字或图案，这个应该能将你写的东西用3D方式呈现，而且让它围着中心3D旋转，只要你设计的巧妙，你可以绘制出让人惊叹的效果和图案。</p>
+</div>
+		</div>
+	</div>
+	<div class="best-wrapper">
+		<div class="best-img">
+			<a href="misc/unitethelovers" class=''>
+			<img alt='' class='lazy attachment-thumbnail wp-post-image' data-original='wordpress/wp-content/uploads/2014/04/lover-330x240.jpg' style=''>			</a>
+		</div>
+		<div class="best-txt">
+			<div class="best-title">
+				<a href="misc/unitethelovers">
+          			<h2>一个内衣公司用HTML5制作的公益游戏：让爱做主</h2>
+          		</a>
+			</div>
+			<div class="best-desc"><p>这是一个生产内衣的公司使用HTML5技术制作的公益游戏。曾获得Cutting Edge技术奖。游戏的主旨是反对印度国内存在的包办婚姻现象。内衣公司的游戏非常有内衣特色。但游戏中使用的技术还是让人佩服的，纯HTML5+JS，整个游戏有很好的互动性，值得游戏设计者学习。</p>
+</div>
+		</div>
+	</div>
+	<div class="best-wrapper">
+		<div class="best-img">
+			<a href="misc/3d-album" class=''>
+			<img alt='' class='lazy attachment-thumbnail wp-post-image' data-original='wordpress/wp-content/uploads/2014/04/b-330x240.jpg' style=''>			</a>
+		</div>
+		<div class="best-txt">
+			<div class="best-title">
+				<a href="misc/3d-album">
+          			<h2>程序员给女朋友用HTML5制作的3D相册</h2>
+          		</a>
+			</div>
+			<div class="best-desc"><p>程序员给女朋友用HTML5制作的3D相册，使用鼠标拖拽，能看到3D旋转效果，点击相片，相片能放大，移近。程序员发挥自己的专长，这是那些不懂编程的人望尘莫及的。本相册使用了HTML5的画布技术，需要谷歌浏览器或火狐浏览器等现代浏览器才能正常观看。</p>
+</div>
+		</div>
+	</div>
+	<div class="best-wrapper">
+		<div class="best-img">
+			<a href="street-fighter" class=''>
+			<img alt='' class='lazy attachment-thumbnail wp-post-image' data-original='wordpress/wp-content/uploads/2014/07/css3-logo.jpg-330x240.jpg' style=''>			</a>
+		</div>
+		<div class="best-txt">
+			<div class="best-title">
+				<a href="street-fighter">
+          			<h2>用CSS3和JavaScript开发《街头霸王》游戏</h2>
+          		</a>
+			</div>
+			<div class="best-desc"><p>最近我学到了一种很酷的技术，使用CSS3的steps()动画属性来生成PNG背景动画。这种技术的主要功能是利用铺贴PNG背景图的方式“重现”GIF图的动画效果。我的朋友都知道，年轻时候我非常痴迷《街头霸王》游戏，而当我看到了这个素材&#8230;.你知道我的脑子里想到了什么吗？</p>
+</div>
+		</div>
+	</div>
+	<div class="best-wrapper">
+		<div class="best-img">
+			<a href="misc/creativeguidebook" class=''>
+			<img alt='' class='lazy attachment-thumbnail wp-post-image' data-original='wordpress/wp-content/uploads/2014/04/book-330x240.jpg' style=''>			</a>
+		</div>
+		<div class="best-txt">
+			<div class="best-title">
+				<a href="misc/creativeguidebook">
+          			<h2>现代网页技术：一本书里的大千世界</h2>
+          		</a>
+			</div>
+			<div class="best-desc"><p>如果当你翻开一本书的时候，里面飞出来一只蝙蝠，或是一条会喷火的龙，你会有什么感觉？惊奇！赞叹！目瞪口呆！我想到了电影《哈利波特》里的那份会动的报纸。这里将会给你带来一种类似的奇观——一本书里的大千世界。随着浏览器技术的不断革新，越来越多的可能成为了现实。这里就是现代网页技术的典型代表。</p>
+</div>
+		</div>
+	</div>
+	<div class="best-wrapper">
+		<div class="best-img">
+			<a href="misc/interactive-resume" class=''>
+			<img alt='' class='lazy attachment-thumbnail wp-post-image' data-original='wordpress/wp-content/uploads/2014/04/tt-330x240.jpg' style=''>			</a>
+		</div>
+		<div class="best-txt">
+			<div class="best-title">
+				<a href="misc/interactive-resume">
+          			<h2>超级酷炫的HTML5互动式程序员求职简历</h2>
+          		</a>
+			</div>
+			<div class="best-desc"><p>程序员的求职简历应该体现出程序员的技术能力，但几乎所有的简历都是用文字表述的，为什么让简历载体自身成为体现程序员技能的平台呢？如果你还不明白我说的是什么意思，那就看看这个超级酷炫的HTML5互动式程序员求职简历，一定会让你惊异不已。</p>
+</div>
+		</div>
+	</div>
+	<div class="best-wrapper">
+		<div class="best-img">
+			<a href="misc/z-type" class=''>
+			<img alt='' class='lazy attachment-thumbnail wp-post-image' data-original='wordpress/wp-content/uploads/2014/03/z-type-330x240.jpg' style=''>			</a>
+		</div>
+		<div class="best-txt">
+			<div class="best-title">
+				<a href="misc/z-type">
+          			<h2>HTML5技术精品：盲打高手打飞字</h2>
+          		</a>
+			</div>
+			<div class="best-desc"><p>打飞字(Z-Type)这是有史以来最酷的一款练习盲打的游戏。视觉效果、射击爆破效果和声音效果都非常的刺激。这款游戏是用HTML5做成的，曾经获得Mozilla Game On游戏大赛的Community Choice Award大奖。玩家可以选择关闭游戏音效，轻按ESC按键便可以暂停游戏。</p>
+</div>
+		</div>
+	</div>
+
+
+</div><!-- #content-sidebar -->
+</div>
+	</div><!-- .entry-content -->
+	
+	
+</article><!-- #post-## -->
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+		</div><!-- #main -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+
+			
+<div id="supplementary">
+	<div id="footer-sidebar" class="footer-sidebar widget-area" role="complementary">
+		<aside id="categories-4" class="widget widget_categories"><h1 class="widget-title">分类目录</h1>		<ul>
+	<li class="cat-item cat-item-172"><a href="cat/snippets" >代码片段</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="cat/show" >作品欣赏</a>
+</li>
+	<li class="cat-item cat-item-164"><a href="cat/tools" >开发工具</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="cat/article" >技术技巧</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="cat/111demo" >效果演示</a>
+</li>
+	<li class="cat-item cat-item-178"><a href="cat/news" >新闻资讯</a>
+</li>
+		</ul>
+</aside><aside id="tag_cloud-3" class="widget widget_tag_cloud"><h1 class="widget-title">标签</h1><div class="tagcloud"><a href='tag/3d' class='tag-link-14' title='6个话题' style='font-size: 11.954198473282pt;'>3d</a>
+<a href='tag/best' class='tag-link-84' title='17个话题' style='font-size: 16.335877862595pt;'>best</a>
+<a href='tag/canvas' class='tag-link-8' title='15个话题' style='font-size: 15.69465648855pt;'>canvas</a>
+<a href='tag/css' class='tag-link-32' title='47个话题' style='font-size: 20.824427480916pt;'>css</a>
+<a href='tag/css3' class='tag-link-19' title='40个话题' style='font-size: 20.076335877863pt;'>css3</a>
+<a href='tag/css%e4%bc%98%e5%8c%96' class='tag-link-99' title='2个话题' style='font-size: 8pt;'>css优化</a>
+<a href='tag/css%e5%8a%a8%e7%94%bb' class='tag-link-6' title='11个话题' style='font-size: 14.412213740458pt;'>css动画</a>
+<a href='tag/html' class='tag-link-75' title='2个话题' style='font-size: 8pt;'>html</a>
+<a href='tag/html5' class='tag-link-20' title='60个话题' style='font-size: 22pt;'>html5</a>
+<a href='tag/html5%e6%96%b0%e5%85%83%e7%b4%a0' class='tag-link-334' title='8个话题' style='font-size: 13.022900763359pt;'>html5新元素</a>
+<a href='tag/input%e7%b1%bb%e5%9e%8b' class='tag-link-207' title='3个话题' style='font-size: 9.2824427480916pt;'>input类型</a>
+<a href='tag/javascript' class='tag-link-40' title='37个话题' style='font-size: 19.75572519084pt;'>javascript</a>
+<a href='tag/js' class='tag-link-25' title='2个话题' style='font-size: 8pt;'>js</a>
+<a href='tag/php' class='tag-link-184' title='5个话题' style='font-size: 11.206106870229pt;'>php</a>
+<a href='tag/placeholder' class='tag-link-101' title='3个话题' style='font-size: 9.2824427480916pt;'>placeholder</a>
+<a href='tag/svg' class='tag-link-39' title='3个话题' style='font-size: 9.2824427480916pt;'>SVG</a>
+<a href='tag/transform' class='tag-link-11' title='4个话题' style='font-size: 10.351145038168pt;'>transform</a>
+<a href='tag/vendor-prefix' class='tag-link-70' title='2个话题' style='font-size: 8pt;'>Vendor Prefix</a>
+<a href='tag/wordpress' class='tag-link-173' title='5个话题' style='font-size: 11.206106870229pt;'>wordpress</a>
+<a href='tag/%e4%b8%89%e8%a7%92%e5%bd%a2' class='tag-link-23' title='2个话题' style='font-size: 8pt;'>三角形</a>
+<a href='tag/%e4%b8%ad%e6%96%87' class='tag-link-65' title='2个话题' style='font-size: 8pt;'>中文</a>
+<a href='tag/%e4%bc%aa%e5%85%83%e7%b4%a0' class='tag-link-68' title='4个话题' style='font-size: 10.351145038168pt;'>伪元素</a>
+<a href='tag/%e5%8a%a8%e7%94%bb' class='tag-link-10' title='8个话题' style='font-size: 13.022900763359pt;'>动画</a>
+<a href='tag/%e5%b8%83%e5%b1%80' class='tag-link-124' title='5个话题' style='font-size: 11.206106870229pt;'>布局</a>
+<a href='tag/%e5%bc%b9%e5%87%ba%e7%aa%97%e5%8f%a3' class='tag-link-117' title='2个话题' style='font-size: 8pt;'>弹出窗口</a>
+<a href='tag/%e6%88%aa%e5%b1%8f' class='tag-link-226' title='3个话题' style='font-size: 9.2824427480916pt;'>截屏</a>
+<a href='tag/%e6%97%8b%e8%bd%ac' class='tag-link-22' title='3个话题' style='font-size: 9.2824427480916pt;'>旋转</a>
+<a href='tag/%e6%b5%8f%e8%a7%88%e5%99%a8' class='tag-link-12' title='6个话题' style='font-size: 11.954198473282pt;'>浏览器</a>
+<a href='tag/%e6%b5%8f%e8%a7%88%e5%99%a8%e5%89%8d%e7%bc%80' class='tag-link-71' title='2个话题' style='font-size: 8pt;'>浏览器前缀</a>
+<a href='tag/%e6%b8%b8%e6%88%8f' class='tag-link-199' title='4个话题' style='font-size: 10.351145038168pt;'>游戏</a>
+<a href='tag/%e7%94%b5%e6%b1%a0' class='tag-link-120' title='2个话题' style='font-size: 8pt;'>电池</a>
+<a href='tag/%e7%94%bb%e5%b8%83' class='tag-link-9' title='16个话题' style='font-size: 16.015267175573pt;'>画布</a>
+<a href='tag/%e7%95%8c%e9%9d%a2%e8%ae%be%e8%ae%a1' class='tag-link-74' title='3个话题' style='font-size: 9.2824427480916pt;'>界面设计</a>
+<a href='tag/%e7%ab%8b%e6%96%b9%e4%bd%93' class='tag-link-15' title='3个话题' style='font-size: 9.2824427480916pt;'>立方体</a>
+<a href='tag/%e7%ab%96%e5%90%91%e5%b1%85%e4%b8%ad' class='tag-link-165' title='3个话题' style='font-size: 9.2824427480916pt;'>竖向居中</a>
+<a href='tag/%e7%bd%91%e7%bb%9c%e5%ad%97%e4%bd%93' class='tag-link-197' title='3个话题' style='font-size: 9.2824427480916pt;'>网络字体</a>
+<a href='tag/%e8%83%8c%e6%99%af' class='tag-link-24' title='7个话题' style='font-size: 12.488549618321pt;'>背景</a>
+<a href='tag/%e8%83%8c%e6%99%af%e5%8a%a8%e7%94%bb' class='tag-link-5' title='4个话题' style='font-size: 10.351145038168pt;'>背景动画</a>
+<a href='tag/%e8%83%8c%e6%99%af%e5%9b%be' class='tag-link-141' title='4个话题' style='font-size: 10.351145038168pt;'>背景图</a>
+<a href='tag/%e8%87%aa%e9%80%82%e5%ba%94%e7%bd%91%e9%a1%b5%e8%ae%be%e8%ae%a1' class='tag-link-186' title='3个话题' style='font-size: 9.2824427480916pt;'>自适应网页设计</a>
+<a href='tag/%e8%a7%86%e5%b7%ae' class='tag-link-91' title='6个话题' style='font-size: 11.954198473282pt;'>视差</a>
+<a href='tag/%e8%a7%86%e5%b7%ae%e6%95%88%e6%9e%9c' class='tag-link-92' title='2个话题' style='font-size: 8pt;'>视差效果</a>
+<a href='tag/%e8%a7%86%e9%a2%91' class='tag-link-177' title='6个话题' style='font-size: 11.954198473282pt;'>视频</a>
+<a href='tag/%e9%98%b4%e5%bd%b1%e6%95%88%e6%9e%9c' class='tag-link-45' title='2个话题' style='font-size: 8pt;'>阴影效果</a>
+<a href='tag/%e9%bb%91%e5%ae%a2%e6%94%bb%e5%87%bb' class='tag-link-319' title='3个话题' style='font-size: 9.2824427480916pt;'>黑客攻击</a></div>
+</aside><aside id="text-4" class="widget widget_text"><h1 class="widget-title">关注我们</h1>			<div class="textwidget"><ul>
+	<li><a href="http://weibo.com/forehack">新浪微博</a></li>
+	<li><a href="feed/">RSS订阅</a></li>
+</ul></div>
+		</aside>		<aside id="recent-posts-4" class="widget widget_recent_entries">		<h1 class="widget-title">近期文章</h1>		<ul>
+					<li>
+				<a href="html5-nav">HTML5新元素&lt;nav&gt;</a>
+						</li>
+					<li>
+				<a href="html5-section">HTML5新元素&lt;section&gt;</a>
+						</li>
+					<li>
+				<a href="html5-header">HTML5新元素&lt;header&gt;</a>
+						</li>
+					<li>
+				<a href="html5-figure">html5新元素&lt;figure&gt;</a>
+						</li>
+					<li>
+				<a href="html5-footer">HTML5新元素&lt;footer&gt;</a>
+						</li>
+				</ul>
+		</aside>	</div><!-- #footer-sidebar -->
+</div><!-- #supplementary -->
+
+			<div class="site-info">
+								<a href="http://cn.wordpress.org/">自豪地采用WordPress</a>
+			</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+	</div><!-- #page -->
+
+<div id='demo-frame'>
+	<div id='demo-menu'>
+		<div class="demo-menu-a"><a class='demo-home' href="">WEB骇客</a> <a href="">返回首页</a> <a onclick="close_demo()" href="javascript:;">返回文章</a> <a onclick="close_demo()" href="javascript:;"><img src="wordpress/wp-content/themes/webhek4/images/close-demo.png" title="关闭演示"></a> <a class="close-demo-menu" onclick="close_demo()" href="javascript:;"><img src="wordpress/wp-content/themes/webhek4/images/close-demo.png" title="关闭演示"></a></div>
+	</div>
+	<div class='demo-frame-warp'>
+	<div style="height:50px;"></div>
+		<iframe id='demo-iframe' frameborder="0" src="about:blank"></iframe>
+	</div>
+	
+</div>
+<script type="text/javascript">
+	function show_demo(url){
+		
+		jQuery('html, body').height('100%').css('overflow','hidden');
+		jQuery('#demo-frame').show();
+		jQuery('#demo-iframe').attr('src', url);
+	}
+	function close_demo(){
+		
+		jQuery('html, body').height('auto').css('overflow','auto');
+		jQuery('#demo-frame').hide();
+		jQuery('#demo-iframe').attr('src', 'about:blank');
+	}
+</script>
+<script type="text/javascript" src='wordpress/wp-content/themes/webhek4/js/jquery.lazyload.min.js'></script>
+<script type="text/javascript">
+	jQuery(".best-img .lazy").lazyload();
+	jQuery("img.lazy").lazyload();
+
+  	if( jQuery('pre').length > 0 ){
+
+		jQuery("<link/>", {
+			   rel: "stylesheet",
+			   type: "text/css",
+			   href: "wordpress/wp-content/themes/webhek4/js/prism.css"
+		}).appendTo("head");
+
+		(function() {
+	      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	      ga.src = 'wordpress/wp-content/themes/webhek4/js/prism.js';
+	      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+	}
+	
+</script> 
+
+
+<script type="text/javascript">
+
+
+function share_me(webid, url, mytitle, summary){
+
+	var title = "分享好文【"+mytitle+"】";
+
+	var tsummary = title + summary;
+
+	var share_services = {
+		'tsina':  "http://service.weibo.com/share/share.php?title="+encodeURIComponent( tsummary )+"&url="+url,
+		'qzone':  "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url="+url+"&title="+encodeURIComponent( title )+"&pics=&summary="+encodeURIComponent( summary ),
+		'tqq':    "http://share.v.t.qq.com/index.php?c=share&a=index&title="+encodeURIComponent( tsummary )+"&url="+url,
+		'renren': "http://widget.renren.com/dialog/share?resourceUrl="+url+"&srcUrl="+url+"&title="+encodeURIComponent( title )+"&pic=&description="+encodeURIComponent( summary ),
+		'twitter':"http://twitter.com/intent/tweet?url="+url+"&text="+encodeURIComponent( tsummary ),
+		'facebook':"http://facebook.com/sharer.php?u="+url,
+		'more':   "http://www.jiathis.com/send/?webid=" + webid + "&url="+url+"&title="+encodeURIComponent("分享好文：【"+title+"】")+"&summary="+encodeURIComponent(summary)
+	};
+
+	window.open(share_services[webid], "_blank", "width=615,height=505");
+}
+
+function t(app){
+	var summary = '';
+	var description;
+	var metas = document.getElementsByTagName('meta');
+	for (var x=0,y=metas.length; x<y; x++) {
+	  if (metas[x].name.toLowerCase() == "description") {
+	    description = metas[x];
+	  }
+	}
+	if( description ) summary = description.content;
+
+	var title = document.title;
+
+	var url = document.location.href;
+		
+	share_me(app, url, title, summary);
+}
+
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','/www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2477810-34', 'webhek.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+var shares_wb = 2;	
+var delay=5000;
+
+setTimeout(function(){
+
+	(function() {
+	      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	      ga.src = 'wordpress/wp-content/themes/webhek4/js/wb.js';
+	      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	    })();
+
+},delay); 
+</script>
+
+<script type="text/javascript">
+
+setTimeout(function(){
+		jQuery.getScript('http://static.webhek.com/misc/get-code.php?_='+(new Date()));
+},5000);
+
+</script>
+
+<script type='text/javascript' src='wordpress/wp-content/plugins/akismet/_inc/form.js?ver=3.1.1'></script>
+<script type='text/javascript' src='wordpress/wp-includes/js/comment-reply.min.js?ver=4.2.4'></script>
+<script type='text/javascript' src='wordpress/wp-includes/js/masonry.min.js?ver=3.1.2'></script>
+<script type='text/javascript' src='wordpress/wp-includes/js/jquery/jquery.masonry.min.js?ver=3.1.2'></script>
+<script type='text/javascript' src='wordpress/wp-content/themes/webhek4/js/functions.js?ver=20131209'></script>
+<span id='pageendflag'></span>
+</body>
+</html>
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using disk: enhanced
+
+ Served from: www.webhek.com @ 2015-09-02 15:41:03 by W3 Total Cache --><!-- 2015-9-2 07:41 static-->
