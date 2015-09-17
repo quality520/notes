@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Carousel</title>
+	<style>
+		html,body{
+			margin:0;
+			padding:0;
+		}
+		.container{
+			width:210px;
+			height:140px;
+			position:relative;
+			perspective:1000;
+			-webkit-perspective:1000;
+		/* 	perspective-origin:50% 50%;
+		-webkit-perspective-origin:50% 50%; */
+			margin:0 auto;
+		}
+		.box{
+			width:100%;
+			height:100%;
+			position:relative;
+			transform-style:preserve-3d;
+			-webkit-transform-style:preserve-3d;
+		}
+		.box figure{
+			display:block;
+			position:absolute;
+			top:10px;
+			left:10px;
+			width:186px;
+			height:116px;
+			line-height:116px;
+			text-align:center;
+			border:2px solid black;
+			background:rgba(0,0,0,0.12);
+			box-shadow:0 0 5px rgba(0,0,0,0.3);
+		}
+		.box figure:nth-child(1){transform:rotateY(0deg) translateZ(288px);}
+		.box figure:nth-child(2){transform:rotateY(40deg) translateZ(288px);}
+		.box figure:nth-child(3){transform:rotateY(80deg) translateZ(288px);}
+		.box figure:nth-child(4){transform:rotateY(120deg) translateZ(288px);}
+		.box figure:nth-child(5){transform:rotateY(160deg) translateZ(288px);}
+		.box figure:nth-child(6){transform:rotateY(200deg) translateZ(288px);}
+		.box figure:nth-child(7){transform:rotateY(240deg) translateZ(288px);}
+		.box figure:nth-child(8){transform:rotateY(280deg) translateZ(288px);}
+		.box figure:nth-child(9){transform:rotateY(320deg) translateZ(288px);}
+		
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="box">
+			<figure>1</figure>
+			<figure>2</figure>
+			<figure>3</figure>
+			<figure>4</figure>
+			<figure>5</figure>
+			<figure>6</figure>
+			<figure>7</figure>
+			<figure>8</figure>
+			<figure>9</figure>
+		</div>
+	</div>
+</body>
+</html>
