@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style>
+		html, body {
+		  height: 100%;
+		}
+
+		body {
+		  font-size: 120px;
+		  background: url(http://i.imgur.com/ihDBGCs.png), radial-gradient(#ffffff, #d1d1d1);
+		  overflow: hidden;
+		}
+		body * {
+		  position: absolute;
+		  top: 50%;
+		  left: 50%;
+		  transform-style: preserve-3d;
+		}
+
+		@keyframes container {
+		  from {
+		    transform: scale(1);
+		  }
+		  to {
+		    transform: scale(0.8165);
+		  }
+		}
+		.container {
+		  animation: container 3s linear infinite;
+		}
+
+		@keyframes thing {
+		  from, 20% {
+		    transform: rotateX(-145deg) rotateY(-135deg);
+		  }
+		  60%, to {
+		    transform: rotateX(0deg) rotateY(0deg);
+		  }
+		}
+		.thing {
+		  animation: thing 3s ease infinite;
+		  transform: translateZ(-10em) rotateX(-35deg) rotateY(-45deg);
+		}
+		.thing .face {
+		  width: 1em;
+		  height: 1em;
+		  background-color: #030303;
+		  background-clip: content-box;
+		}
+		@keyframes face1_color {
+		  from, 80%, to {
+		    background-color: #030303;
+		  }
+		  20%, 60% {
+		    background-color: #ffad10;
+		  }
+		}
+		@keyframes face1 {
+		  from, 20% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(0deg) translateX(0.5em) rotateY(90deg) scaleX(1) translateX(0.5em);
+		  }
+		  60% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(0deg) translateX(0.5em) rotateY(0deg) scaleX(1) translateX(0.5em);
+		  }
+		  80% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(0deg) translateX(0.5em) rotateY(0deg) scaleX(0.36603) translateX(0.5em);
+		  }
+		  100%, to {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(0deg) translateX(0.5em) rotateY(0deg) scaleX(0.36603) translateX(0.5em);
+		  }
+		}
+		.thing .face:nth-child(1) {
+		  border-color: currentColor;
+		  animation: face1 3s ease infinite, face1_color 3s ease infinite;
+		}
+		@keyframes face2_color {
+		  from, 80%, to {
+		    background-color: #030303;
+		  }
+		  20%, 60% {
+		    background-color: #ffad10;
+		  }
+		}
+		@keyframes face2 {
+		  from, 20% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(180deg) translateX(0.5em) rotateY(90deg) scaleX(1) translateX(0.5em);
+		  }
+		  60% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(180deg) translateX(0.5em) rotateY(0deg) scaleX(1) translateX(0.5em);
+		  }
+		  80% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(180deg) translateX(0.5em) rotateY(0deg) scaleX(0.36603) translateX(0.5em);
+		  }
+		  100%, to {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(180deg) translateX(0.5em) rotateY(0deg) scaleX(0.36603) translateX(0.5em);
+		  }
+		}
+		.thing .face:nth-child(2) {
+		  border-color: currentColor;
+		  animation: face2 3s ease infinite, face2_color 3s ease infinite;
+		}
+		@keyframes face3_color {
+		  from, 80%, to {
+		    background-color: #030303;
+		  }
+		  20%, 60% {
+		    background-color: #21a5ad;
+		  }
+		}
+		@keyframes face3 {
+		  from, 20% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(90deg) translateX(0.5em) rotateY(90deg) scaleX(1) translateX(0.5em);
+		  }
+		  60% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(90deg) translateX(0.5em) rotateY(0deg) scaleX(1) translateX(0.5em);
+		  }
+		  80% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(90deg) translateX(0.5em) rotateY(0deg) scaleX(0.36603) translateX(0.5em);
+		  }
+		  100%, to {
+		    transform: translate(-50%, -50%) rotate(30deg) translateZ(0.5em) rotate(90deg) translateX(0.5em) rotateY(0deg) scaleX(0.36603) translateX(0.5em);
+		  }
+		}
+		.thing .face:nth-child(3) {
+		  border-color: currentColor;
+		  animation: face3 3s ease infinite, face3_color 3s ease infinite;
+		}
+		@keyframes face4_color {
+		  from, 80%, to {
+		    background-color: #030303;
+		  }
+		  20%, 60% {
+		    background-color: #21a5ad;
+		  }
+		}
+		@keyframes face4 {
+		  from, 20% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(270deg) translateX(0.5em) rotateY(90deg) scaleX(1) translateX(0.5em);
+		  }
+		  60% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(270deg) translateX(0.5em) rotateY(0deg) scaleX(1) translateX(0.5em);
+		  }
+		  80% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(270deg) translateX(0.5em) rotateY(0deg) scaleX(0.36603) translateX(0.5em);
+		  }
+		  100%, to {
+		    transform: translate(-50%, -50%) rotate(30deg) translateZ(0.5em) rotate(270deg) translateX(0.5em) rotateY(0deg) scaleX(0.36603) translateX(0.5em);
+		  }
+		}
+		.thing .face:nth-child(4) {
+		  border-color: currentColor;
+		  animation: face4 3s ease infinite, face4_color 3s ease infinite;
+		}
+		@keyframes face5_color {
+		  from, 80%, to {
+		    background-color: #030303;
+		  }
+		  20%, 60% {
+		    background-color: #ffad10;
+		  }
+		}
+		@keyframes face5 {
+		  from, 20% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(0deg) translateX(0.5em) rotateY(90deg) scaleX(1) translateX(0.5em);
+		  }
+		  60% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(0deg) translateX(0.5em) rotateY(0deg) scaleX(1) translateX(0.5em);
+		  }
+		  80% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(0deg) translateX(0.5em) rotateY(0deg) scaleX(0.36603) translateX(0.5em);
+		  }
+		  100%, to {
+		    transform: translate(-50%, -50%) rotate(60deg) translateZ(0.5em) rotate(0deg) translateX(0.5em) rotateY(0deg) scaleX(0.36603) translateX(0.5em);
+		  }
+		}
+		.thing .face:nth-child(5) {
+		  border-color: currentColor;
+		  animation: face5 3s ease infinite, face5_color 3s ease infinite;
+		}
+		@keyframes face6_color {
+		  from, 80%, to {
+		    background-color: #030303;
+		  }
+		  20%, 60% {
+		    background-color: #ffad10;
+		  }
+		}
+		@keyframes face6 {
+		  from, 20% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(180deg) translateX(0.5em) rotateY(90deg) scaleX(1) translateX(0.5em);
+		  }
+		  60% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(180deg) translateX(0.5em) rotateY(0deg) scaleX(1) translateX(0.5em);
+		  }
+		  80% {
+		    transform: translate(-50%, -50%) rotate(0deg) translateZ(0.5em) rotate(180deg) translateX(0.5em) rotateY(0deg) scaleX(0.36603) translateX(0.5em);
+		  }
+		  100%, to {
+		    transform: translate(-50%, -50%) rotate(60deg) translateZ(0.5em) rotate(180deg) translateX(0.5em) rotateY(0deg) scaleX(0.36603) translateX(0.5em);
+		  }
+		}
+		.thing .face:nth-child(6) {
+		  border-color: currentColor;
+		  animation: face6 3s ease infinite, face6_color 3s ease infinite;
+		}
+		@keyframes front-back_color {
+		  from, 80%, to {
+		    background-color: #030303;
+		  }
+		  20%, 60% {
+		    background-color: #ef4239;
+		  }
+		}
+		@keyframes front-back_border {
+		  from, 60% {
+		    border: 1px solid rgba(239, 66, 57, 0);
+		  }
+		  80%, to {
+		    border: 1px solid #030303;
+		  }
+		}
+		.thing .face:nth-child(7) {
+		  transform: translate3d(-50%, -50%, 0.5em);
+		  animation: front-back_color 3s ease infinite, front-back_border 3s ease infinite;
+		}
+		@keyframes face8 {
+		  from, 80% {
+		    transform: translate(-50%, -50%) rotate(0deg) rotateY(180deg) translateZ(0.5em);
+		  }
+		  100%, to {
+		    transform: translate(-50%, -50%) rotate(60deg) rotateY(180deg) translateZ(0.5em);
+		  }
+		}
+		.thing .face:nth-child(8) {
+		  animation: face8 3s ease infinite, front-back_color 3s ease infinite, front-back_border 3s ease infinite;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="thing">
+			<div class="face"></div>
+			<div class="face"></div>
+			<div class="face"></div>
+			<div class="face"></div>
+			<div class="face"></div>
+			<div class="face"></div>
+			<div class="face"></div>
+			<div class="face"></div>
+		</div>
+	</div>
+</body>
+</html>
