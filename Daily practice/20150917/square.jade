@@ -1,0 +1,71 @@
+doctype
+html
+	head
+		meta(charset="utf-8")
+		meta(name="viewport" content="width=device-width,initial-scale=1,user-scalable=no")
+		title 正方体
+		style.
+			    		html,body{
+			    			margin:0;
+			    			padding:0;
+			    		}
+			      body{
+			      	background:#ccc;
+			      	font-size:100px;
+			      }
+			      .container{
+			      	position:absolute;
+            	width:2em;
+            	height:2em;
+            	top:50%;
+            	left:50%;
+            	margin-top:-1em;
+            	margin-left:-1em;
+            	perspective:800;
+            	-webkit-perspective:800;
+            	perspective-origin:50% 50%;
+            	-webkit-perspective-origin:50% 50%;
+			      }
+			      .box{
+			      	position:relative;
+			      	width:2em;
+			      	height:2em;
+										transform-style:preserve-3d;
+										-webkit-transform-style:preserve-3d;
+			      }
+			      .front,.back,.left,.right,.top,.bottom{
+			      	width:2em;
+			      	height:2em;
+			      	position:absolute;
+			      	top:0;
+			      	left:0;
+			      	background:rgba(0,0,0,0.1);
+			      	box-shadow:0 0 5px rgba(0,0,0,);
+			      }
+			      .front{
+										/*background:#EEB4B4;*/
+			      }
+			      .back{
+										/*background:#EEB422;*/
+			      }
+			      .left{
+										/*background:#EE7AE9;*/
+			      }
+			      .right{
+										/*background:#EE2C2C;*/
+			      }
+			      .top{
+										/*background:#DC143C;*/
+			      }
+			      .bottom{
+										/*background:#DA70D6;*/
+			      }
+	body
+		.container
+			.box
+				.front
+				.back
+				.left
+				.right
+				.top
+				.bottom

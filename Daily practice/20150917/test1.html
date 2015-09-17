@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <link rel="stylesheet" href="">
+  <style>
+    body {
+         background-color: #000;
+       }
+       .container {
+         width: 100%;
+         height: 800px;
+         -webkit-perspective: 800;
+         padding-top: 300px;
+         /*默认景深的中心点，为50% 50%;*/
+         -webkit-perspective-origin: 50% 40%;
+       }
+       @-webkit-keyframes spin {
+         from {
+           -webkit-transform: rotateY(0);
+         }
+         to {
+           -webkit-transform: rotateY(-360deg);
+         }
+       }
+       .cube {
+         margin: 0 auto;
+         width: 200px;
+         height: 200px;
+         position: relative;
+         -webkit-animation: spin 8s infinite linear;
+         -webkit-transform-style: preserve-3d;
+       }
+       .cube .rect {
+         position: absolute;
+         top: 0px;
+         left: 0px;
+         width: 200px;
+         height: 200px;
+         border-radius: 5px;
+         border: 1px solid #ccc;
+         font-size: 125pt;
+         text-align: center;
+         line-height: 200px;
+         background-color: #bbb;
+         opacity: 0.5;
+       }
+       .cube .cubeA {
+         /*这里要放大1.2倍。比较好看。*/
+         -webkit-transform: scale3d(1.2, 1.2, 1.2) rotateX(90deg) translateZ(100px);
+       }
+       .cube .cubeB {
+         -webkit-transform: scale3d(1.2, 1.2, 1.2) rotateX(-90deg) translateZ(100px);
+       }
+       .cube .cubeC {
+         -webkit-transform: scale3d(1.2, 1.2, 1.2) rotateY(-90deg) translateZ(100px);
+       }
+       .cube .cubeD {
+         -webkit-transform: scale3d(1.2, 1.2, 1.2) rotateY(90deg) translateZ(100px);
+       }
+       .cube .cubeE {
+         -webkit-transform: scale3d(1.2, 1.2, 1.2) rotateY(180deg) translateZ(100px);
+       }
+       .cube .cubeF {
+         -webkit-transform: scale3d(1.2, 1.2, 1.2) translateZ(100px);
+       }
+  </style>
+</head>
+<body>
+  <div class="container"><!--用于设置景深的位置，一定要有个在所有旋转元素之上的元素，放置景深-->
+      <div class="cube"><!--用于为子元素设置3D效果，同时围绕的坐标轴也是以此元素为基础。若在这里放景深，跳不出来效果-->
+          <div class="cubeA rect">1</div><!--具体效果看css就明白了。旋转下就好-->
+          <div class="cubeB rect">2</div>
+          <div class="cubeC rect">3</div>
+          <div class="cubeD rect">4</div>
+          <div class="cubeE rect">5</div>
+          <div class="cubeF rect">6</div>
+      </div>        
+  </div>
+</body>
+</html>
+
+ 
