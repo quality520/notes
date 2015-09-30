@@ -1,0 +1,27 @@
+doctype
+html(ng-app='ngShow')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width,initial-scale=1,user-scalable=no')
+    title ng-show
+    style.
+      body{background:purple;}
+      .box{width:200px;height:200px;line-height:200px;text-align:center;background:#fff;color:purple;}
+      button{width:200px;height:30px;border-radius:3px;border:none;background:#fff;}
+  body
+    .containerBox(ng-controller='ngShowController')
+      button(ng-click = 'showBox = !showBox') Toggle
+      .box(ng-show = 'showBox') 我是盒子
+    .containerLi(ng-controller='valueController')
+      input(placeholder = '1,2,3,4,5' ng-model = 'number')
+      span(ng-show = "number == '1'") 我是第一行
+      span(ng-show = "number == '2'") 我是第二行
+      span(ng-show = "number == '3'") 我是第三行
+      span(ng-show = "number == '4'") 我是第四行
+      span(ng-show = "number == '5'") 我是第五行
+
+
+
+    script(src='../scripts/bower_components/angular/angular.min.js')
+    script(src='../scripts/bower_components/angular-route/angular-route.min.js')
+    script(src='main.js')

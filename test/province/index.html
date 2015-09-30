@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<select class="province">
+			<option>请选择省份</option>
+		</select>
+		<script src="scripts/zepto.min.js"></script>
+		<script>
+			$(function(){
+				$('.province').focus(function(){
+					$.ajax({
+						type:'post',
+						url:'http://172.18.2.244:8300/api/DriverInfo/GetProvice',
+						dataType:'json',
+						success:function(data){
+							console.log(data);
+							console.log(data.Result.length)
+							var len = data.Result.length;
+							var tmpl = '';
+							for(var i = 0;i<=len;i++){
+								console.log(data.Result[i].Name);
+								tmpl += '<option>'+data.Result[i].Name+'</option>';
+							}
+							$('.province').append(tmpl);
+						}
+					})
+				})
+			})
+		</script>
+	</body>
+</html>

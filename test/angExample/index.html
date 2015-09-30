@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="Register">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>ng-show</title>
+    <link style="text/css" rel="stylesheet" href="styles/main.css">
+  </head>
+  <body ng-controller="userRegister">
+    <div class="control">
+      <div ng-show="($scope.required)" class="error">用户名不正确</div>
+      <input type="text" placeholder="请输入用户名" required>
+    </div>
+    <div class="control">
+      <div ng-show="(userNameErr)" class="error">邮箱格式不对</div>
+      <input type="email" placeholder="请输入邮箱" required>
+    </div>
+    <div class="control">
+      <div ng-show="(userNameErr)" class="error">密码太简单</div>
+      <input type="password" placeholder="密码" required>
+    </div>
+    <div class="submit">
+      <input type="button" value="提 交" ng-click="">
+    </div>
+    <script src="scripts/bower_components/angular/angular.min.js"></script>
+    <script src="scripts/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controller.js"></script>
+    <script src="scripts/service.js"></script>
+  </body>
+</html>

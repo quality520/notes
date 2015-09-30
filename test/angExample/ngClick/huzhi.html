@@ -1,0 +1,42 @@
+<html>
+<head>
+	<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+  <style>
+  .asciiart{
+	color: #000000;
+	background-color: transparent;
+	font-size: 11px;
+	font-family: "Courier New", Courier, mono;
+	line-height: 9px;
+	letter-spacing: 0px;
+}
+i{
+	color:#fff;
+}
+  
+  </style>
+</head>
+<body>
+	<span class="asciiart"></span>
+  
+  
+  <script>
+  
+  var avatar=""
++"                                                                      <br>"
++"         *    *    *    *   *****    *       *    ***   *****         <br>"
++"        *    *    *    *   *    *   *   *   *     *        *          <br>"
++"       ******    *    *   ****     *  * *  *     *       *            <br>"
++"      *    *    *    *   *    *   * *   * *     *      *              <br>"
++"     *    *    ******   *****    *      *     ***     *****           <br>"
++"                                                                      <br>";
+
+avatar = avatar.replace(/\s/g,"<i>.</i>");//“/s”匹配空字符串
+
+$(function(){
+	$(".asciiart").html(avatar);
+});
+
+  </script>
+</body>
+</html>

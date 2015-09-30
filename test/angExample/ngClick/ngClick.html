@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="ngClick">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>ng-show</title>
+    <style>
+      body{background:purple;}
+      .container{text-align:center;}
+      .container input{width:100%;height:35px;font-size:14px;border-radius:5px;background:#fff;border:1px solid #fff;padding-left:14px;box-sizing:border-box;}
+      .container button{width:50%;height:35px;font-size:14px;border-radius:5px;margin-top:10px;background:blue;color:#fff;border:1px solid #fff;}
+    </style>
+  </head>
+  <body ng-click="clickController">
+    <div class="container">
+      <input type="text" placeholder="please write your userName" ng-model="bindingData.Phone">
+      <button type="button">Click Me!</button>
+    </div>
+    <script src="../scripts/bower_components/angular/angular.min.js"></script>
+    <script src="../scripts/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="ngClick.js"></script>
+  </body>
+</html>

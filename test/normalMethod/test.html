@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			html,body,div{margin:0;padding:0;}
+			div{width:100%;height:25px;}
+		</style>
+	</head>
+	<body>
+			<div class="a" name="math"></div>
+			<div class="b" name="math"></div>
+			<div class="c" name="math"></div>
+			<div class="d" name="math"></div>
+			<div class="e" name="math"></div>
+			<div class="f" name="math"></div>
+			<div class="g" name="math"></div>
+			<div class="h" name="math"></div>
+			<div class="i" name="chinese"></div>
+			<div class="j" name="chinese"></div>
+			<div class="a" name="chinese"></div>
+			<div class="b" name="chinese"></div>
+			<div class="c" name="chinese"></div>
+			<div class="e" name="chinese"></div>
+			<div class="d" name="chinese"></div>
+			<div class="f" name="en"></div>
+			<div class="g" name="en"></div>
+			<div class="h" name="en"></div>
+			<div class="i" name="en"></div>
+			<div class="j" name="en"></div>
+			
+			
+			
+			<script>
+				function getClass(tagName,cls){
+					if(document.getElementsByClassName){
+						return document.getElementsByClassName(cls);
+					}else{
+						var oEle = document.getElementsByTagName(tagName);
+						var oEleArr = [];
+						for(var i = 0;i < oEle.length;i++){
+							if(oEle[i].className == cls){
+								oEleArr[oEleArr.length] = oEle[i];
+							}
+						}
+						return oEleArr;
+					}
+				}
+				console.log(getClass('div','a'));
+				
+			</script>
+	</body>
+</html>

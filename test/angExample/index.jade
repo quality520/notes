@@ -1,0 +1,27 @@
+doctype
+html(ng-app='Register')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width,initial-scale=1,user-scalable=no')
+    title ng-show
+    link(style='text/css' rel='stylesheet' href='styles/main.css')
+  body(ng-controller='userRegister')
+    .control
+      .error(ng-show='($scope.required)') 用户名不正确
+      input(type='text' placeholder='请输入用户名' required)
+    .control
+      .error(ng-show='(userNameErr)') 邮箱格式不对
+      input(type='email' placeholder='请输入邮箱' required)
+    .control
+      .error(ng-show='(userNameErr)') 密码太简单
+      input(type='password' placeholder='密码' required)
+    .submit
+      input(type='button' value='提 交' ng-click='')
+
+
+
+    script(src='scripts/bower_components/angular/angular.min.js')
+    script(src='scripts/bower_components/angular-route/angular-route.min.js')
+    script(src='scripts/app.js')
+    script(src='scripts/controller.js')
+    script(src='scripts/service.js')

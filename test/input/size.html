@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>input根据内容长度的变化而变化</title>
+	</head>
+	<body>
+		<input id="txt" type="text" size="4" />
+		
+		<script>
+			window.onload = function(){
+				var txt = document.getElementById('txt');
+				txt.onkeyup = function(){
+					this.size = (this.value.length > 4 ? this.value.length : 4);
+				}
+			}
+		</script>
+	</body>
+</html>

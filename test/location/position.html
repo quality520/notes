@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<p id="demo"></p>
+		
+		
+		<script>
+			window.onload=function(){
+				getGeolocation();
+				console.log()
+			}
+			function getGeolocation(){
+				navigator.geolocation.getCurrentPosition(getPos);
+			}
+			var x=document.getElementById('demo')
+			function getPos(pos){
+				var lat=pos.coords.latitude;
+				var lng=pos.coords.longitude;
+				return(lat,lng);
+			}
+		</script>
+		</body>
+</html>

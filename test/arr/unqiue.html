@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	
+	<script>
+		Array.prototype.unique = function(){
+			var isHas = {};
+			var arr = [];
+			for(var i = 0;i<this.length;i++){
+				if(!isHas[this[i]]){
+					isHas[this[i]] =true;
+					arr.push(this[i]);
+				}
+			}
+			console.log(isHas);
+			return arr;
+		}
+		var arr1=[1,2,4,5,2, 222,1,5,6, '5'];
+		console.log(arr1+"____"+arr1.unique());
+
+		//下列代码中增加了逻辑判断，字符串
+		Array.prototype.unique = function(){
+		    var isHas = {};
+		    var arr = [];
+		    var _p = '';
+		    for(var i=0; i<this.length; i++){  
+		        if(typeof this[i] != 'string' ) {  
+		            _p = '';    
+		        } else {  
+		            _p = '_str';
+		        }  
+		        if(!isHas[this[i] + _p]){  
+		            isHas[this[i] + _p] = true;  
+		            arr.push(this[i]);  
+		        }   
+		    }
+		    console.log(isHas)
+		    return arr; 
+		}
+		var arr1 = [1,2,4,5,2, 222,1,5,6, '5']; 
+		alert(arr1 + '---' +arr1.unique());
+	</script>
+</body>
+</html>
