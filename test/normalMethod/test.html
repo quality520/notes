@@ -29,26 +29,30 @@
 			<div class="h" name="en"></div>
 			<div class="i" name="en"></div>
 			<div class="j" name="en"></div>
+            <div class="a" name="math"></div>
+            <div class="a" name="math"></div>
+            <div class="a" name="math"></div>
+            <div class="a" name="math"></div>
+
 			
 			
 			
-			<script>
-				function getClass(tagName,cls){
-					if(document.getElementsByClassName){
-						return document.getElementsByClassName(cls);
-					}else{
-						var oEle = document.getElementsByTagName(tagName);
-						var oEleArr = [];
-						for(var i = 0;i < oEle.length;i++){
-							if(oEle[i].className == cls){
-								oEleArr[oEleArr.length] = oEle[i];
-							}
-						}
-						return oEleArr;
-					}
-				}
-				console.log(getClass('div','a'));
-				
-			</script>
+        <script>
+            function getClass(tagName,cls){
+                if(document.getElementsByClassName){
+                    return document.getElementsByClassName(cls);
+                }else{
+                    var oEle = document.getElementsByTagName(tagName);
+                    var oEleArr = [];
+                    for(var i = 0;i < oEle.length;i++){
+                        if(oEle[i].className == cls){
+                            oEleArr[oEleArr.length] = oEle[i];
+                        }
+                    }
+                    return oEleArr;
+                }
+            }
+            console.log(getClass('div','a'));
+        </script>
 	</body>
 </html>
