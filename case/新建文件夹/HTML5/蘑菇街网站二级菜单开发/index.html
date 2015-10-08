@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="关键字" />
+		<meta name="description" content="网站描述" />
+		<title>html模板</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#nav{
+				width: 240px;
+				height: 500px;
+				margin: 20px 0 0 100px;
+				border: 1px solid #ddd;
+				box-shadow: -1px 1px 1px 1px #ddd;
+			}
+			#nav ul li{
+				width: 100%;
+				list-style-type: none;
+				position: relative; /*相对定位*/
+			}
+			#nav ul li dt{
+				height: 40px;
+				line-height: 40px;
+				margin-left: 10px;
+				color: #000;
+				font-size: 18px;
+				font-family: "微软雅黑";
+			}
+			#nav ul li dd{
+				margin-left: 10px;
+				margin-right: 10px;
+				padding-left: 5px;
+				padding-bottom: 2px;
+				border-bottom: 1px dotted #ddd;
+			}
+			#nav ul li dd a{
+				color: #000;
+				font-size: 12px;
+				text-decoration: none;
+				padding: 5px 8px;
+				display: inline-block;
+			}
+			#nav ul li dd a.red{
+				color: #f3f;
+			}
+			#nav ul li .con{
+				width: 290px;
+				height: 366px;
+				border: 1px solid #ddd;
+				position: absolute;
+				top: -1px;left: 100%;
+				display: none;
+			}
+			#nav ul li .right{
+				background: #fff;
+				height: 100%;
+				width: 2px;
+				position: absolute;
+				top: 0;
+				right: -2px;
+				display: none;
+			}
+			#nav ul li .bottom{
+				background: #ddd;
+				height: 1px;
+				width: 100%;
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				display: none;
+			}
+			#nav ul li .top{
+				background: #ddd;
+				height: 1px;
+				width: 100%;
+				position: absolute;
+				top: -1px;
+				right: 0;
+				display: none;
+			}
+			#nav ul li:hover .con,
+			#nav ul li:hover .top,
+			#nav ul li:hover .right,
+			#nav ul li:hover .bottom{
+				display: block;
+			}
+			#top{
+				width: 100%;
+				height: 82px;
+				background: url(images/topBg.png);
+				background-size: cover;
+			}
+			#top .logo{
+				width: 980px;
+				height: 80px;
+				margin: 0 auto;
+			}
+			#top .logo img{
+				margin-top: 20px;
+			}
+			#nav ul li .arrow{
+				width: 5px;
+				height: 8px;
+				position: absolute;
+				background: url(images/gray1.png);
+				right: 10px;
+				top: 50%;
+				margin-top: -4px;
+			}
+			#nav ul li:hover .arrow{
+				background: url(images/gray2.png);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="top">
+			<div class="logo">
+				<img src="images/logo.png" />
+			</div>
+		</div>
+		<div id="nav">
+			<ul>
+				<li>
+					<dl>
+						<dt>衣服</dt>
+						<dd>
+							<a class="red" href="#">秋の新品</a>
+							<a href="#">针织衫</a>
+							<a href="#">牛仔裤</a>
+							<a href="#">时尚套装</a>
+							<a href="#">连衣裙</a>
+							<a href="#">风衣</a>
+						</dd>
+						<div class="con" style="background: url(images/nav1.png);"></div>
+						<div class="right"></div>
+						<div class="bottom"></div>
+						<div class="arrow"></div>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt>鞋子</dt>
+						<dd>
+							<a class="red" href="#">早秋推荐</a>
+							<a href="#">运动</a>
+							<a href="#">单鞋</a>
+							<a href="#">帆布</a>
+							
+						</dd>
+						<div class="con"></div>
+						<div class="right"></div>
+						<div class="top"></div>
+						<div class="bottom"></div>
+						<div class="arrow"></div>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt>男友</dt>
+						<dd>
+							<a class="red" href="#">衬衫</a>
+							<a href="#">T恤</a>
+							<a href="#">休闲裤</a>
+							<a href="#">休闲鞋</a>
+						</dd>
+						<div class="con"></div>
+						<div class="right"></div>
+						<div class="top"></div>
+						<div class="bottom"></div>
+						<div class="arrow"></div>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt>包包</dt>
+						<dd>
+							<a class="red" href="#">初秋新品</a>
+							<a href="#">双肩</a>
+							<a href="#">斜挎</a>
+							<a href="#">小包</a>
+						</dd>
+						<div class="con"></div>
+						<div class="right"></div>
+						<div class="top"></div>
+						<div class="bottom"></div>
+						<div class="arrow"></div>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt>家居</dt>
+						<dd>
+							<a class="red" href="#">收纳</a>
+							<a href="#">杂物</a>
+							<a href="#">四件套</a>
+							<a href="#">美发</a>
+						</dd>
+						<div class="con"></div>
+						<div class="right"></div>
+						<div class="top"></div>
+						<div class="bottom"></div>
+						<div class="arrow"></div>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt>配饰</dt>
+						<dd>
+							<a class="red" href="#">秋季新品</a>
+							<a href="#">手表</a>
+							<a href="#">项链</a>
+							<a href="#">耳钉</a>
+						</dd>
+						<div class="con"></div>
+						<div class="right"></div>
+						<div class="top"></div>
+						<div class="bottom"></div>
+						<div class="arrow"></div>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt>美妆</dt>
+						<dd>
+							<a class="red" href="#">美妆精选</a>
+							<a href="#">洁面</a>
+							<a href="#">眼妆</a>
+							<a href="#">套装</a>
+						</dd>
+						<div class="con"></div>
+						<div class="right"></div>
+						<div class="top"></div>
+						<div class="bottom"></div>
+						<div class="arrow"></div>
+					</dl>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>

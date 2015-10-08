@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="关键字" />
+		<meta name="description" content="网站描述" />
+		<title>html模板</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				font-family: "微软雅黑";
+				font-size: 14px;
+			}
+			body,html{
+				width: 100%;
+				height: 100%;
+				background-color: #633;
+				text-align: center;
+				/*position: relative;*/
+			}
+			#button{
+				color: #039ae3;
+				width: 150px;
+				height: 35px;
+				border: 1px solid #039ae3;
+				text-align: center;
+				line-height: 35px;
+				border-radius: 50px;
+				cursor: pointer;  /*手状*/
+				margin: 40px auto;
+			}
+			#button:hover{
+				background-color: #039AE3;
+				color: #fff;
+			}
+			#container{
+				border: 1px solid #fff;
+				display: inline-block;
+				border-radius: 3px;
+				position: absolute;
+				left: 30%;
+				top: 100px;
+			}
+			#container div.title{
+				width: 576px;
+				height: 30px;
+				color: #fff;
+				background-color: #039AE3;
+				line-height: 30px;
+				font-size: 14px;
+				text-align: left;
+				cursor: move;
+			}
+			#container div.content{
+				width: 100%;
+				height: 400px;
+				background-color: #fff;
+				padding-top: 15px;
+			}
+			#container div.content div{
+				width: 95%;
+				height: 90%;
+				margin: auto;
+			}
+			#container div.content div span{
+				float: left;
+			}
+			#container div.content div span.list{
+				width: 40%;
+				height: 100%;
+			}
+			#container div.content div span.list p{
+				text-align: left;
+				font-size: 14px;
+				font-weight: bold;
+				color: #666;
+			}
+			/*#container div.content div span{
+				width: 20%;
+				height: 100%;
+			}*/
+			#container div.content div span.list ul{
+				margin-top: 10px;
+				text-align: left;
+				list-style: none;
+				width: 100%;
+				height: 362px;
+				border: 1px solid #e5e5e5;
+				background-color: #fafafa;
+			}
+			#container div.content div span.list ul li{
+				height: 36px;
+				line-height: 36px;
+				padding-left: 10px;
+				color: #666;
+				cursor: pointer;
+			}
+			#container div.content div span.list ul li:hover{
+				background-color: #039AE3;
+				color: #fff;
+			}
+			#container div.content div span.list ul li.selected{
+				background-color: #039AE3;
+				color: #fff;
+			}
+			#container div.content div span.oper{
+				width: 20%;
+				height: 100%;
+			}
+			#container div.content div span.oper a{
+				width: 80px;
+				height: 36px;
+				line-height: 36px;
+				border: 1px solid #d9d9d9;
+				display: block;
+				background-color: #f3f3f3;
+				text-align: center;
+				color: #333;
+				text-decoration: none;
+				margin: 10px auto;
+			}
+		</style>
+		<link rel="stylesheet" href="css/animation.css" />
+	</head>
+	<body>
+		<!--按钮-->
+		<div id="button">大数据删选插件</div>
+		
+		<!--容器开始-->
+		<div id="container">
+			<div class="title">&nbsp;&nbsp;&nbsp;选择课程</div>
+			<div class="content">
+				<div>
+					<span class="list">
+						<p>选择课程：</p>
+						<ul id="leftList">
+							<li class="magictime twisterInUp">室内设计运营课程</li>
+							<li class="magictime twisterInUp">Taobao美工课程</li>
+							<li class="magictime twisterInUp">TaoBao运营课程</li>
+							<li class="magictime twisterInUp">影后期制作课程</li>
+							<li class="magictime twisterInUp">网络营销课程</li>
+							<li class="magictime twisterInUp">平面设计课程</li>
+							<li class="magictime twisterInUp">网页制作课程</li>
+							<li class="magictime twisterInUp">网络营销</li>
+							<li class="magictime twisterInUp">SEO课程</li>
+						</ul>
+					</span>
+					<span class="oper">
+						<br /><br /><br /><br /><br /><br /><br />
+						<a href="#" id="add">添加</a>
+						<a href="#" id="remove">删除</a>
+					</span>
+					<span class="list">
+						<p>已选课程：</p>
+						<ul id="rightList"></ul>
+					</span>
+				</div>
+			</div>
+		</div>
+		<!--容器结束-->
+		
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js" ></script>
+		<script>
+			var $leftList = $("#leftList");
+			var $rightList = $("#rightList");
+		
+			//通过jQuery找到7个li对象
+			var $lis = $("#container div.content div span.list ul li");
+			$lis.click(function(){
+				//如果当前被点击的li包含selected样式，那么我就移除它，否则我就增加它
+				$(this).toggleClass('selected');
+			});
+			
+			//点击添加按钮，将左边添加到右边
+			$("#add").click(function(){
+				var $selected = $leftList.find("li.selected");
+				$rightList.append($selected);
+			});
+			
+			//点击添加按钮，将左边添加到右边
+			$("#remove").click(function(){
+				var $selected = $rightList.find("li.selected");
+				$leftList.append($selected);
+			});
+			
+			
+			var x = 0;
+			var y = 0;
+			var l = 0;
+			var t = 0;
+			var kf = 1; //1..是不能启动  2..是可以启动
+		
+			//当鼠标按下去
+			$("#container .title").mousedown(function(e){
+				//鼠标按下去的坐标
+				x = e.clientX; //鼠标按下  X轴坐标
+				y = e.clientY; //鼠标按下  Y轴坐标
+				l = $("#container").offset().left; //.drag 与左边的距离
+				t = $("#container").offset().top; //.drag 与上边的距离
+				kf = 2;
+			});
+			
+			//鼠标移动
+			$("#container .title").mousemove(function(e){
+				//移动时动态改变left和top值
+				if(kf == 2){
+					var _x = e.clientX;
+					var _y = e.clientY;
+					var _left = _x - x + l; //div最终的距离
+					var _top = _y - y + t;
+					$("#container").css({
+						left:_left,
+						top: _top
+					});
+				}
+			});
+			
+			//鼠标弹开，关闭开关
+			$("#container .title").mouseup(function(){
+				kf = 1;
+			});
+			
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

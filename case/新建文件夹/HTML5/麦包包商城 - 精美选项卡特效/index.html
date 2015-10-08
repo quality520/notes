@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="Anthor" content="刘自定" />
+		<meta name="keywords" content="关键字" />
+		<meta name="description" content="网站描述" />
+		<title>麦包包商城 - 精美选项卡特效</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			#top{
+				width: 100%;
+				height: 60px;
+				position: fixed;
+				text-align: center;
+				line-height: 60px;
+				background: rgba(0,0,0,.5);
+				text-shadow: 0 0 4px #000;
+				font-size: 18px;
+				color: #fff;
+				left: 0;
+				top: 0;
+			}
+			#Product{
+				width: 860px;
+				height: 250px;
+				margin: 120px auto 0px;
+			}
+			#Product .title{
+				width: 860px;
+				height: 30px;
+				border-bottom: 2px solid #000;
+			}
+			#Product .title .txt{
+				width: 170px;
+				height: 30px;
+				float: left;
+				font-size: 14px;
+				line-height: 30px;
+				text-indent: 5px;
+			}
+			#Product .title .sel{
+				width: 364px;
+				height: 30px;
+				float: right;
+			}
+			#Product .title .sel span{
+				width: 120px;
+				height: 30px;
+				display: block;
+				text-align: center;
+				border-left: 1px solid #ddd;
+				border-top: 1px solid #ddd;
+				line-height: 30px;
+				font-size: 12px;
+				float: left;
+			}
+			#Product .title .sel span:nth-child(3){
+				border-right: 1px solid #ddd;
+			}
+			#Product .title .sel span.active{
+				background: #000;
+				color: #fff;
+			}
+			#Product .List{
+				height: 218px;
+			}
+			#Product .List ul li{
+				width: 213.7px;
+				height: 215px;
+				text-align: center;
+				border-left: 1px solid #ddd;
+				border-bottom: 1px solid #ddd;
+				float: left;
+				border-top: 0;
+				border-right: 0;
+			}
+			#Product .List ul li.last{
+				border-right: 1px solid #ddd;
+			}
+			#Product .List ul li img{
+				margin-bottom: 20px;
+			}
+			#Product .List ul li{
+				font-size: 12px;
+				line-height: 20px;
+			}
+			#Product .List ul li p del{
+				color: #666;
+			}
+			#Product .List ul{
+				display: none;
+			}
+			#Product .title .sel .active{
+				background: #000;
+				color: #fff;
+			}
+			#Message{
+				position: fixed;
+				bottom: 40px;
+				right: 30px;
+			}
+			#Message p{
+				line-height: 25px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="Message">
+			<p><b style="color:red;">Message:</b> 这个社会有价值的东西，一定是有难度的。<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代码女神 - 清心老师
+			</p>
+		</div>
+		
+		<div id="top">
+			麦包包商城 - 精美选项卡特效
+		</div>
+		
+		<!--div 盒子模型 高度 宽度 放内容的长方形-->
+		<div id="Product">
+			<!--标题开始-->
+			<div class="title">
+				<div class="txt">专属于你的包厨</div>
+				<div class="sel">
+					<span class="active">发现喜欢</span>
+					<span>正在促销</span>
+					<span>最近浏览</span>
+				</div>
+			</div>
+			<!--标题结束-->
+			
+			<!--产品列表开始-->
+			<div class="List">
+				<ul style="display: block;">
+					<li>
+						<img src="images/1.jpg" width="127px" />
+						<p>DUDU 手提斜挎包</p>
+						<p><b>￥248</b><del> ￥428</del></p>
+					</li>
+					<li>
+						<img src="images/2.jpg" width="127px" />
+						<p>DUDU 手提斜挎包</p>
+						<p><b>￥248</b><del> ￥428</del></p>
+					</li>
+					<li>
+						<img src="images/3.jpg" width="127px" />
+						<p>DUDU 手提斜挎包</p>
+						<p><b>￥248</b><del> ￥428</del></p>
+					</li>
+					<li class="last">
+						<img src="images/4.jpg" width="127px" />
+						<p>DUDU 手提斜挎包</p>
+						<p><b>￥248</b><del> ￥428</del></p>
+					</li>
+				</ul>
+				
+				<ul>
+					<li>
+						<img src="images/5.jpg" width="127px" />
+						<p>DUDU 手提斜挎包</p>
+						<p><b>￥248</b><del> ￥428</del></p>
+					</li>
+					<li>
+						<img src="images/6.jpg" width="127px" />
+						<p>DUDU 手提斜挎包</p>
+						<p><b>￥248</b><del> ￥428</del></p>
+					</li>
+					<li>
+						<img src="images/7.jpg" width="127px" />
+						<p>DUDU 手提斜挎包</p>
+						<p><b>￥248</b><del> ￥428</del></p>
+					</li>
+					<li class="last">
+						<img src="images/8.jpg" width="127px" />
+						<p>DUDU 手提斜挎包</p>
+						<p><b>￥248</b><del> ￥428</del></p>
+					</li>
+				</ul>
+				
+				<ul>
+					<li>
+						<img src="images/9.jpg" width="127px" />
+						<p>DUDU 手提斜挎包</p>
+						<p><b>￥248</b><del> ￥428</del></p>
+					</li>
+					<li>
+						<img src="images/10.jpg" width="127px" />
+						<p>DUDU 手提斜挎包</p>
+						<p><b>￥248</b><del> ￥428</del></p>
+					</li>
+					<li>
+						<img src="images/11.jpg" width="127px" />
+						<p>DUDU 手提斜挎包</p>
+						<p><b>￥248</b><del> ￥428</del></p>
+					</li>
+					<li class="last">
+						<img src="images/3.jpg" width="127px" />
+						<p>DUDU 手提斜挎包</p>
+						<p><b>￥248</b><del> ￥428</del></p>
+					</li>
+				</ul>
+			</div>
+			<!--产品列表开始-->
+			
+		</div>
+	</body>
+</html>
+<script type="text/javascript" src="js/jquery-2.1.1.min.js" ></script>
+<script>
+	$(".title .sel span").mouseover(function(){
+		$(this).addClass("active").siblings().removeClass("active");
+		var index = $(this).index();
+		$(".List ul").eq(index).css({"display":"block"}).siblings().css({"display":"none"});
+	})
+</script>
+
+
+
+
+
+
+
+
+
+
+

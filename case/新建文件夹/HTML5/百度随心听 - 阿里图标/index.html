@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="关键字" />
+		<meta name="description" content="网站描述" />
+		<title>百度音乐随心听 - 清心老师</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				background: url(images/afternoon.jpg);
+				background-repeat: no-repeat;
+			    background-attachment: fixed;
+			    background-size: cover;
+			    -webkit-background-size: cover;
+			    -o-background-size: cover;
+			    zoom: 1;
+			}
+			#Music{
+				width: 610px;
+				height: 430px;
+				margin: 120px auto 0;
+			}
+			#Music .MusicCon{
+				width: 260px;
+				height: 430px;
+				background: #fff;
+				float: left;
+			}
+			#Music .MusicTxt{
+				width: 350px;
+				height: 430px;
+				box-shadow: 0 0 60px rgba(0,0,0,0.3) inset;
+				float: left;
+			}
+			#Music .MusicCon img.xxpic{
+				margin: 15px auto;
+				display: block;
+			}
+			.MusicCon h3{
+				font-size: 16px;
+				text-indent: 20px;
+			}
+			.MusicCon p{
+				font-size: 12px;
+				color: #666;
+				line-height: 45px;
+				text-indent: 20px;
+			}
+			.MusicCon .But span{
+				width: 30px;
+				height: 25px;
+				display: block; 
+				float: left;
+				margin-left: 35px;
+			}
+			
+			
+			@font-face {font-family: 'iconfont';
+			    src: url('iconfont/iconfont.eot'); /* IE9*/
+			    src: url('iconfont/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+			    url('iconfont/iconfont.woff') format('woff'), /* chrome、firefox */
+			    url('iconfont/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+			    url('iconfont/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+			}
+			.iconfont{
+			    font-family:"iconfont" !important;
+			    font-size:16px;
+			    color: #666;
+			}
+			
+			.iconfont:hover{
+				color: #000;
+			}
+			
+			.MusicCon .bar{
+				width: 220px;
+				height: 3px;
+				background: #666;
+				margin-top: 50px;
+				margin-left: 20px;
+			}
+			.MusicCon .bar .barCon{
+				width: 0px;
+				height: 3px;
+				background: #286ACC;
+			}
+			.MusicTxtCon{
+				width: 290px;
+				height: 370px;
+				margin: 30px auto;
+				font-size: 14px;
+				color: #ccc;
+				line-height: 30px;
+				overflow-y: scroll;
+			}
+			::-webkit-scrollbar{
+				width: 5px;
+				background: #797b7e;
+			}
+			::-webkit-scrollbar-thumb{
+				background: #575757;
+			}
+			hover{
+				color: #fff;
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--div盒子模型  高度  宽度  宽度  放内容的长方形-->
+		<div id="Music">
+			<!--音乐内容开始-->
+			<div class="MusicCon">
+				<img src="images/musicbg2.jpg" width="240px" class="xxpic" />
+				<h3>感恩的心</h3>
+				<p>演唱：群星</p>
+				<div class="But">
+					<span class="iconfont">&#xe665;</span>
+					<span class="iconfont play">&#xe610;</span>
+					<span class="iconfont pause" style="display: none;">&#xf006b;</span>
+					<span class="iconfont">&#xe67e;</span>
+				</div>
+				<div class="bar">
+					<div class="barCon"></div>
+				</div>
+			</div>
+			<!--音乐内容结束-->
+			
+			<div class="MusicTxt">
+				<div class="MusicTxtCon">
+				</div>
+			</div>
+		</div>
+		
+		
+		<!--插入音乐播放器-->
+		<audio src="mp3/群星-感恩的心.mp3" id="myMusic"></audio>
+		<div id="gc" style="display: none;">
+			[00:06.29]感恩的心 - 群星
+			[00:17.75]我来自偶然像一颗尘土
+			[00:25.00]有谁看出我的脆弱
+			[00:31.54]我来自何方我情归何处
+			[00:38.38]谁在下一刻呼唤我
+			[00:45.39]天地虽宽这条路却难走
+			[00:52.08]我看遍这人间坎坷辛苦
+			[00:59.10]我还有多少爱我还有多少泪
+			[01:06.39]要苍天知道我不认输
+			[01:13.06]感恩的心感谢有你
+			[01:20.00]伴我一生
+			[01:23.46]让我有勇气作我自己
+			[01:27.14]感恩的心感谢命运
+			[01:33.89]花开花落我一样会珍惜
+			[02:09.12]我来自偶然像一颗尘土
+			[02:16.30]有谁看出我的脆弱
+			[02:22.76]我来自何方我情归何处
+			[02:29.83]谁在下一刻呼唤我
+			[02:36.80]天地虽宽这条路却难走
+			[02:43.68]我看遍这人间坎坷辛苦
+			[02:50.50]我还有多少爱我还有多少泪
+			[02:57.36]要苍天知道我不认输
+			[03:04.67]感恩的心感谢有你
+			[03:11.67]伴我一生
+			[03:14.91]让我有勇气作我自己
+			[03:18.65]感恩的心感谢命运
+			[03:25.27]花开花落我一样会珍惜
+			[03:32.32]感恩的心感谢有你
+			[03:39.16]伴我一生
+			[03:42.55]让我有勇气作我自己
+			[03:46.58]感恩的心感谢命运
+			[03:53.15]花开花落我一样会珍惜
+			[04:00.25]
+		</div>
+		
+		<!--引入外部jQuery类库文件-->
+		<script type="text/javascript" src="js/jquery-1.11.1.min.js" ></script>
+		<script>
+			var oMusic = $("#myMusic").get(0);  //源生态
+			
+			//点击音乐播放器按钮时
+			$(".But span.play").click(function(){
+				oMusic.play();  //播放
+				$(this).hide(); //隐藏播放按钮
+				$(".But span.pause").show();  //显示暂停按钮
+				//设置进度条的定时器
+				setInterval("changebar()",1000);
+				
+				//changebar();
+			})
+			
+			$(".But span.pause").click(function(){
+				oMusic.pause();  //暂停hide();
+				$(this).hide();  //
+				$(".But span.play").show();  //显示播放按钮
+			});
+			
+			//改变音乐进度条
+			function changebar(){
+				var allTime = oMusic.duration;  //获取总播放时间
+				var curTime = oMusic.currentTime;  //获取当前播放时间
+				var bl = curTime / allTime;
+				var oWisth = $(".bar").width() * bl;
+				$(".barCon").css({"width":oWisth});
+			}
+			
+			//把歌词和时间分离出来
+			function getGc(){
+				var Gc = $("#gc").text();  //获取最原始的歌词
+				var GcArr = Gc.split("[");
+				var html = "";
+				for(var i = 1; i < GcArr.length; i++){  //GcArr.length
+					var timeAndTxt = GcArr[i].split("]");
+					var otime = timeAndTxt[0];  //分割的是时间
+					var Txt = timeAndTxt[1];  //分割的是歌词
+					
+					//时间分割成秒
+					var stime = otime.split(".");
+					var fs = stime[0].split(":");//02:50.50
+					var alls = fs[0] * 60 + fs[1] * 1;  //时间化成秒
+					
+					if(Txt){
+						html = html + "<p id='"+alls+"'>" + Txt + "</p>";
+					}
+				}
+				$(".MusicTxtCon").html(html);  //把歌词放进去
+			}
+			getGc();
+			
+			oMusic.addEventListener("timeupdate",function(){
+				var timer = this.currentTime;
+				var s = parseInt(timer);
+				for(var i = 0; i < s; i++){
+					$("#").addClass("hover").siblings().removeClass("hover");
+				}
+			})
+			
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+

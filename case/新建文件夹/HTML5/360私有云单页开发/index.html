@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="关键字" />
+		<meta name="description" content="网站描述" />
+		<title>html模板</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			li{list-style: none;}
+			a{text-decoration: none;outline:none;}
+			#doc{
+				font: 12px/16px "microsoft yahei";
+				color: #666;
+			}
+			#doc #header{
+				width: 100%;
+				height: 66px;
+				background: #1C3146;
+				border-top: 14px solid #F2F2F2;
+			}
+			#doc #header .head{
+				width: 958px;
+				height: 66px;
+				margin: 0 auto;
+			}
+			#header .head h1{
+				width: 145px;
+				height: 53px;
+				float: left;
+				margin-top: 8px;
+			}
+			#header .head h1 a{
+				display: block;
+			}
+			#header .head ul{
+				width: 695px;
+				height: 34px;
+				margin-top: 15px;
+				float: right;
+				text-align: center;
+			}
+			#header .head ul li{
+				float: left;
+				width: 93px;
+				height: 34px;
+				line-height: 34px;
+				margin-left: 5px;
+				display: inline;
+			}
+			#header .head ul li.cur{
+				background-image: url("images/navCurBg.jpg");
+			}
+			#header .head ul li a{
+				font-size: 14px;
+				color: #fff;
+				text-shadow: 0 0 5px #000;
+			}
+			#slides-box{
+				background: #4385C7;
+				height: 385px;
+			}
+			#slides-box .slides{
+				width: 100%;
+				height: 385px;
+				background: url(images/img1.jpg);
+				transition: all 0.5s;
+			}
+			#slides-box div.ui-pageination{
+				width: 100%;
+				height: 60px;
+				padding-top: 4px;
+				text-align: center;
+				background: #F2F2F2;
+				
+			}
+			.ui-pageination ul.pageination{
+				width: 80px;
+				height: 10px;
+				margin: 10px auto 0;
+			}
+			#slides-box .ui-pageination ul li{
+				width: 10px;
+				height: 10px;
+				margin-left: 30px;
+				border-radius: 50%;
+				background: #C1CFD9;
+				float: left;
+			}
+			#slides-box .ui-pageination ul li.current{
+				background: #66B6FF;
+			}
+			#explain{
+				position: fixed;
+				right: 10px;
+				bottom: 35px;
+				color: #4385C7;
+				font-size: 14px;
+				color: #FF5500;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="explain">不被他人嘲笑的梦想不值得去实现！</div>
+		<div id="doc">
+			<!--header begin-->
+			<div id="header">
+				<div class="head">
+					<h1><img src="images/logo.jpg"></h1>
+					<ul>
+						<li class="cur"><a href="javascript:void(0);">首页</a></a></li>
+						<li><a href="javascript:void(0);">功能介绍</a></li>
+						<li><a href="javascript:void(0);">常见问题</a></li>
+						<li><a href="javascript:void(0);">正式激活</a></li>
+						<li><a href="javascript:void(0);">申请使用</a></li>
+						<li><a href="javascript:void(0);">服务与支持</a></li>
+						<li><a href="javascript:void(0);">360首页</a></li>
+					</ul>
+				</div>
+			</div>
+			<!--header end-->
+			
+			<!--slides-box begin-->
+			<div id="slides-box">
+				<div class="slides">
+				</div>
+				<div class="ui-pageination">
+					<ul class="pageination">
+						<li class="current"></li>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+			<!--slides end-->
+		</div>
+	</body>
+</html>
+<!--引入外部jquery类库文件-->
+<script type="text/javascript" src="js/jquery-1.11.1.min.js" ></script>
+<script>
+	var index = 0;
+	function switchPic(){
+		index = index == 0 ? 1 : 0;
+		$(".ui-pageination ul li").eq(index).css({"background":"#66B6FF"}).siblings().css({"background":"#C1CFD9"});
+		$("#slides-box .slides").css({"background":"url(images/img" + (index + 1) + ".jpg)"});
+	}
+	
+	//鼠标滑动上去
+	$(".ui-pageination ul li").mouseover(function(){
+		clearInterval(time);
+		index = $(this).index();
+		$(this).css({"background":"#66B6FF"}).siblings().css({"background":"#C1CFD9"});
+		$("#slides-box .slides").css({"background":"url(images/img" + (index + 1) + ".jpg)"});
+		time = setInterval("switchPic()",5000);
+	});
+	
+	//定时切换图片
+	var time = setInterval("switchPic()",5000);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

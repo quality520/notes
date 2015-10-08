@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>html模板</title>
+		<meta name="keywords" content="关键字" />
+		<meta name="description" content="网站描述" />
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body,html{
+				width: 100%;
+				height: 100%;
+				background-image: url(images/bg1.jpg);
+				background-size: 100% 100%;
+			}
+			.container{
+				width: 900px;
+				height: 100%;
+				margin: 0 auto;
+				position: relative;
+			}
+			.container ul{
+				width: 900px;
+				height: 154px;
+				position: absolute;
+				bottom: 100px;
+				left: 0;
+				
+			}
+			.container ul li{
+				width: 170px;
+				height: 150px;
+				border: 2px solid #fff;
+				text-align: center;
+				border-radius: 5px;
+				position: relative;
+				margin-right: 6px;
+				list-style: none;
+				float: left;
+			}
+			
+			/*底层背景颜色*/
+			.container ul li:nth-of-type(1){
+				background-color: #02646E;
+			}
+			.container ul li:nth-of-type(2){
+				background-color: #EB0837;
+			}
+			.container ul li:nth-of-type(3){
+				background-color: #67B374;
+			}
+			.container ul li:nth-of-type(4){
+				background-color: #E6674A;
+			}
+			.container ul li:nth-of-type(5){
+				background-color: #E61061;
+			}
+			
+			.container ul li a{
+				margin-top: 70px;
+				color: #fff;
+				font-family: "Georgia";
+				display: block;
+				text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.8);
+			}
+			.container ul li img{
+				width: 130px;
+				height: 130px;
+				position: absolute;
+				left: 17px;
+				top: -85px;
+				border: 5px solid #fff;
+				border-radius: 50%;
+			}
+			.title{
+				position: fixed;
+				left: 47%;
+				top: 50px;
+				font-size: 30px;
+				font-family: "微软雅黑";
+				color: #D9B338;
+				line-height: 40px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="title">
+			<p>
+				人文湖南<br />
+				山水湖南<br />
+			</p>
+		</div>
+		
+		<div class="container">
+			<ul>
+				<li>
+					<a>
+						长沙<br />
+						寻幽访古岳麓山
+					</a>
+					<img src="images/imgx1.jpg" alt="图片" width="170px" height="150px" imgSrc="images/bg1.jpg" />
+				</li>
+				<li>
+					<a>
+						湘西<br />
+						浓郁古镇凤凰城
+					</a>
+					<img src="images/imgx2.jpg" alt="图片" width="170px" height="150px" imgSrc="images/bg2.jpg" />
+				</li>
+				<li>
+					<a>
+						张家界<br />
+						自然风光张家界
+					</a>
+					<img src="images/imgx3.jpg" alt="图片" width="170px" height="150px" imgSrc="images/bg3.jpg" />
+				</li>
+				<li>
+					<a>
+						衡阳市<br />
+						南岳独秀衡山
+					</a>
+					<img src="images/imgx4.jpg" alt="图片" width="170px" height="150px" imgSrc="images/bg4.jpg" />
+				</li>
+				<li>
+					<a>
+						岳阳市<br />
+						历史古迹岳阳楼
+					</a>
+					<img src="images/imgx5.jpg" alt="图片" width="170px" height="150px" imgSrc="images/bg5.jpg" />
+				</li>
+			</ul>
+		</div>
+		
+		<!--引用外部jQuery类库文件-->
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js" ></script>
+		<script>
+			$(".container ul li").click(function(){
+				var imgSrc = $(this).find("img").attr("imgSrc");
+				$("body,html").css("background-image","url("+imgSrc+")");
+			})
+		</script>
+	</body>
+</html>

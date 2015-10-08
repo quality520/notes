@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="关键字" />
+		<meta name="description" content="网站描述" />
+		<title>html模板</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				background-image: url(images/bg.jpg);
+			}
+			#jiugongge{
+				width: 906px;
+				height: 486px;
+				background-color: #c6f;
+				margin: 45px auto 0;
+				border: 2px solid #fff;
+			}
+			#jiugongge ul li{
+				width: 300px;
+				height: 160px;
+				border: 1px solid green;
+				list-style: none;
+				float: left;
+				position: relative;
+			}
+			#jiugongge ul li a{
+				width: 300px;
+				height: 160px;
+				background: rgba(0,0,0,0.7);
+				display: block;
+				font-size: 22px;
+				color: #fff;
+				text-decoration: none;
+				text-align: center;
+				line-height: 160px;
+				font-weight: bold;
+				position: absolute;
+				left: 0;
+				top: 0;
+				z-index: 10;
+			}
+			#jiugongge ul li img.default{
+				position: absolute;
+				left: 0;
+				top: 0;
+				z-index: 20;
+			}
+			#jiugongge ul li img.top{
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			#jiugongge ul li img.right{
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			#jiugongge ul li img.bottom{
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			#jiugongge ul li img.left{
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			.data{
+				position: fixed;
+				width: 150px;
+				height: 50px;
+				right: 20px;
+				bottom: 20px;
+				color: #FF7800;
+				
+			}
+		</style>
+	</head>
+	<body>
+		<div id="jiugongge">
+			<ul>
+				<li>
+					<img src="images/img1.png" class="default" />
+					<a href="#">潭州学院_SEO课程</a>
+					<img src="images/seor.jpg" class="right" />
+					<img src="images/seob.jpg" class="bottom" />
+				</li>
+				<li>
+					<img src="images/img2.png" class="default" />
+					<a href="#">潭州学院_Taobao美工课程</a>
+					<img src="images/taol.jpg" class="left" />
+					<img src="images/taor.jpg" class="right" />
+					<img src="images/taob.jpg" class="bottom" />
+				</li>
+				<li>
+					<img src="images/img3.png" class="default" />
+					<a href="#">潭州学院_影后期制作课程</a>
+					<img src="images/syb.jpg" class="bottom" />
+					<img src="images/syl.jpg" class="left" />
+				</li>
+				<li>
+					<img src="images/img4.png" class="default" />
+					<a href="#">潭州学院_网页制作课程</a>
+					<img src="images/jt.jpg" class="top" />
+					<img src="images/jb.jpg" class="bottom" />
+					<img src="images/jr.jpg" class="right" />
+				</li>
+				<li>
+					<img src="images/img5.png" class="default" />
+					<a href="#">潭州学院_网络营销</a>
+					<img src="images/wt.jpg" class="top" />
+					<img src="images/wr.jpg" class="right" />
+					<img src="images/wb.jpg" class="bottom" />
+					<img src="images/wl.jpg" class="left" />
+				</li>
+				<li>
+					<img src="images/img6.png" class="default" />
+					<a href="#">潭州学院_平面设计课程</a>
+					<img src="images/pt.png" class="top" />
+					<img src="images/pl.jpg" class="left" />
+					<img src="images/pb.jpg" class="bottom" />
+					
+				</li>
+				<li>
+					<img src="images/img7.png" class="default" />
+					<a href="#">潭州学院 _TaoBao运营课程</a>
+					<img src="images/wll.jpg" class="top" />
+					<img src="images/wlt.jpg" class="right" />
+				</li>
+				<li>
+					<img src="images/img8.png" class="default" />
+					<a href="#">潭州学院_室内设计运营课程</a>
+					<img src="images/snt.jpg" class="top" />
+					<img src="images/snr.jpg" class="right" />
+					<img src="images/snl.jpg" class="left" />
+				</li>
+				<li>
+					<img src="images/img9.png" class="default" />
+					<a href="#">潭州学院_网络营销课程</a>
+					<img src="images/wlt.jpg" class="top" />
+					<img src="images/wll.jpg" class="left" />
+				</li>
+			</ul>
+		</div>
+		<div class="data">
+			<p>日期：2015/09/03</p>
+		</div>
+		
+		<!--引用jquery类库文件-->
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js" ></script>
+		<script type="text/javascript">
+			$("#jiugongge ul li").hover(function(){  //鼠标放上去
+				$(this).find("a").css({"z-index":"30"});
+				$(this).css({"z-index":"30"}).siblings().css({"z-index":"10"});
+				$(this).find("img.top").animate({top:"-162px"},300);
+				$(this).find("img.right").animate({left:"302px"},300);
+				$(this).find("img.bottom").animate({top:"162px"},300);
+				$(this).find("img.left").animate({left:"-302px"},300);
+			},function(){  //鼠标移开
+				$(this).find("a").css({"z-index":10});
+				$(this).find("img.top").animate({top:"0",left:"0"},300);
+				$(this).find("img.right").animate({left:"0",top:"0"},300);
+				$(this).find("img.bottom").animate({top:"0",top:"0"},300);
+				$(this).find("img.left").animate({left:"0",top:"0"},300);
+			});
+		</script>
+	</body>
+</html>

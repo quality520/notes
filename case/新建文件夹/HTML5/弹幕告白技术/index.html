@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="关键字" />
+		<meta name="description" content="网站描述" />
+		<title>html模板</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				font-family: "微软雅黑";
+			}
+			body{
+				background: #000;
+			}
+			img.gb{
+				position: fixed;
+				left: 42%;
+				top: 0;
+				-webkit-animation: bd 5s ease-in-out infinite;
+			}
+			@-webkit-keyframes bd{
+				0%{-webkit-transform: rotate(30deg);-webkit-transform-origin:center top;}
+				50%{-webkit-transform: rotate(-30deg);-webkit-transform-origin:center top;}
+				100%{-webkit-transform: rotate(30deg);-webkit-transform-origin:center top;}
+			}
+			.gray{
+				width: 100%;
+				height: 100%;
+				background: rgba(255,255,255,0.2);
+				position: fixed;/*固定*/
+				left: 0px;
+				top: 0px;
+				display: none;
+			}
+			.Content{
+				width: 560px;
+				height: 30px;
+				position: fixed;
+				left: 25%;
+				bottom: 30px;
+			}
+			.Content span.col{
+				width: 80px;
+				height: 30px;
+				background: #f3f3f3;
+				display: block;
+				float: left;
+				border-radius: 4px 0px 0px 4px;
+				font-size: 12px;
+				line-height: 30px;
+				text-indent: 10px;
+				cursor: pointer;
+			}
+			.Content p.txt{
+				width: 400px;
+				height: 30px;
+				background: #fff;
+				float: left;
+				text-indent: 10px;
+				line-height: 30px;
+				font-size: 14px;
+				overflow: hidden;
+			}
+			.Content span.but{
+				width: 80px;
+				height: 30px;
+				background: #f4354b;
+				float: left;
+				display: block;
+				font-size: 12px;
+				color: #fff;
+				line-height: 30px;
+				text-align: center;
+				border-radius: 0px 4px 4px 0px;
+			}
+			.Content span.col font{
+				width: 10px;
+				height: 10px;
+				display: block;
+				background: #ffff00;
+				position: absolute;
+				left: 40px;
+				top: 9px;
+				border: 1px solid #000;
+			}
+			.Content ul{
+				width: 80px;
+				position: absolute;
+				bottom: 28px;
+				left: 0;
+				display: none;
+			}
+			.Content ul li{
+				list-style: none;
+				width: 80px;
+				height: 30px;
+				font-size: 12px;
+				line-height: 30px;
+				text-indent: 10px;
+				background: #f3f3f3;
+				position: relative;
+			}
+			.Content ul li font{
+				width: 10px;
+				height: 10px;
+				border: 1px solid #000;
+				display: block;
+				position: absolute;
+				top: 10px;
+				left: 40px;
+			}
+			.gray .Text{
+				width: 1000px;
+				height: 500px;
+				margin: 100px auto;
+				color: red;
+				font-size: 20px;
+				text-align: center;
+			}
+			#Music{
+				position: fixed;
+				top: 10px;
+				left: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div style="height:900px; width:100%"></div>
+		
+		<!--弹幕告白图-->
+		<img src="images/xx.png" class="gb"/>
+		
+		<!--灰色的遮罩层-->
+		<div class="gray">
+			<!--内容发表区-->
+			<div class="Content">
+				<span class="col">颜色<font></font></span>
+				<p class="txt" contenteditable="true"></p>
+				<span class="but">清空再写</span>
+				<ul id="Ul">
+					<li data-color="#ffff00" class="xz">颜色<font style="background-color: #ffff00;"></font></li>
+					<li data-color="#ff3333">颜色<font style="background-color: #ff3333;"></font></li>
+					<li data-color="#ccff66">颜色<font style="background-color: #ccff66;"></font></li>
+					<li data-color="#ffffff">颜色<font style="background-color: #ffffff;"></font></li>
+					<li data-color="#33ff33">颜色<font style="background-color: #33ff33;"></font></li>
+					<li data-color="#9933cc">颜色<font style="background-color: #9933cc;"></font></li>
+				</ul>
+			</div>
+			
+			<div class="Text"></div>
+			<audio id="Music" controls loop="loop">
+				<source src="music/刘珂矣 - 半壶纱.mp3" type="audio/mpeg"></source>
+			</audio>
+		</div>
+		
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js" ></script>
+		<script type="text/javascript" src="js/snowfall.jquery.js" ></script>
+		
+		<script>
+			$(document).snowfall('clear');
+			$(document).snowfall({
+			    image:"images/huaban.png",
+			    flakeCount:50,
+			    minSize: 5,
+			    maxSize: 30
+			});
+		</script>
+		<div style="text-align: center;margin: 50px 0;font: normal 14px/24px;'MicroSoft YaHei';"></div>
+		
+		<script type="text/javascript">
+			$("img.gb").click(function(){
+				//$(".gray").css("display","block");
+				$(".gray").show();//显示
+				$("#Music").get(0).play();
+			});
+			
+			//点击颜色时，显示颜色列表
+			$("span.col").click(function(){
+				$(".Content ul").toggle("slow");
+			});
+			
+			//点击颜色时，更换颜色
+			$(".Content ul li").click(function(){
+				var col = $(this).data("color");
+				$("span.col font").css("background-color",col);
+				$(this).addClass("xz").siblings().removeClass("xz");//指定的加上 class="xz"
+				$(".Content ul").toggle("slow");//隐藏
+				window.click(function(){
+				$(".Content ul").css("display","none");
+			});
+			});
+			
+			//当我们抬起键盘时
+			var arr = [];
+			$("p.txt").keyup(function(event){
+				var col = $(".Content ul li.xz").data("color");
+				var txt = "<span style='color:"+col+"'>"+$(this).text()+"</span>";//获取输入框内容
+				$(".Text").html(arr.join("").toString()+txt);
+				
+				//判断有没有按回车键
+				if(event.keyCode == 13){//keyCode的值为13时，说明是回车键
+					//清空里面的内容
+					$(this).empty(); //清空
+					arr.push("<p>"+txt+"</p>");
+					var html = "";
+					for(var i = 0; i < arr.length; i++){
+						html += arr[i];
+					}
+					$(".Text").html(html);
+				}
+			});
+			
+			//清空再写
+			$("span.but").click(function(){
+				$("p.txt").text("");
+			})
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+

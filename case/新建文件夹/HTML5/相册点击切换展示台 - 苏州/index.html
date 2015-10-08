@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="关键字" />
+		<meta name="description" content="网站描述" />
+		<title>html模板</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				background: #fff;
+			}
+			#pic{
+				width: 100%;
+				height: 230px;
+				margin-top: 110px;
+				position: relative;
+				transform-style: preserve-3d;
+				perspective: 800px;
+			}
+			#pic img{
+				width: 300px;
+				height: 200px;
+				position: absolute;
+				box-reflect: below 0 linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,.5));
+				-o-box-reflect: below 0 -o-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,.5));/*兼容opera*/
+				-moz-box-reflect: below 0 -moz-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,.5));/*兼容火狐*/
+				-webkit-box-reflect: below 0 -webkit-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,.7));/*兼容谷歌*/
+				-ms-box-reflect: below 0 -ms-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,.7));/*兼容IE*/
+				transition: 1s;
+			}
+			#pic .front{
+				transform: rotateY(45deg);
+			}
+			#pic .now{
+				transform: translateZ(100px);
+			}
+			#pic .behind{
+				transform: rotateY(-45deg);
+			}
+			#title{
+				width: 100%;
+				height: 50px;
+				position: fixed;
+				z-index: 3;
+				top: 0;
+				left: 0;
+				background: #000;
+				opacity: .5;
+				filter: alpha(opacity=50);
+				color: #fff;
+				line-height: 50px;
+				text-align: center;
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--标题-->
+		<div id="title">苏州 - 狮子园</div>
+		<div id="pic">
+			<img src="images/1.jpg" />
+			<img src="images/2.jpg" />
+			<img src="images/3.jpg" />
+			<img src="images/4.jpg" />
+			<img src="images/5.jpg" />
+			<img src="images/6.jpg" />
+			<img src="images/7.jpg" />
+			<img src="images/8.jpg" />
+			<img src="images/9.jpg" />
+		</div>
+	</body>
+</html>
+<!--引入外部jquery类库文件-->
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script>
+	//获取每张图片最开始的left的值
+	var Left = []; //定义数组
+	var picName = ["苏州  - 拙政园","苏州  - 金鸡湖","苏州  - 留园","苏州  - 苏州乐园","苏州  - 狮子园","苏州  - 苏州大学","苏州  - 苏堤","苏州  - 寒山寺","苏州  - 山塘街"]; //相册名称
+	var imgL = $("#pic img").length;
+	var lIndex = Math.floor(imgL/2); // 当前摆在正中间图片的位置
+	
+	//图片位置初始化
+	function mid(){
+		var wWid = $(window).width(); //获取页面宽度
+		var iWid = $("#pic img").width(); //获取图片宽度
+		Left[lIndex] = wWid/2 - iWid/2;
+		for(var i = 0; i < imgL; i++){
+			Left[i] = Left[lIndex] - 150 * (lIndex - i);
+			$("#pic img").eq(i).css("left",Left[i] + "px");
+		}
+	}
+	mid();
+	
+	//图片名字初始化
+	for(var i = 0; i < imgL; i++){
+		if(i < lIndex){
+			$("#pic img").eq(i).addClass("front");
+		} else if (i == lIndex) {
+			$("#pic img").eq(i).addClass("now");
+		} else {
+			$("#pic img").eq(i).addClass("behind");
+		}
+	}
+	
+	for(var i = 0; i < imgL; i++){
+		Left[i] = parseInt($('#pic img').eq(i).css('left'));
+	}
+	
+	$("#pic img").click(function(){
+		//当图片被点击的时候，执行下面的事件
+		var nIndex = $(this).index(); //当前被点击的图片的序号
+		$(this).removeClass("behind").addClass("now");
+		$("#title").text(picName[nIndex]);
+		for(var i = 0; i < nIndex; i++){
+			$("#pic img").eq(i).removeClass().addClass("front");
+		}
+		
+		for(var i = imgL; i > nIndex; i--){
+			$("#pic img").eq(i).removeClass().addClass("behind");
+		}
+
+		//先看右侧图片被点击时候的事件
+		for(var i = 0; i < imgL; i++){
+			Left[i] -= 150 * (nIndex-lIndex);
+			$("#pic img").eq(i).css('left',Left[i] + "px");
+		}
+		$("#pic img").eq(i).removeClass("behind").addClass("now");
+		
+		lIndex = nIndex;
+	});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+

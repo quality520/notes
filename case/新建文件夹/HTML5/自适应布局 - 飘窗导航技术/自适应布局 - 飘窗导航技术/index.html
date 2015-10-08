@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="关键字" />
+		<meta name="description" content="网站描述" />
+		<title>html模板</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body{
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+			}
+			body{
+				background: url(images/1.jpg) no-repeat;
+				background-size: cover;
+			}
+			nav{
+				width: 80%;
+				height: 45px;
+				border: 1px solid #fff;
+				margin: 150px auto 0;
+				border-radius: 15px;
+				background: -webkit-linear-gradient(top,#fc6,#fcf);/*css3新增的属性*/
+			}
+			nav > ul{
+				display: -webkit-box;
+			}
+			nav > ul > li{
+				list-style: none;
+				-webkit-box-flex: 1;
+				line-height: 45px;
+				text-align: center;
+			}
+			nav ul li a{
+				text-decoration: none;
+				color: #000;
+			}
+			/*子级菜单*/
+			.sub_nav{
+				-webkit-perspective: 600px;
+			}
+			.sub_nav li{
+				list-style: none;
+				border: 1px solid #fff;
+				margin: 2px 0;
+				transform: rotateY(180deg);
+				transition: all 0.8s;
+				opacity: 0;
+			}
+			
+			
+			/*时间延迟加载*/
+			.sub_nav li:nth-child(1){-webkit-transition-delay: 250ms;}
+			.sub_nav li:nth-child(2){-webkit-transition-delay: 200ms;}
+			.sub_nav li:nth-child(3){-webkit-transition-delay: 150ms;}
+			.sub_nav li:nth-child(4){-webkit-transition-delay: 100ms;}
+			.sub_nav li:nth-child(5){-webkit-transition-delay: 50ms;}
+			.sub_nav li:nth-child(6){-webkit-transition-delay: 0ms;}
+			
+			.sub_nav li a{
+				text-decoration: none;
+				color: #fff;
+			}
+			
+			/*下拉导航抖动*/
+			.sub_nav li:hover{
+				box-shadow: 0 0 15px #fff;
+			}
+			.sub_nav li a:hover{
+				/*color: ;*/
+			}
+			
+			/*鼠标经过*/
+			nav > ul > li:hover .sub_nav li{
+				transform: rotateY(0deg);
+				opacity: 1;
+			}
+			
+			nav > ul > li:hover .sub_nav li:nth-child(1){-webkit-transition-delay: 0ms;}
+			nav > ul > li:hover .sub_nav li:nth-child(1){-webkit-transition-delay: 50ms;}
+			nav > ul > li:hover .sub_nav li:nth-child(1){-webkit-transition-delay: 100ms;}
+			nav > ul > li:hover .sub_nav li:nth-child(1){-webkit-transition-delay: 150ms;}
+			nav > ul > li:hover .sub_nav li:nth-child(1){-webkit-transition-delay: 200ms;}
+			nav > ul > li:hover .sub_nav li:nth-child(1){-webkit-transition-delay: 250ms;}
+			
+			/*时间差*/
+			
+		</style>
+	</head>
+	<body>
+		<!--导航开始-->
+		<nav>
+			<ul>
+				<li><a href="#">枫叶的空间</a></li>
+				<li>
+					<a href="#">枫叶的空间</a>
+					<ul class="sub_nav">
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">枫叶的空间</a>
+					<ul class="sub_nav">
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">枫叶的空间</a>
+					<ul class="sub_nav">
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">枫叶的空间</a>
+					<ul class="sub_nav">
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">枫叶的空间</a>
+					<ul class="sub_nav">
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+						<li><a href="#">枫叶的空间</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</body>
+</html>

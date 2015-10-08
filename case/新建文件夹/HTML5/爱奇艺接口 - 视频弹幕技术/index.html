@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="关键字" />
+		<meta name="description" content="网站描述" />
+		<title>html模板</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#Main{
+				width: 1000px;
+				height: 530px;
+				margin: 30px auto 0;
+				position: relative;
+				overflow: hidden;
+			}
+			#Main .avi{
+				width: 1000px;
+				height: 530px;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			#Main #showTxt{
+				width: 1000px;
+				height: 300px;
+				position: absolute;
+				left: 0;
+				top: 0;
+				z-index: 111;
+			}
+			#Main #showTxt p{
+				position: absolute;
+				left: 1000px;
+				top: 0px;
+				width: 100%;
+				font-size: 16px;
+				font-weight: bold;
+			}
+			#Ly{
+				width: 100%;
+				height: 70px;
+				background: rgba(0,0,0,0.5);
+				position: fixed;
+				left: 0;
+				bottom: 0;
+			}
+			#Ly .LyCon{
+				width: 710px;
+				height: 50px;
+				margin: 0px auto;
+				padding-top: 20px;
+				position: relative;
+			}
+			#Ly .LyCon input.txt{
+				width: 600px;
+				height: 30px;
+				line-height: 30px;
+				background: #fff;
+				border: 0;
+				border-radius: 3px 0 0 3px;
+				text-indent: 8px;
+				position: absolute;
+				top: 20px;
+				left: 0;
+			}
+			#Ly .LyCon span.btn{
+				display: block;
+				width: 100px;
+				height: 30px;
+				background: #c0c;
+				color: #fff;
+				font-size: 14px;
+				font-family: "微软雅黑";
+				text-align: center;
+				line-height: 30px;
+				border-radius: 0 3px 3px 0;
+				position: absolute;
+				left: 600px;
+				top: 20px;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="Main">
+			<!--视频开始-->
+			<div class="avi">
+				<!--<embed src="http://player.video.qiyi.com/050af2c0ad55f58a40a9d5000b531f14/0/0/v_
+				19rro305ck.swf-albumId=346139000-tvId=346139000-isPurchase=0-cnId=16" allowFullScreen="true" 
+				quality="high" width="1000" height="530" wmode="Transparent" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>-->
+				<object id="flash" height="100%" width="100%" data-player-playerbody="flash" type="application/x-shockwave-flash" data="http://www.iqiyi.com/common/flashplayer/20150820/MainPlayer_5_2_27_2_c3_3_7_3.swf" style=""><param name="quality" value="high"><param name="allowScriptAccess" value="always"><param name="wMode" value="window"><param name="align" value="middle"><param name="bgcolor" value="#000000"><param name="swLiveConnect" value="true"><param name="loop" value="true"><param name="play" value="true"><param name="DeviceFont" value="false"><param name="allowFullScreen" value="true"><param name="menu" value="true"><param name="flashVars" value="albumId=394162800&amp;tvId=394162800&amp;autoplay=true&amp;isMember=true&amp;cyclePlay=false&amp;exclusive=0&amp;qiyiProduced=0&amp;share_sTime=0&amp;share_eTime=0&amp;tipdataurl=http://static.iqiyi.com/ext/common/tipdata_201501161615.xml&amp;components=feffbfe6e0&amp;qiyiProducedPreloader=http://www.iqiyi.com/common/flashplayer/20141229/loading.swf&amp;exclusivePreloader=http://www.iqiyi.com/player/20140120131607/loading.swf&amp;preloader=http://www.iqiyi.com/player/20140218112703/loading.swf&amp;vipPreloader=http://www.iqiyi.com/common/flashplayer/20150608/vip_loading.swf&amp;adurl=http://www.iqiyi.com/common/flashplayer/20150831/am-3-4-3.swf&amp;flashP2PCoreUrl=http://www.iqiyi.com/common/flashplayer/20150831/30117.swf&amp;cid=qc_100001_100014&amp;videoIsFromQidan=lianbo&amp;cpnc=8878f555fc2678de8fc553ac283304e3&amp;cpnv=1.0&amp;origin=flash&amp;outsite=false&amp;P00001=4eGm2l5zWppA7Q4LyLlQ8zn6PxbPUHSVHi4jm2L26P7HEhom4ef&amp;profileID=2039184369&amp;profileCookie=4eGm2l5zWppA7Q4LyLlQ8zn6PxbPUHSVHi4jm2L26P7HEhom4ef&amp;passportID=2039184369&amp;yhls=1459742653675&amp;playerCTime=1441425430987&amp;webEventID=8a945da37f6339a1fcc66cdd5b0c704d&amp;definitionID=b92800a46dd379e10bcdf10109fdf15e"><div id="qiyi_flash_install" style="height:100%;background: rgb(0, 0, 0); "><div style="top: 50%; width: 100%; text-align: center; margin-top: -50px; position: absolute;"><p><a style="padding: 10px; color: rgb(255, 255, 255); font-size: 14px;" href="http://www.adobe.com/go/getflashplayer" target="_blank">主人，没有安装flash player不能播放啊~~请您<span class="green">立即安装</span></a></p><p style="margin-top: 40px;"><a style="padding: 10px; color: rgb(255, 255, 255); font-size: 14px;" href="http://mbdapp.iqiyi.com/j/ot/QIYImedia_0_08.exe" target="_blank">打死也不想装Flash？可以试试我们的<span class="green">桌面客户端</span>，用过的都觉得好！</a></p></div></div></object>
+			</div>
+			<!--视频结束-->
+			
+			<!--文字开始-->
+			<div id="showTxt"></div>
+			<!--文字结束-->
+		</div>
+		
+		<!--发表评论开始-->
+		<div id="Ly">
+			<div class="LyCon">
+				<input type="text" class="txt" />
+				<span class="btn">发表评论</span>
+			</div>
+		</div>
+		<!--发表评论结束-->
+		
+		<!--引入外部jQuery类库文件-->
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js" ></script>
+		<script>
+			var _top = 0;
+			//$("#showTxt").keydown(function(event){
+				//if(window.event && event.keyCode == 13){ // IE8 以及更早版本
+					//showContent();
+				//} else if (event.which && event.keyCode == 13){ // IE9/Firefox/Chrome/Opera/Safari
+					//showContent();
+				//}
+			//});
+			$("span.btn").click(function(){
+				showContent();
+			});
+
+			//显示文字
+			function showContent(){
+				alert("1111");
+				var l = $("#showTxt").width();
+				var t = $("#showTxt").height();
+				var txt = $("input.txt").val();
+				if(txt == ""){
+					alert("请输入要发表的内容");
+				} else {
+					$("#showTxt").append("<p>"+txt+"</p>");
+				}
+				//处理我们添加进去的内容
+				$("#showTxt p").each(function(){ //each遍历
+					if(_top > t-40){
+						_top = 5;
+					}
+					_top = _top + 40;
+					
+					//定义加入的文字位置
+					$(this).css({left:l,top:_top,color:getRandomColor()});
+					
+					//让文字动起来
+					var _w = $(this).width();
+					$(this).animate({left:-_w},getSjTime(),function(){
+						$(this).remove();
+					});
+				});
+			}
+			
+			//随机获取颜色值
+			function getRandomColor(){
+				return "#" + (function(h){
+					return new Array(7 - h.length).join("0") + h
+				})((Math.random() * 0x1000000 << 0).toString(16));
+			}
+			
+			//获取随机时间
+			function getSjTime(){
+				return Math.random()*10000 + 10000;
+			}
+		</script>
+	</body>
+</html>

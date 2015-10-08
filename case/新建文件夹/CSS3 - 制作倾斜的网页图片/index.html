@@ -1,0 +1,118 @@
+﻿<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<meta name="Author" content="刘自定">
+		<meta name="Keywords" content="关键字">
+		<meta name="Description" content="描述内容">
+		<title>CSS3制作倾斜的网页图片</title>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+			}
+			html,body{
+				background:#959796;
+			}
+			h1{
+				font-size:30px;
+				color:#eee;
+				font-weight:400;
+				font-family:"microsoft yahei";
+				margin:20px auto 30px;
+				text-align:center;
+				text-shadow:1px 1px 5px #333;
+			}
+			#gallery{
+				width:1000px;
+				height:700px;
+				margin:0 auto;
+				position:relative;
+			}
+			#gallery a{
+				width:200px;
+				padding:10px;
+				display:block;
+				background:#eee;
+				position:absolute;
+				box-shadow:0 0 10px #333;
+			}
+			#gallery a.Img1{
+				left:50px;
+				top:0px;
+				transform:rotate(-15deg);
+				-webkit-transform:rotate(-15deg);
+				z-index:1;
+			}
+			#gallery a.Img2{
+				left:250px;
+				top:0px;
+				transform:rotate(20deg);
+				-webkit-transform:rotate(20deg);
+				z-index:4;
+			}
+			#gallery a.Img3{
+				left:490px;
+				top:0px;
+				transform:rotate(-5deg);
+				-webkit-transform:rotate(-5deg);
+				z-index:3;
+			}
+			#gallery a.Img4{
+				left:730px;
+				top:0px;
+				transform:rotate(15deg);
+				-webkit-transform:rotate(15deg);
+				z-index:2;
+			}
+			#gallery a.Img5{
+				left:50px;
+				top:300px;
+				transform:rotate(-15deg);
+				-webkit-transform:rotate(-15deg);
+				z-index:5;
+			}
+			#gallery a.Img6{
+				left:300px;
+				top:300px;
+				transform:rotate(10deg);
+				-webkit-transform:rotate(10deg);
+				z-index:4;
+			}
+			#gallery a.Img7{
+				left:500px;
+				top:300px;
+				transform:rotate(-10deg);
+				-webkit-transform:rotate(-10deg);
+				z-index:3;
+			}
+			#gallery a.Img8{
+				left:730px;
+				top:300px;
+				transform:rotate(20deg);
+				-webkit-transform:rotate(20deg);
+				z-index:2;
+			}
+			#gallery a:hover{
+				z-index:10;
+				box-shadow:0 5px 15px #000;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>CSS3制作倾斜的网页图片库</h1>
+		<!--图片显示区域开始-->
+		<div id="gallery">
+			<a href="javascript:void(0);" class="Img1"><img src="images/1.jpg" width="200"></a>
+			<a href="javascript:void(0);" class="Img2"><img src="images/2.jpg" width="200"></a>
+			<a  class="Img3"><img src="images/3.jpg" width="200"></a>
+			<a href="javascript:void(0);" class="Img4"><img src="images/4.jpg" width="200"></a>
+			<a href="javascript:void(0);" class="Img5"><img src="images/5.jpg" width="200"></a>
+			<a href="javascript:void(0);" class="Img6"><img src="images/6.jpg" width="200"></a>
+			<a href="javascript:void(0);" class="Img7"><img src="images/7.jpg" width="200"></a>
+			<a href="javascript:void(0);" class="Img8"><img src="images/8.jpg" width="200"></a>
+		</div>
+		<!--图片显示区域结束-->
+	</body>
+</html>

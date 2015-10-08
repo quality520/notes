@@ -1,0 +1,192 @@
+﻿<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<meta name="Author" content="刘自定">
+		<meta name="Keywords" content="关键字">
+		<meta name="Description" content="描述内容">
+		<title>CSS3推门特效</title>
+		<!--css3实现动画-->
+		<style type="text/css">
+			*{
+				margin:0px;
+				padding:0px;
+			}
+			/*动画部分开始*/
+			#box{
+				width:910px;
+				margin:0 auto;
+				border:1px solid green;
+			}
+			#box ul li{
+				list-style:none;
+				width:200px;
+				height:270px;
+				position:relative;
+				float:left;
+				margin:13px;
+				overflow:hidden;
+				transform-style:preserve-3d;
+				perspective:800px;
+			}
+			#box ul li a{
+				position:absolute;
+				top:0;
+				left:0;
+				transform-origin:0;
+				transition:all 0.8s;
+			}
+			/*门后面*/
+			#box .boxTxt{
+				width:190px;
+				height:260px;
+				padding:5px;
+				background:#ddd;
+				position:absolute;
+				top:0;
+				left:0;
+				transform:rotateY(180deg);
+				-webkit-transform:rotateY(180deg);
+				transform-origin:0;
+				transition:all 0.8s;
+			}
+			.boxTxt .txtTall{
+				width:170px;
+				height:190px;
+				background:#fff;
+				color:#666;
+				text-align:center;
+				padding:35px 10px;
+			}
+			.boxTxt .txtTall h1{
+				color:#252525;
+			}
+			.boxTxt .txtTall h3{
+				margin:10px 0 20px;
+			}
+			.boxTxt .txtTall p{
+				text-align:left;
+				line-height:22px;
+			}
+			#box ul li:hover a{
+				transform:rotateY(180deg);
+			}
+			#box ul li:hover .boxTxt{
+				transform:rotateY(360deg);
+			}
+			#title{
+				height:30px;
+				width:200px;
+				color:green;
+				font-size:24px;
+				line-height:30px;
+				font-family:"Microsoft Yahei";
+				margin:10px auto;
+			}
+		</style>
+	</head>
+	<body>
+		<!--标题部分开始-->
+		<div id="title">
+			CSS推门特效
+		</div>
+		<!--标题部分结束-->
+
+		<!--推门特效开始-->
+		<div id="box">
+			<ul>
+				<li>
+					<!--图片-开始-->
+					<a href=""><img src="images/1.jpg" width="200px" height="270px" /></a>
+					<!--推门显示（反面）- 开始-->
+					<div class="boxTxt">
+						<div class="txtTall">
+							<h1>瘦身</h1>
+							<h3>七个诀窍不再嘴馋</h3>
+							<p>冬天到了，天气一冷，人自然需要通过摄取食物中的热量来抵御</p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href=""><img src="images/2.jpg" width="200px" height="270px" /></a>
+					<!--推门显示（反面）- 开始-->
+					<div class="boxTxt">
+						<div class="txtTall">
+							<h1>瘦身</h1>
+							<h3>七个诀窍不再嘴馋</h3>
+							<p>冬天到了，天气一冷，人自然需要通过摄取食物中的热量来抵御</p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href=""><img src="images/3.jpg" width="200px" height="270px" /></a>
+					<!--推门显示（反面）- 开始-->
+					<div class="boxTxt">
+						<div class="txtTall">
+							<h1>瘦身</h1>
+							<h3>七个诀窍不再嘴馋</h3>
+							<p>冬天到了，天气一冷，人自然需要通过摄取食物中的热量来抵御</p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href=""><img src="images/4.jpg" width="200px" height="270px" /></a>
+					<!--推门显示（反面）- 开始-->
+					<div class="boxTxt">
+						<div class="txtTall">
+							<h1>瘦身</h1>
+							<h3>七个诀窍不再嘴馋</h3>
+							<p>冬天到了，天气一冷，人自然需要通过摄取食物中的热量来抵御</p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href=""><img src="images/5.jpg" width="200px" height="270px" /></a>
+					<!--推门显示（反面）- 开始-->
+					<div class="boxTxt">
+						<div class="txtTall">
+							<h1>瘦身</h1>
+							<h3>七个诀窍不再嘴馋</h3>
+							<p>冬天到了，天气一冷，人自然需要通过摄取食物中的热量来抵御</p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href=""><img src="images/6.jpg" width="200px" height="270px" /></a>
+					<!--推门显示（反面）- 开始-->
+					<div class="boxTxt">
+						<div class="txtTall">
+							<h1>瘦身</h1>
+							<h3>七个诀窍不再嘴馋</h3>
+							<p>冬天到了，天气一冷，人自然需要通过摄取食物中的热量来抵御</p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href=""><img src="images/7.jpg" width="200px" height="270px" /></a>
+					<!--推门显示（反面）- 开始-->
+					<div class="boxTxt">
+						<div class="txtTall">
+							<h1>瘦身</h1>
+							<h3>七个诀窍不再嘴馋</h3>
+							<p>冬天到了，天气一冷，人自然需要通过摄取食物中的热量来抵御</p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href=""><img src="images/8.jpg" width="200px" height="270px" /></a>
+					<!--推门显示（反面）- 开始-->
+					<div class="boxTxt">
+						<div class="txtTall">
+							<h1>瘦身</h1>
+							<h3>七个诀窍不再嘴馋</h3>
+							<p>冬天到了，天气一冷，人自然需要通过摄取食物中的热量来抵御</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!--推门特效结束-->
+	</body>
+</html>

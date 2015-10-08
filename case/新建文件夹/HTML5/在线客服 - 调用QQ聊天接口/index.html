@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="关键字" />
+		<meta name="description" content="网站描述" />
+		<title>html模板</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#QQ{
+				width: 187px;
+				height: 193px;
+				position: fixed;
+				right: -100px;
+				top: 100px;
+			}
+			#qq_chat{
+				width: 217px;
+				height: 324px;
+				background: url(images/qq_bg.png);
+				position: fixed;
+				top: 100px;
+				right: -217px;
+			}
+			.chat{
+				width: 160px;
+				height: 225px;
+				margin: 90px 0px 0px 35px;
+			}
+			.chat p{
+				font-size: 14px;
+				font-family: "微软雅黑";
+				line-height: 40px;
+			}
+			.chat p img{
+				margin-left: 10px;
+			}
+			.data{
+				position: fixed;
+				width: 100px;
+				height: 50px;
+				right: 20px;
+				bottom: 0px;
+				color: #FF7800;
+			}
+			#jie{
+				width: 187px;
+				height: 233px;
+				margin: 100px auto;
+			}
+			#jie p{
+				text-align: center;
+				font-size: 14px;
+				font-family: "微软雅黑";
+				color: green;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<!--日期-->
+		<div class="data">
+			<p>2015/09/04</p>
+		</div>
+		
+		<div id="jie">
+			<img src="images/qq_icon.png" width="187px" height="193px" />
+			<p>俏皮可爱的小企鹅</p>
+		</div>
+		
+		<!--div盒子模型，高度，宽度，放内容 长方形的容器-->
+		<div id="QQ">
+			<img src="images/qq_icon.png" alt="QQ" width="187px" height="193px" />
+		</div>
+		
+		<!--QQ联系-->
+		<div id="qq_chat">
+			<div class="chat">
+				<p>技术支持：<a href="http://wpa.qq.com/msgrd?v=3&uin=1359150439&site=qq&menu=yes" 
+				target="_blank"><img src="images/qq.gif" align="absmiddle"></a></p>
+				
+				<p>技术支持：<a href="http://wpa.qq.com/msgrd?v=3&uin=524211952&site=qq&menu=yes" 
+				target="_blank"><img src="images/qq.gif" align="absmiddle"></a></p>
+				
+				<p>技术支持：<a href="http://wpa.qq.com/msgrd?v=3&uin=524211952&site=qq&menu=yes" 
+				target="_blank"><img src="images/qq.gif" align="absmiddle"></a></p>
+				
+				<p>技术支持：<a href="http://wpa.qq.com/msgrd?v=3&uin=524211952&site=qq&menu=yes" 
+				target="_blank"><img src="images/qq.gif" align="absmiddle"></a></p>
+				
+				<p>技术支持：<a href="http://wpa.qq.com/msgrd?v=3&uin=524211952&site=qq&menu=yes" 
+				target="_blank"><img src="images/qq.gif" align="absmiddle"></a></p>
+			</div>
+		</div>
+		
+		<!--引入外部jQuery类库文件-->
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js" ></script>
+		<script>
+			//鼠标移到QQ企鹅上
+			$("#QQ").mouseover(function(){
+				$("#qq_chat").animate({right:"0px"},600);
+				$(this).animate({right:"-187px"},600);
+			});
+			
+			//鼠标移到QQ交流上和移开时效果
+			$("#qq_chat").hover(function(){},function(){
+				$("#qq_chat").animate({right:"-217px"},600);
+				$("#QQ").animate({right:"-100px"},600);
+			});
+		</script>
+	</body>
+</html>

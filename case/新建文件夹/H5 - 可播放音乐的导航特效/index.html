@@ -1,0 +1,95 @@
+﻿<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<meta name="Author" content="刘自定">
+		<meta name="Keywords" content="关键字">
+		<meta name="Description" content="描述">
+		<title>带音乐的导航</title>
+		<style type="text/css">
+			*{
+				margin:0px;
+				padding:0px;
+			}
+			#Music{
+				width:100%;
+				height:56px;
+				margin-top:50px;
+				background:#1f0a31 url("images/topbg1.jpg") no-repeat top center;
+			}
+			#Music .Menu{
+				width:800px;
+				height:56px;
+				margin:0 auto;
+			}
+			#Music .Menu ul{
+				padding-left:100px;
+			}
+			#Music .Menu ul li{
+				width:100px;
+				height:56px;
+				line-height:56px;
+				color:#fff;
+				list-style:none;
+				float:left;
+				text-align:center;
+				font-family:"Microsoft Yahei";
+				position:relative;
+			}
+			#Music .Menu ul li a{
+				color:#fff;
+				text-decoration:none;
+				display:block;
+				z-index:4;
+				position:relative;
+			}
+			#Music .Menu ul li span{
+				display:block;
+				background:#66ff99;
+				width:100%;
+				height:0px;
+				position:absolute;
+				left:0px;
+				bottom:0px;
+				z-index:3;
+			}
+			#musicAudio{
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="Music">
+			<div class="Menu">
+				<ul>
+					<li dataName="do"><a href="#">哆(dou)</a><span></span></li>
+					<li dataName="re"><a href="#">唻(ruai)</a><span></span></li>
+					<li dataName="mi"><a href="#">咪(mi)</a><span></span></li>
+					<li dataName="fa"><a href="#">发(fa)</a><span></span></li>
+					<li dataName="sol"><a href="#">梭(sou)</a><span></span></li>
+					<li dataName="la"><a href="#">啦(la)</a><span></span></li>
+					<li dataName="si"><a href="#">西(xi)</a><span></span></li>
+				</ul>
+			</div>
+		</div>
+
+		<audio src="mp3/do.mp3" controls id="musicAudio">
+
+		</audio>
+	</body>
+</html>
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	$(".Menu ul li").hover(function(){
+		//鼠标移动到上面
+		var audio = $("#musicAudio").get(0);
+		var dataName = $(this).attr("dataName");
+		$(this).find("span").animate({height:"56px"},300);
+		audio.src = "mp3/" + dataName + ".mp3";
+		audio.play();//播放音乐
+	},function(){
+		//鼠标移开
+		$(this).find("span").animate({height:"0px"},300);
+	});
+</script>

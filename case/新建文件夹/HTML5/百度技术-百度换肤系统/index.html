@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="关键字" />
+		<meta name="description" content="网站描述" />
+		<title>html模板</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				background: url(images/1.jpg);
+			}
+			#Click{
+				position: absolute;
+				left: 40px;
+				top: 10px;
+				z-index: 1;
+			}
+			img{
+				display: block;
+			}
+			#huanfu{
+				width: 100%;
+				height: 190px;
+				background: #fff;
+				position: absolute;
+				display: none;
+				top: 0;
+				left: 0;
+			}
+			#huanfu #imgList{
+				width: 600px;
+				height: 185px;
+				margin: 0 auto;
+			}
+			#huanfu #imgList .box1{
+				width: 196px;
+				height: 185px;
+				/*background: #690;*/
+				float: left;
+			}
+			#huanfu #imgList .box2{
+				width: 98px;
+				height: 185px;
+				float: left;
+			}
+			#huanfu #imgList a{
+				float: left;
+				margin-bottom: 1px;
+				margin-right: 1px;
+				position: relative;
+			}
+			#huanfu #imgList a:hover img{
+				opacity: 0.8;
+				-moz-opacity: 0.8;
+				filter: Alpha(opacity=80);
+			}
+			#huanfu #imgList .skin{
+				display: none;
+				position: absolute;
+				right: 5px;
+				bottom: 5px;
+			}
+			.data{
+				position: fixed;
+				width: 150px;
+				height: 50px;
+				right: 20px;
+				bottom: 20px;
+				color: #FF7800;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<!--日期-->
+		<div class="data">
+			<p>2015/09/04</p>
+		</div>
+		
+		<!--换肤-->
+		<div id="Click">
+			<img src="images/huanfu.png" width="23px" height="39px" />
+		</div>
+		
+		<!--div盒子模型，高度，宽度，放内容的长方形容器-->
+		<div id="huanfu">
+			<div id="imgList">
+				<!--box1 S-->
+				<div class="box1">
+					<a href="javascript:void(0);">
+						<img src="images/1-1.jpg" width="195" height="119" />
+						<div class="skin" style="display: block;"><img src="images/skin.png" /></div>
+					</a>
+					<a href="javascript:void(0);">
+						<img src="images/2-2.jpg" width="97" height="59"/>
+						<div class="skin"><img src="images/skin.png" /></div>
+					</a>
+					<a href="javascript:void(0);">
+						<img src="images/3-3.jpg" width="97" height="59"/>
+						<div class="skin"><img src="images/skin.png" /></div>
+					</a>
+				</div>
+				<!--box1 E-->
+				
+				<!--box2 S-->
+				<div class="box2">
+					<a href="javascript:void(0);">
+						<img src="images/4-4.jpg" width="97" height="59"/>
+						<div class="skin"><img src="images/skin.png" /></div>
+					</a>
+					<a href="javascript:void(0);">
+						<img src="images/5-5.jpg" width="97" height="59"/>
+						<div class="skin"><img src="images/skin.png" /></div>
+					</a>
+					<a href="javascript:void(0);">
+						<img src="images/6-6.jpg" width="97" height="59"/>
+						<div class="skin"><img src="images/skin.png" /></div>
+					</a>
+				</div>
+				<!--box2 E-->
+				
+				<!--box1 S-->
+				<div class="box1">
+					<a href="javascript:void(0);">
+						<img src="images/7-7.jpg" width="97" height="59"/>
+						<div class="skin"><img src="images/skin.png" /></div>
+					</a>
+					<a href="javascript:void(0);">
+						<img src="images/8-8.jpg" width="97" height="59"/>
+						<div class="skin"><img src="images/skin.png" /></div>
+					</a>
+					<a href="javascript:void(0);">
+						<img src="images/9-9.jpg" width="195" height="119"/>
+						<div class="skin"><img src="images/skin.png" /></div>
+					</a>
+				</div>
+				<!--box1 E-->
+				<!--box2 S-->
+				<div class="box2">
+					<a href="javascript:void(0);">
+						<img src="images/10-10.jpg" width="97" height="59"/>
+						<div class="skin"><img src="images/skin.png" /></div>
+					</a>
+					<a href="javascript:void(0);">
+						<img src="images/11-11.jpg" width="97" height="59"/>
+						<div class="skin"><img src="images/skin.png" /></div>
+					</a>
+					<a href="javascript:void(0);">
+						<img src="images/12-12.jpg" width="97" height="59"/>
+						<div class="skin"><img src="images/skin.png" /></div>
+					</a>
+				</div>
+				<!--box2 E-->
+			</div>
+		</div>
+		
+		<!--引用外部jquery类库文件-->
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js" ></script>
+		<script>
+			$("#Click").click(function(){
+				$("#huanfu").slideToggle();
+			});
+			
+			//换肤
+			$("#huanfu #imgList a").click(function(){
+				var imgUrl = $(this).find("img").attr("src");
+				var Con = imgUrl.substring(imgUrl.indexOf("\/") + 1,imgUrl.indexOf("-"));
+				$("body").css({"background":"url(images/" + Con + ".jpg)"});
+				//$("#huanfu #imgList .skin").show();//.parent().parent().siblings().find(".skin").hide();
+				$(this).find(".skin").show().parent().parent().siblings().find(".skin").hide();
+				$(this).find(".skin").show().parent().siblings().find(".skin").hide();
+			});
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+

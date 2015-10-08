@@ -33,5 +33,11 @@ var aArr = [10,12,9,6,15,20,3,0,1,99];
 aArr.sort(compare);
 //=>[0, 1, 3, 6, 9, 10, 12, 15, 20, 99]
 
-
-
+//
+function aftLoadImg(obj,url){
+    var oImg = new Image();
+    oImg.onload = function(){
+        obj.src = oImg.src;
+    }
+    oImg.src = url;
+}

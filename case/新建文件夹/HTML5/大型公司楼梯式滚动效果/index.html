@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="content-type" charset="text/html;utf-8" />
+		<meta name="keywords" content="关键字" />
+		<meta name="description" content="网站描述" />
+		<title>html模板</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#Louti{
+				width: 120px;
+				height: 520px;
+				position: fixed;
+				bottom: 0;
+				left: 50px;
+			}
+			#Louti img.top{
+				display: block; /*只要是图片有间隙，就要变成块级元素*/
+			}
+			#Louti ul li{
+				width: 120px;
+				height: 40px;
+				font-size: 14px;
+				list-style: none;
+				line-height: 40px;
+				text-align: center;
+				color: #fff;
+			}
+			#Louti ul li.bg1{
+				background: #000 url("images/bg1.png") no-repeat 110px 18px;
+			}
+			#Louti ul li.bg2{
+				background: #2f2f2f url("images/bg1.png") no-repeat 110px 18px;
+			}
+			#Louti ul li.bg3{
+				background: #f09 url("images/bg1.png") no-repeat 110px 18px;
+			}
+			.box{
+				width: 100%;
+				height: 400px;
+				background: #ccf;
+				font-size: 35px;
+				color: red;
+				text-align: center;
+			}
+			.br{
+				width: 100px;
+				height: 100px;
+				position: fixed;
+				top: 100px;
+				right: 45%;
+			}
+			.br img{
+				border-radius: 50%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="Louti">
+			<img src="images/xxpic.png" class="top" />
+			<ul>
+				<li>服装服饰专场</li>
+				<li>鞋包户外专场</li>
+				<li>美妆配饰专场</li>
+				<li>数码/食品专场</li>
+				<li>优质团购专场</li>
+				<li>母婴/家具专场</li>
+				<li>淘宝热卖专场</li>
+				<li>低价购车专场</li>
+			</ul>
+			<img src="images/top.png" class="bottom" />
+		</div>
+		
+		<div class="box" style="background: #ccf;">服装服饰专场</div>
+		<div class="box" style="background: #3ff;">鞋包户外专场</div>
+		<div class="box" style="background: #3f3;">美妆配饰专场</div>
+		<div class="box" style="background: #090;">数码/食品专场</div>
+		<div class="box" style="background: #fc0;">优质团购专场</div>
+		<div class="box" style="background: #390;">母婴/家具专场</div>
+		<div class="box" style="background: #933;">淘宝热卖专场</div>
+		<div class="box" style="background: #ff0;">低价购车专场</div>
+		
+		<div class="br">
+			<img src="images/br.png" width="100px" height="100px" />
+		</div>
+		
+		
+		<!-- 引用外部jquery类库 -->
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js" ></script>
+		<script>
+			$("#Louti ul li:even").addClass("bg1");
+			$("#Louti ul li:odd").addClass("bg2");
+			$("#Louti ul li").mouseover(function(){
+				$(this).addClass("bg3").siblings().removeClass("bg3");
+			});
+			$("#Louti ul li").click(function(){
+				var _index = $(this).index();
+				$("body,html").animate({   //body,html保证浏览器的兼容性
+					scrollTop: _index * 400
+				},500);
+			});
+		</script>
+	</body>
+</html>

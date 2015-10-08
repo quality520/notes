@@ -1,0 +1,121 @@
+﻿<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<meta name="Author" content="">
+		<meta name="Keywords" content="">
+		<meta name="Description" content="">
+		<title>Document</title>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+			}
+			/*View begin*/
+			#View{
+				width:920px;
+				height:670px;
+				margin:0 auto;
+			}
+			#View .Con{
+				width:580px;
+				height:670px;
+				background:url("images/sp.jpg") no-repeat center;
+				float:left;
+				position:relative;
+			}
+			#View .Con .avi{
+				width:525px;
+				height:331px;
+				position:absolute;
+				top:98px;
+				left:27px;
+			}
+			#View .List{
+				width:180px;
+				height:670px;
+				float:right;
+			}
+			#View .List ul li{
+				width:171px;
+				height:151px;
+				cursor:pointer;
+				list-style:none;
+				position:relative;
+				background:url("images/xsp.jpg") no-repeat;
+				margin-top:10px;
+			}
+			#View .List ul li .sp_pic{
+				width:151px;
+				height:94px;
+				position:absolute;
+				left:10px;
+				top:8px;
+			}
+			#View .List ul li img.play{
+				display:none;
+				position:absolute;
+				left:65px;
+				top:30px;
+			}
+			#View .List ul li:hover img.play{
+				display:block;
+			}
+		</style>
+	</head>
+	<body>
+		<!--视频播放开始-->
+		<div id="View">
+			<!--视频内容开始-->
+			<div class="Con">
+				<div class="avi">
+					<embed src="http://player.video.qiyi.com/c2778fe3fdb94ca193438b434c39459b/0/0/dongman/20120202/e8d4e0d9aad075fe.swf-albumId=146454-tvId=163445-isPurchase=0-cnId=4" allowFullScreen="true" quality="high" width="525" height="331" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
+				</div>
+			</div>
+			<!--视频内容结束-->
+			<!--视频列表开始-->
+			<div class="List">
+				<ul>
+					<li>
+						<div class="sp_pic">
+							<img src="images/sp_pic1.png" width="151" height="94" dataSrc="http://player.video.qiyi.com/c2778fe3fdb94ca193438b434c39459b/0/0/dongman/20120202/e8d4e0d9aad075fe.swf-albumId=146454-tvId=163445-isPurchase=0-cnId=4" />
+						</div>
+						<img src="images/mvPlayIcon.png" class="play" />
+					</li>
+					<li>
+						<div class="sp_pic">
+							<img src="images/sp_pic2.jpg" width="151" height="94" dataSrc="http://player.video.qiyi.com/0b70b13265d0428b9209b9782697cedc/0/0/dongman/20120210/493c9331d44663da.swf-albumId=146454-tvId=165497-isPurchase=0-cnId=4" />
+						</div>
+						<img src="images/mvPlayIcon.png" class="play" />
+					</li>
+					<li>
+						<div class="sp_pic">
+							<img src="images/sp_pic3.jpg" width="151" height="94" dataSrc="http://player.video.qiyi.com/e440b2abff5141b3b7e8bf50ecef1f7a/0/0/dongman/20120217/cea7c5a9a339bcfb.swf-albumId=146454-tvId=167823-isPurchase=0-cnId=4" />
+						</div>
+						<img src="images/mvPlayIcon.png" class="play" />
+					</li>
+					<li>
+						<div class="sp_pic">
+							<img src="images/sp_pic4.jpg" width="151" height="94" dataSrc="http://player.video.qiyi.com/f0ef23b3c7d743df90821cf3d9e4ebb8/0/0/dongman/20120224/8ca11667ff4a6cd4.swf-albumId=146454-tvId=169834-isPurchase=0-cnId=4" />
+						</div>
+						<img src="images/mvPlayIcon.png" class="play" />
+					</li>
+				<ul>
+			</div>
+			<!--视频列表结束-->
+		</div>
+		<!--视频播放开始-->
+	</body>
+</html>
+<!--引入外部jquery类库文件-->
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+
+		$(".List ul li").click(function(){
+			var dataSrc = $(this).find(".sp_pic img").attr("dataSrc");
+			$(".avi").html("<embed src='"+dataSrc+"' allowFullScreen='true' quality='high' width='525' height='331' align='middle' allowScriptAccess='always' type='application/x-shockwave-flash'></embed>");
+			$(".avi embed").attr("src",dataSrc);
+		});
+	
+</script>

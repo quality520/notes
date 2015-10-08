@@ -1,0 +1,170 @@
+﻿<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<meta name="Author" content="刘自定 ">
+		<meta name="Keywords" content="关键字">
+		<meta name="Description" content="描述内容">
+		<title>H5创意动画 - 家装分层旋转展示</title>
+		<style type="text/css">
+			*{
+				margin:0px;
+				padding:0px;
+			}
+			body{
+				background:#ddd;
+			}
+			/* banner begin */
+			#banner{
+				width:640px;
+				height:400px;
+				margin:30px auto 0;
+				background:pink;
+				position:relative;
+				overflow:hidden;
+			}
+			#banner ul li{
+				list-style:none;
+				width:640px;
+				height:400px;
+				background-repeat:no-repeat;
+				position:absolute;
+				transition:1.5s;
+				background-size:cover;
+				-ms-transition:1.5s;/*兼容IE9*/
+				-webkit-transform:1.5s;/*兼容Safari和Chrome*/
+				-moz-transform:1.5s;/*兼容Firefox*/
+				-o-transform:1.5s;/*兼容Opera*/
+			}
+			#banner ul li.l1{
+				background-image:url("images/1.png");left:0px;
+			}
+			#banner ul li.l2{
+				background-image:url("images/2.png");left:28px;
+			}
+			#banner ul li.l3{
+				background-image:url("images/3.png");left:56px;
+			}
+			#banner ul li.l4{
+				background-image:url("images/4.png");left:84px;
+			}
+			#banner ul li.l5{
+				background-image:url("images/5.png");left:112px;
+			}
+			#banner ul li p{
+				width:400px;
+				height:26px;
+				color:#fff;
+				font-size:18px;
+				border-top:2px solid #fff;
+				border-bottom:2px solid #fff;
+				font-family:"Microsoft Yahei";
+				font-weight:bold;
+				line-height:30px;
+				text-indent:310px;
+				position:absolute;
+				bottom:0px;left:30px;
+				transform:rotate(-90deg);
+				-ms-transition:rotate(-90deg);/*兼容IE9*/
+				-webkit-transform:rotate(-90deg);/*兼容Safari和Chrome*/
+				-moz-transform:rotate(-90deg);/*兼容Firefox*/
+				-o-transform:rotate(-90deg);/*兼容Opera*/
+				transform-origin:left bottom;
+				-ms-transition:left bottom;/*兼容IE9*/
+				-webkit-transform:left bottom;/*兼容Safari和Chrome*/
+				-moz-transform:left bottom;/*兼容Firefox*/
+				-o-transform:left bottom;/*兼容Opera*/
+				cursor:pointer;
+			}
+			#banner ul li.l2.move{
+				transform:translateX(415px) rotate(-45deg);
+				-ms-transition:translateX(415px) rotate(-45deg);/*兼容IE9*/
+				-webkit-transform:translateX(415px) rotate(-45deg);/*兼容Safari和Chrome*/
+				-moz-transform:translateX(415px) rotate(-45deg);/*兼容Firefox*/
+				-o-transform:translateX(415px) rotate(-45deg);/*兼容Opera*/
+			}
+			#banner ul li.l3.move{
+				transform:translateX(427px) rotate(-45deg);
+				-ms-transition:translateX(427px) rotate(-45deg);/*兼容IE9*/
+				-webkit-transform:translateX(427px) rotate(-45deg);/*兼容Safari和Chrome*/
+				-moz-transform:translateX(427px) rotate(-45deg);/*兼容Firefox*/
+				-o-transform:translateX(427px) rotate(-45deg);/*兼容Opera*/
+				
+			}
+			#banner ul li.l4.move{
+				transform:translateX(438px) rotate(-45deg);
+				-ms-transition:translateX(438px) rotate(-45deg);/*兼容IE9*/
+				-webkit-transform:translateX(438px) rotate(-45deg);/*兼容Safari和Chrome*/
+				-moz-transform:translateX(438px) rotate(-45deg);/*兼容Firefox*/
+				-o-transform:translateX(438px) rotate(-45deg);/*兼容Opera*/
+			}
+			#banner ul li.l5.move{
+				transform:translateX(450px) rotate(-45deg);
+				-ms-transition:translateX(450px) rotate(-45deg);/*兼容IE9*/
+				-webkit-transform:translateX(450px) rotate(-45deg);/*兼容Safari和Chrome*/
+				-moz-transform:translateX(450px) rotate(-45deg);/*兼容Firefox*/
+				-o-transform:translateX(450px) rotate(-45deg);/*兼容Opera*/
+			}
+			#banner ul li.move{
+				transform-origin:left top;
+				-ms-transition:left top;/*兼容IE9*/
+				-webkit-transform:left top;/*兼容Safari和Chrome*/
+				-moz-transform:left top;/*兼容Firefox*/
+				-o-transform:left top;/*兼容Opera*/
+			}
+			#title{
+				width:640px;
+				height:50px;
+				color:#fff;
+				text-align:center;
+				line-height:50px;
+				font-family:"Microsoft Yahei";
+				background:#0033ff;
+				opacity:0.5;
+				filter:Alpha(opacity=50);
+				margin:30px auto;
+			}
+		</style>
+	</head>
+	<body>
+		<!--标题部分开始-->
+		<div id="title">
+			家装分层旋转
+		</div>
+		<!--标题部分结束-->
+
+		<!--创意窗口开始-->
+		<div id="banner">
+			<ul>
+				<li class="l1"><p style="background-color:#000;">Sample1</p></li>
+				<li class="l2"><p style="background-color:#000;">Sample2</p></li>
+				<li class="l3"><p style="background-color:#000;">Sample3</p></li>
+				<li class="l4 move"><p style="background-color:#000;">Sample4</p></li>
+				<li class="l5 move"><p style="background-color:#000;">Sample5</p></li>
+			</ul>
+		</div>
+		<!--创意窗口结束-->
+	</body>
+</html>
+<!--引入外部jquery类库文件-->
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#banner ul li p").click(function(){
+			//获取当前索引
+			var index = $(this).parent().index();
+			//遍历所有元素
+			$('#banner ul li').each(function(i){
+				//如果有move，并且小于等于当前索引，则移除move
+				if($(this).hasClass('move') && i <= index){
+					$(this).removeClass("move");
+				} 
+				//如果没有move，并且大于等于当前索引，则添加move
+				else if(!$(this).hasClass('move') && i >= index){
+					$(this).addClass("move");
+				}
+			});
+		});
+	});
+</script>
