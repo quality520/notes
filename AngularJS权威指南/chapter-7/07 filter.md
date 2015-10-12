@@ -203,16 +203,27 @@
 
     AngularJS能够将HTML5表单验证功能同它自己的验证指令结合起来，并且非常方便。 AngularJS提供过了很多表单验证指令，
 
-    Your email
+        <form name="form" novalidate>
+          <label name="email">Your email</label>
+          <input type="email" name="email" ng-model="email" placeholder="Email Address" />
+        </form>
+    
     借助AngularJS，我们不需要花太多额外的精力就可以轻松实现客户端表单验证功能。 要使用表单验证，首先要确保表单像上面的例子一样有一个name属性。 所有输入字段都可以进行基本的验证，比如最大、最小长度等，这些功能是由新的HTML5表单属性提供的。 如果想要屏蔽浏览器对表单的默认验证行为，可以在表单元素上添加novalidate标记。
     input元素上使用的表单验证选项。 
-    1，必填项 验证某个表单输入是否已经填写，只要在输入字段元素上添加HTML5标记required即可： 
-    2,最小长度 验证表单输入的文本长度是否大于某个最小值，在输入字段上使用AngularJS指令ng-minleng="{number}"; 
-    3,最大长度 验证表单输入的文本长度是否小于某个最大值，在输入字段上使用AngularJS指令ng-maxleng="{number}"; 
-    4，匹配模式 使用ng-pattern="/PATTERN/"来确保输入能够匹配指定的正则表达式： 
-    5,电子邮件 验证输入内容是否是电子邮件，只需要像下面这样将input的类型设置为email即可： 
+    1，必填项 验证某个表单输入是否已经填写，只要在输入字段元素上添加HTML5标记required即可：
+      <input type="text" required />
+    2,最小长度 验证表单输入的文本长度是否大于某个最小值，在输入字段上使用AngularJS指令ng-minleng="{number}";
+      <input type="text" ng-minleng="6" />
+    3,最大长度 验证表单输入的文本长度是否小于某个最大值，在输入字段上使用AngularJS指令ng-maxleng="{number}";
+      <input type="text" ng-maxleng="16" />
+    4，匹配模式 使用ng-pattern="/PATTERN/"来确保输入能够匹配指定的正则表达式：
+      <input type="text" ng-pattern="[a-zA-Z]"/>
+    5,电子邮件 验证输入内容是否是电子邮件，只需要像下面这样将input的类型设置为email即可：
+      <input type="email" name="email" ng-model="user.email"/>
     6,数字 验证输入的是否是数字，将input的类型设置为number 
+      <input type="number" name="age" ng-model="user.age" />
     7,URL 验证输入内容是否是URl，将input的类型设置为url： 
+      <input type="url" name="homepage" ng-model="user.homepage" />
     8,自定义验证
     9,在表单中控制变量
     表单的属性可以在其属的$scope对象中访问到，而我们又可以访问$scope对象，因此javascript可以间接的访问DOM中的表单属性。
@@ -250,74 +261,164 @@
         input.ng-valid{
           border:1px solid green;
         }
-
-####7.2 表单验证
-   AngularJS能够将HTML5表单验证功能同它自己的验证指令结合起来，并且非常方便。
-   AngularJS提供过了很多表单验证指令，
-
-   <form name="form" novalidate>
-     <label name="email">Your email</label>
-     <input type="email" ng-model="email" placeholder="Email Address" />
-   </form>
-
-   借助AngularJS，我们不需要花太多额外的精力就可以轻松实现客户端表单验证功能。
-   要使用表单验证，首先要确保表单像上面的例子一样有一个name属性。
-   所有输入字段都可以进行基本的验证，比如最大、最小长度等，这些功能是由新的HTML5表单属性提供的。
-   如果想要屏蔽浏览器对表单的默认验证行为，可以在表单元素上添加novalidate标记。
-
-   input元素上使用的表单验证选项。
-     1，必填项  验证某个表单输入是否已经填写，只要在输入字段元素上添加HTML5标记required即可：
-       <input type="text" required>
-     2,最小长度 验证表单输入的文本长度是否大于某个最小值，在输入字段上使用AngularJS指令ng-minleng="{number}";
-       <input type="text" ng-minleng="5">
-     3,最大长度 验证表单输入的文本长度是否小于某个最大值，在输入字段上使用AngularJS指令ng-maxleng="{number}";
-       <input type="text" ng-maxleng="15">
-     4，匹配模式 使用ng-pattern="/PATTERN/"来确保输入能够匹配指定的正则表达式：
-       <input type="text" ng-pattern="/[a-zA-Z]/">
-     5,电子邮件 验证输入内容是否是电子邮件，只需要像下面这样将input的类型设置为email即可：
-       <input type="email" name="email" ng-model="user.email" />
-     6,数字 验证输入的是否是数字，将input的类型设置为number
-       <input type="number" name="age" ng-model="user.age"/>
-     7,URL 验证输入内容是否是URl，将input的类型设置为url：
-       <input type="url" name="homepage" ng-model="user.homepage" />
-     8,自定义验证
-
-     9,在表单中控制变量
-        表单的属性可以在其属的$scope对象中访问到，而我们又可以访问$scope对象，因此javascript可以间接的访问DOM中的表单属性。
-        我们可以对表单做出实时(和AngularJS中的其他东西一样)响应。
-        属性如下：
-        格式：formName.inputFileldName.property
-         1,未修改的表单
-         这个一个布尔属性，用来判断用户是否修改了表单。如果未修改，值为true，
-         如果修改过值未false。
-          格式：formName.inputFieldName.$pristine
-         2,修改过的表单
-         只要用户修改过表单，无论输入是否通过验证，该值都返回true:
-          格式：formName.inputFieldName.$dirty
-         3,合法的表单
-         这个布尔型的属性用来判断表单的内容是否合法。如果当前表单内容是合法的，下面的属性就是true：
-          格式：formName.inputFieldName.$valid
-         4,不合法的表单
-         这个布尔型的属性用来判断表单的内容是否合法。如果当前表单内容是不合法的，下面的属性就是true：
-          格式：formName.inputFieldName.$invalid
-         5,错误
-         这是AngularJS听的另外一个非常有用的属性:$error对象。它包含当前表单的所有验证内容，已经他们是否合法的信息
-          格式：formName.inputFieldName.$error
-         如果验证失败，这个属性的值为true;如果值为false，说明输入字段的值通过了验证。
-
-     10,一些有用的CSS样式
-       AngularJS处理表但时，会根据表单当前状态添加一些CSS类。
-       他们包括：
-         .ng-pristine{}
-         .ng-dirty{}
-         .ng-valid{}
-         .ng-invalid{}
-        当某个字段中的输入非法时，.ng-invalid类会被添加到这个字段上，当前例子的站点将对应的CSS设置为：
-         input.ng-invalid{
-         	border:1px solid red;
-         }
-         input.ng-valid{
-         	border:1px solid green;
-         }
+    11,组合实例
+      
+      
+      <!doctype html>
+      <html ng-app="myApp">
+      <head>
+        <link rel="stylesheet" href="http://cdn.jsdelivr.net/foundation/4.3.2/css/foundation.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.js"></script>
+      </head>
+      <body>
         
->>>>>>> fa62251f335d87577da0d53b8385205a4f564ee2
+      <form name="signup_form" novalidate ng-submit="signupForm()">
+        <fieldset>
+          <legend>Signup</legend>
+          
+          <div class="row">
+            <div class="large-12 columns">
+              <label>Your name</label>
+              <input type="text" placeholder="Name" name="name" ng-model="signup.name" 
+                  ng-minlength=3 
+                  ng-maxlength=20 required />
+             <div class="error" 
+                  ng-show="signup_form.name.$dirty && signup_form.name.$invalid">
+              <small class="error" 
+                  ng-show="signup_form.name.$error.required">
+                  Your name is required.
+              </small>
+              <small class="error" 
+                      ng-show="signup_form.name.$error.minlength">
+                      Your name is required to be at least 3 characters
+              </small>
+              <small class="error" 
+                      ng-show="signup_form.name.$error.maxlength">
+                      Your name cannot be longer than 20 characters
+              </small>
+            </div>
+            </div>
+          </div>
+            
+          <div class="row">          
+            <div class="large-12 columns">
+              <label>Your email</label>
+              <input type="email" 
+                placeholder="Email" 
+                name="email" 
+                ng-model="signup.email" 
+                ng-minlength=3 ng-maxlength=20 required />
+              <div class="error" 
+                   ng-show="signup_form.email.$dirty && signup_form.email.$invalid">
+                <small class="error" 
+                       ng-show="signup_form.email.$error.required">
+                       Your email is required.
+                </small>
+                <small class="error" 
+                       ng-show="signup_form.email.$error.minlength">
+                        Your email is required to be at least 3 characters
+                </small>
+                <small class="error" 
+                       ng-show="signup_form.email.$error.email">
+                       That is not a valid email. Please input a valid email.
+                </small>
+                <small class="error" 
+                       ng-show="signup_form.email.$error.maxlength">
+                        Your email cannot be longer than 20 characters
+                </small>
+              </div>
+            </div>
+          </div>
+            
+          <div class="large-12 columns">
+            <label>Username</label>
+              <input  type="text" 
+                      placeholder="Desired username" 
+                      name="username" 
+                      ng-model="signup.username" 
+                      ng-minlength=3 
+                      ng-maxlength=20 
+                      ensure-unique="username" required />
+            <div class="error" ng-show="signup_form.username.$dirty && signup_form.username.$invalid">
+              <small class="error" ng-show="signup_form.username.$error.required">Please input a username</small>
+              <small class="error" ng-show="signup_form.username.$error.minlength">Your username is required to be at least 3 characters</small>
+              <small class="error" ng-show="signup_form.username.$error.maxlength">Your username cannot be longer than 20 characters</small>
+              <small class="error" ng-show="signup_form.username.$error.unique">That username is taken, please try another</small>
+            </div>
+          </div>  
+          <button type="submit" ng-disabled="signup_form.$invalid" class="button radius">Submit</button>
+        </fieldset>
+      </form>
+      </body>
+      </html>
+      
+    在提交后显示验证信息
+    当用户试图提交表单时，你可以在作用于中捕获一个submitted值，然后对表单内容进行验证并显示错误信息。
+      <form name="signup_form"
+      novalidate
+      ng-submit="signupForm()"
+      ng-controller="signupController">
+          <fieldset>
+              <legend>Signup</legend>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label>Your name</label>
+                        <input type="text" placeholder="Name" name="name" ng-model="signup.name" ng-minlength="3"  ng-maxlength="20" required />
+                        <div class="error" ng-show="signup_form.name.$dirty && signup_form.name.$invalid && signup_form.submitted">
+                            <small class="error" ng-show="signup_form.name.$error.required">
+                                Your name is required.
+                            </small>
+                            <small class="error" ng-show="signup_form.name.$error.minlength">
+                                Your name is required to be at least 3 characters
+                            </small>
+                            <small class="error"  ng-show="signup_form.name.$error.maxlength">
+                                Your name cannot be longer than 20 characters
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" >Submit</button>
+          </fieldset>
+      </form>
+      
+      js部分
+      var app = angular.module("myApp",[])
+      app.controller('signupController', function($scope) {
+          $scope.submitted = false;
+          $scope.signupForm = function() {
+          if ($scope.signup_form.$valid) {
+          // 正常提交
+          } else {
+            $scope.signup_form.submitted = true;
+          }
+          }
+      });
+      
+      ngMessages(1.3+)
+      安装AngularJS中的ngMessages指令
+      bower install --save angular-messages
+      引入到HTML中
+      <script type="text/javascript" src="angular-messages.js"></script>
+      并且在AngularJS中将ngMessages作为引用程序的依赖模块引入:
+      angular.module("myApp",["ngMessages"]);
+      
+      <form name="signup_form" novalidate ng-submit="signupForm()"
+      ng-controller="signupController">
+        <label>Your name</label>
+        <input type="text" placeholder="Name" name="name" ng-model="signup.name" ng-minlength=
+        3 ng-maxlength=20 required />
+        <div class="error" ng-messages="signup_form.name.$error">
+        <div ng-message="required">Make sure you enter your name</div>
+        <div ng-message="minlength">Your name must be at least 3 characters</div>
+        <div ng-message="maxlength">Your name cannot be longer than 20 characters</div>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+     借助ngMessage，表本身比前面的实现更清洁，并且更好理解。
+     如果想要更新这个实现同时显示所有的错误信息，只需要在ng-message指令旁边使用ng-message-multiple属性即可
+     <div class="error" ng-message="signup_form.name.$error" ng-message-multiple>
+       <div ng-message="require">Sure you enter your name </div>
+       <div ng-message="minlength">Your name must be at least 3characters</div>
+       <div ng-message="maxlength">Your name cannot be longer than 20 characters</div>
+     </div>
+     
