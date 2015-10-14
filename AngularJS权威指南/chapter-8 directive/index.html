@@ -1,0 +1,30 @@
+<!doctype html>
+<html ng-app="myApp">
+  <head>
+      <meta charset="utf-8"/>
+      <title>AngularJS指令</title>
+      <style>
+
+      </style>
+  </head>
+  <body>
+        <!--指令中可以指定以元素(E)、属性(A)、类(C)或注释(M)的格式来调用指令-->
+      <my-directive></my-directive>
+
+      <div my-directive></div>
+      <div class="my-directive"></div>
+      <!-- directive:my-directive -->
+      <!---->
+      <div my-directive2 my-url="http://www.baidu.com" my-link-text="Click me to go to baidu"></div>
+
+      <div my-directive3 my-url="{{myUrl}}" my-link-text="Let's go"></div>
+
+
+      <h1 ng-init="greeting='helloworld'">
+          the greeting is :{{greeting}}
+      </h1>
+
+      <script src="../library/scripts/angular.js"></script>
+      <script src="main.js"></script>
+  </body>
+</html>
