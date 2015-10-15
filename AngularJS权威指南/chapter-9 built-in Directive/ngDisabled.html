@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ng-disabled</title>
+</head>
+<body>
+		<input type="text" ng-model="someProperty" placeholder="TypetoEnable">
+		<button type="button" ng-disabled="!someProperty">Abutton</button>
+		
+		<div ng-controller="disController">
+			<textarea ng-disabled="isDisabled" cols="30" rows="10"></textarea>
+		</div>
+		<script src="../library/scripts/angular.js"></script>
+		<script>
+			angular.module("myApp",[])
+
+			.controller("disController",function($rootScope,$timeout){
+				$rootScope.isDisabled = true;
+				$timeout(function(){
+					$rootScope.isDisabled = false;
+				},5000);
+			})
+		</script>
+</body>
+</html>

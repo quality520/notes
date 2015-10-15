@@ -19,3 +19,61 @@
          <textarea>
          <select>
          <button>
+        当写普通的HTML输入字段时，如果元素标签上出现了disabled属性就会禁用这个输入字段。
+        通过ng-disabled可以对是否出现属性进行绑定。
+        请看下面的例子，按钮会一直禁用，知道用户在文本字段中输入内容。
+          <input type="text" ng-model="someProperty" placeholder="TypetoEnable">
+          <<button ng-model="button" ng-disable="!someProperty">Abutton</button>
+        在下面例子中，文本字段会被禁用5秒，知道在$timeout中将isDisabled属性设置为false
+          <textarea ng-disabled="isDisabled" cols="30" rows="10">Wait five seconds</textarea>
+
+          angular.module("myApp",[])
+          .controller("disController",function($rootScope,$timeout){
+            $rootScope.isDisabled = true;
+            $timeout(function(){
+              $rootScope.isDisabled = false;
+            },5000);
+          })
+         2,ng-readonly
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
