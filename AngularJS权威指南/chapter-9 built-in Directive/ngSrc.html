@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+</head>
+<body ng-controller="srcController">
+	<label>First images:</label><br>
+	<img src="{{imgSrc}}" />
+	<br>
+	<label>Second images:</label><br>
+	<img ng-src="{{imgSrc}}" />
+
+
+
+
+
+	<script src="../library/scripts/angular.js"></script>
+	<script>
+		angular.module("myApp",[])
+		.controller("srcController",function($rootScope,$timeout){
+			$timeout(function(){
+				$rootScope.imgSrc = "http://g.hiphotos.baidu.com/image/pic/item/2934349b033b5bb5e72933f034d3d539b700bcc5.jpg"
+			},2000);
+		})
+	</script>
+</body>
+</html>

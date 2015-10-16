@@ -35,6 +35,202 @@
             },5000);
           })
          2,ng-readonly
+         同其他布尔属性一样，HTML定义只会检查readonly属性是否出现，而不是它的实际值
+         通过ng-readonly可以将某个返回真或假的表达式同是否出现readonly属性进行绑定:
+          Type here to make sibling readonly:
+          <input type="text" ng-model="someProperty">
+          <br/>
+          <input type="text" ng-readonly="someProperty" value="Some text here">
+         3,ng-checked
+         标准的checked属性是一个布尔值，不需要进行赋值。通过ng-checked将某个表达式同是否出现checked属性进行绑定
+           通过ng-init指令将someProperty的值设置为true。将someProperty同ng-checked绑定在一起，AngularJS会输出标准的HTML checked属性
+             <label>someProperty = {{someProperty}}</label>
+             <input type="checkbox" ng-checked="someProperty" ng-init="someProperty = true" ng-model="someProperty">
+
+             <label>someProperty = {{anotherProperty}}</label>
+             <input type="checkbox" ng-checked="anotherProperty" ng-init="anotherProperty = false" ng-model="anotherProperty">
+         3,ng-selected
+             ng-selected可以对是否出现option标签的selected属性进行绑定
+    2,类布尔属性
+      ng-href、ng-src等属性虽然不是标准的HTML布尔属性，但是由于行为相似，所以AngularJS源码内部适合布尔属性同等对待的。
+      ng-href和ng-src都能有效帮助重构和避免错误，因此在改进代码时强烈建议用他们来替代原来的href和src
+        1,ng-href
+          当使用当前作用域中的属性动态创建URL时，应该用ng-href代替href。
+            <a ng-href="{{myUrl}}">le's go !!!</a>
+            <br>
+            <a ng-href="{{myUrl2}}">wait 2 second</a>
+            <script src="../library/scripts/angular.js"></script>
+            <script>
+              angular.module("myApp",[])
+              .controller("hrefController",function($rootScope,$timeout){
+                $rootScope.myUrl = "http://www.baidu.com";
+                $timeout(function(){
+                  $rootScope.myUrl2 = "http://www.google.com";
+                },2000);
+              })
+            </script>
+        2,ng-src
+          AngularJS会告诉浏览器在ng-src对应的表达式生效之前不要加载图像：
+            <label>First images:</label><br>
+            <img src="{{imgSrc}}" />
+            <br>
+            <label>Second images:</label><br>
+            <img ng-src="{{imgSrc}}" />
+
+            <script src="../library/scripts/angular.js"></script>
+            <script>
+              angular.module("myApp",[])
+              .controller("srcController",function($rootScope,$timeout){
+                $timeout(function(){
+                  $rootScope.imgSrc = "http://g.hiphotos.baidu.com/image/pic/item/2934349b033b5bb5e72933f034d3d539b700bcc5.jpg"
+                },2000);
+              })
+####9.2 在指令中使用子作用域
+    下面将要介绍的指令会以父级作用域为圆形生成子作用域。这种继承的机制可以创建一个隔离层，用来将需要协同工作的方法和数据模型对象放置在一起。
+      ng-app和ng-controller是特殊指令，因为他们会修改嵌套在他们内部的指令的作用域
+      ng-app为AngularJS应用创建$rootScope，ng-controller则会以$rootScope或另外一个ng-controller的作用域为圆形创建新的子作用域。
+      1,ng-app
+        任何具有ng-app属性的DOM元素将被标记为$rootScope的起始点。
+        $rootScope是作用域链的起始点，任何嵌套在ng-app内的指令都会继承它。
+          <label>{{someProperty}}</label>
+          <button ng-click="someAction()">Click me !</button>
+
+
+          <script src="../library/scripts/angular.js"></script>
+          <script>
+            angular.module("myApp",[])
+            .controller("mainCtrl",function($rootScope){
+              $rootScope.someProperty = "hello world!";
+              $rootScope.someAction = function(){
+                $rootScope.someProperty = "hello computer";
+              }
+            })
+          </script>
+        在这里为了演示方便，使用全局作用域一样使用$rootScope,实际上不建议这样做。
+        整个文档中只能使用一次ng-app。如果需要在一个页面中放置多个AngularJS应用，需要手动导入应用
+      2,ng-controller
+        内置指令ng-controller的作用是为嵌套在其中的指令创建一个子作用域，避免将所有操作和模型都定义在$rootScope上，用这个指令可以在一个DOM元素上放置控制器。
+          ng-controller接受一个参数expression，这个参数是必须的。
+          expression参数是AngularJS表达式。
+          子$scope只是一个javascript对象，其中含有从父级$scope中通过原型继承得到的方法和属性，包括应用的$rootScope。
+          嵌套在ng-controller中的指令有访问新子$scope的权限，但是要牢记每个指令都应该遵守的和作用域相关的规则。
+        tips:$scope对象的职责是承载DOM中指令所共享的操作和模型。
+          操作：指的是$scope上的标准javascript方法
+          模型：指的是$scope上保存的包含瞬时状态数据的javascript对象。持久化状态的数据应该保存在服务中，服务的作用是处理模型的持久化。
+            <div ng-controller="SomeCtrl">
+                {{ someBareValue }}
+                <button ng-click="someAction()">Communicate to child</button>
+                <div ng-controller="ChildCtrl">
+                  {{ someBareValue }}
+                  <button ng-click="childAction()">Communicate to parent</button>
+                </div>
+              </div>
+
+              <script>
+                angular.module('myApp', [])
+                .controller('SomeCtrl', function($scope) {
+                  // anti-pattern, bare value
+                  $scope.someBareValue = 'hello computer';
+                  // set actions on $scope itself, this is okay
+                  $scope.someAction = function() {
+                    $scope.someBareValue = 'hello human, from parent';
+                  };
+                })
+                .controller('ChildCtrl', function($scope) {
+                  $scope.childAction = function() {
+                    $scope.someBareValue = 'hello human, from child';
+                  };
+                });
+              </script>
+            由于原型继承的关系，修改父级对象中的someBarValue会同时修改子对象中的值，反之则不行
+            这个例子充分说明了子控制器是复制而非引用someBarValue
+              tips:javascript对象要么是值复制，要么是引用复制。字符串、数字和布尔型变量是值复制。数组、对象和函数则是引用复制。
+            如果将模型对象的某个属性设置为字符串，他会通过引用进行共享，因此在子$scope中修改属性也会修改父$scope中的这个属性。
+            <div ng-controller="SomeCtrl">
+                {{ someModel.someValue }}
+                <button ng-click="someAction()">Communicate to child</button>
+                <div ng-controller="ChildCtrl">
+                  {{ someModel.someValue }}
+                  <button ng-click="childAction()">Communicate to parent</button>
+                </div>
+              </div>
+
+              <script>
+                angular.module('myApp', [])
+                .controller('SomeCtrl', function($scope) {
+                  // best practice, always use a model
+                  $scope.someModel = {
+                    someValue: 'hello computer'
+                  }
+                  $scope.someAction = function() {
+                    $scope.someModel.someValue = 'hello human, from parent';
+                  };
+                })
+                .controller('ChildCtrl', function($scope) {
+                  $scope.childAction = function() {
+                    $scope.someModel.someValue = 'hello human, from child';
+                  };
+                });
+              </script>
+            无论点击那个按钮，值都会进行同步修改
+            warning:虽然这个特性是使用ng-controller时最重要的特性之一，但在使用任何会创建子作用域的指令事，如果将指令中的scope设置为true，这个特性将带来负面影响。
+            下面的内置指令都有同样的特性：
+                ng-include
+                ng-switch
+                ng-repeat
+                ng-view
+                ng-controller
+                ng-if
+      3,ng-include
+        使用ng-include可以加载、编译并包含外部HTML片段到当前的应用中。模板的URL被限制在与应用文档相同的域he写一下，可以通过白名单或包装成被新人的值来突破限制。更进一步，需要考虑跨域资源共享(Cross-Origin Resouce Sharing,CORS)和同源规则(Same Origin Policy)来确保模板可以在任何浏览器中正常加载。例如所有浏览器都不能进行跨域的请求，部分浏览器也不能访问file://协议的资源
+          tips：在开发中，可以通过命令行命令chrome --allow-file-access-from-files来禁止CORS错误。
+        在同一个元素上添加onload属性可以在模板加载完成后执行一个表达式
+        要记住，在使用ng-include时AngularJS会自动闯将一个子作用域。如果你想要使用某个特定的作用域，例如ControllerA的作用域，必须在同一个DOM元素上添加ng-controller="ControllerA"指令，这样当模板加载完成之后，不会像往常一样从外部作用域继承并创建一个新的作用域。例如
+          div ng-include="/myTemplateName.html" ng-controller="MyController" ng-init="name=world">hello {{name}}</div>
+      4,ng-switch
+        这个指令和ng-switch-when和on="propertyName"一起使用，可以在propertyName发生变化时渲染不同指令到视图中。
+          下面例子中，当person.name时Ari时，文本下面的div会显示出来。
+            <input type="text" ng-model="persion.name" />
+            <div ng-switch on="persion.name">
+              <p ng-switch-default>And the winner is</p>
+              <h1 ng-switch-when="Ari">{{persion.name}}</h1>
+            </div>  
+      5,ng-view
+        ng-view指令用来设置将路由管理和放置HTML中的视图的位置
+          <div ng-view></div>
+      6,ng-if
+        ng-if指令可以完全根据表达式的值在DOM中生成或移除一个元素，如果赋值给ng-if的值为false，那么对应的元素将会从DOM中移除，否则对应元的一个克隆将被重新插入到DOM中
+          ng-if同ng-show/ng-hide指令的最本质的区别是：它不是通过CSS显示或隐藏DOM节点，二十真正生成或移除节点。
+          当一个元素被ng-if从DOM中移除，同它关联的作用域也会被销毁。而且当它重新加入DOM中时，会通过原型继承从它的父作用域生成一个新的作用域。
+          tips：一个重要的细节需要知道，ng-if重新创建元素用的使他们编译后的状态。如果ng-if内部代码加载之后被jQuery修改过(.addClass)，那么当ng-if的表达式值为false时，这个DOM元素会被移除，表达式再次为true时这个元素内部的子元素会被重新插入到DOM中，此时这个元素的状态时他们的原始状态，而不是他们上次被移除时的状态，也就是说无论用jQuery的.addClass添加了任何类都不会存在
+            <div ng-if="2+2===5">won't see this DOM code,not even in the source code</div>
+            <div ng-if="2+2===4">Hi,i do exist</div>
+      7,ng-repeat
+        ng-repeat用来遍历一个集合或为一个集合中的每个元素生成一个模板实例。集合中的每个元素都会被赋予自己的模板和作用域。同时每个模板实例的作用域中都会暴露一些特殊的属性。
+          □$index:遍历的进度(0 ... length-1)
+          □$first:当元素时遍历第一个值时为true
+          □$middle:当元素处于第一和最后元素之间时值为true
+          □$last:当元素时遍历最后一个时值为true
+          □even:当$index值时偶数时值为true
+          □odd:当$index值为奇数时值为true
+      8,ng-init
+      9,{{}}
+      10,ng-bind
+      11,ng-cloak
+      12,ng-bind-template
+      13,ng-model
+      14,ng-show/ng-hide
+      15,ng-change
+      16,ng-form
+      17,ng-click
+      18,ng-select
+      19,ng-submit
+      20,ng-class
+      21,ng-attr-(suffix)
+
+
+
+
 
 
 

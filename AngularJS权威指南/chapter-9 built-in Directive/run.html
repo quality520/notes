@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+</head>
+<body ng-controller="mainCtrl">
+	<label>{{someProperty}}</label>
+	<button ng-click="someAction()">Click me !</button>
+
+
+	<script src="../library/scripts/angular.js"></script>
+	<script>
+		angular.module("myApp",[])
+		.controller("mainCtrl",function($rootScope){
+			$rootScope.someProperty = "hello world!";
+			$rootScope.someAction = function(){
+				$rootScope.someProperty = "hello computer";
+			}
+		})
+	</script>
+</body>
+</html>

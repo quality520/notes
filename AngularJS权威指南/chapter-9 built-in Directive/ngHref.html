@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+</head>
+<body ng-controller="hrefController">
+	<a ng-href="{{myUrl}}">le's go !!!</a>
+	<br>
+	<a ng-href="{{myUrl2}}">wait 2 second</a>
+	<script src="../library/scripts/angular.js"></script>
+	<script>
+		angular.module("myApp",[])
+		.controller("hrefController",function($rootScope,$timeout){
+			$rootScope.myUrl = "http://www.baidu.com";
+			$timeout(function(){
+				$rootScope.myUrl2 = "http://www.google.com";
+			},2000);
+		})
+	</script>
+</body>
+</html>
