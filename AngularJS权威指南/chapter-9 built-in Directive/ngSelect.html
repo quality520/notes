@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+</head>
+<body>
+	<div ng-controller="seleController">
+		<select ng-model="city" ng-options="city.name for city in cities">
+			<option value="">select city</option>
+		</select>
+		select:{{city.name}}
+	</div>
+	
+	
+
+	<script src="../library/scripts/angular.js"></script>
+	<script>
+		angular.module("myApp",[])
+		.controller("seleController",function($scope){
+			$scope.cities = [
+				{name: 'Seattle'},
+	      {name: 'San Francisco'},
+	      {name: 'Chicago'},
+	      {name: 'New York'},
+	      {name: 'Boston'}
+			]
+		})
+	</script>
+</body>
+</html>

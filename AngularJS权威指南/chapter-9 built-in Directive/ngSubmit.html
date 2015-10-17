@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+</head>
+<body>
+	<form ng-controller="subController" ng-submit="submit()"> 
+		Enter text and hit enter:
+		<input type="text" ng-model="person.name" name="person.name">
+		<input type="submit" name="person.name" value="submit"/>
+		<code>people={{people}}</code>
+		<ul ng-repeat="(index,object) in people">
+			<li>{{object.name}}</li>
+		</ul>
+	</form>
+	
+	
+
+	<script src="../library/scripts/angular.js"></script>
+	<script>
+		angular.module("myApp",[])
+		.controller("subController",function($scope){
+			$scope.person = {name:null};
+			$scope.people = [];
+			$scope.submit = function(){
+				if($scope.person.name){
+					$scope.people.push({name:$scope.person.name});
+					$scope.person.name = "";
+				}
+			}
+		})
+	</script>
+</body>
+</html>

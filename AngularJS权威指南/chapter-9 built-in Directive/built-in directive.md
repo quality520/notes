@@ -281,13 +281,177 @@
           </div>
       15,ng-change
         这个指令会在表单输入发生变化时计算给定表达式的值。因为要处理表单输入。这个指令要和ngModel联合起来使用。
-          
+          <div ng-controller="EquationController">
+            <input type="text" ng-model="equation.x" ng-change="change()"/>
+            <code>{{equation.output}}</code>
+          </div>
+
+          angular.module("myApp",[])
+          .controller("EquationController",function($scope){
+            $scope.equation = {};
+            $scope.change = function(){
+              $scope.equation.output = 
+                parseInt($scope.equation.x) + 2;
+            }
+          })
+        上面的例子，只要文本输入字段中的内容发生了变化就会改变equation.x的值，进而运行change()函数
+
       16,ng-form
+        ng-form用来在一个表单内部嵌套另一个表单.普通的HTML<form>标签不允许嵌套，但ng-form可以
+        这意味着内部所有的子表单都合法时，外部的表单才会合法。这对于用ng-rapeat动态创建表单时非常有用的。
+        由于不能通过字符插值来输入元素动态地生成name属性，所以需要将ng-form指令内每组重复的输入字段都包含一个外部表单元素内
+          下面的css类会根据表单的验证状态自动设置：
+            1,表单合法时设置ng-valid
+            2,表单不合法时设置ng-invalid
+            3,表单为进行修改时设置ng-pristion
+            4,表单进行修改时设置ng-dirty
+        AngularJS不会将表单提交到服务器,除非它指定了action属性.要指定提交表单时调用那个javascript方法,使用下面两个指令中的一个.
+          1,ng-submit:在表单元素上使用
+          2,ng-click:在第一个按钮或submit类型(input[type=submit])的输入字段上使用.
+
+
+          <form name="signup_form" ng-controller="FormController" ng-submit="submitForm()" novalidate>
+            <div ng-repeat="field in fields" ng-form="signup_form_input">
+                <input type="text" name="dynamic_input" ng-required="field.isRequired" ng-model="field.name" placeholder="{{field.placeholder}}" />
+              <div ng-show="signup_form.signup_form_input.dynamic_input.$dirty && signup_form.signup_form_input.$invalid">
+                <span ng-show="signup_form.signup_form_input.$error.required">
+                  the field is required.
+                </span>
+              </div>
+            </div>
+            <button type="btton" ng-disabled="signup_form.$invalid">
+              submit all
+            </button>
+          </form>
+          <script src="../library/scripts/angular.js"></script>
+          <script>
+            angular.module('myApp',[])
+            .controller('FormController',function($scope) {
+              $scope.fields = [
+                {placeholder: 'Username', isRequired: true},
+                {placeholder: 'Password', isRequired: true},
+                {placeholder: 'Email (optional)', isRequired: false}
+              ];
+              $scope.submitForm = function() {
+                alert("it works!");
+              };
+            });
+          </script>
+          s上述例子展示了如何通过服务器返回的JSON数据动态生成一个表单。我们用ng-repeat来遍历从服务器取回的所有数据。由于不能动态生成name属性，而我们又需要这个属性作验证，所有在循环的过程中为每一个字段都生成一个新表单。
+          由于AngularJS中用来取代<form>的ng-form指令可以嵌套，并且外部表单在所有子表单都合法之前一直处于不合法状态，因此我们可以在动态生成表单的同时使用表单验证功能
       17,ng-click
+        ng-click用来指定一个元素被点击时调用的方法或表达式。
+          <div ng-controller="sumController">
+            <button ng-click="count=count + 1" ng-init="count=0">Increment</button>
+            count:{{count}}
+            <br/>
+            <button ng-click="decrement()">Decrement</button>
+          </div>
+          <script src="../library/scripts/angular.js"></script>
+          <script>
+            angular.module("myApp",[])
+            .controller("sumController",function($scope){
+              $scope.decrement = function(){
+                $scope.count = $scope.count + 1;
+              }
+            })
+          </script>
       18,ng-select
+        ng-select用来将数据同HTML的<select>元素进行绑定。这个指令可以和ng-model以及ng-options指令一同使用，构建惊喜且表现优良的动态表单。
+        ng-options的值可以时一个内涵表达式(comprehension expression),它接受一个数组或对象，并对他们进行循环，将内部的内容提供给select标签内部的选项，它可以时下面两种形式：
+          1,数组作为数据源：
+            用数组中的值做标签；
+            用数组中的值作为选中的标签；
+            用数组中的值做标签组；
+            用数组中的值作为选中的标签组。
+          2,对象作为数据源：
+            用对象的键值（key-value）做标签；
+            用对象的键值作为选中的标签；
+            用对象的键值作为标签组；
+            用对象的键值作为选中的标签组。
+          <div ng-controller="seleController">
+            <select ng-model="city" ng-options="city.name for city in cities">
+              <option value="">select city</option>
+            </select>
+            select:{{city.name}}
+          </div>
+          <script src="../library/scripts/angular.js"></script>
+          <script>
+            angular.module("myApp",[])
+            .controller("seleController",function($scope){
+              $scope.cities = [
+                {name: 'Seattle'},
+                {name: 'San Francisco'},
+                {name: 'Chicago'},
+                {name: 'New York'},
+                {name: 'Boston'}
+              ]
+            })
+          </script>
       19,ng-submit
+        ng-submit用来将表达式同onsubmit事件进行绑定。这个指令同时会阻止默认行为(发送请求并重新加载页面)，除非表单不包含有action属性。
+          <form ng-controller="subController" ng-submit="submit()"> 
+            Enter text and hit enter:
+            <input type="text" ng-model="person.name" name="person.name">
+            <input type="submit" name="person.name" value="submit"/>
+            <code>people={{people}}</code>
+            <ul ng-repeat="(index,object) in people">
+              <li>{{object.name}}</li>
+            </ul>
+          </form>
+          <script src="../library/scripts/angular.js"></script>
+          <script>
+            angular.module("myApp",[])
+            .controller("subController",function($scope){
+              $scope.person = {name:null};
+              $scope.people = [];
+              $scope.submit = function(){
+                if($scope.person.name){
+                  $scope.people.push({name:$scope.person.name});
+                  $scope.person.name = "";
+                }
+              }
+            })
+          </script>
       20,ng-class
+        使用ng-class动态设置元素的类，方法时绑定一个代表所有需要添加的类的表达式。重复的类不会添加。当表达式发生变化，先前添加的类会被移除，新类会被添加。
+          下面的例子会用ng-class在一个随机数大于5时将.red类添加到一个div上:
+            <style>
+              .red{background:#f00;}
+            </style>
+
+            <div ng-controller="clsController">
+              <div ng-class="{red:x>5}" ng-if="x > 5">
+                you Won!!
+              </div>
+              <button ng-click="x=generateNumber()" ng-init="x=0">
+              Draw Number</button>
+              <p>Number is:{{x}}</p>
+            </div>
+
+            <script src="../library/scripts/angular.js"></script>
+            <script>
+              angular.module("myApp",[])
+              .controller("clsController",function($scope){
+                $scope.generateNumber = function(){
+                  return Math.floor((Math.random()*10)+1);
+                }
+              })
+            </script>
       21,ng-attr-(suffix)
+        当AngularJS编译DOM时会查找花括号{{some expression}}内的表达式。这些表达式会被自动注册到$watch服务中并更新到$digest循环中，成为它的一部分：
+          <!-- updated when 'someExpression' on the $scope is updated -->
+          <h1>{{ someExpression }}</h1>
+        有时候浏览器会对属性进行很苛刻的限制。SVG就是一个例子：
+          <svg>
+            <circle cx="{ cx }"></circle>  
+          </svg>
+        运行上述代码会抛出一个错误，指出我们有一个非法属性。可以用ng-attr-cx来解决这个问题。
+          tips:cx位于这个名称的尾部，在这个属性中，通过{{}}来写表达式，达到前面提到的目的。
+            <svg>
+              <circle ng-attr-cx="{{ cx }}"></circle>
+            </svg>
+
 
 
 

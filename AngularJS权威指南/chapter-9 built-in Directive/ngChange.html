@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+</head>
+<body >
+	<div ng-controller="EquationController">
+	  <input type="text" ng-model="equation.x" ng-change="change()"/>
+	  <code>{{equation.output}}</code>
+	</div>
+
+	
+	
+
+	<script src="../library/scripts/angular.js"></script>
+	<script>
+		angular.module("myApp",[])
+			.controller("EquationController",function($scope){
+			  $scope.equation = {};
+			  $scope.change = function(){
+			    $scope.equation.output = 
+			      parseInt($scope.equation.x) + 2;
+			  }
+			})
+	</script>
+</body>
+</html>
