@@ -213,14 +213,75 @@
           □$last:当元素时遍历最后一个时值为true
           □even:当$index值时偶数时值为true
           □odd:当$index值为奇数时值为true
+            <ul ng-controller="peopleController">
+              <li ng-repeat="person in people" ng-class="{even:!$even,odd:!$odd}">
+                {{person.name}} lives in {{person.city}}
+              </li>
+            </ul>
+            
+            <script>
+              angular.module("myApp",[])
+              .controller("peopleController",function($scope){
+                $scope.people = [
+                  {name:"Ari",city:"San Francisco"},
+                  {name:"Erik",city:"Seattle"}
+                ];
+              })
+            </script>
       8,ng-init
+        ng-init指令用来在指令被调用时设置内部作用域的初始化状态
+        ng-init最常见的使用场景时：在类似本节的例子中那样，需要创建小的示例代码的时候
+        对于任何需要健壮结构的场景，请在控制器中用数据模型对象来设置状态。
+          <div ng-init="greeting='hello';person='world'">
+            {{greeting}} {{person}}
+          </div>
       9,{{}}
+        <div>{{name}}</div>
+        {{}}语法是AngularJS内置的模板语法，它会在内部的$scope和视图之间创建绑定。基于这个绑定，只要$scope发生变化，视图就会随之自动更新。
+        {{}}是ng-bind的简略形式，用这种形式不需要创建新的元素，因此它常被用在行内文本中
+        tips:在屏幕可视的区域使用{{}}会导致页面加载时未渲染的元素发生闪烁，用ng-bind可以避免这个问题。
+          <div ng-init="greeting='hello World'">
+            {{greeting}}
+          </div>
       10,ng-bind
+        尽管可以在视图中使用{{}}模板语法(AngularJS内置的方式)，我们也可以通过ng-bind指令实现同样的行为。
+          <div ng-init="greeting='helloWorld'">
+            <p ng-bind="greeting"></p>
+          </div>
+          HTML加载含有{{}}语法的元素后并不会立刻渲染他们，导致为渲染内容闪烁(Flash of Unrendered Content,FOUC)。我们可以用ng-bind将内容同元素绑定在一起避免FOUC。内容会被当作子文本节点渲染到含有ng-bind指令的元素内。
       11,ng-cloak
+        除了使用ng-bind来避免未渲染元素闪烁，还可以在含有{{}}的元素上使用ng-cloak指令：
+          <div ng-init="gteeting='hello world'">
+            <p ng-cloak>{{greet}}</p>
+          </div>
+          ng-cloak指令会将内部元素隐藏，知道路由调用对应的页面才显示出来。
       12,ng-bind-template
+        同ng-bind指令类似，ng-bind-template用来在视图中绑定多个表达式
+          <div ng-bind-template="{{message}}{{name}}">
+          </div>
       13,ng-model
+        ng-model指令用来将input、select、textarea或自定义表单控件同包含它们的作用域中的属性进行绑定。它可以提供并处理表单验证功能，在元素上设置相关的CSS类(ng-valid/ng-invalid等)，并负责在父表单中注册控件。
+        它将当前作用域中运算表达式的值同给定的元素进行绑定。如果属性不存在，它会隐式创建并将其添加到当前作用域中。
+        我们应该始终用ngModel来绑定$scope上一个数据模型内的属性，而不是$scope上的属性，这样可以避免在作用域或后代作用域中发生属性覆盖。
+        <input type="text" ng-model="modeName.someProperty" />
       14,ng-show/ng-hide
+        ng-show和ng-hide根据所给表达式的值来显示或隐藏HTML元素。当赋值为ng-show指令的值为false时元素会被隐藏，类似的，当赋值ng-
+        元素的显示和隐藏时通过移除或添加ng-hide这个CSS类来说实现的。.ng-hide类被预先定义在了AngularJS的css文件中，并且它的display属性的值为none(用了!important标记)
+          <div ng-show="2+2 ==5"> 
+            2 + 2 isn't 5,don't show!
+          </div>
+          <div ng-show="2+2 ==4">
+            2 + 2 is 4,do show!
+          </div>
+          <div ng-hide="2+2 ==5"> 
+            2 + 2 isn't 5,don't hide!
+          </div>
+          <div ng-hide="2+2 ==4">
+            2 + 2 is 4,do hide
+          </div>
       15,ng-change
+        这个指令会在表单输入发生变化时计算给定表达式的值。因为要处理表单输入。这个指令要和ngModel联合起来使用。
+          
       16,ng-form
       17,ng-click
       18,ng-select
