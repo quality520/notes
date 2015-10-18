@@ -145,7 +145,29 @@
 				调用指令之后的结果：
 					<div>some stuff here</div>
 		10.2 指令作用域
-			
+			指令作用域时如何工作的。
+				$rootScope 这个特殊的对象会在DOM中声明 ng-app 时被创建：
+				<div ng-app="myApp"
+				ng-init="someProperty = 'some data'"></div>
+				<div ng-init="siblingProperty = 'more data'">
+				Inside Div Two
+				<div ng-init="aThirdProperty"></div>
+				</div>
+			DOM中每个指令调用时都可能会：
+				直接调用相同的作用域对象,
+				从当前作用域对象继承一个新的作用域对象,
+				创建一个同当前作用域相隔离的作用域对象。
+			上面的列子展示的是第一种情况。 前两个 div 是兄弟元素， 可以通过 get 和 set 访问 $rootScope 。
+			第二个 div 内部的 div 同样可以通过 get 和 set 访问相同的根作用域
+			指令嵌套并不一定意味着需要改变它的作用域。默认情况下，子指令会被付予访问父DOM元素对应的作用域能力，这样做的原因可以通过介绍指令的scope参数来理解，scope参数默认时false。
+			10.2.1 scope参数(布尔型或对象)
+				scope参数时可选的，可以被设置为true或一个对象。默认值时false
+				当scope设置为true时，会从父作用域继承并创建一个新的作用域对象。
+				如果一个元素上有多个指令使用了隔离作用域，其中只由一个可以生效。只由指令模板中的根元素可以获得一个新的作用域。因此，对于这些对象来说scope默认被设置为true。
+				内置指令ng-controller的作用，就是从父作用域继承并创建一个新的子作用域。它会创建一个新的从父作用域继承而来的子作用域。
+				
+
+
 
 
 
