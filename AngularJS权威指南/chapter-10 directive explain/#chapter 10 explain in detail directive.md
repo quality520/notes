@@ -165,6 +165,67 @@
 				当scope设置为true时，会从父作用域继承并创建一个新的作用域对象。
 				如果一个元素上有多个指令使用了隔离作用域，其中只由一个可以生效。只由指令模板中的根元素可以获得一个新的作用域。因此，对于这些对象来说scope默认被设置为true。
 				内置指令ng-controller的作用，就是从父作用域继承并创建一个新的子作用域。它会创建一个新的从父作用域继承而来的子作用域。
+				<div ng-app="myApp" ng-init="someProperty='some data'">
+				    <div ng-init="siblingProperty='moredata'">
+				        inside Div Two:{{ aThirdProperty}}
+				        <div ng-init="aThirdProperty='data for 3rd property'" ng-controller="SomeController">
+				            inside Div three;{{aThirdProperty}}
+				            <div ng-init="aFourthProperty">
+				                Inside Div Four:{{aThirdProperty}}
+				            </div>
+				        </div>
+				    </div>
+				</div>
+			    如果直接运行这段代码会报错，因为没有在javascript中定义所需要的控制器
+			        angular.module("myApp",[])
+			         .controller("SomeController",function($scope){
+			            //可以留空，但必须被定义
+			         })
+			    刷新页面，会发现第二个 div 中由于 {{ aTgirdProperty }} 未定义，因此什么都没有输出。
+                第三个 div 显示了设置在继承来的作用域中的 data for a 3rd property
+                作用域的继承机制是向下而非向上进行的。
+                为了进一步证明作用域的继承机制是向下而非向上进行的，下面再看另外一个例子，展示的是{{aThirdProperty}}从负作用域继承而来：
+                如要要创建一个能够从外部原型继承作用域的指令，将scope属性设置为true：
+                    <div ng-app="myApp"
+                           ng-init="someProperty = 'some data'"></div>
+                      <div ng-init="siblingProperty = 'more data'">
+                        Inside Div : {{ aThirdProperty }}
+                        <div ng-init="aThirdProperty = 'data for 3rd property'"
+                             ng-controller="SomeCtrl">
+                          Inside Div Three: {{ aThirdProperty }}
+                          <div ng-controller="SecondCtrl">
+                            Inside Div Four: {{ aThirdProperty }}
+                            <br>
+                            Outside myDirective: {{ myProperty }}
+                            <div my-directive ng-init="myProperty = 'wow, this is cool'">
+                              Inside myDirective: {{ myProperty }}
+                            <div>
+                          </div>
+                        </div>
+                      </div>
+                    
+                      <script>
+                        angular.module('myApp', [])
+                        .controller('SomeCtrl', function($scope) {
+                          // we can leave it empty, it just needs to be defined
+                        })
+                        .controller('SecondCtrl', function($scope) {
+                          // also can be empty
+                        })
+                        .directive('myDirective', function() {
+                          return {
+                            restrict: 'A',
+                            scope: true
+                          }
+                        })
+                      </script>
+                    结果：
+                    Inside Div :
+                    Inside Div Three: data for 3rd property
+                    Inside Div Four: data for 3rd property 
+                    Outside myDirective:
+                    Inside myDirective: wow, this is cool
+			10.2.2 隔离作用域
 				
 
 
