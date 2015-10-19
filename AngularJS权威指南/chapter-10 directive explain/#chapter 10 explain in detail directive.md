@@ -226,7 +226,182 @@
                     Outside myDirective:
                     Inside myDirective: wow, this is cool
 			10.2.2 隔离作用域
-				
+				隔离作用域的概念是以面向对象编程为基础的。ANgularJS指令的作用域中可以看到如Small Talk语言和SOLID原则的影子。
+				具有隔离作用域的指令最主要的使用场景是创建可复用的组件，组件可以在未知上下文中使用，并且可以避免污染所处的外部作用域或不经意的污染内部作用域。
+				创建具有隔离作用域的指令需要将scope属性设置为一个空对象{}.如果这样做了，指令的模板就无法访问外部作用域了。
+					<div ng-controller="mainController">
+				    Outside myDirective:{{myProperty}}
+				    <div my-directive ng-init="myProperty = 'Wow,this is cool!'">
+				        Inside myDirective:{{ myProperty }}
+				    </div>
+				  </div>
+					<script src="../library/scripts/angular.js"></script>
+					<script>
+				    angular.module("myApp",[])
+			       .controller("mainController",function($scope){
+
+			       })
+			       .directive("myDirective",function(){
+			        return {
+		            restrict:"A",
+		            scope:{},
+		            priority:100,
+		            template:"<div>Inside myDirective {{myProperty}}</div>"
+			        }
+			       })
+					</script>
+				结果：
+					Outside myDirective:Wow,this is cool!
+					Inside myDirective
+				当指令中scope的值为true
+					.directive("myDirective",function(){
+						return {
+							restrict:"A",
+							scope:true,
+							priority:100,
+							template:"<div>Inside myDirective {{myProperty}}</div>"
+						}
+					})
+				结果:
+					Outside myDirective:
+					Inside myDirective Wow,this is cool!
+				tips:这里为myDirective设置了一个高优先级。由于ngInit指令会以非零的优先级运行，这个例子将会优先运行ngInit指令，然后才是我们定义的指令，并且这个myProperty在$scope对象中是有效的。
+				理解重要的关于作用域的概念后，就可以将隔离作用域的属性同外部世界进行绑定，使得隔离作用域可以和外部进行交互。
+			10.3 绑定策略
+				AngularJS提供了几种方法能够将指令内部的隔离作用域，同指令外部的作用域进行数据绑定
+				为了让新的指令作用域可以访问当前本地作用域中的变量，需要使用下面三种别名中的一种。
+					本地作用域属性:使用"@"符号将本地作用域同DOM属性的值进行绑定。指令内部作用域可以使用外部作用域的变量:
+						@ (or @attr)  现在，可以在指令中使用绑定的字符串了。
+					双向绑定:通过"="可以将本地作用域上的属性同父级作用域上的属性进行双向的数据绑定。就像普通的数据绑定一样，本地属性会反映出父数据模型中所发生的变化。
+						= (or =attr)
+					父级作用域绑定:通过"&"符号可以对父级作用域进行绑定，以便在其中运行函数。意味着对这个值进行设置时会生成一个指向父级作用域的包装函数。
+					要使调用带有一个参数的父方法，我们需要传递一个对象，这个对象的键时参数的名称，值时要传递给参数的内容。
+						& (or &attr)
+					例如：假设我们在开发一个电子邮件客户端，并且要创建一个电子邮件的文本输入框:
+						<input type="text" ng-model="to" />
+						<!-- 调用指令 -->
+						<div scope-example ng-model="to" on-send="sendMail(email)" from-name="ari@fullstack.io"></div>
+					这里又一个数据模型(ng-model)、一个函数(sendMail())和一个字符串(from-name)
+					在这里指令中做如下设置以访问这些内容：
+						scope:{
+							ngModel:"=",	//将ngModel同指定对象绑定
+							onSend:"&",		//将引用传递给这个方法
+							fromName:"@"	//存储与fromName相关联字符串
+						}
+				10.3.1 transclude
+					transclude是一个可选的参数。如果设置了，其值必须为true，它的默认值时false。
+					嵌入有时被认为时一个高级主题，但某些情况下它与我们刚刚学习过的作用域之间会又非常号的配合。使用嵌入也会很好地扩充我们的工具集，特别是在创建可以在团队、项目、AngularJS社区之间共享的HTML代码片段时。
+					嵌入通常用来创建可复用的组件，典型的例子时模态对话框或导航栏。
+					我们可以将整个模板，包括其中的指令通过嵌入全部传入一个指令中。这样做可以将任意内容和作用域传递给指令。transclude参数就是用来实现这个目的的，指令的内部可以访问外部指令的作用域，并且模板也可以访问外部的作用域对象。
+					为了将作用域传递进去，scope参数的值必须通过{}或true设置成隔离作用域。如果没有设置scope参数，那么指令内部的作用域将设置为传入模板的作用域。
+						只由当你希望创建一个可以包含任意内容的指令时，才使用transclude:true
+					嵌入允许指令的使用者方便地提供自己的HTML模板，其中可以包含独特的状态和行为，并对指令的各方面进行自定义。
+						创建一个可以被自定义的可复用指令。
+						下面例子创建一个可以复用的侧边栏。
+						<div sideboxtitle="Links">
+							<ul>
+								<li>First link</li>
+								<li>Second link</li>
+							</ul>
+						</div>
+						为这个侧边栏创建一个简单的指令，并将transclude参数设置为true:
+						angular.module("myApp",[])
+						.directive("sideBox",function(){
+							return {
+								restrict:"EA",
+								scope:{
+									title:"@"
+								},
+								transclude:true,
+								template:"<div class='sidebox'>
+										<div class='content'>
+											<h2 class='header'>{{title}}</h2>
+											<span class='content' ng-transclude></span>
+										</div>
+									</div>"
+							};
+						});
+						这段代码告诉AngularJS编译器，将它从DOM元素中获取的内容放到它发现 ng-transclude
+						指令的地方。
+						借助transclusion，我们可以将指令复用到第二个元素上，而无须担心样式和布局的一致性问题。
+						<div sideboxtitle="Links">
+							<ul>
+								<li>First link</li>
+								<li>Second link</li>
+							</ul>
+						</div>
+						<div sideboxtitle="TagCloud">
+							<div class="tagcloud">
+								<a href="">Graphics</a>
+								<a href="">AngularJS</a>
+								<a href="">D3</a>
+								<a href="">Front-end</a>
+								<a href="">Startup</a>
+							</div>
+						</div>
+						如果指令使用了transclude参数，那么在控制器中就无法正常监听数据模型的变化了，这就是最佳实践总是建议在链接函数里使用$watch服务的原因
+				10.3.2 controller(字符串或函数)
+					controller参数可以时一个字符串或一个函数。当设置为字符串，会以字符串的值为名字，来查找注册在应用中的控制器的构造函数:
+						angular.module("myApp",[])
+						.directive("myDirective",function(){
+							restrict:"A",	//属性
+							controller:"SomeController"
+						})
+						//应用中其他的地方，可以时同一个文件或index.html包含的另一个文件
+						angular.module("myApp",[])
+						.controller("SomeController",function($scope,$element,$attrs,$transclude){
+							//控制器逻辑放在这里
+						});
+						可以在指令内部通过匿名构造函数的方式来定义一个内联的控制器:
+						angular.module("myApp",[])
+						.directive("myDirective",function(){
+							restrict:"A",
+							controller:function($scope,$element,$attrs,$transclude){
+								//控制器逻辑放在这里
+							}	
+						});
+					我们可以将任意可以被注入的AngularJS服务传递给控制器。例如，如果我们想要将$log服务传入控制器，只需要简单地将它注入到控制器中，便可以在指令中使用它了。
+						控制器中也又一些特殊的服务可以被注入到指令中，这些服务有：
+							1,$scope  与指令元素相关联的当前作用域
+							2,$element  当前指令对应的元素
+							3,$attrs 由当前元素的属性组成的对象。例如，下面的元素
+								<div id="aDiv" class="box"></div>
+								具有如下的属性对象：
+									{
+										id:"aDiv",
+										class:"box"
+									}
+							4,$transclude
+								嵌入链接函数会与对应的嵌入作用域进行预绑定。
+								transclude链接函数时实际被执行用来克隆元素和操作DOM的函数
+									在控制器内部操作DOM时和AngularJS风格相悖的做法，但通过链接函数就可以实现这个需求。仅在compile参数中使用transcludeFn时推荐的做法。
+								通过指令来添加一个超链接标签，可以在控制器内的$transclude函数中实现
+									angular.module("myApp",[])
+									.directive("link",function(){
+										return {
+											restrict:"A",
+											transclude:true,
+											controller:function($scope,$element,$transclude,$log){
+												$transclude(function(clone){
+													var a = angular.element("<a>");
+													a.attr("href",clone.text());
+													a.text(clone.text());
+													$log.info("Created new a tag in link directive");
+													$element.append(a);
+												})
+											}
+										}
+									})
+								指令的控制器和 link 函数可以进行互换。 控制器主要是用来提供可在指令间复用的行为， 但
+								链接函数只能在当前内部指令中定义行为，且无法在指令间复用。
+									tips:link函数可以将指令互相隔离开来，而controller则定义可复用的行为。
+								由于指令可以require其他指令所使用的控制器，因此控制器常被用来防止在多个指令间共享的动作。
+								如果我们希望当前指令的API暴露给其他指令使用，可以使用controller参数，否则可以使用link来构造当前指令元素的功能性。如果我们使用了scope.$watch()或者想要与DOM元素做实时交互，使用链接会时更好的选择。
+								技术上讲，$scope会在DOM元素被实际渲染之前传入到控制器中。在某些情况下，例如使用了嵌入，控制器中的作用域所反映的作用域可能与我们所期望的不一样，这种情况下，$scope对象无法保证可以被正常更新。
+									当想要同当前屏幕上的作用域交互时，可以使用被传入到link函数中的scope参数
+				10.3.3 controllerAs(字符串)
+
+
 
 
 

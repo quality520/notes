@@ -20,10 +20,20 @@
         return {
             restrict:"A",
             scope:{},
+            //scope:true,
             priority:100,
             template:"<div>Inside myDirective {{myProperty}}</div>"
         }
        })
+       /*
+      scope:{}，得到的结果如下：
+        Outside myDirective:Wow,this is cool!
+        Inside myDirective
+
+      scope:true，得到的结果如下：
+        Outside myDirective:
+        Inside myDirective Wow,this is cool!
+        */
 </script>
 </body>
 </html>
