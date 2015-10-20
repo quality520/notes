@@ -400,6 +400,51 @@
 								技术上讲，$scope会在DOM元素被实际渲染之前传入到控制器中。在某些情况下，例如使用了嵌入，控制器中的作用域所反映的作用域可能与我们所期望的不一样，这种情况下，$scope对象无法保证可以被正常更新。
 									当想要同当前屏幕上的作用域交互时，可以使用被传入到link函数中的scope参数
 				10.3.3 controllerAs(字符串)
+					controllerAs参数用来设置控制器的别名，可以以此为名来发布控制器，并且作用域可以访问controllerAs。这样就可以在视图中引用控制器，甚至无须注入$scope.
+						创建一个mainController，然后不要注入$scope
+							angular.module("myApp")
+							.controller("mainController",function(){
+								this.name = "Ari";
+							})
+							现在在HTML中无须引用作用域就可以使用mainController
+							<div ng-appng-controller="mainController">
+								<input type="text" ng-model="main.name">
+								<span>{{main.name}}</span>
+							</div>
+							这个参数看起来好像没声明大用，但它给了我们可以在路由和指令中创建匿名控制器的强大能力。这种能力可以将动态的对象创建成为控制器，并且这个对象时隔离的、易于测试的。
+							angular.module("myApp")
+							.directive("myDirective",function(){
+								return {
+									restrict:"A",
+									template:"<h4>{{myController.msg}}</h4>",
+									controllerAs:"myController",
+									controller:function(){
+										this.msg = "hello world"
+									}
+								}
+							})
+				10.3.4 require(字符串或数组)
+					require参数可以被设置为字符串或数组，字符串代表另外一个指令的名字。require会将控制器注入到其他值所指定的指令中，并作为当前指令的链接函数的第四个参数。
+					字符串或数组元素的值时会在当前指令的作用域中使用的指令名称。
+					scope会影响指令作用域的指向，是一个隔离作用域，一个有依赖的作用域或完全没有作用域。在任何情况下，AngularJS编译器在查找子控制器时都会参考当前指令的模板。
+					如果不使用"^"前缀，指令只会在自身的元素上查找控制器。
+						restrict:"EA",
+						require:"ngModel"
+					指令定义只会查找定义在指令作作用域中的ng-model="".
+					<!-- 指令会在本地作用域查找ng-model -->
+					<div my-directive ng-model="object"></div>
+					require参数的值可以用下面的前缀进行修饰，这会改变查找控制器时的行为：
+						"?" 如果在当前作用域中没有找到所需要的控制器，会将null作为传给link函数的第四个参数
+						"^" 指令会在上游的指令链中查找require参数所指定的控制器
+						"?^" 将前面两个选项的行为组合起来，我们可选择的加载需要的指令并在父指令链中进行查找。
+						没有前缀 指令会在吱声所提供的控制器中查找，如果没有找到任何控制器(或具有指令名字的指令)就抛出一个错误。
+			10.4 AngularJS的生命周期
+				在AngularJS应用启动之前。他们以HTML文本的形式保存在文本编辑器中。应用启动后会进行编译和链接，作用域会同HTML进行绑定，应用可以对用户在HTML中进行的操作进行实时响应。
+					在这个过程中总共有两个主要阶段
+					10.4.1 编译阶段
+						在编译阶段，AngularJS会遍历整个HTML文档并根据javascript中的指令定义来处理页面上声明的指令。
+						没有一个指令模板中都可能包含另外一个指令，另外一个指令也可能包含自己的模板。当AngularJS调用HTML文档根部的指令时，会遍历其中所有的模板，模板中也可能会包含带有模板的指令
+							tips:尽管元素可以被多个指令进行修饰，这些指令本身的模板中也可以包含其他指令，但是有属于最高优先级指令的模板会被解析并添加到模板树中。
 
 
 
