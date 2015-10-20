@@ -444,7 +444,207 @@
 					10.4.1 编译阶段
 						在编译阶段，AngularJS会遍历整个HTML文档并根据javascript中的指令定义来处理页面上声明的指令。
 						没有一个指令模板中都可能包含另外一个指令，另外一个指令也可能包含自己的模板。当AngularJS调用HTML文档根部的指令时，会遍历其中所有的模板，模板中也可能会包含带有模板的指令
-							tips:尽管元素可以被多个指令进行修饰，这些指令本身的模板中也可以包含其他指令，但是有属于最高优先级指令的模板会被解析并添加到模板树中。
+							tips:尽管元素可以被多个指令进行修饰，这些指令本身的模板中也可以包含其他指令，但只是有属于最高优先级指令的模板会被解析并添加到模板树中。
+							建议：就是将包含模板的指令和行为的指令分离开来。如果一个元素已经又一个含有模板的指令，永远不要对其用另一个指令进行修饰，只有具有最高优先级的指令中的模板会被编
+					10.4.2 compile(对象或函数)
+						compile选项可以返回一个对象或函数
+						理解compile和link选项时AngularJS中需要深入讨论的高级话题之一，对于了解AngularJS究竟时如何工作的至关重要
+						compile选项本身并不会被频繁使用，但是link函数则会被经常使用。本质上，当我们设置了link选项，实际上时创建了一个postLink()链接函数，以便compile()函数可以定义链接函数。
+						通常情况下，如果设置了compile函数，说明我们希望在指令和实时数据被放到DOM中之前进行DOM操作，在这个函数中进行注入添加和删除节点等DOM操作时安全的。
+							warn：compile和link选项时互斥的。如果同时设置了这两个选项，那么会把compile所返回的函数当做链接函数，而link选项本身则会被忽略。
+							//...
+							compile:function(tEle,tAttrs,transcludeFn){
+								var tplEl = angular.element("<div>"+"<h2></h2>"+"</div>");
+								var h2 = tplEl.find("h2");
+								h2.attr("type",tAttrs.type);
+								h2.attr("ng-model",tAttrs.ngModel);
+								h2.val("hello");
+								tEle.replaceWidth(tplEl);
+								return function(scope,ele,attrs){
+									//连接函数
+								}
+							}
+							//...
+						不要在进行DOM事件监听器的注册，这个操作应该在链接函数中完成。
+						编译函数负责对模板DOM进行转换	
+						链接函数负责将作用域和DOM进行链接。在作用域同DOM链接之前可以手动操作DOM。在实践中，编写自定义指令时这种操作时非常罕见的，但有几个内置指令提供了这样的功能。链接这个流程对于理解AngularJS真正的工作方式很有帮助。
+					10.4.3 链接
+						用link函数创建可以操作Dom的指令
+						链接函数时可选的。如果定义了编译函数，它会返回链接函数，因此当两个函数都定义了时，编译函数会重载链接函数。如果我们的指令很简单，并且不需要额外的设置，可以从工厂函数(回调函数)返回一个函数来代替对象。如果这样做了，这个函数就是链接函数
+							下面两种定义指令的方式在功能上时完全一样的:
+							angular.module("myApp",[])
+							.directive("myDirective",function(){
+								return {
+									pre:function(tElement,tAttrs,transclude){
+										//在子元素被链接之前执行
+										//在这里进行dom转换不安全
+										//之后调用"link"函数将无法定位要链接的元素
+									},
+									post:function(scope,iElement,iAttrs,controller){
+										//在子元素被链接之后执行
+										//如果在这里省略掉编译选项
+										//在这里执行dom转换和链接函数一样安全吗
+									}
+								};
+							});
+
+							angular.module("myApp",[])
+							.directive("myDirective",function(){
+								return {
+									link:function(scope,ele,attrs){
+										return {
+											pre:function(tElement,tAttrs,transclude){
+												// 在子元素被链接之前执行
+												// 在这里进行Don转换不安全
+												// 之后调用'lihk'h函数将无法定位要链接的元素
+												},
+											post:function(scope,iElement,iAttrs,controller){
+												// 在子元素被链接之后执行
+												// 如果在这里省略掉编译选项
+												//在这里执行DOM转换和链接函数一样安全吗
+											}
+										}
+									}
+								}
+							})
+						当定义了编译函数来取代链接函数时，链接函数是我们能提供返回对象的第二个方法，也就是postLink函数。从本质上讲，这个事实正说明了链接函数的作用。它会在模板编译并同作用域进行链接后被调用，因此它负责设置事件监听器，监视数据变化和实时的操作DOM。
+						link函数对绑定了实时数据的DOM具有控制能力，因此需要考虑性能问题
+						链接函数的签名如下：
+						link:function(scope,element,attrs){
+							//在这里操作DOM
+						}
+						如果指令定义中又require选项，函数签名中会有第四个参数，代表控制器或者所依赖的指令控制器
+						//require "someController",
+						link:function(scope,element,attrs,someController){
+							//在这里操作dom，可访问required指定的控制器
+						}
+						如果require选项提供了指令数组，第四个参数会是一个由每个指令所对应的控制器组成的数组
+						链接函数中的参数：
+							scope 指令用来在其内部注册监听器的作用域
+							iElement参数代表实例元素，指使用此指令的元素。在postLink函数中我们的应该只操作此元素的子元素，因为子元素已经被连接过了。
+							iAttrs参数代表实例属性，是一个由定义在元素上的属性组成的标准化列表，可以在所有指令的链接函数间共享。会以javascript对象的形式进行传递。
+							controller参数指向require选项定义的控制器。如果没有设置require选项，那么controller参数的值为undefined
+							控制器在所有的指令间共享，因此指令可以将控制器当做通信通道(公共API)。如果设置了多个require，那么这个参数会是一个由控制器实例组成的数组，而不只是一个单独的控制器。
+			10.5 ngModel
+				ngModel是一个用法特殊的指令，它提供更底层的API来处理控制器内的数据。
+				ngModel控制器会随ngModel被一直注入到指令中，其中包含了一些方法。为了访问ngModelController必须使用require设置:
+					angular.module("myApp")
+					.directive("myDirective",function(){
+						return {
+							require:"?ngModel",
+							link:function(scope,ele,attrs,ngModel){
+								if(!ngModel) return;
+								//现在我们的指令中已经又ngModelController的一个实例
+							}
+						}
+					})
+					tips:如果不设置require选项，ngModelController就不会被注入到指令中
+				注意，这个指令没有隔离作用域。如果给这个指令设置隔离作用域，将导致内部ngModel无法更新外部ngModel的对应值:AngularJS会在本地作用域以外查找值。
+				为了设置作用域中的视图值,需要调用ngModel.$setViewValue()函数。ngModel.$setViewValue()函数可以接受一个参数。
+				value(字符串)：value参数时我们想要赋值给ngModel实例的实际值。这个方法会更新控制器上本地的$viewValue,然后将值传递给每一个$parser函数(包括验证器)。
+				当值被解析，且 $parser 流水线中所有的函数都调用完成后，值会被赋给 $modelValue 属性，
+				并且传递给指令中 ng-model 属性提供的表达式。
+				最后，所有步骤都完成后， $viewChangeListeners 中所有的监听器都会被调用。
+				注意，单独调用 $setViewValue() 不会唤起一个新的digest循环，因此如果想更新指令，需要
+				在设置 $viewValue 后手动触发digest。
+				$setViewValue() 方法适合于在自定义指令中监听自定义事件（比如使用具有回调函数的
+				jQuery插件） ，我们会希望在回调时设置 $viewValue 并执行digest循环。
+					angular.module("myApp",[])
+					.directive("myDirective",function(){
+						return {
+							require:"?ngModel",
+							link:function(scope,ele,attrs,ngModel){
+								if(!ngModel) return;
+
+								$(function(){
+									ele.datepicker({
+										onSelect:function(date){
+											//设置视图和调用apply
+											scope.$apply(function(){
+												ngModel.$setViewValue(date);
+												});
+										}
+									});
+								});
+							}
+						};
+					});
+				10.5.1 自定义渲染
+					在控制器中定义$render方法可以定义视图具体的渲染方式。这个方法会在$parser流水线完成后调用
+					由于这个方法会破坏AngularJS的标准工作方式，谨慎使用:
+						angular.module("myApp")
+						.directive("myDirective",function(){
+							return {
+								require:"?ngModel",
+								link:function(scope,ele,attrs,ngModel){
+									if(!ngModel) return;
+
+									ngModel.$render = function(){
+										element.html(ngModel.$setViewValue() || "none");
+									};
+								}
+							};
+						});
+				10.5.2 属性
+					ngModelController中又几个属性可以用来检查甚至修改视图。
+						1,$viewValue 保存着更新视图所需的实际字符串
+						2,$modelValue 由数据模型持有。$modelValue和$viewValue可能时不同的，取决于$parser流水线是否对其进行了操作
+						3,$parser
+							$parsers 的值是一个由函数组成的数组，其中的函数会以流水线的形式被逐一调用。
+							ngModel 从DOM中读取的值会被传入 $parsers 中的函数，并依次被其中的解析器处理。
+						4,,formatters
+							$formatters 的值是一个由函数组成的数组，其中的函数会以流水线的形式在数据模型的值
+							发生变化时被逐一调用。它和 $parser 流水线互不影响，用来对值进行格式化和转换，以便在绑
+							定了这个值的控件中显示
+						5,$viewChangeListeners
+							$viewChangeListeners 的值是一个由函数组成的数组，其中的函数会以流水线的形式在视
+							图中的值发生变化时被逐一调用。通过 $viewChangeListeners ，可以在无需使用 $watch 的情况
+							下实现类似的行为。由于返回值会被忽略，因此这些函数不需要返回值。
+						6,$error
+							$error 对象中保存着没有通过验证的验证器名称以及对应的错误信息。
+						7,$pristine
+							$pristine 的值是布尔型的，可以告诉我们用户是否对控件进行了修改
+						8,$ditry
+							$dirty 的值和 $pristine 相反，可以告诉我们用户是否和控件进行过交互。
+						9,$valid
+							$valid 值可以告诉我们当前的控件中是否有错误。 当有错误时值为 false ， 没有错误时值为 true 。
+						10,$invalid
+							$invalid 值可以告诉我们当前控件中是否存在至少一个错误，它的值和 $valid 相反。
+			10.6 自定义验证
+				AngularJS可以方便的通过指令添加自定义验证
+				例如:我们需要验证username在数据库中是否合法，可以实现一个指令，用来在表单发生变化时发送AJAX请求，
+					angular.module('validationExample', [])
+					.directive('ensureUnique',function($http) {
+						return {
+							require: 'ngModel',
+							link: function(scope, ele, attrs, c) {
+							scope.$watch(attrs.ngModel, function() {
+							$http({
+							method: 'POST',
+							url: '/api/check/' + attrs.ensureUnique,
+							data: {field: attrs.ensureUnique, valud:scope.ngModel
+							}).success(function(data,status,headers,cfg) {
+							c.$setValidity('unique', data.isUnique);
+							}).error(function(data,status,headers,cfg) {
+							c.$setValidity('unique', false);
+							});
+							});
+							}
+						};
+					});
+
+					<input type="text"
+					placeholder="Desired username"
+					name="username"
+					ng-model="signup.username"
+					ng-minlength="3"
+					ng-maxlength="20"
+					ensure-unique="username" required />
+					在这个自定义验证中，每当 ngModel 中对应的字段发生变化就会向服务器发送请求，以检查
+					用户名是否是唯一的。
+
+		
+
 
 
 
