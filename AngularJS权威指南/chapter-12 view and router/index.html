@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+</head>
+<body>
+	<div ng-view="">
+		
+	</div>
+
+	<script src="../library/scripts/angular.js"></script>
+	<script src="../library/scripts/angular-route.js"></script>
+	<script>
+		angular.module("myApp",["ngRoute"])
+		  .config(function($routeProvider){
+		  	$routeProvider
+		  		.when("/",{
+		  			templateUrl:"view/0.html"
+		  		})
+		  		.when("/1",{
+		  			templateUrl:"view/1.html"
+		  		})
+		  		.when("/2",{
+		  			templateUrl:"view/2.html"
+		  		})
+		  		.when("/3",{
+		  			templateUrl:"view/3.html"
+		  		})
+		  		.otherwise({
+		  			redirectTo:"/"
+		  		})
+		  })
+		  .controller("mainController",function($location,$scope){
+		  	$scope.url = $location.protocol() + "," +$location.absUrl() + "," +$location.path() + "," +$location.hash() + "," +$location.host();
+		  })
+	</script>
+</body>
+</html>
