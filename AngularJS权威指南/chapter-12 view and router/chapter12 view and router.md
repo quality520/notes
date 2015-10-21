@@ -203,6 +203,107 @@
             $location.url();//该URL的字符串
             如果调用 url() 方法时传了参数，会设置并修改当前的URL，这会同时修改URL中的路径、
             查询串和hash，并返回 $location 。
+            //设置新的URL
+            $location.url("/home?name=Ari#hashthing");
+            url()方法可以接受两个参数。
+                url(可选，字符串)
+                    新的URL的基础的前缀
+                replace(可选，字符串)
+                    想要修改成的路径。
+####12.5 路由模式
+    不同的路由模式在浏览器的地址栏中会以不同的URL格式呈现。$location服务默认会使用标签模式来进行路由
+    标签模式
+    标签(hashbang)是angularJS用来同你的应用内部进行链接的技巧。标签模式时HTML模式的降级方案，URL路径会以"#"符号开头。标签模式不需要重写<a href=""></a>标签，也不需要任何服务器端的支持。如果没有进行额外的指定，AngularJS将默认使用标签模式。
+    使用标签模式的URL看起来时这样的:
+        http://yoursite.com/#!/inbox/all
+    如果要显示指定配置并使用标签模式，需要在应用模块的config函数中进行配置:
+        angular.module("myApp",["ngRoute"])
+            .config(["$locationProvider",function($locationProvider){
+                $locationProvider.html5Mode(false);
+            }])
+    我们还可以配置hashPrefix，也就是标签模式下标签默认的前缀"!"符号。这个前缀也时AngularJS在比较老的浏览器中降级机制的一部分。这个符号时可以配置的:
+        angular.module("myApp",["ngRoute"])
+            .config(["$locationProvider",function($locationProvider){
+                $locationProvider.html5Mode(false);
+                $locationProvider.hashPrefix("!");
+            }])
+    12.5.1 HTML5模式
+        AngularJS支持的另一种路由模式时html5模式。在这个模式中，URL看起来和普通的URL一样(在老师浏览器中看起来还是使用标签的URL)。例如，同样的路由在HTML5模式中看起来时这样的:
+            http://yoursite.com/index/all
+        在angularJS内部，$location服务通过HTML5历史API让应用能够使用普通的URL路径来路由。当浏览器不支持HTML5历史API时，$location服务会自动使用标签模式的URL作为替代方案。
+        $location服务还有一个有趣的功能，当一个支持HTML5历史API的现代浏览器加载了一个带标签的URL时，它会为用户重写这个URL。
+        在HTML5模式中，angularJS会负责重写<a href=""></a>中的链接。也就是说angularJS会根据浏览器的能力在编译时决定是否要重写href=""中的链接。
+        例如 <a href="/person/42?all=true">Person</a> 这个标签，在老式浏览器中会被重写成
+        标签模式的URL： /index.html#!/person/42?all=true 。但在现代浏览器中会URL会保持本来
+        的样子。
+        当在HTML5模式的AngularJS中写链接时，永远都不要使用相对路径。如果你的应用是在根
+        路径中加载的，这不会有什么问题，但如果是在其他路径中，AngularJS应用就无法正确处理路
+        由了。
+        另一个选择是在HTML文档的HEAD中用 <base> 标签来指定应用的基础URL：
+        <base href="/base/url" />
+    12.5.2 路由事件
+        $route服务在路由过程中的每个阶段都会出发不同的事件，可以为这些不同的路由事件设置监听器并做出响应。
+        这个功能对于控制不同的路由事件，以及探测用户的登录和授权状态等场景时非常有用的。
+        我们需要给路由设置事件监听器，用$rootScope来监听这些事件。
+            1,$routeChangeStart
+            AngularJS在路由变化之前会广播$routeChangeStart事件。在这一步中，路由服务会开始加载路由变化所需要的所有依赖，并且模板和resolve键中的promise也会被resolve。
+                angular.module("myApp",[])
+                    .run(["$rootScope","$location",function($rootScope,$location){
+                        $rootScope.$on("$routeChangeStart",function(evt,next,current){
+
+                        })
+                    }])
+            $routeChangeStart事件带有三个参数:
+                /*原始的AngularJS evt对象*/
+                将要导航到的下一个URL;
+                路由变化前的URL
+            2,$routeChangeSuccess
+            AngularJS会在路由的依赖被加载后广播$routeChangeSuccess事件
+                angular.module("myApp",[])
+                    .run(["$rootScope","$location",function($rootScope,$location){
+                        $rootScope.$on("$routeChangeSuccess",function(evt,next,previous){
+
+                        })
+                    }])
+            $routeChangeSuccess事件带有三个参数
+                原始的AngularJS evt对象;
+                用户当前所处的路由;
+                上一个路由(如果当前时第一个路由，则为undefined)
+            3,$routeChangeError
+            AngularJS会在任何一个promise被拒绝或者失败时广播$routeChangeError事件
+                angular.module("myApp",[])
+                    .run(["$rootScope","$location",function($rootScope,$location){
+                        $rootScope.$on("$routeChangeError",function(current,previous,rejection){
+
+                        })
+                    }])
+            $routeChangeError事件又三个参数:
+                当前路由的信息;
+                上一个路由的信息;
+                被拒绝的promise的错误信息
+            4,$routeUpdate
+            AngularJS在reloadOnSearch属性被设置为false的情况下，重新使用某个控制器的实例时，会广播$routeUpdate事件
+    12.5.3 关于搜索引擎索引
+        Web爬虫对于JavaScript的胖客户端应用无能为力。为了在应用的运行过程中给爬虫提供支
+        持， 我们需要在头部添加 meta 标签。 这个元标记会让爬虫请求一个带有空的转义片段参数的链接，
+        服务器根据请求返回对应的HTML代码片段。
+            <meta name="fragment" content="!"/>
+####12.6 更多关于路由的内容
+    12.6.1 页面重新加载
+        $location服务不会重新加载整个页面，它之后单纯地改变URL。如果我们想重新加载整个页面，需要用$window服务来设置地址
+            $window.location.href="/reload/page";
+    12.6.2 异步的地址变化
+        如果我们想要在作用域的生命周期外使用 $location 服务，必须用 $apply 函数将变化抛到
+        应用外部。因为 $location 服务是基于 $digest 来驱动浏览器的地址变化，以使路由事件正常工
+        作的
+
+
+
+
+
+
+    
+
             
 
     
