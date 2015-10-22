@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>依赖注入</title>
+</head>
+<body ng-controller="myController">
+	<div>
+		<input type="button" value="click me!" ng-click="sayHello()">
+	</div>
+
+	<script src="../library/scripts/angular.js"></script>
+	<script>
+		angular.module('myApp',[])
+		  .factory('greeter',function(){
+		  	return {
+		  		greet:function(msg){alert(msg)}
+		  	}
+		  })
+		  .controller('myController',function($scope,greeter){
+		  	$scope.sayHello = function(){
+		  		greeter.greet('hello');
+		  	}
+		  })
+	</script>
+</body>
+</html>
