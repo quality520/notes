@@ -169,6 +169,278 @@
     请求时， $http 服务会从缓存中取回请求的结果，而不会真的发送一个HTTP GET请求。
     在这个例子里，由于设置了启用缓存，AngularJS默认会使用 $cacheFactory ,这个服务是
     AngularJS在启动时自动创建的。
+    如果想要对AngularJS使用的缓存进行更多的自定义控制，可以向请求传入一个自定义的缓存实例替代true。
+    例如，如果要使用LRU(Least Recenlty Used,最近最少使用)缓存，可以像下面这样传入缓存实例对象:
+    var lru = $cacheFactory('lru',{
+    	capacity:20
+    });
+    $http.get('/api/users.json',{cache:lru})
+    .success(function(data){})
+    .error(function(data){});
+    现在， 最新的20个请求会被缓存。 第21个请求会导致LRU从缓存中将时间比较老的请求移除掉。
+    每次发送请求时都传入一个自定义缓存时很麻烦的事情(即使时在服务中)。可以通过应用的.config()函数给所有$http请求设置一个默认的缓存:
+     angular.module('myApp',[])
+       .config(function($httpProvider,$cacheFactory){
+       	$httpProvider.defaults.cache = $cacheFactory('lru',{
+       		capacity:20
+       	});
+       });
+    现在，所有的请求都会使用我们自定义的LRU缓存了。
+####15.5 拦截器
+    任何时候如果我们想要为请求添加全局功能，例如身份验证、错误处理等，在请求发送给服
+    务器之前或者从服务器返回时对其进行拦截，是比较好的实现手段
+    AngularJS通过拦截器提供了一个从全局层面对响应进行处理的途径。
+    拦截器，实际上是 $http 服务的基础中间件，用来向应用的业务流
+    程中注入新的逻辑。
+    拦截器的核心是服务工厂（查看第14章获得更多关于服务的信息） ，通过向 $httpProvider.
+    interceptors 数组中添加服务工厂，在 $httpProvider 中进行注册。
+      一共有四中拦截器，两种成功拦截器，两种失败拦截器
+      1,request
+        AngularJS通过$http设置对象来对请求拦截器进行调试。它可以对设置对象进行修改，或者创建一个新的设置对象，它需要返回一个更新过的设置对象，或者一个可以返回新的设置对象的promise.
+      2,response
+        AngularJS通过$http设置对象来对响应拦截器进行调用。它可以对响应进行修改，或者创建一个新的响应，它需要返回一个更新过的响应，或者一个可以返回新响应的promise.
+      3,requestError
+        AngularJS会在上一个请求拦截器抛出错误，或者promise被reject时调用此拦截器
+      4,responseError
+        AngularJS会在上一个响应拦截器抛出错误，或者promise被reject时调用此拦截器。
+    调用.factory()方法来创建拦截器，可以在服务中添加一种或多种拦截器:
+      angular.module('myApp',[])
+        .factory('myInterceptor',function($q){
+        	var interceptor = {
+        		'request':functon(config){
+        			//成功的请求方法
+        			return config;//或者 $q.when(config);
+        		},
+        		'response':function(response){
+        			//响应成功
+        			return respone;//或者$q.when(config);
+        		},
+        		'requestError':function(rejection){
+        			//请求发生了错误，如果能从错误中恢复，可以返回一个新的请求或promise
+        			return respone; //或新的promise
+        			//或者，可以通过返回一个rejection来阻止下一步
+        			// return $q.reject(rejection);
+        		},
+        		'responeseError':function(rejection){
+        			//请求发生了错误，如果能从错误中恢复，可以返回一个新的响应或promise
+        			return rejection; //或新的promise
+        			//或者，可以通过返回一个rejection来阻止下一步
+        			//return $q.reject(rejection);
+        		}
+        	};
+        	return interceptor;
+        });
+    我们需要使用$httpProvider在.config()函数中注册拦截器:
+      angular.module('myApp',[])
+        .config(function($httpProvider){
+        	$httpProvider.interceptors.push('myInterceptor');
+        });
+####15.6 设置$httpProvider
+    使用 .config() 可以向所有请求中添加特定的HTTP头， 这非常有用， 尤其是我们希望将身份
+    验证的头同请求一同发送，或设置响应类型的时候。
+    默认的请求头保存在 $httpProvider.defaults.headers.common 对象中。默认的头如下所示：
+      Accept:application/json,text/plain,*/*
+    通过.config()函数可以对这些头进行修改或扩充
+      angular.module('myApp',[])
+        .config(function($httpProvider){
+        	$httpProvider.defaults.headers.common['X-Requested-By'] = 'MyAngularApp';
+        });
+    也可以在运行时通过$http对象的defaults属性对这些属性进行修改。例如，通过如下方法可以动态添加一个头:
+      $http.defaults.common['X-Auth'] = 'RandomString';
+      tips:这个功能可以通过使用请求转换器实现， 对于单个请求， 也可以通过设置 $http请求的 headers 选项实现。
+    也可以只对POST和PUT类型的请求进行设置。POST请求的默认头如下所示:
+      Content-Type:application/json
+    可以在.config()函数中对POST请求的头进行修改或扩充，如下所示:
+      angular.module('myApp',[])
+        .config(function($httpProvider){
+        	$httpProvider.defaults.headers.post['X-Post-By'] = 'MyAngularApp';
+        });
+    也可以对所有的PUT请求做同样的设置。PUT请求的默认头如下所示:
+      Content-Type:application/json
+    可以在.config()函数中对PUT请求的头进行修改或扩充，如下所示:
+      angular.module('myApp',[])
+        .config(function($httpProvider){
+        	$httpProvider.defaults.headers.put['X-Posted-By'] = 'MyAngularApp';
+        });
+####15.7 使用$resource
+    AngularJS还提供另外一个非常有用的可选服务 $resource 供我们使用。 这个服务可以创建一
+    个资源对象，我们可以用它非常方便地同支持RESTful的服务端数据源进行交互，当同支持
+    RESTful的数据模型一起工作时，它就派上用场了。
+      tips:REST是Representational State Transfer（表征状态转移）的缩写，是服务器用来智能化地提供数据服务的一种方式。
+    $resource服务难以置信的方便，它对很多复杂的细节进行了抽象，只留下同后端进行真正有意义的交互，前提是服务器支持RESTful的数据模型。
+    $resource服务可以将$http请求转换成save和update等简单形式。
+    15.8 安装$resource
+      bower install --save-dev angular-resouce
+      引用
+      <script src="js/vendor/angular.js"></script>
+      <script src="js/vendor/angular-resource.js"></script>
+      在应用中将ngResource当作依赖进行引用:
+        angular.moduel('myApp',['ngResource']);
+    15.9 应用$resource
+      $resource服务本身是一个创建资源对象的工厂。返回的$resource对性爱那个中包含了同后端服务器进行交互的高层API
+        var user = $resource('/api/users/:userId.json',{
+        	userId:'@id'
+        });
+      $resource返回包含了几个默认动作的资源类对性爱那个。可以把user对象理解成同RESTful的后端服务尽心公交互的接口
+      资源类对象本身包含的方法可以同后端服务进行简洁的交互。
+      默认情况下，这个对象包含了五个常用的方法，可以同资源集合进行交互，或者创建资源对象的实例。它会生成两个基于HTTP GET类型的方法，以及上那个非GET类型的方法
+      15.9.1 基于HTTP GET方法
+        两个HTTP GET类型的方法可以接受下面三个参数
+        params(对象)
+          随请求一起发送的参数，他们可以是URL中的具名参数，也可以是查询参数
+        successFn(函数)
+          当HTTP响应成功时的回调函数
+        errorFn(函数)
+          当HTTP响应非成功时的回调函数
+        1.get(params,successFn,errorFn)
+          get方法向指定URL发送一个GET请求，并期望一个JSON类型的响应
+            像上面那样不定义具体的参数，get()请求通常被用来获取单个资源
+            //发送一个请求;
+            //GET /api/users
+            user.get(function(resp){
+            	//处理响应成功
+            },function(err){
+            	//处理错误
+            })
+            如果参数中传入了具名参数，那么get()方法会包含id的URL发送请求:
+            //发起一个请求
+            //GET /api/users/123
+            user.get({
+            	id:'123'
+            },function(resp){
+            	//处理响应成功
+            },function(err){
+            	//处理错误
+            });
+        2,query(params,successFn,errorFn)
+          query向指定URL发送一个GET请求，并期望返回一个JSON格式的资源对象集合。
+            //发送一个请求
+            //GET /api/users
+            user.query(function(users){
+            	//读取集合中第一个用户
+            	var user = users[0];
+            });
+        query()和get()方法之间唯一的区别是AngularJS期望query()返回数组。
+      15.9.2 基于非HTTP GET类型的方法
+        三个基于非HTTP GET类型的方法可以接受下面四个参数。
+        params(对象)
+          随请求一起发送的参数，他们可以是URL中的具名参数，也可以是查询参数。
+        postData(对象)
+          这个对象是随请求发送的数据体。
+        successFn(函数)
+          当HTTP响应成功事的回调函数
+        errorFn(函数)
+          当HTTP响应非成功事的回调函数
+        1,save(params,payload,successFn,errorFn)
+        save方法向指定URL发送一个POST请求，并用数据体来生成请求提。save()方法用在服务器上生成一个新的资源。
+          // 发起一个请求：
+          // POST /api/users
+          // with the body {name: 'Ari'}
+          User.save({}, {
+          name: 'Ari'
+          }, function(response) {
+          // 处理响应成功
+          }, function(response) {
+          // 处理非成功响应
+          });
+        2,delete(params,payload,successFn,errorFn)
+        delete方法会向指定URL发送一个DELETE请求，并用数据体来生成请求体。它被用来在服务器上删除一个实例
+          // 发起一个请求：
+          // DELETE /api/users
+          user.delete({},{
+          	id:'123'
+          },function(response){
+          	//处理成功的删除响应
+          },function(response){
+          	//处理非陈公告的删除响应
+          })
+        3,remove(params,payload,successFn,errorFn)
+        remove方法和delete()方法的作用是完全相同的，它存在的意义是因为delete是javascript的保留字，在IE浏览器中会导致额外的问题
+          // 发起一个请求：
+          // DELETE /api/users
+          user.remove({},{
+          	id:'123'
+          },function(response){
+          	//处理成功的删除响应
+          },function(response){
+          	//处理非陈公告的删除响应
+          })
+      15.9.3 $resource实例
+        上述方法返回数据时，响应会被一个圆形类所包装，并在实例上添加一些游泳的方法。
+        实例对象上面被添加下面三个实例方法:
+          $save()
+          $remove()
+          $delete()
+        除非在一个单独的资源上而不是一个集合上被调用， 否则这三个方法与资源上对应的方法是
+        一样的。
+        这三个方法可以在资源实例上被调用。
+          //使用实例方法$save()
+          user.get({id:'123'},function(user){
+          	user.name = 'Ari';
+          	user.$save(); //Save the user
+          });
+          user.save({id:'123'},{name:'Ari'});
+      15.9.4 $resource实例是异步的
+        这三个方法在调用时 $resource 对象会立即返回一个空的数据引用。由于所
+        有方法都是异步执行的，所以这个数据是一个空的引用，并不是真实的数据
+        因此，虽然获取实例的调用看起来是同步的，但实际上不是。事实上，它只是数据的引用，当数据从服务器返回后AngularJS会自动将数据填充进去。
+          //$scope.user将为空
+          $scope.user = user.get({id:'123'});
+        这些方法也提供了回调函数，在数据返回时按预期的方式调用:
+          user.get({id:'123'},function(user){
+          	$scope.user = user;
+          })
+      15.9.5 附加属性
+        $resource集合和实例有两个特殊的属性用来同底层的数据定义进行交互。
+        $promise(promise)
+        $promise属性是为$resource生成的原始promise对象,这个属性是特别用来同$routeProvider.when()在resolve时进行连接的。
+        如果请求成功了，资源实例或集合对象会随promise的resolve一起返回。如果请求失败了，
+        promise被resolve时会返回HTTP响应对象，其中没有 resource 属性。
+        $resolved(布尔型)
+        $resolved属性在服务器首次响应时会被设置为true(无论请求是否成功)
+####15.10 自定义$resource方法
+    为了在$resorce对象中创建自定义方法，需要向包含修改过的$http设置对象的资源类传入第三个参数，它被当作自定义方法.
+    在这个对象中，键是方法的名称，值是$http设置对象
+      var user = $resource('/api/users/:userId.json',{
+      	userId:'@id'
+      	sendEmail:{
+      		method:'POST'
+      	},
+      	allInboxs:{
+      		method:'JSONP',
+      		isArray:true
+      	}
+      });
+    借助user资源，资源集合(user资源对象)中的个体实例现在可以使用sendEmail()和update()方法(也就是 user.$sendEmail() 和 user.$update()).
+####15.11 $resource 设置对象
+    $resouce设置对象和$http设置对象十分相似，仅有少量的不同。
+    对象中的值，也就是动作，是资源对象中某个方法的名字。
+    它可以包含以下键。
+      1,method(字符串)
+        method指的是我们想要用来发送HTTP请求的方法。它必须是以下值之一:'GET','DELETE','JSONP','POST','PUT'.
+      2,url(字符串)
+        一个URL，用来覆盖为该方法的具体路由设置的URL
+      3,params(字符串map或对象)
+        这个键中包含了此动作可选的预绑定参数。如果任何一个值都是函数，那么每当我们需要读
+        取一个请求的参数时，它就会被执行一次。
+      4,isArray(布尔型)
+        如果isArray被设置为true，那么这个动作返回的对象会以数组的形式返回。
+      5,transformRequest(函数或函数数组)
+        这个函数或函数数组用来对HTTP请求的请求体和头信息进行转换，并返回转换后的版本。
+        通常用来进行序列化。
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
