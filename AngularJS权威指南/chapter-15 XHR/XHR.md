@@ -428,6 +428,101 @@
       5,transformRequest(函数或函数数组)
         这个函数或函数数组用来对HTTP请求的请求体和头信息进行转换，并返回转换后的版本。
         通常用来进行序列化。
+          var user = $resource('/api/users/:id',{
+          	id:'@'
+          },{
+          	sendEmail:{
+          		method:'PUT',
+          		transformRequest:function(data,headerFn){
+          			//返回修改后的请求数据
+          			return JSON.stringify(data);
+          		}
+          	}
+          });
+      6,transformResponse(函数或函数数组)
+        这个函数或函数数组用来对HTTP响应体和头信息进行转换，并返回转换后的版本，通常用来进行反序列化。
+          var user = $resource('/api/users/:id',{
+          	id:'@'
+          },{
+          	sendEmail:{
+          		method:'PUT',
+          		transformResponse:function(data,headerFn){
+          			//Return modified data for the respons
+          			return JSON.parse(data);
+          		}
+          	}
+          });
+      7,cache(布尔型或缓存对象)
+        如果 cache 属性被设置为 true ，那么AngularJS会用默认的 $http 缓存对GET请求进行缓存。
+        如果 cache 属性被设置为 $cacheFactory 对象的一个实例，那么这个对象会用来对GET请求进行
+        缓存。
+        如果 cache 属性被设置为 false ，那么 $resource 服务所发送的请求不会被缓存。
+      8,timeout(数值型或promise对象)
+        如果 timeout 被设置为一个数值，那么请求将会在推迟 timeout 指定的毫秒数后再发送。如
+        果被设置为一个promise对象，那么当该promise对象被resolve时，请求会被中止。
+      9，withCredentials(布尔型)
+        如果该属性被设置为 true ，那么XHR请求对象中会设置 withCredentials 标记。
+        默认情况下，CORS请求不会发送cookie，而 withCredentials 标记会在请求中加入 Access-
+        Control-Allow-Credentials 头，这样请求就会携带目标域的cookie。
+      10,responseType(字符串)
+        responseType 选项会在请求中设置 XMLHttpRequestResponseType 属性。我们可以使用以下
+        HTTP请求类型之一：
+	      ' ' (字符串，默认)
+	      'arraybuffer' ( ArrayBuffer )
+	      'blob' (blob对象)
+	      'document' (HTTP文档)
+	      'json' (从JSON对象解析而来的JSON字符串) 
+	      'text' (字符串)
+	      'moz-blob' (Firefox的接收进度事件)
+	      'moz-chunked-text' (文本流)
+	        'moz-chunked-arraybuffer'(ArrayBuffer流)
+      11,interceptor(对象)
+        拦截器属性有两个可选的方法： response 或 responseError 。这些拦截器像普通的 $http 拦
+        截器一样，由 $http 请求对象调用。
+####15.12 $resource服务
+    创建一个封装$resource的服务，需要将$resource的服务注入到我们用来封装的服务对象中。
+      angular.module('myApp',['ngResource'])
+        .factory('userService',['$resource',function($resource){
+        	return $resource('/api/users/:id',{
+        		id:'@'
+        	},{
+        		update:{
+        			method:'PUT'
+        		}
+        	});
+        }]);
+    $resource API
+      通过$resource()方法来使用$resource服务，可以接受三个参数
+      url(字符串)
+      我们在这里传入一个包含所有参数的，用来定位资源的参数化URL字符串模版(参数以':'符号为前缀)。对URL中的每个参数，都可以通过它们的名字来为其赋值:
+        $resource('/api/users/:id.:format',{
+        	format:'json',
+        	id:'123'
+        });
+        这里需要注意，如果 : 之前的参数是空的（上面例子中的 :id ） ，那么URL中的这部分会被压
+        缩成一个 . 符号。
+          如果我们使用的服务器要求在URL中输入端口号， 例如 http://localhost:3000 ，
+          我们必须对URL进行转义。这种情况下URL规则看起来是这样的：
+          $resource('http://localhost\\:3000/api/users/:id.json') 。
+      paramsDefaults(可选，对象)
+        第二个参数中包含了发送请求时URL中参数的默认值。对象中的键会与参数名进行匹配。如果我们传入一个没有在URL中设置过的参数，那么它会以普通的查询字符串的形式被发送。
+          例如，如果URL字符串具有 /api/users/:id 这样的签名，并且我们将默认值设置为 {id:
+          '123', name: 'Ari' } ，那么URL最终会被转换成 /api/users/123?name=Ari 
+        这里可以像上面一样硬编码一个默认值来传入一个静态值， 也可以设置它从一个数据对象中
+        读取动态值。
+        如果要设置动态值，需要在值之前加上 @ 字符作为前缀。
+      actions(可选，对象)
+        动作对象是具有自定义动作，并且可以对默认的资源动作进行扩展的hash对象。
+        在这个动作中，对象的键就是自定义动作的名字，而$http设置对象的值会对URL中相应的参数进行替换。
+          定义一个新的update动作：
+            $resource('/api/users/:id.:format',{
+            	format:'json',
+            	id:'123'
+            },{
+            	update:{
+            		method:'PUT'
+            	}
+            })
 
 
 
