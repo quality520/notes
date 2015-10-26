@@ -96,6 +96,71 @@
         预请求
           浏览器发送的预请求是OPTIONS类型的,预请求中包含以下头信息:
           Access-Control-Request-Method  这个头是请求所使用的HTTP方法,会始终包含在请求中.
-          Access-Control-Request-Headers(可选)  
+          Access-Control-Request-Headers(可选)
+          这个头的值是一个逗号分割的非简单列表，列表中的每个头都会宝航这个请求中。
+          服务器必须接受这个请求，然后检查HTTP方法和头的合法性。如果通过了检查，服务器会在响应中添加下面这个头:
+          Access-Control-Allow-Origin
+          这个头的值必须和请求的来源相同,或者时*符号,以允许接受来自任何来源的请求.
+          Access-Control-Allow-Methods
+          这是一个可以接受的HTTP方法列表,对在客户端缓存响应结果很有帮助,并且未来发送请求可以不必总是发送预请求.
+          Access-Control-Allow-Headers
+          如果设置了Access-Control-Request-Headers头,服务器必须在响应中添加同一个头.
+          我们希望服务器在可以接受这个请求时返回200状态码。如果服务器返回了200状态码，真正
+          的请求才会发出。
+            CORS并不是一个安全机制,只是现代浏览器实现的一个标准,在应用中设置安全策略依然时我们的责任.
+          AngularJS中的非简单请求和普通请求看起来没声明区别:
+            $http
+            .delete('http://api.github.com/api/users/1')
+            .success(function(data){
+              //data
+            })
+####16.4 服务器端代理
+    实现向所有服务器发送请求的最简单方式是使用服务器端代理。 这个服务器和页面处在同一
+    个域中（或者不在同一个域中但支持CORS） ，做为所有远程资源的代理。
+    可以简单地通过使用本地服务器来代替客户端向外部资源发送请求， 并将响应结果返回给客
+    户端。
+    通过这种方式，老式浏览器不必使用需要发送额外请求的CORS（只有现代浏览器支持
+    CORS）也能发送跨域请求，并且可以在浏览器中采用标准的安全策略。
+####16.5 使用JSON
+    JSON是JavaScript Object Notation的简写,是一种看起来像JavaScript对象的数据交换格式.事实上,当javascript加载它时,它确实会被当做一个对象来解析.AngularJS也会将所有以JSON格式返回的javascript对象解析为一个与之对应的Angular对象.
+      如果服务器返回以下JSON:
+      [
+        {'msg':'This is the first msg',state:1},
+        {'msg':'This is the second msg',state:2},
+        {'msg':'This is the third msg',state:3},
+        {'msg':'This is the fourth msg',state:4}
+      ]
+    当AngularJS通过$http服务收到这个数据后,可以像普通javascript对象那样来引用其中的数据:
+      $http.get('/v1/message.json')
+           .success(function(data,status){
+              $scope.first_msg = data[0].msg;
+              $scope.first_state = data[0].state;
+            });
+####16.6 使用XML
+    假如服务器返回的是XML而非JSON格式的数据，需要将其转换成JavaScript对象。
+    幸好，有不少出色的开源库可以使用，同样，某些浏览器也内置了解析器，可以帮助我们将
+    XML格式转换成JavaScript对象。
+    在这里我们以X2JS库为例，这是一个非常好用的开源库
+      angular.factory('xmlParser', function() {
+        var x2js = new X2JS();
+        return {
+          xml2json: x2js.xml2json,
+          json2xml: x2js.json2xml_str
+        };
+      });
+    借助这个轻量的解析服务，可以将 $http 请求返回的XML解析成JSON格式，如下所示：
+      angular.factory('Data', [$http, 'xmlParser', function($http, xmlParser) {
+        $http.get('/api/msgs.xml', {
+          transformResponse: function(data) {
+          return xmlParser.xml2json(data);
+        }
+        });
+      });
+    现在请求的结果被转换成了JSON对象，可以像服务器本来返回的就是JSON格式一样来使用
+    这个对象。
+####16.7 使用AngularJS进行身份验证
+    16.7.1 服务器端需求
+      
+
     
     
