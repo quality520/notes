@@ -160,6 +160,147 @@
     这个对象。
 ####16.7 使用AngularJS进行身份验证
     16.7.1 服务器端需求
+      用来保护客户端应用的两种方法
+      1,服务器端视图渲染
+        如果站点所有的HTML页面都是由后端服务器处理的，可以使用传统的授权方式，由服务器
+        端进行鉴权，只发送客户端需要的HTML
+      2,纯客户端身份验证
+        通过令牌授权来实现客户端身份验证，服务器需要做的是给客户端应用提供授权令牌。
+        令牌本身是一个由服务器端生成的随机字符串， 由数字和字母组成， 它与特定的用户会话相关联。
+          uuid库时用来生成令牌的号选择.
+          服务端请求返回的状态码:
+            状态码           含义
+              200          一切正常
+              401          未授权的请求
+              403          禁止的请求
+              404          页面找不到
+              500          服务器错误
+        当客户端收到这些状态码时会做出相应的响应.
+        数据流程如下:
+          1,一个未经过身份验证的用户浏览了我们的站点
+          2,用户视图访问一个受保护的资源,被重定向到登录页面,或用户手动访问了登录页
+          3,用户输入登录的ID以及密码,接着AngularJS应用通过POST请求将用户的信息发送给服务端
+          4,服务端对ID和密码进行校验,检查他们是否匹配
+          5,如果ID和密码匹配,服务端生成一个唯一的令牌,并将其同一个状态码为200的响应一起返回.如果不匹配,服务器返回一个状态码为401的响应.
+          对一个已经通过身份验证的用户,流程如下:
+          1,用户请求受保护的资源路径
+          2,如果用户尚未登录，应用会将他重定向到登录页面。如果用户登录了，应用会使用该会话对应的令牌来发送请求
+          3,服务器对令牌进行校验,并根据请求返回合适的数据.
+    16.7.2 客户端身份验证
+      重定向未经过身份验证的页面请求；
+      捕获所有响应状态码非200的XHR请求，并进行相应的处理；
+      在整个页面会话中持续监视用户的身份验证情况
+      有下面几种方法可以将路由定义为公共的或非公共
+      1,资源AIP访问的资源
+        创建$http拦截器来处理所有的响应.
+          angular.module('myApp',[])
+           .config(function($httpProvider){
+            //在这里构造拦截器
+            })
+          处理所有请求的响应已经响应错误
+          angular.module('myApp',[])
+            .config(function($httpProvider){
+              var interceptor = function($q,$rootScope,Auth){
+                return {
+                  'response':function(resp){
+                    if(resp.config.url='/api/login'){
+                      //假设API服务器返回的数据格式如下:
+                      //{toke:'AUTH_TOKEN'}
+                      Auth.setToken(resp.data.token);
+                    }
+                    return resp;
+                  },
+                  'responseError':function(rejection){
+                    //错误处理
+                    switch(rejection.status){
+                      case 401:
+                        if(rejection.config.url != 'aip/login')
+                        //如果页面不是在登录页面
+                          $rootScope.$broadcast('auth:loginRequired');
+                        break;
+                      case 403:
+                        $rootScope.$broadcast('auth:forbidden');
+                        break;
+                      case 404:
+                        $rootScope.$broadcast('page:notFound');
+                        break;
+                      case 500:
+                        $rootScope.$broadcast('server:error');
+                        break;
+                    }
+                    return $q.reject(rejection);
+                  }
+                };
+              };
+              //将拦截器和$httpde的request/response链整合在一起
+              $httpProvider.inerceptor.push(interceptor);
+            });
+      2,使用路由定义受保护资源
+        监视路由的变化:$routeChangeStart事件
+        首先要定义应用的访问规则。可以通过在应用中设置常量，然后在每个路由中通过对比这些
+        常量来判断用户是否具有访问权限
+          angular.modult('myApp',['ngRoute'])
+            .constant('ACCESS_LEVELS',{
+              pub:1,
+              user:2
+            })
+        通过把 ACCESS_LEVELS 设置为常量，可以将它注入到 .confgi() 和 .run() 代码块中，并在整
+        个应用范围内使用
+          angular.module('myApp',['ngRoute'])
+            .config(function($routeProvider,ACCESS_LEVELS){
+              $routeProvider
+                .when('/',{
+                  controller:'mainController',
+                  templateUrl:'view/main.html',
+                  access_level:ACCESS_LEVELS.pub
+                })
+                .when('/account',{
+                  controller:'accountController',
+                  templateUrl:'view/account.html',
+                  access_level:ACCESS_LEVELS.user
+                })
+                .otherwise({
+                  redirecTo:'/'
+                });
+            });
+          为了验证用户的身份,需要创建一个服务来对已经存在的用户进行监视.同时需要让服务能够访问浏览器的cookie,这样当用户重新登录时,只要回话有效就无需再次进行身份验证.
+            angular.module('myApp.services', [])
+            .factory('Auth', function($cookieStore,ACCESS_LEVELS) {
+            var _user = $cookieStore.get('user');
+            var setUser = function(user) {
+            if (!user.role || user.role < 0) {
+            user.role = ACCESS_LEVELS.pub;
+            }
+            _user = user;
+            $cookieStore.put('user', _user);
+            };
+            return {
+            isAuthorized: function(lvl) {
+            return _user.role >= lvl;
+            },
+            setUser: setUser,
+            isLoggedIn: function() {
+            return _user ? true : false;
+            },
+            getUser: function() {
+            return _user;
+            },
+            getId: function() {
+            return _user ? _user._id : null;
+            },
+            getToken: function() {
+            return _user ? _user.token : '';
+            },
+            logout: function() {
+            $cookieStore.remove('user');
+            _user = null; }
+            }
+            };
+            });
+            
+
+
+
       
 
     
