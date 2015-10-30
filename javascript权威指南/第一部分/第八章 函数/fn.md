@@ -237,6 +237,20 @@
         arguments[0] = null;//修改实参数组的元素同样会修改x的值
         console.log(x);     //输出"null"
       }
+      
+    callee和caller属性
+      除了数组元素,实参对象还定义了callee和caller属性.
+      在ECMAScript5严格模式中,对这两个属性的读写操作都会产生一个类型错误.
+      非严格模式下,callee属性指代当前正在执行的函数
+      caller是非标准的,它指代调用当前正在执行的函数的函数,通过caller属性可以访问
+      调用栈
+      callee属性在某些时候会非常有用,比如在匿名函数中通过callee来递归地调用自身.
+        var factorial = function(x){
+          if(x <= 1) return 1;
+          return x * arguments.callee(x-1);
+        };
+ ######8.3.3 将对象属性用做实参
+     
     
     
     
