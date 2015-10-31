@@ -250,7 +250,118 @@
           return x * arguments.callee(x-1);
         };
  ######8.3.3 将对象属性用做实参
-     
+     //将原始数组的length元素复制至目标数组
+     //开始复制原始数组的from_start元素
+     //并且将其复制至目标数组的to_start中
+     //要记住实参的顺序并不容易
+     function arraycopy(/*array*/from,/*index*/form_start,
+     	/*array*/to,/*index*/to_start,/*integer*/
+     	length)
+     	{
+     		//逻辑代码
+     	}
+
+     	//通过名/值对的形式来传入参数,这样参数的顺序
+     	//就无关紧要了
+     	//
+     	function easycopy(args){
+     		arraycopy(
+     			args.from,
+     			args.from_start || 0, //这里设置了默认值
+     			args.to,
+     			args.to_start || 0,
+     			args.length);
+     	}
+     	//来看如何调用easycopy()
+     	var a =[1,2,3,4],b = [];
+     	easycopy({from:a,to:b,length:4});
+######8.3.4 实参类型
+    //判断o是否是一个类数组对象
+    //字符串和函数有length属性,但是它们
+    //可以用typeof检测将其排除,在客户端javascript中,DOM文本节点
+    //也又length属性,需要用额外判断o.nodeType !=3来将其排除
+    isArrayLike(o){
+    	if(o &&  //o非null,undefined等
+    		 typeof o === "object"&&  //o是对象
+    		 isFinite(o.length)&&  //o.length是有限数值
+    		 o.legth >= 0 &&  //o.length为非负数
+    		 o.length === Math.floor(o.length) && //o.length时整数
+    		 o.length < 4294967296  //o.length < 2^32
+    		)
+    		{return true;}   //o是类数组对象
+    		else{
+    			return false;  //否则它不是
+    		}
+    }
+
+    //返回数组(或类数组对象)a的元素累加和
+    //数组a中必须为数字、null和undefined的元素都将忽略
+    function sum(a){
+    	if(isArrayLike(a)){
+    		var total = 0;
+    		for(var i = 0;i < a.length;i++){//遍历所有元素
+    			var element = a[i];
+    			if(element == null) continue; //跳过null和undefined
+    			if(isFinite(element)){
+    				total += element; 
+    			}else{
+    				throw new Error("sum():elements must be finite numbers");
+    			}
+    			return total;
+    		}
+    		else{
+    			throw new Error("sum():argument must be array-like");
+    		}
+    	}
+    }
+
+
+
+    var isArray = Function.isArray || function(o){
+    	return typeof o === "object"&&
+    	Object.prototype.toString.call(o) === "[object Array]";
+    };
+
+    function flexisum(a){
+    	var total = 0;
+    	for(var i = 0;i < arguments.length;i++){
+    		var element = arguments[i],n;
+    		if(element == null) continue; //忽略null和undefined
+    		if(isArray(element))  //如果实参是数组
+    		   n = flexisum.apply(this,element); //递归的累加和
+    		else if(typeof element === "function") //否则,如果时函数...
+    		   n = Number(element());  //调用它并做类型转换
+    		else
+    		   n = Number(element);  //否则直接做类型转换
+    		if(isNaN(n)) //如果无法转换为数字,则抛出异常
+    		  throw Error("flexisum();can't convert"+ element +"to number");
+    		total += n;  //否则将n累加至total;
+    	}
+    	return total;
+    }
+
+
+####8.4 作为值的函数
+    函数可以定义,也可以调用,这是函数最重要的特性.
+    函数定义和调用时javascript的词法特性,对于其他大多数编程语言来说亦是如此.
+    在javascript中,函数不仅时一种语法,也是值.
+    可以将函数赋值给变量,存储在对象的属性或数组的元素中,
+    作为参数传入另一个函数等
+
+     eg:
+       function square(x){return x*x;}
+       var s = square;   //现在s和square指定同一个函数
+       square(6); //=>16;
+       s(4); //=>16
+
+      将函数赋值给对象的属性,
+      当函数作为对象的属性调用时,函数就称为方法;
+       var a = {square:function(x){return x*x;}};//对象直接量
+       var y = a.square(16);  //=>y等于256
+      函数甚至不需要带名字,当把他们赋值给数组元素时:
+       var a = [function(x){return x*x,},20];
+       a[0](a[1]);//=>400
+
     
     
     
