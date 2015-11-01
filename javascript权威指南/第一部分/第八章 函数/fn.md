@@ -361,6 +361,46 @@
       函数甚至不需要带名字,当把他们赋值给数组元素时:
        var a = [function(x){return x*x,},20];
        a[0](a[1]);//=>400
+     eg8-2:将函数用作值
+       //在这里定义一些简单的函数
+       function add(x,y) {return x+y;}
+       function subtract(x,y) {return x-y;}
+       function multiply(x,y) {return x*y;}
+       function divide(x,y) {return x/y;}
+
+       function operate(operator,operand1,operand2){
+         return operator(operand1,operand2);
+       }
+
+       //这行代码所示的函数调用实际上计算了(2+3)+(4*5)的值
+       var i = operate(add,operate(add,2,3),operate(multiply,4,5));
+
+       var operators = {
+         add:function(x,y) {return x+y;},
+         subtract:function(x,y) {return x-y;},
+         multiply:function(x,y) {return x*y;},
+         divide:function(x,y) {return x/y;},
+         pow:Math.pow //使用预定义的函数
+       };
+
+       //
+       function operate2(operation,operand1,operand2){
+         if(typeof operator[operation] === "function")
+           return operators[operation](operand1,operand2);
+         else throw "unknown operator";
+       }
+
+       //这样来计算("hello" + " " + "world")的值
+       var j = operate2("add","hello",operate2("add","","world"));
+       //使用预定义的函数Math.pow()
+       var k = operate2("pow",10,2);
+
+       sort()函数
+       Array.sort()
+       Array.sort(function(num1,num2){return num1-num2;});
+
+     自定义函数属性
+
 
     
     
