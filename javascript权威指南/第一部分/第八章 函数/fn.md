@@ -400,6 +400,131 @@
        Array.sort(function(num1,num2){return num1-num2;});
 
      自定义函数属性
+       javascript中的函数并不是原始值,而是一种特殊的对象
+       函数可以拥有属性.
+       eg:
+         //初始化函数对象的计数器
+         //由于函数声明被提前了,因此这里可以在函数声明
+         //之前给它的成员赋值的
+         uniqueInteger.counter = 0;
+         
+         //每次调用这个函数都会返回一个不同的整数
+         //它使用一个属性来记住下一次将要返回的值
+         function uniqueInteger(){
+         	return uniqueInteger.counter++; //先返回计数器的值,然后计数器自增1
+         }
+         
+         uniqueInteger();  //=>0
+         console.log(uniqueInteger.counter); //=>1
+       eg2:
+         //计算阶乘,并将结果缓存至函数的属性中
+         function factorial(n){
+         	if (isFinite(n)  && n>0 && n==Math.round(n)){  //有限的正整数
+         		if (!(n in factorial)){	//如果没有缓存结果
+         			factorial[n] = n * factorial(n-1);	//计算结果并缓存
+         			console.log(factorial[n])
+         		}
+         		return factorial[n];	//返回缓存结果
+         	} else {
+         		return NaN; //如果输入有误
+         	}
+         }
+         
+         factorial[1] = 1; //初始化缓存以保存这种基本情况
+         
+         console.log(factorial(10));  //=>362880
+####8.5 作为命名空间的函数
+    将代码放入一个函数内,然后调用这个函数,这样全局变量就编程了函数内的局部变量:
+      function mymodule(){
+        //模块代码
+        //这个模块所使用的变量都是局部变量
+      }
+      module();//调用该函数
+    这段代码仅仅定义了一个单独的全局变量:名叫"mymodule"的函数.这样还是太麻烦,可以
+    直接定义一个匿名函数,并在单个表达式中调用它:
+      (function(){  //mymodule()函数重写为匿名的函数表达式
+        //模块代码
+      }()); //结束函数定义并立即调用它
+####8.6 闭包
+    javascript采用词法作用域(lexical scoping),
+    也就是说,函数的执行依赖于变量作用域,这个作用域是在函数定义时决定的,而不是函数调用时决定的.
+    为了实现这种词法作用域,javascript函数对象的内部状态不仅包含函数的代码逻辑,还必须引用当前的
+    作用域链.
+    函数对象可以通过作用域链相互关联起来,函数体内部的变量都可以保存在函数作用域内.
+    这种特性在计算机科学文献中称为"闭包".
+    
+    理解闭包首先要链接嵌套函数的词法作用域规则.
+      var scope = "global scope"; //全局变量
+      function checkscope(){
+        var scope = "local scope"; //局部变量
+        function f(){return scope;} //在作用域中返回这个值
+        return f();
+      }
+      checkscope();   //=> "local scope"
+      
+    改动
+      var scope = "global scope"; //全局变量
+      function checkscope(){
+        var scope = "local scope"; //局部变量
+        function f(){return scope;} //在作用域中返回这个值
+        return f;
+      }
+      checkscope()();   //=> "local scope"
+      在这段代码中,我们将函数内的一对圆括号移动到了checkscope()之后.checkscope()现在仅仅返回函数内
+      嵌套的一个函数对象,而不是直接返回结果.
+      
+      词法作用域的基本规则:javascript函数的执行用到了作用域链,这个作用域链是函数定义的时候创建的.
+      嵌套的函数f()定义在这个作用域链里,其中的变量scope一定是局部变量,不管在何时何地执行函数f(),
+      这种绑定在执行f()时依然有效.因此最后一行代码返回"local scope"
+      简言之:闭包的这个特性强大到让人吃惊:它们可以扑捉到局部变量(和参数),并一直保存下来,看起来像
+      这些变量绑定到了在其中定义他们的外部函数.
+      
+      利用闭包来重写之前的uniqueInteger()函数
+        var uniqueInteger = (function(){   //定义函数并立即调用
+          var counter = 0;                 //函数的私有状态
+          return function(){return counter++;}
+        }());
+      这段代码定义了一个立即调用的函数,因此是这个函数的返回值赋值给变量uniqueInteger.
+      
+    像counter一样的私有变量不是只能用在一个单独的闭包内,在同一个外部函数内定义的多个嵌套函数也可以
+    访问它,这多个嵌套函数都共享一个作用域链.
+      function counter(){
+        var n = 0;
+        return {
+          count: function() {return n++;},
+          reset: function() {n = 0;}
+        };
+      }
+      var c = counter(), d = counter();  //创建两个计数器
+      c.count()   //=> 0
+      d.count()   //=> 0
+      c.reset()   //reset()和count()方法共享状态
+      c.count()   //=> 0:因为我们重置了c
+      d.count()   //=> 1:而没有重置d
+      
+    将这个闭包合并为属性getter和setter.
+      function counter(n){
+      return {
+        get count(){return n++;},
+        set count(m){
+            if(m>n) n=m;
+            else throw Error("count can only be set to a larger value");
+        }
+      };
+      }
+      var c = counter(1000);
+      c.count               //=>1000;
+      c.count               //=>1001;
+      c.count = 2000;
+      c.count               //=>2000
+      c.count = 2000        //=> Error!
+    
+    下面例子是这种使用闭包技术来共享的私有状态的通用做法.
+      eg:利用闭包实现的私有属性存取器方法
+        function addPrivateProperty(o)
+    
+    
+       
 
 
     
