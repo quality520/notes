@@ -1,0 +1,41 @@
+/**
+ * Created by Rayr Lee on 2015/11/5 0005.
+ */
+/*
+  ½á¹¹
+  <input type="radio" id="m1"/>
+  <label for="m1">checked me!</label>
+
+
+  <input type="checkbox" id="m2"/>
+  <label for="m2">checked me!</label>
+*/
+input[type="radio"]{
+    display:none;
+}
+input[type="radio"] + label{
+    display:inline-block;
+    width:30%;
+    height:40px;
+    background:#f00;
+    border-radius:5px;
+}
+input[type="radio"]:checked + lable{
+    background:blue;
+    color:#fff;
+}
+
+input[type="checkbox"]{
+    display:none;
+}
+input[type="checkbox"] + label{
+    display:inline-block;
+    width:30%;
+    height:40px;
+    background:#f00;
+    border-radius:5px;
+}
+input[type="checkbox"]:checked + lable{
+    background:blue;
+    color:#fff;
+}
