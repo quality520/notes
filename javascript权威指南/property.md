@@ -48,3 +48,4 @@
 
     box.run(); //white26   
     box2.run(); //quality26
+######模式
