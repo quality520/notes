@@ -205,9 +205,55 @@
     数据共享的缘故,导致很多开发者放弃使用原型,因为每次
     实例化出的数据需要保留自己得到特性,而不能共享.
     为了解决构造传参和共享问题,可以组合构造函数+原型模式:
-    字面量
-    构造函数
-
-    原型模式+构造函数
-
+    function Box(name,age){		//不共享的使用构造函数
+    	this.name = name;
+    	this.age = age;
+    	this.family = ['父亲','母亲','妹妹'];
+    };
+    Box.prototype = {	//共享的使用原型模式
+    	constructor:Box,
+    	run:function(){
+    		return this.name+this.age+this.family;
+    	}
+    };
     动态原型模式
+    //将原型封装到构造函数里
+    function Box(name,age){
+    	this.name = name;
+    	this.age = age;
+    	this.family = ['格格','姐姐','妹妹'];
+
+    	Box.prototype.run = function(){
+    		return this.name+this.age;
+    	};
+    }
+    var box1 = new Box('white',26);
+    var box2 = new Box('quality',26);
+    //上述代码
+
+	  //原型的初始化,只要第一次初始化
+	  function Box(name,age){
+	  	this.name = name;
+	  	this.age = age;
+	  	this.family = ['格格','姐姐','妹妹'];
+	    if(typeof this.run != 'function'){  //判断是否存在
+	    	Box.prototype.run = function(){
+	  			return this.name+this.age;
+  			};
+	    }
+	  }
+	  var box1 = new Box('white',26);
+	  var box2 = new Box('quality',26);
+####寄生构造函数
+    寄生构造函数 = 工厂模式 + 构造函数
+    function Box(name,age){
+    	var obj = new Object();
+    	obj.name = name;
+    	obj.age = age;
+    	obj.run = function(){
+    		return this.name + this.age;
+    	};
+    	return obj;
+    }
+    var box1 = new Box('white',26);
+    var box2 = new Box('quality',26);
