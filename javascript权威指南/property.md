@@ -158,7 +158,53 @@
 ######hasOwnProperty
     如何判断属性是在构造函数的实例里,还是在原型里呢?可以使用hasOwnProperty()函数来验证
     box.hasOwnProperty('name'); //实例里返回true,否则返回false
-    判断只由原型中有属性
+
+    in操作符还在通过对象能够访问给定属性时返回true,
+    无论该属性存在实例中还是原型中
+    "name" in box; //true,存在实例中或者原型中
+
+    结合hasOwnProperty()与in操作符来判断只有原型中有属性
     function isProperty(object,property){
     	return !object.hasOwnProperty(property) && (property in object)
     }
+
+####原型对象的重写
+    使用构造函数创建原型对象和使用字面两创建对象在使用上基本相同,
+    不同:字面量串讲的方式使用constructor属性不会指向实例,
+    而是object,构造函数创建的方式则相反.
+    //原型字面量
+    Box.prototype = {
+    	constructor:Box,		//如果想让字面量方式的constructor
+  												//指向实例对象,直接强制指向即可
+			name:'white',
+			age:26,
+			run:function(){
+				return this.name + this.age;
+			}
+    };
+    原型的声明是有先后顺序的,所以,重写的原型会切断之前的原型
+    Box.prototype = {
+    	age:26
+    };
+    var box = new Box();
+    box.name;		//undefined
+    box.run();	//run not a function
+
+######内置应用的功能扩展
+    查看sort是否是Array原型对象的方法.
+    Array.prototype.sort;
+    查看substring是否是String原型对象的方法
+    String.prototype.substring;
+    自定义方法
+    String.prototype.addstring = function(){
+    	return this + ",被添加了...";
+    }
+		"abc".addstring(); //abc,被添加了...
+
+####原型prototype缺点
+    字面量
+    构造函数
+
+    原型模式+构造函数
+
+    动态原型模式
