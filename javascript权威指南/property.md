@@ -257,3 +257,107 @@
     }
     var box1 = new Box('white',26);
     var box2 = new Box('quality',26);
+####稳妥构造函数和寄生类似
+
+####继承
+    继承是面向对象中一个比较核心的概念.
+    其他正统面向对象语言都会用两种方式实现继承:
+    1,接口实现
+    2,继承
+    而ECMAScript只支持继承,不支持接口实现,而实现继承的方式
+    依靠原型链完成.
+    function Box(){			//Box构造
+    	this.name = 'white';
+    }
+
+    function Desk(){   //Desk构造
+    	this.age = 26;
+    }
+
+    Desk.prototype = new Box(); //Desk继承了Box,通过原型,形成链条
+    
+    var desk = new Desk();  //实例化
+    desk.age;
+    desk.name;   //得到被继承的属性
+    
+    function Table(){			//Table构造
+    	this.level = 'AAAAA';
+    }
+
+    Table.prototype = new Desk();  //继续原型链继承
+
+    var table = new Table();
+    table.name;		//继承了Box和Desk()
+
+    在javascript里，被继承的函数称为超类型(父类，基类)，继承的函数称为子类型(子类，派生类)
+    继承也有之前的问题，比如字面量重写原型会终端关系，使用
+    引用类型的原型，并且子类还无法给超类型传递参数。
+    为了解决引用共享和超类型无法传参的问题，我们采用一种叫借用构造函数的技术，
+    或者称为对象毛重(伪造对象、经典继承)的技术来解决这两种问题
+
+    就近原则，实例中有，就返回，
+    没有就去原型中查找
+
+    通过instanceof判断是否属于那个父类。
+    desk instanceof Desk
+    desk instanceof Box
+####借用构造函数(对象冒充)
+    function Box(age){
+    	this.name = ['white','quality'];
+    	this.age = age;
+    }
+    function Desk(age){
+    	Box.call(this,age);//对象冒充，给超类型传参
+    }
+    对象冒充只能继承构实例中的信息
+    function Box(name,age){
+    this.name = name;
+    this.age = age;
+    this.family =  ['white','quality'];
+    }
+    function Desk(name,age){
+    Box.call(this,name,age);
+    }
+    var desk = new Desk('white',26);
+    desk; //Desk {name: "white", age: 26, family: Array[2]}
+    //{
+    	name:"whtie",
+    	age:26,
+    	family:['white','quality']
+    }
+
+    function Box(name,age){
+    this.name = name;
+    this.age = age;
+    }
+    Box.prototype.family = ['white','quality'];
+    function Desk(name,age){
+    Box.call(this,name,age);
+    }
+    var desk = new Desk('white',26);
+    desk;//=>{name:"white",age:26}
+		构造函数每次都需要实例化
+		eg：var box = new Box()
+
+		借用构造函数(原型冒充)虽然解决了刚才两种问题，但没有
+		原型，复用无从谈起，所以，我们
+		需要原型链+借用构造函数(原型冒充)的模式，
+		这种模式成为组合继承。
+		function Box(age){
+			this.name = ['white','quality'];
+			this.age = age;
+		}
+		Box.prototype.run = function(){
+			return this.name + this.age;
+		}
+
+		function Desk(age){
+			Box.call(this,age);		//对象冒充
+		}
+		Desk.prototype = new Box(); //原型链继承
+
+		var desk = new Desk(26);
+		desk.run();  //=>white,quality26
+
+		对象冒充只继承构造函数中的对象
+		原型链继承原型中的对象
