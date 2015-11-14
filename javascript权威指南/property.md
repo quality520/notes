@@ -266,6 +266,7 @@
     2,继承
     而ECMAScript只支持继承,不支持接口实现,而实现继承的方式
     依靠原型链完成.
+####原型链继承
     function Box(){			//Box构造
     	this.name = 'white';
     }
@@ -338,7 +339,7 @@
     desk;//=>{name:"white",age:26}
 		构造函数每次都需要实例化
 		eg：var box = new Box()
-
+####组合继承
 		借用构造函数(原型冒充)虽然解决了刚才两种问题，但没有
 		原型，复用无从谈起，所以，我们
 		需要原型链+借用构造函数(原型冒充)的模式，
@@ -361,3 +362,67 @@
 
 		对象冒充只继承构造函数中的对象
 		原型链继承原型中的对象
+		
+####原型式继承
+    原型式继承；这种继承借助原型并基于已有的对象创建新对象，
+    同时还不比因此创建自定义类型。
+######临时中转函数
+    function obj(o){        //o表示将要传递进入的一个对象
+      function F(){};       //创建一个F构造函数
+      F.prototype = o;      //把字面量函数赋值给构造函数的原型
+      return new F();       //最终返回出实例化的构造函数
+    }
+    
+    function obj(o){
+    function F(){};
+    F.prototype = o;    //F.prototype = o;相当于Desk.prototype = new Box();
+    return new F();
+    
+    }
+    
+    var a = {
+    name:"white",
+    age:26
+    }
+    obj(a);//=>F{name:"white",age:26}
+    
+    function obj(o){
+    function F(){};
+    F.prototype = o;
+    return new F();
+    
+    }
+    
+    var a = {
+    name:"white",
+    age:26,
+    sport:['basketball','football']
+    }
+    var box1 = obj(a);
+    console.log(box1.sport);   //=>["basketball", "football"]
+    box1.sport.push('vallball');
+    console.log(box1.sport);    //=>["basketball", "football", "vallball"]
+    var box2 = obj(a);
+    console.log(box2.sport);    //=>["basketball", "football", "vallball"]   引用类型共享了。
+####寄生式继承
+    寄生式继承把原型式+工厂模式结合而来，目的是为了封装创建对象的过程。
+    function obj(o){
+    function F(){};
+    F.prototype = o;
+    return new F();
+    
+    }
+    
+    var a = {
+    name:"white",
+    age:26,
+    sport:['basketball','football']
+    }
+    function create(o){
+    var f = obj(o);
+    return f;
+    }
+    var box3 = create(a);
+    console.log(box3.sport);
+    
+    寄生组合模式
