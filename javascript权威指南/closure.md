@@ -227,6 +227,86 @@
     静态私有变量来避免这个问题
 ######静态私有变量
 <!-- 42.[JavaScript]第16章 匿名函数和闭包[下]视频看到22分钟 -->
+    通过块级作用域(私有作用域)中定义私有变量或函数，
+    同样可以创建对外公共的特权方法。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    (function(){
+    	var user = '';
+    	Person = function(value){
+    		user = value;
+    	};
+    	Person.prototype.getUser = function(){
+    		return user;
+    	};
+    	Person.prototype.setUser(value){
+    		user = value;
+    	}
+  	})();
+
+  	(function(){
+  		var user = '';  //私有变量
+  		Box = function(value){  //全局，构造函数
+  			user = value;
+  		};
+  		Box.prototype.getUser = function(){
+  			return user;
+  		};
+  		Box.prototype.setUser = function(value){
+  			user = value;
+  		}
+  	})();
+
+  	var box = new Box('white');
+  	box.getUser();  //=>white
+  	var box2 = new Box('quality');
+  	box.getUser();	//quality
+  	box2.setUser('abc');
+  	box.getUser();	//abc
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 
 
