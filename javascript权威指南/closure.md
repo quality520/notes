@@ -294,6 +294,68 @@
   	box.getUser();	//quality
   	box2.setUser('abc');
   	box.getUser();	//abc
+  	上面的对象声明，采用的是
+  		Box = function(){}
+  	而不是
+  		function Box(){}
+  	因为如果用后者，就变成私有函数，无法在全局访问到了。
+
+  	使用prototype导致方法共享了,而user也就变成了静态属性了。(
+  	所谓静态属性，即共享于不同对象中的属性)。
+######模块模式
+    之前采用的都是构造函数的方式来创建私有变量和特权方法。那么
+    对象字面量方式就采用模块来创建
+    var box = {		//字面量对象，也是单例对象
+    	age:26,			//这是公有属性，将要改成私有
+    	run:function(){	//这是公有函数，将要改成私有
+    		return 'hello World...'
+    	}
+    };
+
+    var box = function(){
+    	var user = 'white';
+    	function run(){
+    		return 'hello World...'
+    	};
+    	return {
+    		go:function(){	//对外公共接口的特权方法
+    			return user + run();
+    		}
+    	};
+    }();
+    box.go(); //=>whitehello World...
+
+    也可以这么写
+    var box = function(){
+    	var age = 26;
+    	function run(){
+    		return 'hello World...';
+    	}
+    	var obj = {		//创建字面量对象
+    		go:function(){
+    			return age + run();
+    		}
+    	};
+    	return obj;  //返回这个对象
+    }();
+
+    字面量的对象声明，其实在设计模式中可以看做时一种单例模式，
+    所谓单例模式，就是永远保持对象的一个实例。
+
+    增强的模块模式，这种模式适合返回自定义对象，也就是构造函数。
+    function Desk(){};
+    var box = function(){
+    	var age = 26;
+    	function run(){
+    		return 'hello World...';
+    	}
+    	var desk = new Desk();  //可以实例化特定的对象
+    	desk.go = function(){
+    		return age + run();
+    	};
+    	return desk;
+    }();
+    box.go();  //=>26hello World...
 
 
 
