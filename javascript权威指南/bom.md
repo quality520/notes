@@ -4,7 +4,7 @@
     BOM的核心对象时window,它表示浏览器的一个实例。
     window对象处于javascript结构的最顶层，
     对于每个打开的窗口，系统都会自动为其定义window对象。
-######window对象的属性:
+#####window对象的属性:
     	document(窗口中当前显示的文档对象):
     	  document对象的五大对象
 	    		anchors
@@ -31,7 +31,7 @@
     	self(指示当前窗口)
     	status(描述由用户交互导致的状态栏的临时消息)
     	window(指示当前窗口，与self等效)
-######window对象的方法
+#####window对象的方法
     alert(text)创建一个警告对话框,显示一条信息
     blur()将焦点从窗口移除
     focus()将焦点移至窗口
@@ -71,6 +71,43 @@
 
     window的属性和方法的调用:window.Attribute、window.方法()
     也可以直接Attribute、方法
+######窗口的位置和大小
+    用来确定和修改window对象位置的属性和方法又很多,ie,safari,chrom提供了screenLeft和screenTop属性，
+    分别用来表示窗口相对与屏幕左边和上边的位置。
+    firefox则在screenX和screenY属性中提供相同的窗口位置信息，safari和chrome同时支持这两个属性
+    screenLeft:距离左边距离
+    screenTop:距离上边距离
+    上述两个属性，firefox不能认识
+    screenX
+    screenY
+    //跨浏览器的方法
+    var leftX = (typeof screenLeft==='number')?screenLeft:screenX;
+    var topY = (typeof screenTop==='number')?screenTop:screenY;
+    窗口页面大小,ff,safari,opera和chrome均为此提供了4个属性：
+    innerWidth(页面宽度),
+    innerHeight(页面高度)
+    返回浏览器窗口本身尺寸
+    outerWidth(页面宽度+边框),
+    outerHeight(页面高度+边框)
+    返回浏览器窗口本身及边框尺寸
+    在chrome中innerWidth = outerWidth
+    innerHeight = outerHeight
+
+    在ie、ff、safari、chrome中,document.documentElement.clientWidth和
+    document.documentElement.clientHeight中保存页面窗口的信息
+    ps:在ie6中,这些属性必须在标准模式下才有效,如果时怪异模式,就必须通过
+		document.body.clientWidth
+		document.body.clientHeight取得窗口大小信息
+
+		document.compatMode  判断标准模式
+    
+    //调整浏览器位置
+    moveTo(0,0);	//移动到0,0坐标
+    moveBy(10,10);	//向下和右分别移动10像素
+		//调整浏览器大小
+		resizeTo(200,200);	//调整大小
+		resizeBy(200,200);  //扩展收缩大小
+
 
 
 
