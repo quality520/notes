@@ -107,7 +107,68 @@
 		//调整浏览器大小
 		resizeTo(200,200);	//调整大小
 		resizeBy(200,200);  //扩展收缩大小
+####4,间歇调用和超时调用
+    javascript时单线程语言,但它允许通过设置超时值和间歇时间值来调度代码在特定的时刻执行.
+    前者在指定的时间过后执行代码,而后者则是
+    每隔指定的时间就执行一次代码.
+    超时调用需要使用window对象的setTimeout()方法，
+    它接受两个参数：
+    要执行的代码
+    毫秒数的超时时间.
+    	setTimeout('alert("hello world")',1000);
+    	function box(){
+    		alert('hello world');
+    	}
+    	setTimeout(box,1000);  //直接传入函数名即可
+    	setTimeout(function(){//推荐做法
+				alert('white');
+  		},1000);
+  		直接使用函数传入的方法，扩展性好，性能更佳。
+  		调用setTimeout()之后，该方法会返回一个数值ID,表示超时调用。
+  		这个超时调用的ID是计划执行代码的唯一
+  		标识符,可以通过它来取消超时调用。
+  		clearTimeout()  清除超时调用函数
+      间歇调用，可以重复不断的执行
+      setInterval(function(){
+				alert("123");
+    	},1000);
 
+    	clearInterval()清除定时器
+
+    	var a = 0;
+    	setInterval(function(){
+    		a++;
+    		console.log(a);	
+  		},1000);
+
+  		var num = 0;
+  		var max = 5;
+  		var play = null;
+  		function box(){
+  			num++;
+  			console.log(num);
+  			if(num == max){
+					clearInterval(play);
+					console.log("时间到了");
+  			}
+  		}
+  		play = setInterval(box,1000);
+  		一般认为,使用超时调用来模拟间隙调用时一种最佳模式。
+
+  		var num = 0;
+  		var max = 10;
+  		function box(){
+  			num++;
+  			console.log(num);
+  			if(num == max){
+  				console.log("时间到了");
+  			}else{
+  				setTimeout(box,1000);
+  			}
+  		}
+  		setTimeout(box,1000);//执行定时器
+  		使用超时调用时，没必要跟踪超时调用ID，因为每次执行代码之后，如果
+  		不再设置另一次超时调用，调用就会自行停止。
 
 
 
