@@ -169,6 +169,58 @@
   		setTimeout(box,1000);//执行定时器
   		使用超时调用时，没必要跟踪超时调用ID，因为每次执行代码之后，如果
   		不再设置另一次超时调用，调用就会自行停止。
+####location对象
+    location提供了与当前窗口中加载的文档有关
+    的信息，还提供了一些导航功能，
+    location对象是window对象的属性
+    也是document对象的属性
+    window.location和document.location等效    
+
+#####location对象的属性
+    hash:如果该部分存在，表示锚点部分
+    host:主机名：端口号
+    hostname:主机名
+    href:整个URL
+    pathname:路径名
+    port：端口号
+    protocol:协议部分
+    search：查询字符串
+#####location对象的方法
+    assign():跳转到指定页面，也href等效
+    reload()重载当前URL
+    replace()用新的URL替换当前页面
+    
+    在web开发中，经常需要获取诸如:？id=5&search=ok这种类型的url键值对
+    那么我们通过location，我们写一个函数来获取
+    function getArgs(){
+    	//创建一个存放键值对的数组;
+    	var args = [];
+    	//去除?号
+    	var qs = location.search.length>0?location.search.substring(1):'';
+    	//按&字符串拆分数组
+    	var items = qs.split('&');
+    	var item = null,name=null,value=null;
+    	//遍历
+    	for(var i = 0;i<items.length;i++){
+    		item = items[i].split('=');
+    		name = item[0];
+    		value = item[1];
+    		//将键值对存放到数组中去
+    		args[name] = value;
+    	}
+			return args;
+    }
+
+####3,history对象
+    history对象时window对象的属性,它
+    保存用户上网的记录，
+    history对象的属性
+    length:history对象中的记录数
+    history对象的方法
+    back()前往浏览器历史条目前一个URL，类似后退
+    forward()前往浏览器历史条目下一个URL，类似前进
+    go(num)浏览器在history对象中向前或向后
+    可以通过判断history.length == 0,得到是否又历史记录
 
 
 
