@@ -226,6 +226,7 @@
     但是对象的方法，在多次调用的时候，会多次创建。可以使用
     静态私有变量来避免这个问题
 ######静态私有变量
+<<<<<<< Updated upstream
 <!-- 42.[JavaScript]第16章 匿名函数和闭包[下]视频看到22分钟 -->
     通过块级作用域(私有作用域)中定义私有变量或函数，
     同样可以创建对外公共的特权方法。
@@ -369,6 +370,41 @@
 
 
     
+=======
+    通过块级作用域(私有作用域)中定义私有变量或函数，同样可以创建对外公共的特权方法
+    原型模式
+    (function(){
+        var age =26;
+        function run(){
+            return "hello world...";
+        }    
+        Box = function(){};             //构造方法
+        Box.prototype.go = function(){  //原型方法
+            return age + run();
+        }
+    })();
+
+    var box = new Box();
+    box.go();  //=>26hello world...
+
+    (function(){
+        var user = '';      //私有变量              
+        //function Box(){}   //构造函数，但在函数内写构造函数不支持，因为
+        Person = function(value){   //全局,构造函数
+            user = value;
+        };
+        Person.prototype.getUser = function(){
+            return user;
+        };
+        Person.prototype.setUser = function(value){
+            user = value;
+        }
+    })();
+    使用了prototype导致方法共享了，而user也就变成了静态属性(
+    所谓静态属性,即共享于不同对象的属性)
+
+
+>>>>>>> Stashed changes
 
 
 
