@@ -72,6 +72,110 @@
 #####removeAttribute()
     可以移除HTML属性
 ####DOM节点
+#####1,node节点属性
+    节点可以氛围元素节点、属性节点和文本节点，
+    而这些几点有有3个非常有用的属性:
+    nodeName,nodeType和nodeValue
+    var box = document.getElementById('box');
+    box.nodeName; //获取元素节点的标签名,与tagName等价
+    box.nodeType; //1,表示元素2,表示属性3,表示文本
+    box.nodeValue; //元素节点本身没有内容,返回null
+    node只能获取当前节点的东西,不能获取元素里面的内容
+
+
+#####2,层次节点属性
+    节点的层次结构可以划分为:父节点与子节点、兄弟节点两种
+    属性
+    	childNodes  获取当前元素节点的所有子节点
+
+    	firstChild  获取当前元素的第一个子节点
+    	lastChild  获取当前元素的最后一个子节点
+    	ownerDocument  获取该节点的文档根节点,相当于document
+    	parentNode  获取当前节点的父节点
+    	previousSibling  获取当前节点的前一个同级节点
+    	nextSibling  获取当前节点的后一个同级节点
+    	attributes  获取当前元素节点的所有属性节点集合
+
+    	//忽略空白字符
+    	function filterWhiteNode(node){
+    		var ret = [];
+    		for(var i = 0;i<node.length;i+=){
+    			if(node[i].nodeType===3 && /^\s+$/.test(node[i].nodeValue)){
+    				continue;
+    			}else{
+    				ret.push(node[i]);
+    			}
+    		}
+    		return ret;
+    	}
+
+    	//移除空白字符
+    	function removeWhiteNode(node){
+    		for(var i =0;i<node.length;i++){
+    			if(node[i].nodeType===3 && /^\s+$/.test(node[i].nodeValue)){
+    				node[i].parentNode.removeChild(node[i]);
+    			}
+    		}
+    		return node;
+    	}
+
+    	//获取节点的过程中处理遇到的空白节点
+    	function removeWhiteNode(node){
+    		for(var i =0;i<node.childNodes.length;i++){
+    			if(node.childNodes[i].nodeType===3 && /^\s+$/.test(node.childNodes[i].nodeValue)){
+    				node.childNodes[i].parentNode.removeChild(node.childNodes[i]);
+    			}
+    		}
+    		return node;
+    	}
+#####4,节点操作
+    创建节点、复制节点、删除节点和替换节点
+    write();   //这个方法可以把任意字符串插入到文档中
+	    document.write('hello world!');
+	  createElement();  //创建一个元素节点
+    document.createElement('div');//创建一个div元素
+    appendChild()；  将新节点追加到子节点列表的末尾
+			var box = document.getElementById('box');
+			var oDiv = document.createElement('div');
+			box.appendChild(oDiv);
+			//将新节点oDiv添加到id=box的子节点列表的末尾上
+    createTextNode();  //创建爱你一个文本节点
+    	var text = document.createTextNode('hello world');
+    	oDiv.appendChild(text);
+
+    	var a = document.getElementById('xjsd');
+    	var oDiv = document.createElement('div');
+    	var text = document.createTextNode('hello world!!!');
+    	oDiv.appendChild(text);
+    	a.appendChild(oDiv);
+    insetBefore();//将新节点插入在前面
+    	需要两个参数
+    		第一个：需要插入的新节点
+    		第二个：需要插入到那个元素之前
+			并且需要先切换到被插入的元素的父元素上node.parentNode
+			var box = document.getElementById('box');
+			var p = document.createElement('p');
+			box.parentNode.insetBefore(p,box);
+		在元素之后创建新节点
+		  function insetAfter(newElement,targetElement){
+		  	//得到父节点
+		  	var parent = targetElement.parentNode;
+		  	//如若最后一个子节点时当前元素，那么直接添加
+		  	if(parent.lastChild === targetElement){
+		  		parent.appendChild(newElement);
+		  	}else{
+		  		//否则，在当前节点的下一个节点之前添加
+		  		parent.insetBefore(newElement,targetElement.nextSibling);
+		  	}
+		  }
+
+		createElement创建元素的兼容性能(input,radio,checkbox)  
+    replaceChild(); //将新节点替换旧节点
+    cloneNode();  //赋值节点
+    	var clone=box.firstChild.cloneNode(true);//获取第一个子节点，true表示复制内容，false表示标签也clone
+    	box.appendChild(clone);
+    removeChild();  //移除节点
+    	box.parentNode.removeChild(box);//删除指定节点
 
 
 
