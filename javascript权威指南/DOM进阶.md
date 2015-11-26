@@ -108,6 +108,35 @@
     nodeValue为属性值
 ####2,DOM扩展
 #####1,呈现模式
-    
     标准模式：
     混杂模式：
+    IE为document对象添加了一个名为compatMode属性，
+    这个属性可以识别IE浏览器的文档处于声明模式，如果
+    时标准模式，则返回CSS1Compat,如果是混杂模式则返回
+    BackCompat
+    	if(document.compatMode == 'CSS1Compat'){
+    		alert(document.documentElement.clientWidth);
+    	}else{
+    		alert(document.body.clientWidth);
+    	}
+    firefox,opera和chrome都实现了这个属性
+    IE8又引入documentMode新属性因为IE8呈现模式分别为
+    标准模式8，仿真模式7，混杂模式5,所以如果想测试IE8
+    的标准模式，就判断document.documentMode>7即可
+#####2,滚动
+    DOM提供了一些滚动页面的方法，如下：
+      document.getElementById('box').scrollIntoView();
+      //设置指定可见
+#####3,children属性
+    由于子节点空白问题，IE和其他浏览器解释不一致。
+    虽然可以过滤掉，但如果只是想得到有效子节点，
+    可以使用children属性，支持的浏览器为IE5+,FF3.5+,OPERA8+,CHROME
+    这个属性是非标准的
+      var box = document.getElementById('box');
+      alert(box.children.length);//得到有效子节点数目
+#####4,contains()方法
+    判断一个节点是不是另一个节点的后代，我们可以使用
+    contains()方法,开发人员无须遍历即可获取此信息.
+    var box = document.getElementById('box');
+    alert(box.contains(box.firstChild)); //true;
+
