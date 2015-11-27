@@ -194,7 +194,7 @@
     那么我们通过location，我们写一个函数来获取
     function getArgs(){
     	//创建一个存放键值对的数组;
-    	var args = [];
+    	var args = {};
     	//去除?号
     	var qs = location.search.length>0?location.search.substring(1):'';
     	//按&字符串拆分数组

@@ -140,3 +140,36 @@
     var box = document.getElementById('box');
     alert(box.contains(box.firstChild)); //true;
 
+    box.compareDocumentPostition(box.firstChild); //=>20
+    关系掩码
+    1  没有关系
+    2  之前
+    4  之后
+    8
+    16 包含
+
+    function contains(refNode,otherNode){
+      if(typeof refNode.contains != 'undefined' && !(BrowserDetect.browser =='safari' && BrowserDetect.version<3)){
+        return refNode.contains(otherNode);
+      }else if(typeof refNode.compareDocumentPosition =='function'){
+        return !!(refNode.compareDocumentPosition(otherNode)>16);
+      }else{
+        var node = otherNode.parentNode;
+        do{
+          if(node === refNode){
+            return true;
+          }else{
+            node = node.parentNode;
+          }
+        }while(node !=null);
+      }
+      return false;
+    }
+####3,DOM操作内容
+    innerText,innerHTML,outerText,outerHTML
+    1,innerText属性
+      document.getElementById('box').innerText;
+      document.getElementById('box').innerText = "white"
+      上述方法浏览器都支持，并且ff还有另外一个类似的属性
+      document.getElementById('box').textContent;
+
