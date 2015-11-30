@@ -37,4 +37,5 @@
     cells            保存着<tr>元素中单元格的HTMLCollection
     deleteCell(pos)  删除指定位置的单元格
     insertCell(pos)  向cells集合的指定位置插入一个单元格，并返回引用
+    
 
