@@ -30,4 +30,26 @@
 #####总结
     以上三种css获取元素大小的方法，只能获取元素
     的css大小，query无法获取元素本身实际的大小。
+####二,获取元素实际大小
+#####1,clientWidth和clientHeight获取元素可视区域的大小
+可以得到元素内容及内边距所占据的空间大小
+    var body = document.body;
+    body.clientWidth;
+    body.clientHeight;
+
+    var kw = document.getElementById('kw');
+    kw.clientWidth;
+    kw.clientHeight;
+    改变padding的值会改变获取的clientWdith与clientHeight的值。
+    改变滚动条:overflow:scroll也会改变clientWdith与clientHeight的值
+    增加边框与外边距都不会改变clientWidth与clientHeight的值(clientWidth,clientHeight
+    不包含边框与外边距的值)
+    ps:如果没有设置任何CSS的宽度和高度，非IE浏览器会算上
+    滚动条和内边距计算后的大小，IE会返回0;
+#####2,scrollWidth,scrollHeight,这组属性可以获取滚动内容的元素大小
+    box.scrollWidth;
+    box.scrollHeight;
+    
+
+
 
