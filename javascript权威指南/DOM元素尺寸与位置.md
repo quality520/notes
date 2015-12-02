@@ -84,6 +84,36 @@
     否则浏览器会有不同的解释
     加上边框和内边距不会影响它的位置，但加上外边距会累加
     box.offsetParent;
+    ps:offsetParent中，如果本身父元素是<body>，非IE返回body
+    对象，IE返回html对象，如果两个元素嵌套，上级父元素没有使用定位
+    position:absolute,那么offsetParent将返回body对象或html对象，所以
+    在获取offsetLeft和offsetTop时，css定位很重要
 
+    如果说，在很多层次里，外层已经定位了，我们如何获取
+    里层的元素距离body或html元素之间的距离？
+    box.offsetTop + box.offsetParent.offsetTop;  //只有两层的情况下
+    如果多层的化，就必须使用循环或递归
+    function offsetLeft(element){
+      var left = element.offsetLeft;   //得到第一层距离
+      var parent = element.offsetParent;//得到第一个父元素
+
+      while(parent !== null){  //如果还有上一层父元素
+        left += parent.offsetLeft;  //把本层的距离累加
+        parent = parent.offsetParent;//得到本层的父元素
+      }                              //继续循环
+      return left;
+    }
+#####3,scrollTop和scrollLeft
+     这组属性可以获取滚动条被隐藏的区域大小，也
+     可以设置定位到该区域
+     box.scrollTop;//获取滚动内容上方的位置
+     box.scrollLeft;//获取滚动内容左方的位置
+
+     如果要让滚动条滚动到初始位置
+     function scrollStart(element){
+      if(element.scrollTop!=0) element.scrollTop = 0;
+     }
+
+     document.body.scrollTop = 0;
 
 
