@@ -19,7 +19,7 @@
     会返回元素的大小，如果本身没有设置，非IE浏览器会返回默认的大小，IE
     浏览器返回auto。
 #####3,通过CSSStyleSheet对象中的cssRules(或rules)属性获取元素大小
-    var sheet=document.styleSheets[0]; 
+    var sheet=document.styleSheets[0];
     //获取link或style
     var rule=(sheet.cssRules||sheet.rules)[0];
     //获取第一条规则
@@ -113,7 +113,5 @@
      function scrollStart(element){
       if(element.scrollTop!=0) element.scrollTop = 0;
      }
-
+     //将滚动条回复到0
      document.body.scrollTop = 0;
-
-
