@@ -49,7 +49,41 @@
 #####2,scrollWidth,scrollHeight,这组属性可以获取滚动内容的元素大小
     box.scrollWidth;
     box.scrollHeight;
-    
+    ps:对于元素的实际大小：scrollWidth和scrollHeight理解如下：
+      1,增加边框,不同浏览器有不同的解释
+        a)ff和opera浏览器会增加边框的大小，220*220
+        b)IE,chrome和safari浏览器会会略边框大小,200*200
+        c)IE浏览器值显示它本来内容的高度
+      2,增加内边距，最终值等于原来大小加上内边距大小，220*220,
+      IE为220*38(38为本来内容的高度)
+      3,增加滚动条，最终值会等于原本大小减去滚动条大小，184*184，
+      IE为184*18
+      4,增加外边距，没有变化
+      5,增加内容溢出,ff、chrome和IE获取实际内容高度,opera比前三个
+      浏览器获取的高度偏小，safari比前面三个浏览器获取的高度偏大
+#####offsetWidth和offsetHeight这组属性可以返回元素实际大小，包含
+边框、内边距和滚动条
+    box.offsetWidth;
+    box.offsetHeight;
+    ps:对于元素的实际大小：offsetWidth和offsetHeight理解如下：
+      1,增加边框，最终值会等于原本大小加上边框大小
+      2,增加内边距，最终值等于原本大小加上内边距大小
+      3,增加外边距，没有变化
+      4,增加滚动条，无变化，不会减小
+####三、获取元素周边大小
+#####1,clientLeft和clientTop这组属性可以获取元素设置了左边框和上边框的大小
+    box.clientLeft;
+    box.clientTop;
+    ps:目前只提供了Left和Top这组,并没有提供Right和Bottom，这四条边宽度
+    不同的化，可以直接通过计算后的样式获取，或者采用以上三种获取元素大小
+    的减法求得
+#####2,offsetLeft和offsetTop这组属性可以获取当前元素相对于父元素的位置。
+    box.offsetLeft;
+    box.offsetTop;
+    ps:获取元素当前相对于父元素的位置，最好将它设置为定位:position:absolute;
+    否则浏览器会有不同的解释
+    加上边框和内边距不会影响它的位置，但加上外边距会累加
+    box.offsetParent;
 
 
 
