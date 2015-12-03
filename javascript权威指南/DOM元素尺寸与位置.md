@@ -115,3 +115,29 @@
      }
      //将滚动条回复到0
      document.body.scrollTop = 0;
+####四、元素位置
+    getBoundingClientRect(),这个方法返回一个矩形对象
+    包含left,top,right,bottom四个属性
+    分别表示元素各边与页面上边和左边的距离
+    var box = document.getElementById('box');//获取元素
+    box.getBoundingClientRect().top;  //元素上边距离页面上边的距离
+    box.getBoundingClientRect().bottom;  //元素下边距离页面上边的距离
+    box.getBoundingClientRect().left;  //元素左边距离页面左边的距离
+    box.getBoundingClientRect().right;  //元素右边边距离页面左边的距离
+    在IE中，默认左边从(2,2)开始计算，导致最终距离比其他浏览器多两像素，
+    我们需要做兼容
+    document.documentElement.clientTop;//非IE为0,IE为2。
+    document.documentElement.clientLeft;//非IE为0,IE为2。
+       //document.documentElement获取到HTML元素
+    function getRect(element){
+      var rect = element.getBoundingClientRect();
+      var top = document.documentElement.clientTop;
+      var left = document.documentElement.clientLeft;
+
+      return{
+        top:rect.top-top,
+        right:rect.right-left,
+        bottom:rect.bottom-top,
+        left:rect.left-left
+      }
+    }
