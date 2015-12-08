@@ -1,6 +1,6 @@
 #svg
     基于XML
-####基本图形和属性
+####1.2基本图形和属性
     基本图形：
       <rect>(矩形)/<circle>(原型)/<ellipse>(椭圆)/<line>(直线)/<polyline>(折线)/<polygon>(多边形)
     基本属性
@@ -44,3 +44,11 @@
       stroke = #971817
       strokeWidth = 10
       transform = "rotate(30)"
+####1.3基本操作API
+    创建图形
+      document.createElementNS(ns,tagName)
+    添加图形
+      element.appendChild(childElement)
+    设置/获取图形
+      element.setAttribute(name,value)
+      element.getAttribute(name)

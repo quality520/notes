@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="device-width=width,initial-scale=1,user-scalable=no" />
+    <title>SVG--API</title>
+  </head>
+  <body>
+    <input id="createSvg" type="button" name="name" value="创建">
+    <script type="text/javascript">
+      window.onload = function(){
+        var SVG_NS = 'http://www.w3.org/2000/svg';
+        var aInput = document.getElementById('createSvg');
+        aInput.onclick = function(){
+          var aSvg = document.createElementNS(SVG_NS,'svg');
+          var rect = document.createElementNS(SVG_NS,'rect');
+          rect.setAttribute('x','10');
+          rect.setAttribute('y','10');
+          rect.setAttribute('width','200');
+          rect.setAttribute('height','100');
+          rect.setAttribute('fill','red');
+          rect.setAttribute('stroke','blue');
+          rect.setAttribute('stroke-width','3');
+          aSvg.appendChild(rect);
+          document.body.appendChild(aSvg);
+        }
+      }
+    </script>
+  </body>
+</html>
