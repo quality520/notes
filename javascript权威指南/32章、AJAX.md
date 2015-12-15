@@ -43,6 +43,78 @@
           500    Internal Server Error  服务器遇到意外错误，无法完成请求
           503     ServiceUnavailable   由于服务器过载或维护导致无法完成请求
 
+        addEvent(document,'click',function(){
+          var xhr = new createXHR();
+          xhr.open('get','demo.php?rand='+Math.random(),false);//设置了同步
+          xhr.send(null);
+          if(xhr.status == 200){//如果返回成功
+            alert(xhr.responseText);//调出服务器返回的数据
+          }  
+          else{
+            alert('数据返回失败!状态码：'+xhr.status+',状态信息：'+xhr.statusText);
+          }
+        });
+      同步调用固然简单,但使用异步调用才是我们真正常用的手段,使用异步
+      调用的时候，需要触发readystatechange事件，然后检查
+      readyState属性即可，这个属性有五个值:
+        值   状态    说明
+        0  未初始化 尚未调用open()方法
+        1   启动    已经调用open()方法，但尚未调用send()方法
+        2   发送    已经调用send()方法，但尚未调用send()方法
+        3   接受    已经接收到部分响应数据
+        4   完成    已经接收到全部响应的数据，而且可以使用
+
+      addEventLister(document,'click',function(){
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+          if(xhr.readyStatus == 4){
+            if(xhr.status == 200){
+              alert(xhr.responseText);
+            }else{
+              alert('数据返回失败！状态码：'+xhr.status+',状态信息：'+xhr.statusText);
+            }
+          }
+        };
+        xhr.open('get','demo.php?rand='+Math.random(),true);
+        xhr.send(null);  
+      });
+      ps:使用abort()方法可以取消异步请求，放在send()方法之前会报错。
+      放在responseText之前会得到一个空值
+####二、GET与POST
+    在提供服务器请求的过程中,有两种方式,分别是：GET和POST。
+    在Ajax使用的过程中,GET的使用频率要比POST高。
+#####HTTP头部信息
+    HTTP头部信息包含服务器返回的响应头信息和客户端发送出去
+    的请求头信息。我们可以获取响应头信息或者设置请求头信息。
+      //使用getResponseHeader()获取单个响应头信息
+        xhr.getResponseHeader('Content-Type');
+      //使用getAllResponseHeaders()获取整个响应头信息
+        xhr.getAllResponseHeaders();
+      //使用setRequestHeader()设置单个请求头信息
+        xhr.setRequestHeader('myHeader','white');
+        //放在open()方法之后，send()方法之前
+    ps:我们只可以获取服务器返回回来响应头信息,无法获取向服务器提交
+    的请求头信息，自然自定义的请求头，在javascript端无法获取到的。
+#####GET请求
+    GET请求是最常见的请求类型，最常用于想服务器查询某些信息.
+    必要时,可以将查询字符串参数追加到URL的末尾，以便提交给服务器。
+      xhr.open('get','demo.php?rand='+Math.random()+'&name=white',true);
+    通过URL后的问好给服务器传递键值对数据,服务器接收到返回响应数据.
+    特殊字符传参产生的问题可以使用encodeURIComponent()进行编码处理，
+    中文字符的返回及参数，可以将页面保存和设置为UTF-8格式即可。
+      //一个通用的URL提交函数
+      function addURLParam(url,name,value){
+        url +=(url.indexOf('?') == -1?'?':'&');//判断url是否有已有参数
+        url +=encodeURIComponent(name)+'='+encodeURIComponent(value);
+        alert(url);
+        return url;
+      }
+    ps:当没有encodeURIComponent()方法时，在一些特殊字符比如"&",
+    会出现错误导致无法获取。
+#####POST请求
+
+
+
 
 
 
