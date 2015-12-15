@@ -112,6 +112,23 @@
     ps:当没有encodeURIComponent()方法时，在一些特殊字符比如"&",
     会出现错误导致无法获取。
 #####POST请求
+    POST请求可以包含非常多的数据，我们在使用表单提交的时候，
+    很多就是使用的POST传输方式
+      xhr.open('post','demo.php',true);
+    发送post请求的数据,不是跟在URL的尾巴上,而是通过send()
+    方法向服务器提交数据。
+      xhr.send('name=white&age=26');
+    向服务器发送POST请求由于解析机制的原因,需要进行特别的处理。因为
+    POST请求和Web表单提交是不同的，需要使用XHR来
+    模仿表单提交。
+      xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+    ps:从性能上讲POST请求比GET请求消耗更多一些,用相同数据
+    比较,GET最多比POST快两倍。
+    JSON也可以使用Ajax来回调访问
+      var url = 'demo.json?rand='+Math.random();
+      var box = JSON.parse(xhr.responseText);
+####封装Ajax
+    
 
 
 
