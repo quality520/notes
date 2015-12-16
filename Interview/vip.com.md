@@ -14,6 +14,27 @@
 ####页面样式兼容(各个手机浏览器)
 ####匿名函数递归调用
 ####angularJS的特点
+    AngularJS中四大核心特性
+#####一、MVC
+#####二、模块化和依赖注入
+#####三、双向数据绑定
+#####四、指令
+######解析最简单的指令hello:匹配模式restrict
+######解析最简单的指令hello:template、templateUrl、$templateCache
+######解析最简单的指令hello:replace与transclude
+######comile与link(操作元素、添加CSS样式、绑定事件)
+######指令与控制器之间的交互
+######指令间的交互
+######scope的类型与独立scope
+######scope的绑定策略
+######AngularJS内置的指令
+######实例解析Expander
+######实例解析Accordion
+######指令的运行原理:compile和link
+######总结：ERP类型的系统必备的UI组件
+######总结：互联网/电商型系统必备的UI组件
+######第三方指令库angular-ui
+######Directive思想的奇缘和原理概述
 ####angularJS开发android与IOS
 ####骇客兼容
 ####事件代理
