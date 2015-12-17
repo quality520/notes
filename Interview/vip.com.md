@@ -1,5 +1,68 @@
 #vip.com.md
 ####原型链
+#####前言
+    javascript不包含传统的类继承模型，而是使用prototype原型模型
+    虽然这经常被当做javascript的缺点被提及，其实基于原型的继承模型比传统的类继承还要强大。
+    实现传统的类继承模型是很简单，但是实现javascript中的原型继承则要困难的多
+    javascript是唯一一个被广泛使用的基于原型继承的语言。
+#####原型
+    1、、 如下方式来写代码
+    ```
+      var decimalDigits = 2,
+          tax = 5;
+      function add(x,y){
+        return x + y;
+      }
+      function subtract(x,y){
+        return x - y;
+      }
+      console.log(add(1,3));
+    ```
+    通过执行各个function来得到结果，学习了原型之后，我们可以使用如下方式来美化一下代码
+    2、 、原型使用方式1：
+    在使用原型之前，我们需要先将代码做一下小修改：
+    ```
+      var Calculator = function(decimalDigits,tax){
+        this.decimalDigits = decimalDigits;
+        this.tax = tax;
+      }
+    ```
+    然后，通过给Calculator对象的prototype属性赋值对象字面量来设定Calculator对象的原型
+    ```
+      Calculator.prototype = {
+        add:function(x,y){
+          return x + y;
+        },
+        subtract:function(x,y){
+          return x - y;
+        }
+      };
+      console.log((new Calculator()).add(1,3));
+    ```
+    这样，我们就可以new Calculator对象以后，就可以调用add方法来计算结果了。
+    3、、原型使用方式2：
+    第二种方式是：在赋值原型prototype的时候使用function立即执行的表达式来赋值，即如下格式：
+    `Calculator.prototype = function(){}();`
+    它的好处就是可以封装私有的function，通过return的形式暴露处简单的使用名称，以达到
+    public/private的效果，修改后的代码如下：
+    ```
+      Calculator.prototype = function () {
+            add = function (x, y) {
+                return x + y;
+            },
+
+            subtract = function (x, y) {
+                return x - y;
+            }
+            return {
+                add: add,
+                subtract: subtract
+            }
+        } ();
+
+        //console.log((new Calculator()).add(11, 3));
+    ```
+    同样的方式，我们可以new Calculator对象以后调用add方法来计算结果了。
 ####作用域链
 ####原型继承 原理
 ####this,call,apply
