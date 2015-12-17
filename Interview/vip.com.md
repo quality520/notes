@@ -6,7 +6,7 @@
     实现传统的类继承模型是很简单，但是实现javascript中的原型继承则要困难的多
     javascript是唯一一个被广泛使用的基于原型继承的语言。
 #####原型
-    1、、 如下方式来写代码
+1、 如下方式来写代码
     ```
       var decimalDigits = 2,
           tax = 5;
@@ -19,7 +19,7 @@
       console.log(add(1,3));
     ```
     通过执行各个function来得到结果，学习了原型之后，我们可以使用如下方式来美化一下代码
-    2、 、原型使用方式1：
+2、 原型使用方式1：
     在使用原型之前，我们需要先将代码做一下小修改：
     ```
       var Calculator = function(decimalDigits,tax){
@@ -40,7 +40,7 @@
       console.log((new Calculator()).add(1,3));
     ```
     这样，我们就可以new Calculator对象以后，就可以调用add方法来计算结果了。
-    3、、原型使用方式2：
+3、 原型使用方式2：
     第二种方式是：在赋值原型prototype的时候使用function立即执行的表达式来赋值，即如下格式：
     `Calculator.prototype = function(){}();`
     它的好处就是可以封装私有的function，通过return的形式暴露处简单的使用名称，以达到
