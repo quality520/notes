@@ -105,6 +105,14 @@
 #####状态码的含义
 ####居中布局
 ####position的作用
+#####absolute:
+    生成绝对定位的元素，相对于static定位以外的第一个父元素进行定位。
+    元素的位置通过left、top、right、bottom属性进行规定
+#####fixed:
+    生成绝对定位的元素，相对于浏览器窗口定位。
+    元素的位置通过left、top、right、bottom属性进行规定
+#####relative:
+    生成相对定位的元素，相对于其正常位置进行定位。
 #####static
 #####fixed
 #####relative
