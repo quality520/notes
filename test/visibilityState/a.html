@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>DDDDDDDD</title>
+  </head>
+  <body>
+    <div>
+      HELLO World!
+    </div>
+
+    <script type="text/javascript">
+    /* document.addEventListener('visibilitychange',function(){
+        document.title = document.hidden ? '出BUG了，快看！':'DDDDDDDD';
+      }) */
+      var n = '出BUG了，快看！',
+          r = document.title;
+     document.addEventListener('visibilitychange',function(){
+       document.title = document.hidden ? n : r;
+     })
+    </script>
+  </body>
+</html>
