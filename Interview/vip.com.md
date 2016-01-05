@@ -73,7 +73,6 @@
 #####rem字体
     
     参考链接:http://www.w3cplus.com/css3/define-font-size-with-css3-rem
-#####rem字体的比例计算(62.5%)
 ####多图片并发处理
 ####懒加载
 ####页面样式兼容(各个手机浏览器)
