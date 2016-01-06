@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+</head>
+<body>
+  <div ng-controller="MainCtrl">
+    <loader>滑动加载</loader>
+  </div>
+
+  <script src="../vendor/angular/angular.js"></script>
+  <script>
+    angular.module('myApp',[])
+      .directive('loader',function(){
+        return{
+          restrict:'ECMA'
+        }
+      })
+      .controller('MainCtrl',['$scope',function(){
+
+      }])
+  </script>
+</body>
+</html>
