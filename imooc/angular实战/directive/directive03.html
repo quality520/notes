@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,19 +7,37 @@
 </head>
 <body>
   <div ng-controller="MainCtrl">
-    <loader>滑动加载</loader>
+    <loader howToLoad="loadData()">滑动加载...</loader>
+  </div>
+  <div ng-controller="MainCtrl2">
+    <loader howToLoad="loadData2()">滑动加载2...</loader>
   </div>
 
-  <script src="../vendor/angular/angular.js"></script>
+  <script src="../vendor/angular/angular.min.js"></script>
   <script>
     angular.module('myApp',[])
       .directive('loader',function(){
         return{
-          restrict:'ECMA'
+          restrict:'ECMA',
+          link:function(scope,element,attrs){
+            element.bind("mouseenter",function(){
+              //scope.loadData();
+              //scope.$apply("loadData()");//同样可以达到效果
+              console.log(attrs.howtoload);
+              scope.$apply(attrs.howtoload);
+            })
+          }
         }
       })
-      .controller('MainCtrl',['$scope',function(){
-
+      .controller('MainCtrl',['$scope',function($scope){
+        $scope.loadData = function(){
+          console.log("loading...");
+        }
+      }])
+      .controller('MainCtrl2',['$scope',function($scope){
+        $scope.loadData2 = function(){
+          console.log("loading2...");
+        }
       }])
   </script>
 </body>
