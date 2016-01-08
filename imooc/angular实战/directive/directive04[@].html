@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+</head>
+<body>
+  <div ng-controller="myCtrl">
+    <drink flavor="{{ctrlFlavor}}"></drink> 
+  </div>
+
+  <script src="../vendor/angular/angular.min.js"></script>
+  <script>
+    angular.module('myApp',[])
+      .directive('drink',function(){
+        return {
+          restrict:'ECMA',
+          scope:{
+            flavor:'@'
+          },
+          template:'<div>{{flavor}}</div>'/*,
+          link:function(scope,element,attrs){
+            scope.flavor = attrs.flavor;
+          }*/
+          //使用scope:{flavor:'@'} 与link一样的效果
+        }
+      })
+      .controller('myCtrl',['$scope',function($scope){
+        $scope.ctrlFlavor = "white";
+      }])
+  </script>
+</body>
+</html>
