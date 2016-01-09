@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+</head>
+<body>
+  <form name="myForm" ng-submit="save()" ng-controller="mainCtrl">
+    <input type="text" name="username" ng-model="user.userName" required>
+    <input type="password" name="password" ng-model="user.password" required>
+    <input type="submit" ng-disabled="myForm.$invalid">
+  </form>
+
+  <script src="../vendor/angular/angular.min.js"></script>
+  <script>
+    angular.module('myApp',[])
+      .controller('mainCtrl',['$scope',function($scope){
+        $scope.save = function(){
+          console.log('哎哟，提交成功了!');
+        }
+      }])
+  </script>
+</body>
+</html>
