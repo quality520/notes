@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+</head>
+<body ng-controller="mainCtrl">
+  <expander expander-title = 'title'>
+    {{text}}
+  </expander>
+
+  <script src="../vendor/angular/angular.min.js"></script>
+  <script>
+    angular.module('myApp',[])
+      .directive('expander',function(){
+        return {
+          restrict:'EA',
+          replace:true,
+          transclude:true,
+          scope:{
+            title:'=expanderTitle'
+          },
+          template:'<div>'
+                  +'<div class="title" ng-click="toggle()">{{title}}</div>'
+                  +'<div class="body" ng-show="showMe" ng-transclude></div>'
+                  +'</div>',
+          link:function(scope,element,attrs){
+            scope.showMe = false;
+            scope.toggle = function(){
+              scope.showMe = !scope.showMe;
+            }
+          }
+        }
+      })
+      .controller('mainCtrl',['$scope',function($scope){
+        $scope.title = 'click me !';
+        $scope.text = 'this is content!'
+      }]);
+  </script>
+</body>
+</html>
