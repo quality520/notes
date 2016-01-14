@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>$filter服务</title>
+</head>
+<body>
+  {{12314567788 | date}}
+  <br/>
+  {{12314567788 | date:"MM/DD/YYYY @ HH:mm:ss"}}
+  <div>
+    {{'white' | filter1}}
+  </div>
+  <script src="../vendor/angular/angular.min.js"></script>
+  <script>
+    angular.module("myApp",[])
+      .filter("filter1",function(){
+        return function(item){
+          return item + '=.=';
+        }
+      });
+  </script>
+
+
+
+  <!--
+    $filter是用来进行数据格式化的专用服务
+    AngularJS内置了9个filter：
+      currency:货比
+      date:日期
+      json：json格式
+      limitTo：
+      lowercase:
+      number:
+      orderBy:
+      uppercase:
+    filter可以嵌套使用(用管道符号|分割)
+    filter是可以传递参数的
+    用于可以定义自己的filter
+  -->
+</body>
+</html>
+
