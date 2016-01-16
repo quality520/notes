@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>手动启动angular</title>
+  <style>
+    .ng-cloak{display: none;}
+  </style>
+</head>
+<body>
+  <div ng-controller="mainCtrl" >
+    <p ng-cloak class="ng-cloak">{{name}}</p>
+  </div>
+  <script src="../vendor/angular/angular.min.js"></script>
+  <script>
+    var myModule = angular.module('myModule',[]);
+    myModule.controller('mainCtrl',['$scope','$window',function($scope,$window){
+      $scope.name = 'white';
+      /*$window.title = '123';*/
+      /*document.title = "123";*/
+    }]);
+    /*手动启动ng*/
+    /*angular.element(document).ready(function(){
+      angular.bootstrap(document,['myModule']);
+    })*/
+  </script>  
+</body>
+</html>
