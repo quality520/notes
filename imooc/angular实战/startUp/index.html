@@ -15,10 +15,11 @@
   <script src="../vendor/angular/angular.min.js"></script>
   <script>
     var myModule = angular.module('myModule',[]);
-    myModule.controller('mainCtrl',['$scope','$window',function($scope,$window){
+    myModule.controller('mainCtrl',['$scope','$window','$injector',function($scope,$window,$injector){
       $scope.name = 'white';
       /*$window.title = '123';*/
       /*document.title = "123";*/
+      console.log($injector);
     }]);
     /*手动启动ng*/
     /*angular.element(document).ready(function(){
