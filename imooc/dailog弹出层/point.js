@@ -1,0 +1,11 @@
+/*定位*/
+absolute,relative,fixed
+/*事件*/
+onload,onclick
+/*DOM操作*/
+getElementById();
+scrollHeight();
+clientHeight();
+createElement();
+appendChild();
+removeChild();
