@@ -79,7 +79,7 @@ global、CompositeOperation、font、textAlign、textBaseline。
 #2,toDataURL(),这个方法返回的数据是代表当前Canvas对象产生位图的字符串,它就像屏幕的快照,通过提供一个不同的MIME类型作为参数,可以返回部共同的数据格式。
 #几本的格式是image/png，单是也可以获取image/jpeg和其他格式
 #3,toBlob(),toBlob([callback])将返回一个引用图像的文件，而不是一个base64编码的字符串。
-
+###
 
 #console.log调试
 Debugger.log('drawing canvas');
