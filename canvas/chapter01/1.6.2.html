@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<title>Canvas</title>
+</head>
+<body>
+	<canvas id="cas" width="400" height="400">
+		Your browser does not support HMTL5 Canvas.
+	</canvas>	
+
+	<script type="text/javascript">
+		var oCas = document.getElementById('cas');
+		// 获取2d环境
+		var ctx = oCas.getContext('2d');
+		console.log(ctx);
+		// 判断浏览器是否支持canvas
+		if(!oCas || !oCas.getContext){
+			// return;
+			console.log("...")
+		}
+		//颜色
+		ctx.fillStyle = '#ff0000';
+		ctx.fillRect(0,0,500,300);
+		//文本
+		ctx.font = '30px Sans-Serif';
+		//字体垂直对齐方式
+		ctx.textBaseline = 'bottom';
+		ctx.fillText('Hello World!',195,400);
+
+	</script>
+</body>
+</html>
