@@ -102,3 +102,8 @@ b = ''
 print 'hello',b or 'world'
 #执行a时a不为''所以为True，返回a
 #执行b时b为'',所以为False,返回world
+
+
+
+
+
