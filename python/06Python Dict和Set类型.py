@@ -196,8 +196,20 @@ s.remove(1)
 print s
 #如果删除的元素不再set中，remove()会报错
 s = set([1,2,3,4])
-s.remove(5)
+#s.remove(5)
 #Traceback (most recent call last):
 #  File "<stdin>", line 1, in <module>
 #KeyError: 4
 #所以用add()可以直接添加，而remove()前需要判断。
+#任务
+#针对下面的set，给定一个list，对list中的每一个元素，如果在set中，就将其删除，如果不在set中，就添加进去。
+s = set(['Adam', 'Lisa', 'Paul'])
+L = ['Adam', 'Lisa', 'Bart', 'Paul']
+for name in L:
+    if name in s:
+        s.remove(name)
+    else:
+        s.add(name)
+print s
+
+
