@@ -90,6 +90,6 @@ def firstCharUpper(s):
     First = s[:1].upper()
     World = First + s[1:]
     return World
-print firstCharUpper('hello');
+print firstCharUpper('hello'); #Hello
 
 
