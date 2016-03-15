@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>StarSky</title>
+    <style>
+        #cas{border:1px solid #eee;}
+    </style>
+</head>
+<body>
+    <canvas id="cas"></canvas>
+
+
+
+
+    <script>
+        var cas = document.getElementById('cas');
+                cas.width = 1200;
+                cas.height = 600;
+                
+        var ctx = cas.getContext('2d');
+        var linearGrad = ctx.createLinearGradient(0,0,0,cas.height);
+            linearGrad.addColorStop(0.0,'black');
+            linearGrad.addColorStop(1.0,'#035');
+                ctx.fillStyle = linearGrad;
+                ctx.fillRect(0,0,cas.width,cas.height);
+                for(var i = 0;i < 500;i++){
+                    var r = Math.random()*5 + 5;
+                    var x = Math.random()*cas.width;
+                    if(x<2*r){
+                        x = x + r;
+                    }else{
+                        x = x -r
+                    }
+                    var y = Math.random()*cas.height * 0.65;
+                    if(y<2*r){
+                        y = y +r;
+                    }else{
+                        y = y -r
+                    }
+                    var rot = Math.random()*360;
+                    drawStar(ctx,r,r*1/2.0,x,y,rot)
+                }
+            //声明一个函数drawStar，可以复用,ctx为上下文，r,R是大小圆半径，x,y为偏移量，rot为旋转角度
+            function drawStar(ctx,r,R,x,y,rot){
+                ctx.beginPath();
+                for(var i = 0;i < 5;i++){
+                    ctx.lineTo(Math.cos((18+i*72-rot)/180*Math.PI)*R+x,
+                                        -Math.sin((18+i*72-rot)/180*Math.PI)*R+y);
+                    ctx.lineTo(Math.cos((54+i*72-rot)/180*Math.PI)*r+x,
+                                        -Math.sin((54+i*72-rot)/180*Math.PI)*r+y)
+                }
+                ctx.fillStyle = "#fb3";
+                ctx.strokeStyle = "#fd5";
+                ctx.closePath();
+                ctx.lineWidth = 3;
+                ctx.lineJoin = "round";
+                ctx.fill()
+                ctx.stroke();
+            }
+    </script>
+</body>
+</html>

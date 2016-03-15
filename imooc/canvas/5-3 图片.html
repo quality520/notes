@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>5-3 图片</title>
+</head>
+<body>
+    <canvas id="cas"></canvas>
+
+
+    <script>
+        window.onload = function(){
+            var cas = document.getElementById('cas');
+                cas.width = 800;
+                cas.height = 800;
+            var ctx = cas.getContext('2d');
+
+            var images = new Image();
+                images.src = 'h.png';
+                images.onload = function(){
+                    var pattern = ctx.createPattern(images,'repeat-x');
+                    ctx.fillStyle = pattern;
+                    ctx.fillRect(0,0,800,800);  
+                }
+        }
+    </script>
+</body>
+</html>
