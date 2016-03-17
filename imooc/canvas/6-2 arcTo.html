@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>6-2 arcTo</title>
+</head>
+<body>
+    <canvas id="cas"></canvas>
+
+
+
+    <script>
+        window.onload = function(){
+            var cas = document.getElementById('cas');
+            cas.width = 1024;
+            cas.height = 768;
+
+            var ctx = cas.getContext('2d');
+                ctx.lineWidth = 5;
+                ctx.strokeStyle = '#058';
+
+            arcToTest(ctx , 150 , 150 , 650 , 150 , 650 , 650 , 300);
+
+            // arcTo;
+            // ctx.beginPath();
+            // ctx.moveTo(150 , 150);
+            // ctx.arcTo(650 , 150 , 650 , 650 , 300);
+
+
+            // ctx.lineWidth = 6;
+            // ctx.strokeStyle = 'red';
+            // ctx.stroke();
+
+            // // baseLine
+            // ctx.beginPath();
+            // ctx.moveTo(150 , 150);
+            // ctx.lineTo(650 , 150);
+            // ctx.lineTo(650 , 650);
+            // ctx.lineWidth = 1;
+            // ctx.strokeStyle = 'gray';
+            // ctx.stroke();
+        }
+
+        function arcToTest(ctx , x0 , y0 , x1 , y1, x2 , y2 , R){
+            ctx.beginPath();
+            ctx.moveTo(x0 , y0);
+            ctx.arcTo(x1 , y1 , x2 , y2 , R);
+            ctx.lineWidth = 6; 
+            ctx.strokeStyle = 'red';
+            ctx.stroke();
+
+            // baseLine
+            ctx.beginPath();
+            ctx.moveTo(x0 , y0);
+            ctx.lineTo(x1 , y1);
+            ctx.lineTo(x2 , y2);
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = 'gray';
+            ctx.stroke();
+        }
+
+    </script>
+</body>
+</html>

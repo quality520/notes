@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>6-1 arc</title>
+</head>
+<body>
+    <canvas id="cas"></canvas>
+
+
+
+    <script>
+        window.onload = function(){
+            var cas = document.getElementById('cas');
+            cas.width = 1024;
+            cas.height = 768;
+
+            var ctx = cas.getContext('2d');
+                ctx.lineWidth = 5;
+                ctx.strokeStyle = '#058';
+
+            for(var i = 0;i < 10;i++){
+                ctx.beginPath();
+                ctx.arc(50+i*100,60,40,0,2*Math.PI*(i+1)/10)
+                ctx.stroke();
+            }
+
+            for(var i = 0;i < 10;i++){
+                ctx.beginPath();
+                ctx.arc(50+i*100,180,40,0,2*Math.PI*(i+1)/10)
+                ctx.closePath();
+                ctx.stroke();
+            }
+
+            for(var i = 0;i < 10;i++){
+                ctx.beginPath();
+                ctx.arc(50+i*100,300,40,0,2*Math.PI*(i+1)/10,true)
+                ctx.stroke();
+            }
+
+            for(var i = 0;i < 10;i++){
+                ctx.beginPath();
+                ctx.arc(50+i*100,420,40,0,2*Math.PI*(i+1)/10,true)
+                ctx.closePath();
+                ctx.stroke();
+            }
+
+            ctx.fillStyle = '#058'
+            for(var i = 0;i < 10;i++){
+                ctx.beginPath();
+                ctx.arc(50+i*100,540,40,0,2*Math.PI*(i+1)/10)
+                ctx.fill();
+            }
+
+            ctx.fillStyle = '#058'
+            for(var i = 0;i < 10;i++){
+                ctx.beginPath();
+                ctx.arc(50+i*100,660,40,0,2*Math.PI*(i+1)/10)
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+    </script>
+</body>
+</html>

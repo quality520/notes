@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>6-1 arc</title>
+</head>
+<body>
+    <canvas id="cas"></canvas>
+
+
+
+    <script>
+        window.onload = function(){
+            var cas = document.getElementById('cas');
+            cas.width = 1024;
+            cas.height = 768;
+
+            var ctx = cas.getContext('2d');
+                ctx.lineWidth = 5;
+                ctx.strokeStyle = '#058';
+
+            // drawRoundRect(ctx , 100 , 100 , 600 , 500 , 50);
+            // fillRoundRect(ctx , 100 , 100 , 600 , 500 , 50 , '#058')
+            fillRoundRect(ctx , 150 , 150 , 500 , 500 , 10 , '#bbada0');
+            for(var i = 0 ; i < 4 ; i++){
+                for(var j = 0 ; j < 4 ; j++){
+                    fillRoundRect(ctx , 170 + i * 120 , 170 + j * 120 , 100 , 100 , 6 , '#ccc0b3');
+                }
+            }
+        }
+
+        function drawRoundRect(ctx , x , y , width , height , radius){
+                if(2 * radius > width || 2 * radius > height){
+                    return
+                }
+                ctx.save();
+                ctx.translate(x , y);
+                pathRoundRect(ctx , width , height , radius);
+                ctx.strokeStyle = 'black';
+                ctx.stroke();
+                ctx.restore();
+            }
+        // 绘制带有填充色的圆角矩形
+        function fillRoundRect(ctx , x , y , width , height , radius , /*options*/ fillStyle){
+                if(2 * radius > width || 2 * radius > height){
+                    return
+                }
+                ctx.save();
+                ctx.translate(x , y);
+                pathRoundRect(ctx , width , height , radius);
+                ctx.fillStyle = fillStyle || 'black';
+                ctx.fill();
+                ctx.restore();
+            }
+        // 绘制带有边框的圆角矩形
+        function strokeRoundRect(ctx , x , y , width , height , radius , /*options*/ lineWidth , strokeStyle){
+                if(2 * radius > width || 2 * radius > height){
+                    return
+                }
+                ctx.save();
+                ctx.translate(x , y);
+                pathRoundRect(ctx , width , height , radius);
+                ctx.lineWidth = lineWidth || '1';
+                ctx.strokeStyle = strokeStyle || 'black';
+                ctx.stroke();
+                ctx.restore();
+            } 
+        //绘制圆角矩形的基本方法 
+        function pathRoundRect(ctx , width , height , radius){
+            ctx.beginPath();
+            ctx.arc(width - radius , height - radius , radius , 0 , Math.PI / 2);
+            ctx.lineTo(radius , height);
+            ctx.arc(radius , height - radius , radius , Math.PI / 2 , Math.PI);
+            ctx.lineTo(0 , radius);
+            ctx.arc(radius ,  radius , radius , Math.PI , Math.PI * 3 /2);
+            ctx.lineTo(width - radius , 0);
+            ctx.arc(width - radius , radius , radius , Math.PI * 3 / 2 , Math.PI * 2);
+            ctx.closePath();
+        }
+    </script>
+</body>
+</html>
