@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>6-2 arcTo</title>
+</head>
+<body>
+    <canvas id="cas"></canvas>
+
+
+
+    <script>
+        window.onload = function(){
+            var cas = document.getElementById('cas');
+            cas.width = 1024;
+            cas.height = 768;
+
+            var ctx = cas.getContext('2d');
+                ctx.lineWidth = 5;
+                ctx.strokeStyle = '#058';
+        }
+    </script>
+</body>
+</html>
