@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>定时器</title>
+	<style>
+		.btn{
+			display:inline-block;
+			width:100px;
+			height:35px;
+			line-height:35px;
+			text-align:center;
+			background:red;
+			text-decoration:none;
+			color:#fff;
+			font-size:18px;
+		}
+		.disBtn{
+			cursor:no-drop;
+			background:#797979;
+		}
+	</style>
+</head>
+<body ng-app="myApp" ng-controller="mainCtrl">
+	<a href="javascript:void(0);" class="btn" ng-class="{'disBtn':abc}" ng-model="getBtn" ng-bind="getBtn" ng-click="getCode()"></a>
+	<!-- <input type="button" class="btn" ng-model="getBtn" value="hhh" ng-click="getCode()"> -->
+	<script src="libs/angular.min.js"></script>
+	<!-- <script src="libs/jquery.min.js"></script> -->
+	<script>
+		angular.module('myApp',[])
+			.controller('mainCtrl',['$scope','$timeout', '$interval',function($scope,$timeout,$interval){
+				$scope.getBtn = '发送';
+				$scope.count = 60;
+				$scope.on = 1;
+				$scope.abc = false;
+				$scope.countDown = function(){
+						$scope.timer = $interval(function(){
+							$scope.count--;
+							if($scope.count == '0'){
+								$scope.abc = false;
+								$scope.getBtn = '重新获取';
+				 				$scope.on = 1;
+				 				$scope.count = 10;
+				 				console.log($scope.on);
+			 				  $interval.cancel($scope.timer);
+							}else{
+								$scope.abc = true;
+								$scope.on = 0;
+								$scope.getBtn = $scope.count + 's';
+								console.log($scope.count);
+							}
+						},1000)
+				}
+				$scope.getCode = function(){
+					if($scope.on){
+						$scope.countDown();
+					}
+				}
+			}]);
+	</script>
+</body>
+</html>
