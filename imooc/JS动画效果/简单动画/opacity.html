@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<title>简单动画</title>
+	<style>
+		html,body,div,span{
+			margin:0;
+			padding:0;
+		}
+		.content{
+			width:200px;
+			height:200px;
+			background:red;
+			opacity:0.3;
+			alpha(opacity:30);
+		}
+		
+	</style>
+</head>
+<body>
+	<div id="conBtn" class="content">
+		
+	</div>
+	
+	<script>
+		window.onload = function(){
+			var oBtn = document.getElementById('conBtn');
+
+			oBtn.onmouseover = function(){
+				startMove(100);
+			}
+			oBtn.onmouseout = function(){
+				startMove(30);
+			}
+		}
+
+		var timer = null,
+				alpha = 30;
+		function startMove(iTarget){
+			var oBtn = document.getElementById('conBtn');
+
+			timer = setInterval(function(){
+				var speed = 0;
+				if(alpha > iTarget){
+					speed = -10;
+				}else{
+					speed = 10;
+				}
+				console.log(new Date().valueOf())
+				if(alpha == iTarget){
+					clearInterval(timer);
+				}else{
+					alpha+=speed;
+					oBtn.style.filter = 'alpha(opacity:'+alpha+')';
+					oBtn.style.filter = alpha/100;
+				}
+			},30);
+		}
+	</script>
+</body>
+</html>
