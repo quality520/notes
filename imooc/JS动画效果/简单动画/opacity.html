@@ -6,10 +6,6 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 	<title>简单动画</title>
 	<style>
-		html,body,div,span{
-			margin:0;
-			padding:0;
-		}
 		.content{
 			width:200px;
 			height:200px;
@@ -41,7 +37,7 @@
 				alpha = 30;
 		function startMove(iTarget){
 			var oBtn = document.getElementById('conBtn');
-
+			clearInterval(timer);
 			timer = setInterval(function(){
 				var speed = 0;
 				if(alpha > iTarget){
@@ -55,7 +51,7 @@
 				}else{
 					alpha+=speed;
 					oBtn.style.filter = 'alpha(opacity:'+alpha+')';
-					oBtn.style.filter = alpha/100;
+					oBtn.style.opacity = alpha/100;
 				}
 			},30);
 		}
