@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-	<title>¼òµ¥¶¯»­</title>
+	<title>ç®€å•åŠ¨ç”»</title>
 	<style>
 		html,body,div,span{
 			margin:0;
@@ -31,7 +31,7 @@
 <body>
 	<div id="conBtn" class="content">
 		<span class="share">
-			·ÖÏí
+			åˆ†äº«
 		</span>
 	</div>
 	
@@ -50,16 +50,9 @@
 		function startMove(iTarget){
 			clearInterval(timer);
 			var conBtn = document.getElementById('conBtn');
-
 			timer = setInterval(function(){
-				var speed = 0;
-
-				if(conBtn.offsetLeft > iTarget){
-					speed = -10;
-				}else{
-					speed = 10;
-				}
-				
+				var speed = (iTarget - conBtn.offsetLeft)/10;
+					speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed); 
 				if(conBtn.offsetLeft == iTarget){
 					clearInterval(timer);
 				}else{
