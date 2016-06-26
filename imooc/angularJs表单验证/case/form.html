@@ -15,18 +15,59 @@
 			<form name="signupForm" ng-submit="submitForm()">
 				<div class="form-group">
 					<label for="username">用户名：</label>
-					<input name="username" type="text" class="form-control" ng-model="userdata.username"/>
-					<p class="error">用户名格式不正确</p>
+					<pre>合法{{signupForm.username.$valid}}</pre>
+					<pre>{{signupForm.username}}</pre>
+					<pre>{{userdata.username}}</pre>
+					<input name="username" type="text" class="form-control" 
+								 ng-model="userdata.username"
+								 required
+								 ng-minlength="6"
+								 ng-maxlength="32"
+								 />
+					<p class="error" ng-if="(signupForm.username.$error.minlength 
+																	|| signupForm.username.$error.maxlength) 
+																	&& signupForm.username.$touched">
+																	用户名长度应该在6至32位之间
+					</p>
+					<p class="error" ng-if="signupForm.username.$error.required 
+																	&& signupForm.username.$touched">
+						用户名不能为空
+					</p>
 				</div>
 				<div class="form-group">
 					<label for="password">密码：</label>
-					<input name="password" type="password" class="form-control" ng-model="userdata.password"/>
-					<p class="error">密码格式不正确</p>
+					<pre>合法{{signupForm.password.$valid}}</pre>
+					<pre>{{signupForm.password}}</pre>
+					<pre>{{userdata.password}}</pre>
+					<input name="password" type="password" class="form-control" ng-model="userdata.password"
+								 required
+								 ng-minlength="6"
+								 ng-maxlength="24"
+								 />
+					<p class="error" ng-if="signupForm.password.$error.required 
+																	&& signupForm.password.$touched">
+						密码不能为空
+					</p>
+					<p class="error" ng-if="(signupForm.password.$error.minlength 
+																 || signupForm.password.$error.maxlength)
+																 && signupForm.password.$touched">
+																 密码格式不正确
+					</p>
 				</div>
 				<div class="form-group">
 					<label for="passwordagain">确认密码：</label>
-					<input name="passwordagain" type="password" class="form-control" ng-model="userdata.passwordagain"/>
-					<p class="error">两次输入的密码不匹配</p>
+					<pre>合法{{signupForm.passwordagain.$valid}}</pre>
+					<pre>{{signupForm.passwordagain}}</pre>
+					<pre>{{userdata.passwordagain}}</pre>
+					<input name="passwordagain" type="password" class="form-control" 
+								 ng-model="userdata.passwordagain"
+								 required
+								 compare="userdata.password"
+								 />
+					<p class="error" ng-if="signupForm.passwordagain.$error.compare 
+																	&& signupForm.passwordagain.$touched">
+					两次输入的密码不匹配
+					</p>
 				</div>
 				<div class="form-group">
 					<button class="btn btn-primary"/>注册</button>
