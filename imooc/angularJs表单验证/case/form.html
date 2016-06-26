@@ -4,8 +4,35 @@
 		<meta charset="UTF-8">
 		<title>Angular-form</title>
 		<link rel="stylesheet" href="../libs/bootstrap.css"/>
+		<style>
+			.wrapper{width:200px;margin:30px auto;}
+			.error{color:#a10;}
+			input.error{border:1px solid #a10;}
+		</style>
 	</head>
 	<body ng-app="mainApp">
+		<div class="wrapper">
+			<form class="">
+				<div class="form-group">
+					<label for="username">用户名：</label>
+					<input name="username" type="text" class="form-control"/>
+					<p class="error">用户名格式不正确</p>
+				</div>
+				<div class="form-group">
+					<label for="password">密码：</label>
+					<input name="password" type="password" class="form-control"/>
+					<p class="error">密码格式不正确</p>
+				</div>
+				<div class="form-group">
+					<label for="passwordagain">确认密码：</label>
+					<input name="passwordagain" type="password" class="form-control"/>
+					<p class="error">两次输入的密码不匹配</p>
+				</div>
+				<div class="form-group">
+					<input type="button" value="注册" class="btn btn-primary"/>
+				</div>
+			</form>
+		</div>
 		
 		
 		
