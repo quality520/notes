@@ -3,7 +3,7 @@ var WINDOW_HEIGHT = 768;
 var RADIUS = 8;
 var MARGIN_TOP = 60;
 var MARGIN_LEFT = 30;
-var endTime = new Date(2016,6,1,23,59,59);
+var endTime = new Date(2016,6,12,23,59,59);
 var curShowTimeSeconds = 0;
 
 window.onload = function(){
