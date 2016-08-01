@@ -1,0 +1,839 @@
+html,
+body,
+div,
+p,
+span,
+ul,
+li,
+a,
+i,
+em,
+section,
+article {
+  margin: 0;
+  padding: 0;
+}
+ul,
+li,
+ol {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+html body {
+  font: 16px tahoma, arial, 'Microsoft YaHei', 'Hiragino Sans GB', '\5b8b\4f53', sans-serif;
+  background: #fff;
+}
+html body .clear {
+  clear: both;
+}
+html body .banner {
+  position: relative;
+  margin: 0 auto;
+  min-width: 1200px;
+  height: 700px;
+  background: url('../images/top-banner.png') no-repeat center center;
+}
+html body .banner .m-banner {
+  display: none;
+}
+html body .banner .banner_top {
+  position: relative;
+  width: 1200px;
+  height: 70px;
+  margin: 0 auto;
+}
+html body .banner .banner_top .banner_top_logo,
+html body .banner .banner_top .banner_top_project {
+  width: 50%;
+  height: 46px;
+  line-height: 46px;
+  margin-top: 24px;
+}
+html body .banner .banner_top .banner_top_logo {
+  float: left;
+  text-align: left;
+}
+html body .banner .banner_top .banner_top_logo img {
+  display: inline-block;
+  vertical-align: middle;
+  width: 91px;
+  height: 40px;
+  margin-right: 32px;
+}
+html body .banner .banner_top .banner_top_logo span {
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+  height: 24px;
+  line-height: 24px;
+  text-indent: 30px;
+  font-size: 18px;
+  color: #fff;
+  background: url('../images/v-line.png') no-repeat 0 0;
+}
+html body .banner .banner_top .banner_top_project {
+  float: right;
+  text-align: right;
+}
+html body .banner .banner_top .banner_top_project .publish {
+  display: inline-block;
+  width: 122px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  font-size: 0;
+  border: 1px solid #fff;
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  -ms-border-radius: 18px;
+  -o-border-radius: 18px;
+  border-radius: 18px;
+}
+html body .banner .banner_top .banner_top_project .publish:first-child {
+  margin-right: 36px;
+}
+html body .banner .banner_top .banner_top_project .publish i {
+  display: inline-block;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+html body .banner .banner_top .banner_top_project .publish i.publish_project {
+  width: 22px;
+  height: 22px;
+  background: url(../images/publish-project.png) no-repeat center center;
+  background-size: 100% auto;
+}
+html body .banner .banner_top .banner_top_project .publish i.publish_activity {
+  width: 21px;
+  height: 24px;
+  background: url(../images/publish-activity.png) no-repeat center center;
+  background-size: 100 auto;
+}
+html body .banner .banner_top .banner_top_project .publish span {
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+  height: 34px;
+  margin-top: -3px;
+  font-size: 16px;
+  color: #fff;
+}
+html body .banner .banner_introduce {
+  position: relative;
+  width: 1200px;
+  margin: 150px auto 0;
+  text-align: center;
+  font-size: 28px;
+}
+html body .banner .banner_introduce .introduce_tit {
+  font-size: 66px;
+  font-weight: bold;
+  color: #fff;
+}
+html body .banner .banner_introduce .introduce_txt {
+  width: 410px;
+  margin: 70px auto 0;
+  text-align: left;
+  color: #fff;
+}
+html body .banner .banner_introduce .introduce_txt i {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 55px;
+}
+html body .banner .banner_download {
+  position: relative;
+  width: 1200px;
+  margin: 90px auto 0;
+}
+html body .banner .banner_download .download_app {
+  display: inline-block;
+  width: 274px;
+  height: 67px;
+  line-height: 67px;
+  border: 1px solid #fff;
+  -webkit-border-radius: 67px;
+  -moz-border-radius: 67px;
+  -ms-border-radius: 67px;
+  -o-border-radius: 67px;
+  border-radius: 67px;
+  font-size: 0;
+  text-align: center;
+}
+html body .banner .banner_download .download_app:first-child {
+  margin-left: 280px;
+  margin-right: 76px;
+}
+html body .banner .banner_download .download_app i {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 20px;
+}
+html body .banner .banner_download .download_app .app_iphone {
+  width: 38px;
+  height: 43px;
+  background: url('../images/iphone-icon.png') no-repeat center center;
+  background-size: 100% auto;
+}
+html body .banner .banner_download .download_app .app_android {
+  width: 38px;
+  height: 47px;
+  background: url('../images/android-icon.png') no-repeat center center;
+  background-size: 100% auto;
+}
+html body .banner .banner_download .download_app span {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 25px;
+  color: #fff;
+}
+html body .banner .banner_download .app_barcode {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: inline-block;
+  width: 171px;
+  height: 171px;
+  background: url('../images/top-barcode.png') no-repeat center center;
+}
+html body .content {
+  min-width: 1200px;
+  padding-top: 34px;
+}
+html body .content .content_advantage {
+  min-width: 1200px;
+  height: auto;
+  margin: 0 auto;
+  text-align: center;
+}
+html body .content .content_advantage .content_dack {
+  margin-bottom: 144px;
+}
+html body .content .content_advantage .content_dack .dack_tit {
+  display: inline-block;
+  font-size: 36px;
+}
+html body .content .content_advantage .content_dack .dack_tit:before,
+html body .content .content_advantage .content_dack .dack_tit:after {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  width: 120px;
+  height: 1px;
+  background: #a0a0a0;
+}
+html body .content .content_advantage .content_dack .dack_tit:before {
+  margin-right: 50px;
+}
+html body .content .content_advantage .content_dack .dack_tit:after {
+  margin-left: 50px;
+}
+html body .content .content_advantage .content_dack .dack_connect {
+  display: inline-block;
+  width: 1200px;
+  height: auto;
+  margin-top: 62px;
+  font-size: 0;
+}
+html body .content .content_advantage .content_dack .dack_connect .entrepreneur {
+  display: inline-block;
+  width: 124px;
+  height: 231px;
+  background: url('../images/entrepreneur.png') no-repeat center center;
+  background-size: 100% auto;
+}
+html body .content .content_advantage .content_dack .dack_connect .connect {
+  display: inline-block;
+  vertical-align: top;
+  width: 73px;
+  height: 48px;
+  margin: 50px 100px 0;
+  background: url('../images/connect.png') no-repeat center center;
+}
+html body .content .content_advantage .content_dack .dack_connect .elite {
+  display: inline-block;
+  width: 73px;
+  height: 214px;
+  background: url('../images/elite.png') no-repeat center center;
+}
+html body .content .content_advantage .content_advantage_three {
+  min-width: 1200px;
+  height: auto;
+  margin: 0 auto;
+  padding-top: 105px;
+  padding-bottom: 111px;
+  box-sizing: border-box;
+  font-size: 0;
+  background: #ececec;
+}
+html body .content .content_advantage .content_advantage_three .content_partnership,
+html body .content .content_advantage .content_advantage_three .content_activity,
+html body .content .content_advantage .content_advantage_three .content_project {
+  display: inline-block;
+  vertical-align: top;
+}
+html body .content .content_advantage .content_advantage_three .content_partnership img,
+html body .content .content_advantage .content_advantage_three .content_activity img,
+html body .content .content_advantage .content_advantage_three .content_project img {
+  margin-bottom: 45px;
+}
+html body .content .content_advantage .content_advantage_three .content_partnership .advantage_txt,
+html body .content .content_advantage .content_advantage_three .content_activity .advantage_txt,
+html body .content .content_advantage .content_advantage_three .content_project .advantage_txt {
+  position: relative;
+  font-size: 24px;
+  line-height: 40px;
+  text-align: left;
+  background: #fff;
+  color: #696969;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+html body .content .content_advantage .content_advantage_three .content_partnership .advantage_txt i,
+html body .content .content_advantage .content_advantage_three .content_activity .advantage_txt i,
+html body .content .content_advantage .content_advantage_three .content_project .advantage_txt i {
+  font-style: normal;
+  font-size: 30px;
+  color: #3da3db;
+}
+html body .content .content_advantage .content_advantage_three .content_partnership .advantage_txt em,
+html body .content .content_advantage .content_advantage_three .content_activity .advantage_txt em,
+html body .content .content_advantage .content_advantage_three .content_project .advantage_txt em {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -28px;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid #fff;
+}
+html body .content .content_advantage .content_advantage_three .content_partnership {
+  width: 444px;
+  margin-right: 20px;
+}
+html body .content .content_advantage .content_advantage_three .content_partnership .advantage_txt {
+  padding: 40px 16px 68px 35px;
+  box-sizing: border-box;
+}
+html body .content .content_advantage .content_advantage_three .content_activity {
+  width: 362px;
+  margin-right: 20px;
+}
+html body .content .content_advantage .content_advantage_three .content_activity .advantage_txt {
+  padding: 40px 0 113px 46px;
+  box-sizing: border-box;
+}
+html body .content .content_advantage .content_advantage_three .content_project {
+  width: 338px;
+}
+html body .content .content_advantage .content_advantage_three .content_project .advantage_txt {
+  padding: 40px 0 112px 46px;
+  box-sizing: border-box;
+}
+html body .content .content_banner {
+  min-width: 1200px;
+  background: #3da3db;
+}
+html body .content .content_banner .content_banner_box {
+  width: 1200px;
+  min-height: 503px;
+  margin: 0 auto;
+  background: url('../images/phone.png') no-repeat 100% 100%;
+  background-size: auto 100%;
+  padding-top: 155px;
+  box-sizing: border-box;
+  font-size: 60px;
+  color: #fff;
+}
+html body .content .content_trait {
+  min-width: 1200px;
+  height: auto;
+  margin: 0 auto;
+  font-size: 0;
+}
+html body .content .content_trait .content_box {
+  min-width: 1200px;
+}
+html body .content .content_trait .content_box:nth-child(odd) {
+  background: #fff;
+}
+html body .content .content_trait .content_box:nth-child(even) {
+  background: #fbfbfb;
+}
+html body .content .content_trait .trait_icon,
+html body .content .content_trait .trait_text {
+  display: inline-block;
+  width: 50%;
+  height: 398px;
+}
+html body .content .content_trait .m_trait_text {
+  display: none;
+}
+html body .content .content_trait .search,
+html body .content .content_trait .matche,
+html body .content .content_trait .chance,
+html body .content .content_trait .demand,
+html body .content .content_trait .share,
+html body .content .content_trait .contact {
+  width: 1200px;
+  margin: 0 auto;
+}
+html body .content .content_trait .search .trait_tit,
+html body .content .content_trait .matche .trait_tit,
+html body .content .content_trait .chance .trait_tit,
+html body .content .content_trait .demand .trait_tit,
+html body .content .content_trait .share .trait_tit,
+html body .content .content_trait .contact .trait_tit {
+  margin-top: 150px;
+  margin-bottom: 20px;
+  color: #484848;
+  font-size: 40px;
+}
+html body .content .content_trait .search .trait_txt,
+html body .content .content_trait .matche .trait_txt,
+html body .content .content_trait .chance .trait_txt,
+html body .content .content_trait .demand .trait_txt,
+html body .content .content_trait .share .trait_txt,
+html body .content .content_trait .contact .trait_txt {
+  font-size: 20px;
+  color: #9e9e9e;
+}
+html body .content .content_trait .search .text_right,
+html body .content .content_trait .matche .text_right,
+html body .content .content_trait .chance .text_right,
+html body .content .content_trait .demand .text_right,
+html body .content .content_trait .share .text_right,
+html body .content .content_trait .contact .text_right {
+  padding-right: 90px;
+  box-sizing: border-box;
+}
+html body .content .content_trait .search .text_left,
+html body .content .content_trait .matche .text_left,
+html body .content .content_trait .chance .text_left,
+html body .content .content_trait .demand .text_left,
+html body .content .content_trait .share .text_left,
+html body .content .content_trait .contact .text_left {
+  padding-left: 90px;
+  box-sizing: border-box;
+}
+html body .content .content_trait .search .search_icon {
+  vertical-align: top;
+  background: url('../images/search-icon.png') no-repeat 90px center;
+}
+html body .content .content_trait .search .search_text {
+  vertical-align: top;
+  text-align: right;
+}
+html body .content .content_trait .matche .matche_icon {
+  vertical-align: top;
+  background: url('../images/matche-icon.png') no-repeat right center;
+}
+html body .content .content_trait .chance .chance_icon {
+  vertical-align: top;
+  background: url('../images/chance-icon.png') no-repeat 90px center;
+}
+html body .content .content_trait .chance .chance_text {
+  vertical-align: top;
+  text-align: right;
+}
+html body .content .content_trait .demand .demand_icon {
+  vertical-align: top;
+  background: url('../images/demand-icon.png') no-repeat right center;
+}
+html body .content .content_trait .share .share_icon {
+  vertical-align: top;
+  background: url('../images/share-icon.png') no-repeat 90px center;
+}
+html body .content .content_trait .share .share_text {
+  vertical-align: top;
+  text-align: right;
+}
+html body .content .content_trait .contact .contact_icon {
+  vertical-align: top;
+  background: url('../images/contact-icon.png') no-repeat right center;
+}
+html body .content .content_slogan {
+  position: relative;
+  width: 1200px;
+  height: 234px;
+  line-height: 234px;
+  margin: 0 auto;
+  font-size: 46px;
+  text-align: center;
+}
+html body .content .content_slogan .slogan_mobile {
+  display: none;
+}
+html body .content .content_slogan em {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -28px;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #fff;
+}
+html body .content .content_download {
+  min-width: 1200px;
+  height: 380px;
+  text-align: center;
+  background: #3da3db;
+}
+html body .content .content_download img {
+  margin-top: 58px;
+  margin-bottom: 60px;
+}
+html body .content .content_download p {
+  font-size: 36px;
+  color: #fff;
+}
+html body .content .m_download {
+  display: none;
+}
+html body .footer {
+  min-width: 1200px;
+  height: 75px;
+  margin: 0 auto;
+  text-align: center;
+  background: #313332;
+}
+html body .footer ul {
+  width: 100%;
+  font-size: 0;
+}
+html body .footer ul li {
+  display: inline-block;
+  width: 76px;
+  height: 30px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 16px;
+  color: #3776c1;
+}
+html body .footer .copyright {
+  color: #818383;
+  font-size: 14px;
+}
+@media only screen and (max-device-width: 768px) {
+  /*iphone6 */
+  /*iphone6 plus */
+  html {
+    width: 100%;
+  }
+  html body {
+    width: 100%;
+  }
+  html body .banner {
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    padding-top: .8rem;
+    background: url('../images/m-top-banner.png') no-repeat center center;
+    background-size: auto 100%;
+  }
+  html body .banner .m-banner {
+    display: block;
+    width: 55%;
+    margin: 0 auto 0;
+  }
+  html body .banner .banner_top,
+  html body .banner .banner_introduce,
+  html body .banner .banner_download {
+    display: none;
+    visibility: hidden;
+  }
+  html body .content {
+    width: 100%;
+    min-width: 0;
+    padding-top: 0.5rem;
+  }
+  html body .content .content_advantage {
+    width: 100%;
+    min-width: 0;
+  }
+  html body .content .content_advantage .content_dack {
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+  html body .content .content_advantage .content_dack .dack_tit {
+    width: 100%;
+    text-align: left;
+    text-indent: 0.86rem;
+    font-size: 0.3rem;
+    background: url('../images/m-v-line.png') no-repeat 0.6rem center;
+    background-size: auto 100%;
+  }
+  html body .content .content_advantage .content_dack .dack_tit:before,
+  html body .content .content_advantage .content_dack .dack_tit:after {
+    display: none;
+  }
+  html body .content .content_advantage .content_dack .dack_connect {
+    width: 100%;
+    height: auto;
+    margin-top: 0.62rem;
+    font-size: 0;
+  }
+  html body .content .content_advantage .content_dack .dack_connect .entrepreneur {
+    width: 1.24rem;
+    height: 2.31rem;
+  }
+  html body .content .content_advantage .content_dack .dack_connect .connect {
+    width: .73rem;
+    height: .48rem;
+    margin: .50rem 1.00rem 0;
+    background-size: 100% auto;
+  }
+  html body .content .content_advantage .content_dack .dack_connect .elite {
+    width: .73rem;
+    height: 2.14rem;
+    background-size: 100% auto;
+  }
+  html body .content .content_advantage .content_advantage_three {
+    display: none;
+    visibility: hidden;
+  }
+  html body .content .content_banner {
+    display: none;
+    visibility: hidden;
+  }
+  html body .content .content_trait {
+    width: 100%;
+    min-width: 0;
+  }
+  html body .content .content_trait .content_box {
+    width: 100%;
+    min-width: 0;
+  }
+  html body .content .content_trait .trait_icon {
+    display: inline-block;
+    width: 100%;
+    height: 4.98rem;
+  }
+  html body .content .content_trait .trait_text {
+    display: none;
+  }
+  html body .content .content_trait .m_trait_text {
+    display: inline-block;
+    width: 100%;
+    height: inherit;
+  }
+  html body .content .content_trait .m_text {
+    font-size: 0.18rem;
+    color: #696969;
+    line-height: 0.48rem;
+  }
+  html body .content .content_trait .m_text i {
+    font-style: normal;
+    font-size: 0.27rem;
+    color: #3da3db;
+  }
+  html body .content .content_trait .padding_right {
+    padding-right: 0.6rem;
+    box-sizing: border-box;
+  }
+  html body .content .content_trait .search,
+  html body .content .content_trait .matche,
+  html body .content .content_trait .chance,
+  html body .content .content_trait .demand,
+  html body .content .content_trait .share,
+  html body .content .content_trait .contact {
+    width: 100%;
+  }
+  html body .content .content_trait .search .trait_text,
+  html body .content .content_trait .matche .trait_text,
+  html body .content .content_trait .chance .trait_text,
+  html body .content .content_trait .demand .trait_text,
+  html body .content .content_trait .share .trait_text,
+  html body .content .content_trait .contact .trait_text {
+    display: none;
+  }
+  html body .content .content_trait .search .m_trait_tit,
+  html body .content .content_trait .matche .m_trait_tit,
+  html body .content .content_trait .chance .m_trait_tit,
+  html body .content .content_trait .demand .m_trait_tit,
+  html body .content .content_trait .share .m_trait_tit,
+  html body .content .content_trait .contact .m_trait_tit {
+    margin-top: 1.9rem;
+    margin-bottom: 0.2rem;
+    color: #484848;
+    font-size: 0.36rem;
+  }
+  html body .content .content_trait .search .m_trait_txt,
+  html body .content .content_trait .matche .m_trait_txt,
+  html body .content .content_trait .chance .m_trait_txt,
+  html body .content .content_trait .demand .m_trait_txt,
+  html body .content .content_trait .share .m_trait_txt,
+  html body .content .content_trait .contact .m_trait_txt {
+    font-size: 0.27rem;
+    color: #9e9e9e;
+  }
+  html body .content .content_trait .search .m_text_right,
+  html body .content .content_trait .matche .m_text_right,
+  html body .content .content_trait .chance .m_text_right,
+  html body .content .content_trait .demand .m_text_right,
+  html body .content .content_trait .share .m_text_right,
+  html body .content .content_trait .contact .m_text_right {
+    padding-right: 0.6rem;
+    text-align: right;
+    box-sizing: border-box;
+  }
+  html body .content .content_trait .search .m_text_left,
+  html body .content .content_trait .matche .m_text_left,
+  html body .content .content_trait .chance .m_text_left,
+  html body .content .content_trait .demand .m_text_left,
+  html body .content .content_trait .share .m_text_left,
+  html body .content .content_trait .contact .m_text_left {
+    padding-left: 0.6rem;
+    text-align: left;
+    box-sizing: border-box;
+  }
+  html body .content .content_trait .search .m_trait_tit,
+  html body .content .content_trait .matche .m_trait_tit,
+  html body .content .content_trait .chance .m_trait_tit {
+    margin-top: 1rem;
+    margin-bottom: 0.2rem;
+  }
+  html body .content .content_trait .search .m_trait_txt,
+  html body .content .content_trait .matche .m_trait_txt,
+  html body .content .content_trait .chance .m_trait_txt {
+    margin-bottom: 0.2rem;
+  }
+  html body .content .content_trait .search {
+    background: #fbfbfb;
+  }
+  html body .content .content_trait .search .search_icon {
+    background-size: 2.59rem 2.08rem;
+    background-position: 0.6rem center;
+  }
+  html body .content .content_trait .search .search_text {
+    vertical-align: top;
+    text-align: right;
+  }
+  html body .content .content_trait .matche {
+    background: #fff;
+  }
+  html body .content .content_trait .matche .matche_icon {
+    background-size: 2.15rem 2.23rem;
+  }
+  html body .content .content_trait .chance {
+    background: #fbfbfb;
+  }
+  html body .content .content_trait .chance .chance_icon {
+    background-size: 1.77rem 2.33rem;
+    background-position: 0.6rem center;
+  }
+  html body .content .content_trait .chance .chance_text {
+    vertical-align: top;
+    text-align: right;
+  }
+  html body .content .content_trait .demand {
+    background: #fff;
+  }
+  html body .content .content_trait .demand .demand_icon {
+    vertical-align: top;
+    background: url('../images/demand-icon.png') no-repeat right center;
+    background-size: 2.22rem 2.01rem;
+  }
+  html body .content .content_trait .share {
+    background: #fbfbfb;
+  }
+  html body .content .content_trait .share .share_icon {
+    vertical-align: top;
+    background: url('../images/share-icon.png') no-repeat 90px center;
+    background-size: 2.63rem 2.21rem;
+    background-position: 0.6rem center;
+  }
+  html body .content .content_trait .share .share_text {
+    vertical-align: top;
+    text-align: right;
+  }
+  html body .content .content_trait .contact {
+    background: #fff;
+  }
+  html body .content .content_trait .contact .contact_icon {
+    vertical-align: top;
+    background: url('../images/contact-icon.png') no-repeat right center;
+    background-size: 2.62rem 1.88rem;
+  }
+  html body .content .content_slogan {
+    position: relative;
+    width: 100%;
+    height: 2.76rem;
+    line-height: normal;
+    margin: 0 auto;
+    text-align: center;
+  }
+  html body .content .content_slogan .slogan_web {
+    display: none;
+  }
+  html body .content .content_slogan .slogan_mobile {
+    display: inline-block;
+    font-size: 0.36rem;
+  }
+  html body .content .content_slogan em {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -0.14rem;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #fff;
+  }
+  html body .content .content_download {
+    width: 100%;
+    min-width: 0;
+    height: 4.87rem;
+  }
+  html body .content .content_download img {
+    width: 1.71rem;
+    height: 1.71rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+  html body .content .content_download p {
+    font-size: 0;
+  }
+  html body .content .m_download {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+    font-size: .36rem;
+    color: #fff;
+    background: #4183d7;
+  }
+  html body .footer {
+    display: none;
+  }
+}
+@media only screen and (max-device-width: 768px) and screen and (max-width: 320px) {
+  html,
+  body {
+    font-size: 26.67%;
+  }
+}
+@media only screen and (max-device-width: 768px) and screen and (min-width: 321px) and (max-width: 375px) {
+  html,
+  body {
+    font-size: 31.25%;
+  }
+}
+@media only screen and (max-device-width: 768px) and screen and (min-width: 376px) and (max-width: 540px) {
+  html,
+  body {
+    font-size: 34.5%;
+  }
+}
