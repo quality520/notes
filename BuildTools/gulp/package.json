@@ -1,0 +1,22 @@
+{
+  "name": "gulp",
+  "version": "1.0.0",
+  "description": "gulp_test",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-htmlmin": "^2.0.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-stylus": "^2.5.0"
+  },
+  "devDependencies": {
+    "gulp-concat": "^2.6.0",
+    "gulp-rev": "^7.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "10th",
+  "license": "ISC"
+}
