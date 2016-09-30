@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>03多态--地图</title>
+</head>
+<body>
+	
+
+
+
+	<script>
+		var googleMap = {
+			show : function(){
+				console.log('开始渲染谷歌地图');
+			}
+		}
+
+		var baiduMap = {
+			show : function(){
+				console.log('开始渲染百度地图');
+			}
+		}
+		/*//不够灵活
+		var renderMap = function(type){
+			if(type === 'google'){
+				googleMap.show();
+			}else if(type === 'baidu'){
+				baiduMap.show();
+			}	
+		}
+
+		renderMap('google');   //开始渲染谷歌地图
+		renderMap('baidu');		 //开始渲染百度地图*/
+
+		var renderMap = function(map){
+			if(map.show instanceof Function){
+				map.show();
+			}
+		}
+
+		renderMap(googleMap);
+		renderMap(baiduMap);
+	</script>
+</body>
+</html>
