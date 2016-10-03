@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2.1.1.2作为普通函数调用</title>
+</head>
+<body>
+	
+
+	<script>
+		window.name = "globalName";
+		var getName = function(){
+			return this.name;
+		}
+		console.log(getName());   //globalName
+
+
+		window.age = 27;
+		var myObject = {
+			age : 24,
+			getAge : function(){
+				return this.age;
+			}
+		}
+		var getAge = myObject.getAge;
+		console.log(getAge());   //27 
+	</script>
+</body>
+</html>

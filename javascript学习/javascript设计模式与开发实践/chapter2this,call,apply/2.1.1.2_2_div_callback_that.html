@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2.1.1.2_2_div_callback</title>
+</head>
+<body>
+	<div id="mainCon">我是一个div</div>
+
+
+
+	<script>
+
+		window.id = "window";
+
+		function getId(id){
+			return document.getElementById(id);
+		}
+
+		document.getElementById('mainCon').onclick = function(){
+			var that = this
+			console.log(that.id);		//mainCon
+			var callback = function(){
+				console.log(that.id);	//mainCon
+			}
+			callback();
+		}
+	</script>
+</body>
+</html>
