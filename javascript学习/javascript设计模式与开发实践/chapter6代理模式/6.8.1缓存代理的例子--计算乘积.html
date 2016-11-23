@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>缓存代理的例子--计算乘积</title>
+</head>
+<body>
+	
+
+
+
+	<script type="text/javascript">
+		var mult = function(){
+			console.log('开始计算乘积了');
+
+			var a = 1;
+			for (var i = 0, l = arguments.length; i < l; i += 1) {
+				a = a * arguments[i];
+			}
+
+			return a;
+		}
+
+		//加入缓存代理函数：
+		var proxyMult = (function(){
+			var cache = {};
+			return function(){
+				var args = Array.prototype.join.call( arguments, ',');
+				console.log(cache);
+				if (args in cache) {
+					console.log(cache[ args ]);
+					return cache[ args ];
+				}
+				return cache[ args ] = mult.apply( this, arguments);
+			}
+		})();
+
+		proxyMult(1, 2, 3);
+		proxyMult(1, 2, 3);
+	</script>
+</body>
+</html>
