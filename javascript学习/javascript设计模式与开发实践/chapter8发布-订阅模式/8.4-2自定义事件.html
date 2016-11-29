@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>8.4-2自定义事件</title>
+</head>
+<body>
+	
+
+
+	<script>
+		var salesOffices = {};
+		salesOffices.clientList = [];
+
+		salesOffices.listen = function(key, fn){
+			if(!this.clientList[key]){//如果还没有订阅过此类消息，给该类消息创建一个缓存列表
+				this.clientList[key] = [];
+			}
+			this.clientList[key].push(fn);
+		}
+
+		salesOffices.trigger = function(){
+			var key = Array.prototype.shift.call(arguments),
+					fns = this.clientList[key];
+
+			if(!fns || fns.length === 0){
+				return false;
+			}
+
+			for(var i = 0,fn; fn = fns[i++];){
+				fn.apply(this,arguments);
+			}
+		};
+
+
+		salesOffices.listen('squareMeter88', function(price){
+			console.log('价格='+price);
+		});
+		salesOffices.listen('squareMeter110', function(price){
+			console.log('价格='+price);
+		});
+
+		salesOffices.trigger('squareMeter88', 2000000);
+		salesOffices.trigger('squareMeter110', 3000000);
+	</script>
+</body>
+</html>

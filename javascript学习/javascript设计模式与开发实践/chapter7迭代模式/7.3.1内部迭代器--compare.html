@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>7.3.1内部迭代器--compare</title>
+</head>
+<body>
+	
+
+	<script>
+		var each = function(arr, callback){
+				for(var i = 0, l = arr.length; i < l;i++){
+					callback.call(arr[i], i , arr[i]);
+				}
+			}
+
+		var compare = function(arr1, arr2){
+			if(arr1.length !== arr2.length){
+				return console.log('arr1和arr2不相等');
+			}
+
+			each(arr1, function(i, n){
+				if(n !== arr2[i]){
+					return console.log('arr1和arr2不相等');
+				}
+			});
+			console.log('arr1和arr2相等');
+		}
+
+		compare([1, 2, 3], [1, 2, 3, 4]);
+	</script>
+</body>
+</html>

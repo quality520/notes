@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>7.2自己实现each函数</title>
+</head>
+<body>
+	
+
+	<script type="text/javascript">
+		window.onload = function(){
+			var each = function(arr, callback){
+				for(var i = 0, l = arr.length; i < l;i++){
+					callback.call(arr[i], i , arr[i]);
+				}
+			}
+			each([1, 2, 3, 4], function(i, n){
+				console.log([i, n]);
+			})
+		}
+	</script>
+</body>
+</html>
