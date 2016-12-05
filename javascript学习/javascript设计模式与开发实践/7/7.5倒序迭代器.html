@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>7.5倒序迭代器</title>
+</head>
+<body>
+	
+
+
+	<script>
+		var reverseEach = function(arr, callBack){
+			for(var l = arr.length - 1; l >= 0;l--){
+				callBack( l, arr[l] );
+			}
+		}
+
+		reverseEach([1, 2, 3], function(i, n){
+			console.log(n);
+		})
+	</script>
+</body>
+</html>
