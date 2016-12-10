@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css3-bp-nav-menu-codes</title>
+	<style>
+		html,body,div,ul,li,a,i,p,span,em,ol,{
+			margin:0;
+			padding:0;
+		}
+		ul,li{
+			list-style: none;
+		}
+		a{
+			text-decoration:none;
+		}
+		div.menu{
+			width:1000px;
+			height:100px;
+			margin:0 auto;
+			border:1px solid #ccc;
+		}
+		div.menu ul{
+			width:1000px;
+			height:100px;
+			font-size:0;
+		}
+		div.menu ul li{
+			display:inline-block;
+			width:100px;
+			height:40px;
+			line-height:40px;
+			margin-right:23px;
+		}
+		div.menu ul li a{
+			position:relative;
+			display:inline-block;
+			width:inherit;
+			height:inherit;
+			line-height: inherit;
+			background:blue;
+		}
+		div.menu ul li a:before,div.menu ul li a:after{
+			content: "";
+	    position: absolute;
+	    top: 0;
+	    border: 0 solid blue;
+	    border-width: 20px 10px;
+	    width: 0;
+	    height: 0;
+		}
+		div.menu ul li a:before{
+			left:-20px;
+			border-left-color: transparent;
+		}
+		div.menu ul li a:after{
+			left:100%;
+			border-color: transparent;
+    	border-left-color: blue;
+		}
+		div.menu ul li:first-child a:before{
+			border:none;
+		}
+		div.menu ul li a:hover{
+			background:red;
+		}
+		div.menu ul li a:hover
+	</style>
+</head>
+<body>
+	
+	<div class="menu">
+		<ul>
+			<li><a href="#"></a></li>
+			<li><a href="#"></a></li>
+			<li><a href="#"></a></li>
+			<li><a href="#"></a></li>
+			<li><a href="#"></a></li>
+		</ul>
+	</div>
+</body>
+</html>
