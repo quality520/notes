@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>setTimeout</title>
+	</head>
+	<body>
+		
+		
+		
+		<script>
+			/*for(var i = 0;i <= 3;i++){
+				setTimeout(function(){
+					alert(i);
+				},0)
+			}*/
+			for(var i = 0;i <= 3;i++){
+				console.log("first"+i,new Date().getTime())
+				setTimeout((function(i){
+					console.log("second"+i,new Date().getTime())
+					return function(){
+						console.log("third"+i,new Date().getTime())
+						console.log(i);	
+					}
+				})(i),0)
+			}
+		</script>
+	</body>
+</html>
